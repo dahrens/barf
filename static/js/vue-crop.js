@@ -1,0 +1,1 @@
+../../node_modules/vue-crop/vue-crop.js
