@@ -4,12 +4,22 @@ import defaultState from './state'
 
 Vue.use(Vuex)
 
+export const PERSIST_STORE = 'PERSIST_STORE'
 export const UPDATE_DOG = 'UPDATE_DOG'
 export const INSERT_DOG = 'INSERT_DOG'
 
+const localStorage = window.localStorage
+let state = localStorage.getItem('barf')
+if (state === null) {
+  state = defaultState
+}
+
 export default new Vuex.Store({
-  state: defaultState,
+  state: state,
   mutations: {
+    [PERSIST_STORE] (state) {
+      localStorage.setItem('barf', state)
+    },
     [UPDATE_DOG] (state, payload) {
       let idx = state.dogs.indexOf(payload.id)
       if (idx === -1) {
@@ -30,4 +40,3 @@ export default new Vuex.Store({
     }
   }
 })
-

@@ -11,14 +11,16 @@ export default {
       name: 'Delphi',
       birthday: new Date(2012, 2, 15),
       sex: 'm',
-      weight: 15000
+      weight: 15000,
+      plan: 1
     },
     {
       id: 2,
       name: 'Loni',
       birthday: new Date(2014, 6, 25),
       sex: 'f',
-      weight: 18000
+      weight: 18000,
+      plan: null
     }
   ],
   categories: {
@@ -71,11 +73,10 @@ export default {
   plans: [
     {
       id: 1,
-      dog: 1,
       animal: 0.8,
       vegetables: 0.2,
       subcategories: [
-        [0.4, 'Fleisch'], [0.2, 'Innereien'], [0.3, 'Magen'], [0.1, 'Bones'],
+        [0.4, 'Fleisch'], [0.2, 'Innereien'], [0.3, 'Magen'], [0.1, 'Knochen'],
         [0.4, 'Getreide'], [0.2, 'Früchte'], [0.4, 'Gemüse']
       ],
       week: [
@@ -85,4 +86,3 @@ export default {
     }
   ]
 }
-

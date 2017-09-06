@@ -1,7 +1,7 @@
 <template>
   <div class="data container">
     <div class="columns">
-      <div class="column is-one-third">
+      <div class="column is-half">
         <nav class="panel">
 					<p class="panel-tabs">
             <template v-for="entity in entities">
@@ -22,9 +22,17 @@
 							Add new {{ activeEntity }}
 						</button>
 					</div>
-				</nav> 
+				</nav>
       </div>
-      <div class="column is-two-thirds">
+      <div class="column is-half">
+        <article class="message">
+          <div class="message-header">
+            <p>Hello World</p>
+            <button class="delete" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+          </div>
+        </article>
         <div class="card">
 					<div class="card-content">
             <table v-if="activeEntity === 'dog'" class="table">
@@ -56,8 +64,8 @@ export default {
       activeRecord: {
         name: 'unknown'
       },
-      activeEntity: 'dog',
-      entities: ['dog', 'ingredient', 'recipe']
+      activeEntity: 'ingredient',
+      entities: ['ingredient', 'recipe']
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import Data from '@/components/Data'
+import Home from '@/components/Home'
+import Food from '@/components/Food'
 import Plan from '@/components/Plan'
 
 Vue.use(Router)
@@ -11,12 +11,12 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Hello
+      component: Home
     },
     {
-      path: '/data',
-      name: 'Data',
-      component: Data
+      path: '/food',
+      name: 'Food',
+      component: Food
     },
     {
       path: '/plan',
