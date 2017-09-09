@@ -3,93 +3,90 @@
     <div class="columns">
       <div class="column is-half">
         <nav class="panel">
-					<p class="panel-tabs">
-            <template v-for="entity in entities">
-              <a v-on:click="activateEntity(entity)" :class="{'is-active': entity === activeEntity}">{{ entity }}s</a>
-            </template>
-					</p>
-          <template v-for="element in elements">
-            <a v-on:mouseover="activateRecord(element)" class="panel-block is-active">
-              <span class="panel-icon">
-                <i v-if="activeEntity === 'dog'" class="fa fa-id-card-o"></i>
-                <i v-else class="fa fa-question"></i>
+          <div class="panel-block">
+            <p class="control has-icons-left">
+              <input class="input is-small" type="text" placeholder="search">
+              <span class="icon is-small is-left">
+                <i class="fa fa-search"></i>
               </span>
-              {{ element.name }}
+            </p>
+          </div>
+          <p class="panel-tabs">
+            <template v-for="entity in entities">
+              <a v-on:click="activateEntity(entity)" :class="{'is-active': entity === activeEntity}">{{ entity }}</a>
+            </template>
+          </p>
+          <template v-for="element in elements">
+
+            <a v-on:click="activateRecord(element)" class="panel-block is-active">
+              <span class="panel-icon">
+                <i v-if="isActive(element)" class="fa fa-eye"></i>
+              </span>
+              {{ element.name }}&nbsp;
+              <span v-if="activeEntity === 'stash'"></span>
+              <template v-if="activeEntity === 'ingredients'" v-for="part in element.parts">
+                <category-tag :amount="part[0]" :category="part[1]"></category-tag>&nbsp;
+              </template>
             </a>
           </template>
-          <div class="panel-block">
-						<button class="button is-primary is-outlined is-fullwidth">
-							Add new {{ activeEntity }}
-						</button>
-					</div>
-				</nav>
+          <create-ingredient v-if="activeEntity === 'ingredients'"></create-ingredient>
+        </nav>
       </div>
       <div class="column is-half">
-        <article class="message">
-          <div class="message-header">
-            <p>Hello World</p>
-            <button class="delete" aria-label="delete"></button>
-          </div>
-          <div class="message-body">
-          </div>
-        </article>
-        <div class="card">
-					<div class="card-content">
-            <table v-if="activeEntity === 'dog'" class="table">
-							<thead>
-								<tr>
-                  <td>Name</td>
-									<td>Age</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-                  <td>{{ activeRecord.name }}</td>
-									<td>3</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+        <template v-for="activeIngredient in activeIngredients">
+          <detail-ingredient v-if="activeEntity === 'ingredients'" v-on:close="activateRecord(activeIngredient)" :ingredient="activeIngredient"></detail-ingredient>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import IngredientCreate from '@/components/IngredientCreate'
+import IngredientDetail from '@/components/IngredientDetail'
+import CategoryTag from '@/components/CategoryTag'
+
 export default {
   name: 'hello',
+  components: {
+    'create-ingredient': IngredientCreate,
+    'detail-ingredient': IngredientDetail,
+    'category-tag': CategoryTag
+  },
   data () {
     return {
-      activeRecord: {
-        name: 'unknown'
-      },
-      activeEntity: 'ingredient',
-      entities: ['ingredient', 'recipe']
+      activeEntity: 'ingredients',
+      activeIngredients: [],
+      entities: ['ingredients', 'recipes', 'stash']
     }
   },
   computed: {
     elements () {
-      return this.$store.state[this.activeEntity + 's']
+      return this.$store.state[this.activeEntity]
     }
   },
   methods: {
     activateEntity: function (entity) {
-      this.activeRecord = {
-        name: 'Unknown'
-      }
       this.activeEntity = entity
     },
     activateRecord: function (record) {
-      console.log('activated')
-      this.activeRecord = record
+      if (this.activeEntity === 'ingredients') {
+        if (this.activeIngredients.indexOf(record) === -1) {
+          this.activeIngredients.push(record)
+        } else {
+          this.activeIngredients.splice(this.activeIngredients.indexOf(record), 1)
+        }
+      }
+    },
+    isActive: function (record) {
+      return this.activeIngredients.indexOf(record) !== -1
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h1, h2 {
   font-weight: normal;
 }
@@ -102,9 +99,5 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>

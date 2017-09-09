@@ -5,6 +5,9 @@ export default {
     recipes: 2,
     plans: 2
   },
+  event_meta: {
+    types: ['meal']
+  },
   dogs: [
     {
       id: 1,
@@ -12,7 +15,12 @@ export default {
       birthday: new Date(2012, 2, 15),
       sex: 'm',
       weight: 15000,
-      plan: 1
+      plan: 1,
+      meals: new Map([
+        [new Date(), [
+          { name: 'Rindermuskelfleisch', amount: 250, unit: 'g', parts: [1, 'Fleisch'] }
+        ]]
+      ])
     },
     {
       id: 2,
@@ -35,29 +43,37 @@ export default {
     {
       id: 1,
       name: 'Rindermuskelfleisch',
-      parts: [[1, 'Fleisch']]
+      parts: [[1, 'Fleisch']],
+      unit: 'g',
+      amount: 2000
     },
     {
       id: 2,
       name: 'Knorpelfleisch',
-      parts: [[0.2, 'Knochen'], [0.8, 'Fleisch']]
+      parts: [[0.2, 'Knochen'], [0.8, 'Fleisch']],
+      unit: 'g',
+      amount: 2000
     },
     {
       id: 3,
       name: 'Dorschlebertran',
-      parts: [[1, 'Vitamine']]
+      parts: [[1, 'Vitamine']],
+      unit: 'ml',
+      amount: 500
     }
   ],
   stash: [
     {
       ingredient: 1,
       amount: 2000,
-      unit: 'g'
+      unit: 'g',
+      quantity: 1
     },
     {
       ingredient: 3,
       amount: 500,
-      unit: 'ml'
+      unit: 'ml',
+      quantity: 1
     }
   ],
   recipes: [
@@ -81,7 +97,7 @@ export default {
       ],
       week: [
         [{ recipe: 1 }],
-        [], [], [], [], [], [], []
+        [], [], [], [], [], []
       ]
     }
   ]
