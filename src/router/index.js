@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Food from '@/components/Food'
+import Ingredients from '@/components/Ingredients'
+import Recipes from '@/components/Recipes'
+import Stash from '@/components/Stash'
 import Plan from '@/components/Plan'
 
 Vue.use(Router)
@@ -14,9 +16,19 @@ export default new Router({
       component: Home
     },
     {
-      path: '/food',
-      name: 'Food',
-      component: Food
+      path: '/ingredients',
+      name: 'Ingredients',
+      component: Ingredients
+    },
+    {
+      path: '/recipes',
+      name: 'Recipes',
+      component: Recipes
+    },
+    {
+      path: '/stash',
+      name: 'Stash',
+      component: Stash
     },
     {
       path: '/plan',

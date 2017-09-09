@@ -21,15 +21,15 @@ export default {
           { name: 'Rindermuskelfleisch', amount: 250, unit: 'g', parts: [1, 'Fleisch'] }
         ]]
       ])
-    },
-    {
-      id: 2,
-      name: 'Loni',
-      birthday: new Date(2014, 6, 25),
-      sex: 'f',
-      weight: 18000,
-      plan: null
     }
+    // {
+    //   id: 2,
+    //   name: 'Loni',
+    //   birthday: new Date(2014, 6, 25),
+    //   sex: 'f',
+    //   weight: 18000,
+    //   plan: null
+    // }
   ],
   categories: {
     animal: ['Fleisch', 'Innereien', 'Magen', 'Knochen'],
@@ -66,14 +66,12 @@ export default {
     {
       ingredient: 1,
       amount: 2000,
-      unit: 'g',
-      quantity: 1
+      unit: 'g'
     },
     {
       ingredient: 3,
       amount: 500,
-      unit: 'ml',
-      quantity: 1
+      unit: 'ml'
     }
   ],
   recipes: [

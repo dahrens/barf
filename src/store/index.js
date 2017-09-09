@@ -29,6 +29,7 @@ export const INSERT_DOG = 'INSERT_DOG'
 export const FEED_DOG = 'FEED_DOG'
 export const INSERT_INGREDIENT = 'INSERT_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
+export const INSERT_RECIPE = 'INSERT_RECIPE'
 
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
@@ -77,6 +78,13 @@ export default new Vuex.Store({
       let idx = state.ingredients.indexOf(payload)
       if (idx === -1) return
       state.ingredients.splice(idx, 1)
+    },
+    [INSERT_RECIPE] (state, payload) {
+      if (payload.id) throw Error('already has an ID')
+      payload.id = state.ids.recipes
+      state.ids.recipes++
+      state.recipes.push(payload)
+      persist(state)
     }
   },
   getters: {

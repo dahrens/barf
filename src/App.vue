@@ -5,12 +5,36 @@
         <div class="navbar-menu">
           <div class="navbar-start">
             <a class="nav-item"><h1 class="title">B.A.R.F.</h1></a>
-            <router-link class="nav-item is-tab is-hidden-mobile" :class="{'is-active': $route.fullPath === '/'}"
-              :to="{ name: 'Home' }">Übersicht</router-link>
-            <router-link class="nav-item is-tab is-hidden-mobile" :class="{'is-active': $route.fullPath ==='/food'}"
-              :to="{ name: 'Food' }">Nahrung</router-link>
-            <router-link class="nav-item is-tab is-hidden-mobile" :class="{'is-active': $route.fullPath ==='/plan'}"
-              :to="{ name: 'Plan' }">Pläne</router-link>
+            <router-link
+              class="nav-item is-tab is-hidden-mobile"
+              :class="{'is-active': $route.fullPath === '/'}"
+              :to="{ name: 'Home' }">
+              Übersicht
+            </router-link>
+            <router-link
+              class="nav-item is-tab is-hidden-mobile"
+              :class="{'is-active': $route.fullPath ==='/ingredients'}"
+              :to="{ name: 'Ingredients' }">
+              Zutaten
+            </router-link>
+            <router-link
+              class="nav-item is-tab is-hidden-mobile"
+              :class="{'is-active': $route.fullPath ==='/recipes'}"
+              :to="{ name: 'Recipes' }">
+              Rezepte
+            </router-link>
+            <router-link
+              class="nav-item is-tab is-hidden-mobile"
+              :class="{'is-active': $route.fullPath ==='/stash'}"
+              :to="{ name: 'Stash' }">
+              Vorräte
+            </router-link>
+            <router-link
+              class="nav-item is-tab is-hidden-mobile"
+              :class="{'is-active': $route.fullPath ==='/plan'}"
+              :to="{ name: 'Plan' }">
+              Pläne
+            </router-link>
           </div>
         </div>
         <div class="navbar-end">
