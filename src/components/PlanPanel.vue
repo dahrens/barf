@@ -66,8 +66,16 @@
           <div class="column is-2">
             <span class="is-pulled-right">{{animalCategory.part}}</span>
           </div>
-          <div class="column is-10">
+          <div class="column is-8">
             <categorySlider v-on:changed="onCategoryChange" :category="animalCategory.part" :cls="animalCategory.category" :value="plan.subcategories.filter(sc => sc[1] === animalCategory.part)[0][0]"></categorySlider>
+          </div>
+          <div class="column is-2">
+            <a v-on:click="toggleLockCategory(animalCategory.part)" class="button is-primary has-icon">
+              <span class="icon">
+                <i v-if="locks.indexOf(animalCategory.part) === -1" class="fa fa-unlock"></i>
+                <i v-else class="fa fa-lock"></i>
+              </span>
+            </a>
           </div>
         </div>
       </template>
@@ -78,11 +86,18 @@
             <span class="is-pulled-right">{{vegetablesCategory.part}}</span>
           </div>
           <div class="column is-8">
-            <categorySlider v-on:changed="onCategoryChange" :category="vegetablesCategory.part" :cls="vegetablesCategory.category" :value="plan.subcategories.filter(sc => sc[1] === vegetablesCategory.part)[0][0]"></categorySlider>
+            <categorySlider
+              v-on:changed="onCategoryChange"
+              :category="vegetablesCategory.part"
+              :cls="vegetablesCategory.category"
+              :value="plan.subcategories.filter(sc => sc[1] === vegetablesCategory.part)[0][0]"></categorySlider>
           </div>
           <div class="column is-2">
-            <a class="icon">
-              <i class="fa fa-unlock"></i>
+            <a v-on:click="toggleLockCategory(vegetablesCategory.part)" class="button is-primary has-icon">
+              <span class="icon">
+                <i v-if="locks.indexOf(vegetablesCategory.part) === -1" class="fa fa-unlock"></i>
+                <i v-else class="fa fa-lock"></i>
+              </span>
             </a>
           </div>
         </div>
@@ -104,10 +119,8 @@ export default {
   },
   data () {
     return {
+      locks: [],
       collapsed: false,
-      locked: {
-        'Fleisch': false
-      },
       selectedPlan: 1,
       slider: {
         value: 0,
@@ -142,6 +155,15 @@ export default {
     }
   },
   methods: {
+    toggleLockCategory (category) {
+      let idx = this.locks.indexOf(category)
+      console.log('toggleLockCategory', category)
+      if (idx === -1) {
+        this.locks.push(category)
+      } else {
+        this.locks.splice(idx, 1)
+      }
+    },
     onCategoryChange (category, cls) {
       let diff = 0
       let untouched = []
@@ -157,9 +179,13 @@ export default {
       let decrease = diff < 0
       let adjust = []
       for (let c of this.categories) {
-        if (c.category === cls && c.part !== category[1]) {
+        if (c.category === cls && c.part !== category[1] && this.locks.indexOf(c.part) === -1) {
           adjust.push(untouched.filter(u => u[1] === c.part)[0])
         }
+      }
+      if (!adjust.length) {
+        this.$forceUpdate()
+        return
       }
       let touched = []
       let diffPerCategory = Math.floor(Math.abs(diff) / adjust.length)
@@ -186,7 +212,6 @@ export default {
           }
         }
       }
-
       touched.push(category)
       this.$store.commit('UPDATE_PLAN_CATEGORIES', {
         plan: this.plan.id,
