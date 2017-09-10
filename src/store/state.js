@@ -81,7 +81,7 @@ export default {
   recipes: [
     {
       id: 1,
-      name: 'Normale Fleisch Malzeit',
+      name: 'Normale Fleisch Mahlzeit',
       ingredients: [
         { ingredient: 1, amount: 250 },
         { ingredient: 3, amount: 10 }
@@ -91,11 +91,13 @@ export default {
   plans: [
     {
       id: 1,
-      animal: 0.8,
-      vegetables: 0.2,
+      name: 'Delphi\'s Plan',
+      dog: 1,
+      animal: 80,
+      vegetables: 20,
       subcategories: [
-        [0.4, 'Fleisch'], [0.2, 'Innereien'], [0.3, 'Magen'], [0.1, 'Knochen'],
-        [0.4, 'Getreide'], [0.2, 'Früchte'], [0.4, 'Gemüse']
+        [40, 'Fleisch'], [20, 'Innereien'], [30, 'Magen'], [10, 'Knochen'],
+        [40, 'Getreide'], [20, 'Früchte'], [40, 'Gemüse']
       ],
       week: [
         [{ recipe: 1 }],

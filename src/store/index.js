@@ -30,6 +30,7 @@ export const FEED_DOG = 'FEED_DOG'
 export const INSERT_INGREDIENT = 'INSERT_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
 export const INSERT_RECIPE = 'INSERT_RECIPE'
+export const UPDATE_PLAN_CATEGORIES = 'UPDATE_PLAN_CATEGORIES'
 
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
@@ -68,7 +69,6 @@ export default new Vuex.Store({
     //   dog.meals.push(payload.food)
     // },
     [INSERT_INGREDIENT] (state, payload) {
-      if (payload.id) throw Error('already has an ID')
       payload.id = state.ids.ingredients
       state.ids.ingredients++
       state.ingredients.push(payload)
@@ -78,13 +78,23 @@ export default new Vuex.Store({
       let idx = state.ingredients.indexOf(payload)
       if (idx === -1) return
       state.ingredients.splice(idx, 1)
+      persist(state)
     },
     [INSERT_RECIPE] (state, payload) {
-      if (payload.id) throw Error('already has an ID')
       payload.id = state.ids.recipes
       state.ids.recipes++
       state.recipes.push(payload)
       persist(state)
+    },
+    [UPDATE_PLAN_CATEGORIES] (state, payload) {
+      let plan = state.plans.filter(p => p.id === payload.plan)[0]
+      for (let category of payload.subcategories) {
+        for (let p of plan.subcategories) {
+          if (category[1] === p[1]) {
+            p[0] = category[0]
+          }
+        }
+      }
     }
   },
   getters: {

@@ -46,7 +46,7 @@
         </div>
       </div>
     </nav>
-    <!-- <section class="barf-title hero is-primary">
+    <!-- <section class="barf-title hero is-primary is-marginless">
       <div class="hero-body">
         <div v-if="$route.fullPath ==='/'" class="container">
           <h1 class="title">
@@ -56,7 +56,7 @@
             Schau was deine Hunde in den kommenden Tagen benötigen und bestätige inwiefern die deine Pläne eingehalten hast.
           </h2>
         </div>
-        <div v-if="$route.fullPath ==='/food'" class="container">
+        <div v-if="$route.fullPath ==='/stash'" class="container">
           <h1 class="title">
             Zutaten, Rezepte und Vorräte
           </h1>

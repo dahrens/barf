@@ -6,8 +6,8 @@
         <i v-if="!collapsed" class="fa fa-caret-down"></i>
         <i v-if="collapsed" class="fa fa-caret-right"></i>
       </a>
-      <button v-on:click="showCreate = !showCreate" class="button is-small is-light is-pulled-right">
-        <span v-if="!showCreate" class="icon">
+      <button v-if="showCreate" v-on:click="expandedCreate = !expandedCreate" class="button is-small is-light is-pulled-right">
+        <span v-if="!expandedCreate" class="icon">
           <i class="fa fa-eye"></i>
         </span>
         <span v-else class="icon">
@@ -44,7 +44,7 @@
           </span>
       </template>
     </template>
-    <template v-if="showCreate">
+    <template v-if="expandedCreate">
       <create-recipe></create-recipe>
     </template>
   </nav>
@@ -59,10 +59,16 @@ export default {
     'stash-recipe': StashRecipe,
     'create-recipe': RecipeCreate
   },
+  props: {
+    showCreate: {
+      required: false,
+      default: () => (true)
+    }
+  },
   data () {
     return {
       collapsed: false,
-      showCreate: false,
+      expandedCreate: false,
       active: []
     }
   },
