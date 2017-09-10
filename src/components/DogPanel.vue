@@ -15,12 +15,12 @@
             <i class="fa fa-area-chart"></i>
           </span>
         </a>
-        <a v-on:click="toggleConfig" class="card-header-icon">
+        <a v-on:click="showConfig = !showConfig" class="card-header-icon">
           <span class="icon">
             <i class="fa fa-cog"></i>
           </span>
         </a>
-        <a  v-on:click="toggleCollapse()" class="card-header-icon">
+        <a  v-on:click="collapsed = !collapsed" class="card-header-icon">
           <span class="icon">
             <i class="fa" :class="{'fa-caret-down': !collapsed, 'fa-caret-right': collapsed}"></i>
           </span>
@@ -34,8 +34,8 @@
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <button v-on:click="toggleInfo()" class="button is-light">
-                  <span>Show info</span>
+                <button v-on:click="showInfo = !showInfo" class="button is-light">
+                  <span>Bild & Statistik</span>
                   <span v-if="showInfo" class="icon has-text-success">
                     <i class="fa fa-check"></i>
                   </span>
@@ -46,8 +46,8 @@
               </div>
             </div>
             <div class="field">
-              <button v-on:click="toggleNeeds()" class="button is-light">
-                <span>Show needs</span>
+              <button v-on:click="showNeeds = !showNeeds" class="button is-light">
+                <span>Bedarf</span>
                 <span v-if="showNeeds" class="icon has-text-success">
                   <i class="fa fa-check"></i>
                 </span>
@@ -58,8 +58,8 @@
             </div>
             <div class="field">
               <div class="control">
-                <button v-on:click="togglePlan()" class="button is-light">
-                  <span>Show plan</span>
+                <button v-on:click="showPlan = !showPlan" class="button is-light">
+                  <span>Mahlzeiten</span>
                   <span v-if="showPlan" class="icon has-text-success">
                     <i class="fa fa-check"></i>
                   </span>
@@ -135,24 +135,6 @@ export default {
     'dog-plan': DogPlan
   },
   methods: {
-    toggleCollapse () {
-      this.collapsed = !this.collapsed
-    },
-    toggleEdit () {
-      this.showEdit = !this.showEdit
-    },
-    toggleConfig () {
-      this.showConfig = !this.showConfig
-    },
-    toggleInfo () {
-      this.showInfo = !this.showInfo
-    },
-    toggleNeeds () {
-      this.showNeeds = !this.showNeeds
-    },
-    togglePlan () {
-      this.showPlan = !this.showPlan
-    },
     calculateAge (birthday) {
       if (!birthday) return
       let today = new Date()

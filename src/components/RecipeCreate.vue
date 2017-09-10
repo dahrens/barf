@@ -17,16 +17,16 @@
                 <i v-if="!isNameValid" class="fa fa-times has-text-danger"></i>
               </span>
             </div>
-            <p v-if="this.newRecipe.name === ''" class="help is-danger">Pick a name</p>
-            <p v-if="!isNameValid && this.newRecipe.name !== ''" class="help is-danger">This recipe name already exists</p>
+            <p v-if="this.newRecipe.name === ''" class="help is-danger">Wähle einen Namen für das neue Rezept</p>
+            <p v-if="!isNameValid && this.newRecipe.name !== ''" class="help is-danger">Ein Rezept mit diesem Namen gibt es schon</p>
           </div>
         </div>
       </div>
       <div v-for="ingredient in newRecipe.ingredients" class="field has-addons">
         <p class="control">
           <span class="select">
-            <select v-model="ingredient.id">
-              <option v-for="option in ingredientOptions" v-model="ingredient.id">{{ option.name }}</option>
+            <select v-model="ingredient.ingredient">
+              <option v-for="option in ingredientOptions" v-model="ingredient.ingredient">{{ option.name }}</option>
             </select>
           </span>
         </p>
@@ -39,7 +39,7 @@
               <i class="fa fa-plus"></i>
             </span>
           </a>
-          <a v-if="newRecipe.ingredients.length !== 1" class="button">
+          <a v-on:click="removeIngredient(ingredient)" v-if="newRecipe.ingredients.length !== 1" class="button">
             <span class="icon">
               <i class="fa fa-trash"></i>
             </span>
@@ -64,7 +64,7 @@ export default {
     let newRecipe = {
       name: '',
       ingredients: [
-        { ingredient: 1, amount: 100, unit: 'g' }
+        { ingredient: 1, amount: 100 }
       ]
     }
     return {
@@ -94,6 +94,15 @@ export default {
     }
   },
   methods: {
+    addIngredient: function () {
+      this.newRecipe.ingredients.push({ ingredient: 1, amount: 100 })
+    },
+    removeIngredient: function (ingredient) {
+      let idx = this.newRecipe.ingredients.indexOf(ingredient)
+      if (idx !== -1) {
+        this.newRecipe.ingredients.splice(idx, 1)
+      }
+    },
     createNewRecipe: function () {
       if (!this.isValid) {
         return

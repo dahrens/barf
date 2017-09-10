@@ -13,18 +13,6 @@
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath ==='/ingredients'}"
-              :to="{ name: 'Ingredients' }">
-              Zutaten
-            </router-link>
-            <router-link
-              class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath ==='/recipes'}"
-              :to="{ name: 'Recipes' }">
-              Rezepte
-            </router-link>
-            <router-link
-              class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath ==='/stash'}"
               :to="{ name: 'Stash' }">
               Vorräte

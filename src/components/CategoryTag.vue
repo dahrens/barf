@@ -1,6 +1,6 @@
 <template>
   <span class="tag is-dark" :class="size">
-    <span v-if="amount !== 1">{{amount * 100 }}%</span>&nbsp;{{ category }}</span>
+    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>{{ category }}</span>
   </span>
 </template>
 

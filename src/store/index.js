@@ -104,6 +104,54 @@ export default new Vuex.Store({
         }
       }
       return options
+    },
+    stashed_ingredients: state => {
+      let ingredients = {}
+      for (let item of state.stash) {
+        if (item.hasOwnProperty('ingredient')) {
+          let ingredient = state.ingredients.filter(i => i.id === item.ingredient)[0]
+          if (ingredients.hasOwnProperty(ingredient.id)) {
+            // already found this one
+            let ingredientMeta = ingredients[ingredient.id]
+            let existingAmounts = ingredientMeta.amounts.map(e => e[0])
+            if (existingAmounts.indexOf(item.amount) === -1) {
+              ingredientMeta.amounts.push([item.amount, 1])
+            } else {
+              let amountCounter = ingredientMeta.amounts.filter(a => item.amount)[0]
+              amountCounter[1]++
+            }
+          } else {
+            // first occurency
+            ingredients[ingredient.id] = {
+              ingredient,
+              item,
+              amounts: [[item.amount, 1]],
+              unit: item.unit
+            }
+          }
+        }
+      }
+      return ingredients
+    },
+    stashed_recipes: state => {
+      let recipes = {}
+      for (let item of state.stash) {
+        if (item.hasOwnProperty('recipe')) {
+          let recipe = state.recipes.filter(i => i.id === item.recipe)[0]
+          if (recipes.hasOwnProperty(recipe.id)) {
+            // already found this one
+            let recipeMeta = recipes[recipe.id]
+            recipeMeta.quantity++
+          } else {
+            // first occurency
+            recipes[recipe.id] = {
+              recipe,
+              quantity: 1
+            }
+          }
+        }
+      }
+      return recipes
     }
   }
 })

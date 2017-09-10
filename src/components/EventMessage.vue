@@ -1,7 +1,7 @@
 <template>
   <article class="message">
     <div class="message-header">
-      {{ event.name }}
+      <span v-if="event.name === 'meal'">Mahlzeit</span>
       <button class="delete" aria-label="delete"></button>
     </div>
     <div class="message-body is-clearfix">

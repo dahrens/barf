@@ -45,21 +45,21 @@ export default {
       name: 'Rindermuskelfleisch',
       parts: [[1, 'Fleisch']],
       unit: 'g',
-      amount: 2000
+      defaultAmount: 2000
     },
     {
       id: 2,
       name: 'Knorpelfleisch',
       parts: [[0.2, 'Knochen'], [0.8, 'Fleisch']],
       unit: 'g',
-      amount: 2000
+      defaultAmount: 2000
     },
     {
       id: 3,
       name: 'Dorschlebertran',
       parts: [[1, 'Vitamine']],
       unit: 'ml',
-      amount: 500
+      defaultAmount: 500
     }
   ],
   stash: [
@@ -72,6 +72,10 @@ export default {
       ingredient: 3,
       amount: 500,
       unit: 'ml'
+    },
+    {
+      recipe: 1,
+      quantity: 2
     }
   ],
   recipes: [
@@ -79,8 +83,8 @@ export default {
       id: 1,
       name: 'Normale Fleisch Malzeit',
       ingredients: [
-        { ingredient: 1, amount: 250, unit: 'g' },
-        { ingredient: 3, amount: 10, unit: 'ml' }
+        { ingredient: 1, amount: 250 },
+        { ingredient: 3, amount: 10 }
       ]
     }
   ],
