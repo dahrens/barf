@@ -7,10 +7,6 @@
 <script>
 export default {
   props: {
-    category: {
-      required: false,
-      type: String
-    },
     subcategory: {
       required: true,
       type: String
@@ -26,9 +22,9 @@ export default {
       default: () => ('is-small')
     }
   },
-  created () {
-    if (!this.category) {
-      this.$store.getters.subcategories.filter(c => c.subcategory === this.subcategory).category
+  computed: {
+    category () {
+      return this.$store.getters.subcategories.filter(c => c.subcategory === this.subcategory)[0].category
     }
   }
 }
