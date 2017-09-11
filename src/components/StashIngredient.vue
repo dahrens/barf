@@ -1,30 +1,40 @@
 <template>
-  <div class="field has-addons has-addons-right">
-    <p class="control">
-      <span class="select">
-        <select v-model="newOrder.unit" disabled>
-          <option v-for="unit in unitOptions" v-bind:value="newOrder.unit">{{unit.name}}</option>
-        </select>
-      </span>
-    </p>
-    <p class="control">
-      <input v-model="newOrder.amount" class="input" type="number" placeholder="Amount">
-    </p>
-    <p class="control">
-      <input v-model="newOrder.quantity" class="input" type="number" min="1" step="1" placeholder="Quantity">
-    </p>
-    <p class="control">
-      <a v-on:click="order()" class="button is-primary" title="Put into stash">
-        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
-      </a>
-    </p>
-    <p class="control">
-      <a v-on:click="remove()" class="button is-danger is-pulled-right" title="Delete from inventory">
-        <span class="icon is-small">
-          <i class="fa fa-trash"></i>
+  <div>
+    <div class="field has-addons has-addons-right">
+      <p class="control">
+        <span class="select">
+          <select v-model="newOrder.unit" disabled>
+            <option v-for="unit in unitOptions" v-bind:value="newOrder.unit">{{unit.name}}</option>
+          </select>
         </span>
-      </a>
-    </p>
+      </p>
+      <p class="control">
+        <input v-model="newOrder.amount" class="input" type="number" placeholder="Amount">
+      </p>
+      <p class="control">
+        <input v-model="newOrder.quantity" class="input" type="number" min="1" step="1" placeholder="Quantity">
+      </p>
+      <p class="control">
+        <a v-on:click="order()" class="button is-primary" title="Put into stash">
+          <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+        </a>
+      </p>
+      <p class="control">
+        <a v-on:click="remove()" class="button is-danger is-pulled-right" title="Delete from inventory">
+          <span class="icon is-small">
+            <i class="fa fa-trash"></i>
+          </span>
+        </a>
+      </p>
+    </div>
+    <div v-if="showCascade">
+      <div class="notification is-danger">
+        <button v-on:click="showCascade = false" class="delete"></button>
+        Danger lorem ipsum dolor sit amet, consectetur
+        adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Sit amet,
+        consectetur adipiscing elit
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,7 +50,8 @@ export default {
     }
     return {
       newOrder,
-      newOrderBlueprint: JSON.stringify(newOrder)
+      newOrderBlueprint: JSON.stringify(newOrder),
+      showCascade: false
     }
   },
   computed: {
@@ -53,6 +64,12 @@ export default {
         })
       }
       return options
+    },
+    needsCascade () {
+      return this.$store.getters.ingredientNeedsCascade(this.ingredient)
+    },
+    getCascaded () {
+      return this.$store.getters.getIngredientsCascaded(this.ingredient)
     }
   },
   methods: {
@@ -67,8 +84,14 @@ export default {
       this.newOrder = JSON.parse(this.newOrderBlueprint)
     },
     remove: function () {
-      this.$emit('close')
-      this.$store.commit('REMOVE_INGREDIENT', this.ingredient)
+      if (this.needsCascade && !this.showCascade) {
+        this.showCascade = true
+      } else if ((this.needsCascade && this.showCascade) || !this.needsCascade) {
+        this.$store.commit('REMOVE_INGREDIENT', {
+          ingredient: this.ingredient,
+          cascade: this.getCascaded
+        })
+      }
     }
   }
 }

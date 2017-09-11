@@ -63,15 +63,15 @@ export default {
       return this.$store.state.stash
     },
     ingredientStash () {
-      return this.$store.getters.stashed_ingredients
+      return this.$store.getters.stashedIngredients
     }
   },
   methods: {
-    activateRecipe: function (record) {
-      if (this.activeRecipes.indexOf(record) === -1) {
-        this.activeRecipes.push(record)
+    activateStashItem: function (record) {
+      if (this.activeStashItems.indexOf(record) === -1) {
+        this.activeStashItems.push(record)
       } else {
-        this.activeRecipes.splice(this.activeRecipes.indexOf(record), 1)
+        this.activeStashItems.splice(this.activeStashItems.indexOf(record), 1)
       }
     },
     isActiveStashItem (record) {

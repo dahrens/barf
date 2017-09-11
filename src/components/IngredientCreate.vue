@@ -29,7 +29,7 @@
               </span>
             </p>
             <p class="control is-expanded">
-              <input class="input" type="number" min="1" max="999999" step="1" v-model="newIngredient.amount">
+              <input class="input" type="number" min="1" max="999999" step="1" v-model="newIngredient.defaultAmount">
             </p>
           </div>
 

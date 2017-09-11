@@ -47,7 +47,8 @@ if (state === null) {
 }
 
 function persist (state) {
-  localStorage.setItem('barf', JSON.stringify(state))
+  console.log('persist is disabled')
+  // localStorage.setItem('barf', JSON.stringify(state))
 }
 
 export default new Vuex.Store({
@@ -74,13 +75,20 @@ export default new Vuex.Store({
       payload.id = state.ids.ingredients
       state.ids.ingredients++
       state.ingredients.push(payload)
-      console.log('added ingredient: ', payload)
       persist(state)
     },
     [REMOVE_INGREDIENT] (state, payload) {
-      let idx = state.ingredients.indexOf(payload)
+      console.log('will delete: ', payload)
+      let ingredient = payload.ingredient
+      let idx = state.ingredients.indexOf(ingredient)
       if (idx === -1) return
       state.ingredients.splice(idx, 1)
+      for (let item of payload.cascade.stashContent) {
+        state.stash.splice(state.stash.indexOf(item), 1)
+      }
+      for (let recipe of payload.cascade.recipes) {
+        state.recipes.splice(state.recipes.indexOf(recipe), 1)
+      }
       persist(state)
     },
     [STASH_INGREDIENT] (state, payload) {
@@ -128,7 +136,42 @@ export default new Vuex.Store({
       }
       return options
     },
-    stashed_ingredients: state => {
+    ingredientNeedsCascade: (state) => (ingredient) => {
+      for (let item of state.stash) {
+        if (item.hasOwnProperty('ingredient')) {
+          if (item.ingredient === ingredient.id) return true
+        }
+      }
+      for (let recipe of state.recipes) {
+        for (let i of recipe.ingredients) {
+          if (i.indredient === ingredient.id) return true
+        }
+      }
+      return false
+    },
+    getIngredientsCascaded: (state) => (ingredient) => {
+      let stashContent = []
+      let recipes = []
+      for (let recipe of state.recipes) {
+        for (let i of recipe.ingredients) {
+          if (i.ingredient === ingredient.id) recipes.push(recipe)
+        }
+      }
+      for (let item of state.stash) {
+        if (item.hasOwnProperty('ingredient')) {
+          if (item.ingredient === ingredient.id) stashContent.push(item)
+        }
+        if (item.hasOwnProperty('recipe')) {
+          console.log(recipes.map(r => parseInt(r.id)), item.recipe)
+          if (recipes.map(r => parseInt(r.id)).indexOf(parseInt(item.recipe)) !== -1) stashContent.push(item)
+        }
+      }
+      return {
+        stashContent,
+        recipes
+      }
+    },
+    stashedIngredients: state => {
       let ingredients = {}
       for (let item of state.stash) {
         if (item.hasOwnProperty('ingredient')) {
@@ -156,7 +199,7 @@ export default new Vuex.Store({
       }
       return ingredients
     },
-    stashed_recipes: state => {
+    stashedRecipes: state => {
       let recipes = {}
       for (let item of state.stash) {
         if (item.hasOwnProperty('recipe')) {
