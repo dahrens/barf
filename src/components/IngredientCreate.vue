@@ -1,6 +1,6 @@
 <template>
-  <article class="message">
-    <div class="message-body">
+  <div class="ingredient-create">
+    <div class="panel-block">
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
@@ -32,47 +32,49 @@
               <input class="input" type="number" min="1" max="999999" step="1" v-model="newIngredient.defaultAmount">
             </p>
           </div>
-
         </div>
-
       </div>
-      <div v-for="subCategory in newIngredient.subCategories" v-model="newIngredient.subCategories" class="field has-addons">
-        <p class="control">
-          <span class="select">
-            <select v-model="subCategory[1]">
-              <option v-for="option in subCategoryOptions" v-model="subCategory[1]">{{ option.subCategory}}</option>
-            </select>
-          </span>
-        </p>
-        <p class="control is-expanded">
-          <input class="input" type="number" min="0" max="1" step="0.1" v-model="subCategory[0]"
-                :class="{
-                  'is-danger': !isSubcategoriesValid
-                }">
-        </p>
-        <p class="control">
-          <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subCategory)">
-            <span class="icon">
-              <i class="fa fa-plus"></i>
-            </span>
-          </a>
-          <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subCategory)">
-            <span class="icon">
-              <i class="fa fa-trash"></i>
-            </span>
-          </a>
-        </p>
-      </div>
-      <p v-if="!isSubcategoriesValid" class="help is-danger">The sum of all subCategories must be 1, not {{subCategoryValue}}</p>
     </div>
-    <div class="message-footer">
+    <template v-for="subCategory in newIngredient.subCategories">
+      <div class="panel-block">
+        <div v-model="newIngredient.subCategories" class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select v-model="subCategory[1]">
+                <option v-for="option in subCategoryOptions" v-model="subCategory[1]">{{ option.subCategory}}</option>
+              </select>
+            </span>
+          </p>
+          <p class="control is-expanded">
+            <input class="input" type="number" min="0" max="1" step="0.1" v-model="subCategory[0]"
+                  :class="{
+                    'is-danger': !isSubcategoriesValid
+                  }">
+          </p>
+          <p class="control">
+            <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subCategory)">
+              <span class="icon">
+                <i class="fa fa-plus"></i>
+              </span>
+            </a>
+            <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subCategory)">
+              <span class="icon">
+                <i class="fa fa-trash"></i>
+              </span>
+            </a>
+          </p>
+        </div>
+        <p v-if="!isSubcategoriesValid" class="help is-danger">The sum of all subCategories must be 1, not {{subCategoryValue}}</p>
+      </div>
+    </template>
+    <div class="panel-block">
       <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewIngredient()" :disabled="!isValid">
         <span class="icon">
-          <i class="fa fa-plus"></i>
+          <i class="fa fa-save"></i>
         </span>
       </button>
     </div>
-  </article>
+  </div>
 </template>
 
 <script>
@@ -150,3 +152,8 @@ export default {
   }
 }
 </script>
+
+<style>
+.ingredient-create {
+  color: #ff0;
+}

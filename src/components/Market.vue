@@ -17,7 +17,17 @@
           <i class="fa fa-plus"></i>
         </span>
       </button>
+      <button v-on:click="expandAll = !expandAll" class="button is-small is-light is-pulled-right">
+        <span v-if="!expandAll" >1</span>
+        <span v-else>all</span>
+        <span class="icon is-small">
+          <i class="fa fa-expand"></i>
+        </span>
+      </button>
     </p>
+    <template v-if="showCreate">
+      <ingredientCreate></ingredientCreate>
+    </template>
     <div v-if="!collapsed" class="panel-block">
       <p class="control has-icons-left">
         <input class="input is-small" type="text" placeholder="search">
@@ -25,7 +35,6 @@
           <i class="fa fa-search"></i>
         </span>
       </p>
-
     </div>
     <template v-if="!collapsed">
       <template v-for="ingredient in ingredients">
@@ -44,9 +53,6 @@
           </span>
       </template>
     </template>
-    <template v-if="showCreate">
-      <ingredientCreate></ingredientCreate>
-    </template>
   </nav>
 </template>
 
@@ -64,6 +70,7 @@ export default {
   },
   data () {
     return {
+      expandAll: false,
       collapsed: false,
       showCreate: false,
       active: []
@@ -77,8 +84,10 @@ export default {
   methods: {
     activate: function (record) {
       if (this.active.indexOf(record) === -1) {
+        if (!this.expandAll) this.active = []
         this.active.push(record)
       } else {
+        if (!this.expandAll) this.active = []
         this.active.splice(this.active.indexOf(record), 1)
       }
     },

@@ -2,25 +2,25 @@
   <div>
     <div class="field has-addons has-addons-right">
       <p class="control">
-        <span class="select">
+        <span class="select is-large">
           <select v-model="newOrder.unit" disabled>
             <option v-for="unit in unitOptions" v-bind:value="newOrder.unit">{{unit.name}}</option>
           </select>
         </span>
       </p>
       <p class="control">
-        <input v-model="newOrder.amount" class="input" type="number" placeholder="Amount">
+        <input v-model="newOrder.amount" class="input is-large" type="number" placeholder="Amount">
       </p>
       <p class="control">
-        <input v-model="newOrder.quantity" class="input" type="number" min="1" step="1" placeholder="Quantity">
+        <input v-model="newOrder.quantity" class="input is-large" type="number" min="1" step="1" placeholder="Quantity">
       </p>
       <p class="control">
-        <a v-on:click="order()" class="button is-primary" title="Put into stash">
+        <a v-on:click="order()" class="button is-primary is-large" title="Put into stash">
           <span class="icon"><i class="fa fa-shopping-cart"></i></span>
         </a>
       </p>
       <p class="control">
-        <a v-on:click="remove()" class="button is-danger is-pulled-right" title="Delete from inventory">
+        <a v-on:click="remove()" class="button is-danger is-pulled-right is-large" title="Delete from inventory">
           <span class="icon is-small">
             <i class="fa fa-trash"></i>
           </span>

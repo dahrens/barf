@@ -1,6 +1,6 @@
 <template>
-  <article class="message">
-    <div class="message-body">
+  <div class="recipe-create">
+    <div class="panel-block">
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
@@ -22,39 +22,43 @@
           </div>
         </div>
       </div>
-      <div v-for="ingredient in newRecipe.ingredients" class="field has-addons">
-        <p class="control">
-          <span class="select">
-            <select v-model="ingredient.ingredient">
-              <option v-for="option in ingredientOptions" v-model="ingredient.ingredient">{{ option.name }}</option>
-            </select>
-          </span>
-        </p>
-        <p class="control">
-          <input class="input" type="number" min="0" max="99999" step="1" v-model="ingredient.amount">
-        </p>
-        <p class="control">
-          <a class="button" v-on:click="addIngredient()">
-            <span class="icon">
-              <i class="fa fa-plus"></i>
-            </span>
-          </a>
-          <a v-on:click="removeIngredient(ingredient)" v-if="newRecipe.ingredients.length !== 1" class="button">
-            <span class="icon">
-              <i class="fa fa-trash"></i>
-            </span>
-          </a>
-        </p>
-      </div>
     </div>
-    <div class="message-footer">
+    <template v-for="ingredient in newRecipe.ingredients">
+      <div class="panel-block">
+        <div class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select v-model="ingredient.ingredient">
+                <option v-for="option in ingredientOptions" v-model="ingredient.ingredient">{{ option.name }}</option>
+              </select>
+            </span>
+          </p>
+          <p class="control">
+            <input class="input" type="number" min="0" max="99999" step="1" v-model="ingredient.amount">
+          </p>
+          <p class="control">
+            <a class="button" v-on:click="addIngredient()">
+              <span class="icon">
+                <i class="fa fa-plus"></i>
+              </span>
+            </a>
+            <a v-on:click="removeIngredient(ingredient)" v-if="newRecipe.ingredients.length !== 1" class="button">
+              <span class="icon">
+                <i class="fa fa-trash"></i>
+              </span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </template>
+    <div class="panel-block">
       <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewRecipe()" :disabled="!isValid">
         <span class="icon">
-          <i class="fa fa-plus"></i>
+          <i class="fa fa-save"></i>
         </span>
       </button>
     </div>
-  </article>
+  </div>
 </template>
 
 <script>

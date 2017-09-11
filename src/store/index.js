@@ -30,6 +30,7 @@ export const FEED_DOG = 'FEED_DOG'
 export const INSERT_INGREDIENT = 'INSERT_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
 export const STASH_INGREDIENT = 'STASH_INGREDIENT'
+export const STASH_RECIPE = 'STASH_RECIPE'
 export const INSERT_RECIPE = 'INSERT_RECIPE'
 export const REMOVE_RECIPE = 'REMOVE_RECIPE'
 export const UPDATE_PLAN_CATEGORIES = 'UPDATE_PLAN_CATEGORIES'
@@ -47,7 +48,7 @@ if (state === null) {
 }
 
 function persist (state) {
-  console.log('persist is disabled')
+  console.log('persist is disabled', state)
   // localStorage.setItem('barf', JSON.stringify(state))
 }
 
@@ -78,7 +79,6 @@ export default new Vuex.Store({
       persist(state)
     },
     [REMOVE_INGREDIENT] (state, payload) {
-      console.log('will delete: ', payload)
       let ingredient = payload.ingredient
       let idx = state.ingredients.indexOf(ingredient)
       if (idx === -1) return
@@ -88,6 +88,10 @@ export default new Vuex.Store({
       }
       for (let recipe of payload.cascade.recipes) {
         state.recipes.splice(state.recipes.indexOf(recipe), 1)
+      }
+      for (let planMeal of payload.cascade.planMeals) {
+        let plan = state.plans.filter(p => planMeal.plan)[0]
+        plan.week[planMeal.dow].splice(planMeal.meal, 1)
       }
       persist(state)
     },
@@ -105,6 +109,16 @@ export default new Vuex.Store({
       let idx = state.recipes.indexOf(payload)
       if (idx === -1) return
       state.recipes.splice(idx, 1)
+      persist(state)
+    },
+    [STASH_RECIPE] (state, payload) {
+      console.log(payload)
+      let included = state.stash.filter((i) => i.hasOwnProperty('recipe') && i.recipe === payload.recipe)
+      if (included.length === 1) {
+        console.log(payload)
+        included[0].quantity += payload.quantity
+      }
+      state.stash.push(payload)
       persist(state)
     },
     [UPDATE_PLAN_CATEGORIES] (state, payload) {
@@ -152,6 +166,7 @@ export default new Vuex.Store({
     getIngredientsCascaded: (state) => (ingredient) => {
       let stashContent = []
       let recipes = []
+      let planMeals = []
       for (let recipe of state.recipes) {
         for (let i of recipe.ingredients) {
           if (i.ingredient === ingredient.id) recipes.push(recipe)
@@ -162,13 +177,25 @@ export default new Vuex.Store({
           if (item.ingredient === ingredient.id) stashContent.push(item)
         }
         if (item.hasOwnProperty('recipe')) {
-          console.log(recipes.map(r => parseInt(r.id)), item.recipe)
-          if (recipes.map(r => parseInt(r.id)).indexOf(parseInt(item.recipe)) !== -1) stashContent.push(item)
+          if (recipes.map(r => r.id).indexOf(item.recipe) !== -1) stashContent.push(item)
+        }
+      }
+      for (let plan of state.plans) {
+        for (let dow in plan.week) {
+          for (let meal in plan.week[dow]) {
+            let known = () => recipes.map(r => r.id).indexOf(plan.week[dow][meal].recipe) !== -1
+            if (plan.week[dow][meal].hasOwnProperty('ingredient')) {
+              planMeals.push({ plan: plan.id, dow, meal })
+            } else if (plan.week[dow][meal].hasOwnProperty('recipe') && known()) {
+              planMeals.push({ plan: plan.id, dow, meal })
+            }
+          }
         }
       }
       return {
         stashContent,
-        recipes
+        recipes,
+        planMeals
       }
     },
     stashedIngredients: state => {
@@ -200,24 +227,25 @@ export default new Vuex.Store({
       return ingredients
     },
     stashedRecipes: state => {
-      let recipes = {}
+      let recipeMetas = []
       for (let item of state.stash) {
         if (item.hasOwnProperty('recipe')) {
           let recipe = state.recipes.filter(i => i.id === item.recipe)[0]
-          if (recipes.hasOwnProperty(recipe.id)) {
+          let idx = recipeMetas.map(rm => rm.recipe).indexOf(recipe)
+          if (idx !== -1) {
             // already found this one
-            let recipeMeta = recipes[recipe.id]
+            let recipeMeta = recipeMetas[idx]
             recipeMeta.quantity++
           } else {
             // first occurency
-            recipes[recipe.id] = {
+            recipeMetas.push({
               recipe,
               quantity: 1
-            }
+            })
           }
         }
       }
-      return recipes
+      return recipeMetas
     }
   }
 })

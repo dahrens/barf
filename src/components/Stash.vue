@@ -32,6 +32,21 @@
               hi there
             </span>
           </template>
+          <template v-for="recipeMeta of recipeStash">
+            <a v-on:click="activateStashItem(recipeMeta.recipe)" class="panel-block" :class="{'is-active': isActiveStashItem(recipeMeta.recipe)}">
+              <p class="panel-icon">
+                <i v-if ="!isActiveStashItem(recipeMeta.recipe)" class="fa fa-caret-right"></i>
+                <i v-if ="isActiveStashItem(recipeMeta.recipe)" class="fa fa-caret-down"></i>
+              </p>
+              {{ recipeMeta.recipe.name }}&nbsp;
+              <span class="tag is-dark">
+                <span class="is-size-7">x{{ recipeMeta.quantity }}</span>
+              </span>
+            </a>
+            <span v-if="isActiveStashItem(recipeMeta.recipe)"class="panel-block">
+              hi there
+            </span>
+          </template>
         </nav>
       </div>
       <div class="column is-half">
@@ -64,6 +79,9 @@ export default {
     },
     ingredientStash () {
       return this.$store.getters.stashedIngredients
+    },
+    recipeStash () {
+      return this.$store.getters.stashedRecipes
     }
   },
   methods: {
