@@ -1,16 +1,16 @@
 <template>
   <table class="table is-fullwidth dog-needs">
     <tbody>
-      <tr v-for="category in categories">
+      <tr v-for="category in subcategories">
         <td>
           <span class="icon has-text-danger">
             <i class="fa fa-caret-down"></i>
           </span>
         </td>
         <td>
-          <category-tag :category="category.part" :size="''"></category-tag>
+          <category-tag :subcategory="category.subcategory" :size="''"></category-tag>
         </td>
-        <td class="subcategories-progress">
+        <td>
           <progress class="progress is-medium is-success" :value="0.6 * 100" max="100"></progress>
         </td>
       </tr>
@@ -27,8 +27,8 @@ export default {
     'category-tag': CategoryTag
   },
   computed: {
-    categories () {
-      return this.$store.getters.categories
+    subcategories () {
+      return this.$store.getters.subcategories
     }
   }
 }

@@ -29,6 +29,7 @@ export const INSERT_DOG = 'INSERT_DOG'
 export const FEED_DOG = 'FEED_DOG'
 export const INSERT_INGREDIENT = 'INSERT_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
+export const STASH_INGREDIENT = 'STASH_INGREDIENT'
 export const INSERT_RECIPE = 'INSERT_RECIPE'
 export const REMOVE_RECIPE = 'REMOVE_RECIPE'
 export const UPDATE_PLAN_CATEGORIES = 'UPDATE_PLAN_CATEGORIES'
@@ -73,12 +74,17 @@ export default new Vuex.Store({
       payload.id = state.ids.ingredients
       state.ids.ingredients++
       state.ingredients.push(payload)
+      console.log('added ingredient: ', payload)
       persist(state)
     },
     [REMOVE_INGREDIENT] (state, payload) {
       let idx = state.ingredients.indexOf(payload)
       if (idx === -1) return
       state.ingredients.splice(idx, 1)
+      persist(state)
+    },
+    [STASH_INGREDIENT] (state, payload) {
+      state.stash.push(payload)
       persist(state)
     },
     [INSERT_RECIPE] (state, payload) {
@@ -109,14 +115,14 @@ export default new Vuex.Store({
       let exclude = ['ids', 'categories']
       return Object.keys(state).filter(e => exclude.indexOf(e) === -1)
     },
-    categories: state => {
+    subcategories: state => {
       let options = []
       for (let category of Object.keys(state.categories)) {
         let subcategories = state.categories[category]
         for (let subcategory of subcategories) {
           options.push({
-            part: subcategory,
-            category: category
+            subcategory,
+            category
           })
         }
       }

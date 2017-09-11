@@ -61,7 +61,7 @@ export default {
         amount: this.newOrder.amount
       }
       for (let x = 1; x <= this.newOrder.quantity; x++) {
-        this.$store.state.stash.push(JSON.parse(JSON.stringify(stashItem)))
+        this.$store.commit('STASH_INGREDIENT', JSON.parse(JSON.stringify(stashItem)))
       }
       this.newOrder = JSON.parse(this.newOrderBlueprint)
     },

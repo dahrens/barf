@@ -35,7 +35,7 @@
               <i v-if ="isActive(recipe)" class="fa fa-caret-down"></i>
             </p>
             {{ recipe.name }}&nbsp;
-            <template v-for="part in recipe.parts">
+            <template v-for="part in recipe.subcategories">
               <category-tag :amount="part[0]" :category="part[1]"></category-tag>&nbsp;
             </template>
           </a>

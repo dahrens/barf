@@ -64,15 +64,15 @@
       <template v-for="animalCategory in animalCategories">
         <div class="columns">
           <div class="column is-2">
-            <span class="is-pulled-right">{{animalCategory.part}}</span>
+            <span class="is-pulled-right">{{animalCategory.subcategory}}</span>
           </div>
           <div class="column is-8">
-            <categorySlider v-on:changed="onCategoryChange" :category="animalCategory.part" :cls="animalCategory.category" :value="plan.subcategories.filter(sc => sc[1] === animalCategory.part)[0][0]"></categorySlider>
+            <categorySlider v-on:changed="onCategoryChange" :category="animalCategory.subcategory" :cls="animalCategory.category" :value="plan.subcategories.filter(sc => sc[1] === animalCategory.subcategory)[0][0]"></categorySlider>
           </div>
           <div class="column is-2">
-            <a v-on:click="toggleLockCategory(animalCategory.part)" class="button is-primary has-icon">
+            <a v-on:click="toggleLockCategory(animalCategory.subcategory)" class="button is-primary has-icon">
               <span class="icon">
-                <i v-if="locks.indexOf(animalCategory.part) === -1" class="fa fa-unlock"></i>
+                <i v-if="locks.indexOf(animalCategory.subcategory) === -1" class="fa fa-unlock"></i>
                 <i v-else class="fa fa-lock"></i>
               </span>
             </a>
@@ -83,19 +83,19 @@
       <template v-for="vegetablesCategory in vegetablesCategories">
         <div class="columns">
           <div class="column is-2">
-            <span class="is-pulled-right">{{vegetablesCategory.part}}</span>
+            <span class="is-pulled-right">{{vegetablesCategory.subcategory}}</span>
           </div>
           <div class="column is-8">
             <categorySlider
               v-on:changed="onCategoryChange"
-              :category="vegetablesCategory.part"
+              :category="vegetablesCategory.subcategory"
               :cls="vegetablesCategory.category"
-              :value="plan.subcategories.filter(sc => sc[1] === vegetablesCategory.part)[0][0]"></categorySlider>
+              :value="plan.subcategories.filter(sc => sc[1] === vegetablesCategory.subcategory)[0][0]"></categorySlider>
           </div>
           <div class="column is-2">
-            <a v-on:click="toggleLockCategory(vegetablesCategory.part)" class="button is-primary has-icon">
+            <a v-on:click="toggleLockCategory(vegetablesCategory.subcategory)" class="button is-primary has-icon">
               <span class="icon">
-                <i v-if="locks.indexOf(vegetablesCategory.part) === -1" class="fa fa-unlock"></i>
+                <i v-if="locks.indexOf(vegetablesCategory.subcategory) === -1" class="fa fa-unlock"></i>
                 <i v-else class="fa fa-lock"></i>
               </span>
             </a>
@@ -144,14 +144,14 @@ export default {
     }
   },
   computed: {
-    categories () {
-      return this.$store.getters.categories
+    subcategories () {
+      return this.$store.getters.subcategories
     },
     animalCategories () {
-      return this.$store.getters.categories.filter(c => c.category === 'animal')
+      return this.$store.getters.subcategories.filter(c => c.category === 'animal')
     },
     vegetablesCategories () {
-      return this.$store.getters.categories.filter(c => c.category === 'vegetables')
+      return this.$store.getters.subcategories.filter(c => c.category === 'vegetables')
     }
   },
   methods: {
@@ -178,9 +178,9 @@ export default {
       let increase = diff > 0
       let decrease = diff < 0
       let adjust = []
-      for (let c of this.categories) {
-        if (c.category === cls && c.part !== category[1] && this.locks.indexOf(c.part) === -1) {
-          adjust.push(untouched.filter(u => u[1] === c.part)[0])
+      for (let c of this.subcategories) {
+        if (c.category === cls && c.subcategory !== category[1] && this.locks.indexOf(c.subcategory) === -1) {
+          adjust.push(untouched.filter(u => u[1] === c.subcategory)[0])
         }
       }
       if (!adjust.length) {

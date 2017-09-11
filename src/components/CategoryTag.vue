@@ -1,6 +1,6 @@
 <template>
   <span class="tag is-dark" :class="size">
-    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>{{ category }}</span>
+    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>{{ subcategory }}</span>
   </span>
 </template>
 
@@ -8,6 +8,10 @@
 export default {
   props: {
     category: {
+      required: false,
+      type: String
+    },
+    subcategory: {
       required: true,
       type: String
     },
@@ -20,6 +24,11 @@ export default {
       required: false,
       type: String,
       default: () => ('is-small')
+    }
+  },
+  created () {
+    if (!this.category) {
+      this.$store.getters.subcategories.filter(c => c.subcategory === this.subcategory).category
     }
   }
 }

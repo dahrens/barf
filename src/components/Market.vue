@@ -35,8 +35,8 @@
               <i v-if ="isActive(ingredient)" class="fa fa-caret-down"></i>
             </p>
             {{ ingredient.name }}&nbsp;
-            <template v-for="part in ingredient.parts">
-              <category-tag :amount="part[0]" :category="part[1]"></category-tag>&nbsp;
+            <template v-for="part in ingredient.subcategories">
+              <category-tag :amount="part[0]" :subcategory="part[1]"></category-tag>&nbsp;
             </template>
           </a>
           <span v-if="isActive(ingredient)" class="panel-block">
