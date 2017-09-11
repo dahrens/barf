@@ -30,6 +30,7 @@ export const FEED_DOG = 'FEED_DOG'
 export const INSERT_INGREDIENT = 'INSERT_INGREDIENT'
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT'
 export const INSERT_RECIPE = 'INSERT_RECIPE'
+export const REMOVE_RECIPE = 'REMOVE_RECIPE'
 export const UPDATE_PLAN_CATEGORIES = 'UPDATE_PLAN_CATEGORIES'
 
 const localStorage = window.localStorage
@@ -84,6 +85,12 @@ export default new Vuex.Store({
       payload.id = state.ids.recipes
       state.ids.recipes++
       state.recipes.push(payload)
+      persist(state)
+    },
+    [REMOVE_RECIPE] (state, payload) {
+      let idx = state.recipes.indexOf(payload)
+      if (idx === -1) return
+      state.recipes.splice(idx, 1)
       persist(state)
     },
     [UPDATE_PLAN_CATEGORIES] (state, payload) {
