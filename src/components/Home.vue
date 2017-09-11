@@ -3,12 +3,12 @@
     <div class="columns">
       <div class="column is-4">
         <template v-for="event in events">
-          <event-message :event="event"></event-message>
+          <eventMessage :event="event"></eventMessage>
         </template>
       </div>
       <div class="column is-8">
         <template v-for="dog in dogs">
-          <dog-panel :dog="dog"></dog-panel>
+          <dogPanel :dog="dog"></dogPanel>
         </template>
       </div>
     </div>
@@ -17,14 +17,14 @@
 
 <script>
 
-import DogPanel from '@/components/DogPanel'
-import EventMessage from '@/components/EventMessage'
+import dogPanel from '@/components/DogPanel'
+import eventMessage from '@/components/EventMessage'
 
 export default {
   name: 'home',
   components: {
-    'dog-panel': DogPanel,
-    'event-message': EventMessage
+    dogPanel,
+    eventMessage
   },
   computed: {
     dogs () {

@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: 'create-recipe',
+  name: 'createRecipe',
   data () {
     let newRecipe = {
       name: '',

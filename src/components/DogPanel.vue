@@ -118,7 +118,7 @@ import DogNeeds from '@/components/DogNeeds'
 import DogPlan from '@/components/DogPlan'
 
 export default {
-  name: 'dog-panel',
+  name: 'dogPanel',
   props: ['dog'],
   data () {
     return {

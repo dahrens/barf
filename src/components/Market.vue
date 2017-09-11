@@ -40,25 +40,26 @@
             </template>
           </a>
           <span v-if="isActive(ingredient)" class="panel-block">
-            <stash-ingredient :ingredient="ingredient"></stash-ingredient>
+            <stashIngredient :ingredient="ingredient"></stashIngredient>
           </span>
       </template>
     </template>
     <template v-if="showCreate">
-      <create-ingredient></create-ingredient>
+      <ingredientCreate></ingredientCreate>
     </template>
   </nav>
 </template>
 
 <script>
-import IngredientCreate from '@/components/IngredientCreate'
-import StashIngredient from '@/components/StashIngredient'
+import ingredientCreate from '@/components/IngredientCreate'
+import stashIngredient from '@/components/StashIngredient'
 import subCategoryTag from '@/components/SubCategoryTag'
 
 export default {
+  name: 'market',
   components: {
-    'create-ingredient': IngredientCreate,
-    'stash-ingredient': StashIngredient,
+    ingredientCreate,
+    stashIngredient,
     subCategoryTag
   },
   data () {

@@ -43,6 +43,7 @@
 
 <script>
 export default {
+  name: 'eventMessage',
   props: ['event'],
   computed: {
     dog () {

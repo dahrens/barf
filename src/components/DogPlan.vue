@@ -70,7 +70,7 @@
 
 <script>
 export default {
-  name: 'dog-plan',
+  name: 'dogPlan',
   props: ['dog', 'plan']
 }
 </script>

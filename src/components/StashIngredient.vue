@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'stashIngredient',
   props: ['ingredient'],
   data () {
     let newOrder = {

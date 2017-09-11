@@ -43,14 +43,14 @@
 </template>
 
 <script>
-import Market from '@/components/Market'
-import Kitchen from '@/components/Kitchen'
+import market from '@/components/Market'
+import kitchen from '@/components/Kitchen'
 
 export default {
   name: 'Stash',
   components: {
-    'market': Market,
-    'kitchen': Kitchen
+    market,
+    kitchen
   },
   data () {
     return {

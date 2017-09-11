@@ -31,6 +31,7 @@
 
 <script>
 export default {
+  name: 'stashRecipe',
   props: ['recipe'],
   data () {
     return {
