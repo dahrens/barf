@@ -1,14 +1,14 @@
 <template>
   <table class="table is-fullwidth dog-needs">
     <tbody>
-      <tr v-for="category in subcategories">
+      <tr v-for="category in subCategories">
         <td>
           <span class="icon has-text-danger">
             <i class="fa fa-caret-down"></i>
           </span>
         </td>
         <td>
-          <category-tag :subcategory="category.subcategory" :size="''"></category-tag>
+          <subCategoryTag :subCategory="category.subCategory" :size="''"></subCategoryTag>
         </td>
         <td>
           <progress class="progress is-medium is-success" :value="0.6 * 100" max="100"></progress>
@@ -19,16 +19,17 @@
 </template>
 
 <script>
-import CategoryTag from '@/components/CategoryTag'
+import subCategoryTag from '@/components/SubCategoryTag'
 
 export default {
+  name: 'dogNeeds',
   props: ['dog'],
   components: {
-    'category-tag': CategoryTag
+    subCategoryTag
   },
   computed: {
-    subcategories () {
-      return this.$store.getters.subcategories
+    subCategories () {
+      return this.$store.getters.subCategories
     }
   }
 }

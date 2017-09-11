@@ -1,13 +1,14 @@
 <template>
   <span class="tag is-dark" :class="size">
-    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>{{ subcategory }}</span>
+    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>{{ subCategory }}</span>
   </span>
 </template>
 
 <script>
 export default {
+  name: 'subCategoryTag',
   props: {
-    subcategory: {
+    subCategory: {
       required: true,
       type: String
     },
@@ -24,7 +25,7 @@ export default {
   },
   computed: {
     category () {
-      return this.$store.getters.subcategories.filter(c => c.subcategory === this.subcategory)[0].category
+      return this.$store.getters.subCategories.filter(c => c.subCategory === this.subCategory)[0].category
     }
   }
 }

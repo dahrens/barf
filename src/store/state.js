@@ -43,21 +43,21 @@ export default {
     {
       id: 1,
       name: 'Rindermuskelfleisch',
-      subcategories: [[1, 'Fleisch']],
+      subCategories: [[1, 'Fleisch']],
       unit: 'g',
       defaultAmount: 2000
     },
     {
       id: 2,
       name: 'Knorpelfleisch',
-      subcategories: [[0.2, 'Knochen'], [0.8, 'Fleisch']],
+      subCategories: [[0.2, 'Knochen'], [0.8, 'Fleisch']],
       unit: 'g',
       defaultAmount: 2000
     },
     {
       id: 3,
       name: 'Dorschlebertran',
-      subcategories: [[1, 'Vitamine']],
+      subCategories: [[1, 'Vitamine']],
       unit: 'ml',
       defaultAmount: 500
     }
@@ -108,7 +108,7 @@ export default {
           Gemüse: 40
         }
       },
-      subcategories: [
+      subCategories: [
         [40, 'Fleisch'], [20, 'Innereien'], [30, 'Magen'], [10, 'Knochen'],
         [40, 'Getreide'], [20, 'Früchte'], [40, 'Gemüse']
       ],

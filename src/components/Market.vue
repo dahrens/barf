@@ -36,7 +36,7 @@
             </p>
             {{ ingredient.name }}&nbsp;
             <template v-for="part in ingredient.subcategories">
-              <category-tag :amount="part[0]" :subcategory="part[1]"></category-tag>&nbsp;
+              <subCategoryTag :amount="part[0]" :subCategory="part[1]"></subCategoryTag>&nbsp;
             </template>
           </a>
           <span v-if="isActive(ingredient)" class="panel-block">
@@ -53,13 +53,13 @@
 <script>
 import IngredientCreate from '@/components/IngredientCreate'
 import StashIngredient from '@/components/StashIngredient'
-import CategoryTag from '@/components/CategoryTag'
+import subCategoryTag from '@/components/SubCategoryTag'
 
 export default {
   components: {
     'create-ingredient': IngredientCreate,
     'stash-ingredient': StashIngredient,
-    'category-tag': CategoryTag
+    subCategoryTag
   },
   data () {
     return {

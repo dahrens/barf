@@ -36,34 +36,34 @@
         </div>
 
       </div>
-      <div v-for="subcategory in newIngredient.subcategories" v-model="newIngredient.subcategories" class="field has-addons">
+      <div v-for="subCategory in newIngredient.subCategories" v-model="newIngredient.subCategories" class="field has-addons">
         <p class="control">
           <span class="select">
-            <select v-model="subcategory[1]">
-              <option v-for="option in subcategoryOptions" v-model="subcategory[1]">{{ option.subcategory}}</option>
+            <select v-model="subCategory[1]">
+              <option v-for="option in subCategoryOptions" v-model="subCategory[1]">{{ option.subCategory}}</option>
             </select>
           </span>
         </p>
         <p class="control is-expanded">
-          <input class="input" type="number" min="0" max="1" step="0.1" v-model="subcategory[0]"
+          <input class="input" type="number" min="0" max="1" step="0.1" v-model="subCategory[0]"
                 :class="{
                   'is-danger': !isSubcategoriesValid
                 }">
         </p>
         <p class="control">
-          <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subcategory)">
+          <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subCategory)">
             <span class="icon">
               <i class="fa fa-plus"></i>
             </span>
           </a>
-          <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subcategory)">
+          <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subCategory)">
             <span class="icon">
               <i class="fa fa-trash"></i>
             </span>
           </a>
         </p>
       </div>
-      <p v-if="!isSubcategoriesValid" class="help is-danger">The sum of all subcategories must be 1, not {{subcategoryValue}}</p>
+      <p v-if="!isSubcategoriesValid" class="help is-danger">The sum of all subCategories must be 1, not {{subCategoryValue}}</p>
     </div>
     <div class="message-footer">
       <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewIngredient()" :disabled="!isValid">
@@ -77,11 +77,11 @@
 
 <script>
 export default {
-  name: 'create-ingredient',
+  name: 'createIngredient',
   data () {
     let newIngredient = {
       name: '',
-      subcategories: [[1, 'Fleisch']],
+      subCategories: [[1, 'Fleisch']],
       unit: 'g',
       defaultAmount: 2000
     }
@@ -101,8 +101,8 @@ export default {
       }
       return options
     },
-    subcategoryOptions () {
-      return this.$store.getters.subcategories
+    subCategoryOptions () {
+      return this.$store.getters.subCategories
     },
     isNameValid () {
       if (this.$store.state.ingredients.map(i => i.name).indexOf(this.newIngredient.name) !== -1 || this.newIngredient.name === '') {
@@ -110,35 +110,35 @@ export default {
       }
       return true
     },
-    subcategoryValue () {
-      return this.newIngredient.subcategories.map(p => p[0]).reduce((a, c) => parseFloat(a) + parseFloat(c))
+    subCategoryValue () {
+      return this.newIngredient.subCategories.map(p => p[0]).reduce((a, c) => parseFloat(a) + parseFloat(c))
     },
     isSubcategoriesValid () {
-      return this.newIngredient.subcategories.map(p => p[0]).reduce((a, c) => parseFloat(a) + parseFloat(c)) === 1.0
+      return this.newIngredient.subCategories.map(p => p[0]).reduce((a, c) => parseFloat(a) + parseFloat(c)) === 1.0
     },
     isValid () {
       return this.isNameValid && this.isSubcategoriesValid
     },
     canDeleteSubcategory () {
-      return this.newIngredient.subcategories.length > 1
+      return this.newIngredient.subCategories.length > 1
     },
     canAddSubcategory () {
-      return this.newIngredient.subcategories.length < this.subcategoryOptions.length
+      return this.newIngredient.subCategories.length < this.subCategoryOptions.length
     }
   },
   methods: {
-    splitNewSubcategory: function (subcategory) {
-      subcategory[0] = subcategory[0] / 2
-      let idx = this.newIngredient.subcategories.indexOf(subcategory)
-      let usedValues = this.newIngredient.subcategories.map(e => e[1])
-      let possibleValues = this.subcategoryOptions.filter(e => usedValues.indexOf(e.subcategory) === -1)
+    splitNewSubcategory: function (subCategory) {
+      subCategory[0] = subCategory[0] / 2
+      let idx = this.newIngredient.subCategories.indexOf(subCategory)
+      let usedValues = this.newIngredient.subCategories.map(e => e[1])
+      let possibleValues = this.subCategoryOptions.filter(e => usedValues.indexOf(e.subCategory) === -1)
       if (possibleValues.length) {
-        this.newIngredient.subcategories.splice(idx + 1, 0, [subcategory[0], possibleValues[0].subcategory])
+        this.newIngredient.subCategories.splice(idx + 1, 0, [subCategory[0], possibleValues[0].subCategory])
       }
     },
-    mergeExistingSubcategory: function (subcategory) {
+    mergeExistingSubcategory: function (subCategory) {
       // split value to all others
-      // remove this subcategory
+      // remove this subCategory
     },
     createNewIngredient: function () {
       if (!this.isValid) {

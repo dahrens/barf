@@ -64,15 +64,17 @@
       <template v-for="animalCategory in animalCategories">
         <div class="columns">
           <div class="column is-2">
-            <span class="is-pulled-right">{{animalCategory.subcategory}}</span>
+            <span class="is-pulled-right">{{animalCategory.subCategory}}</span>
           </div>
           <div class="column is-8">
-            <categorySlider v-on:changed="onCategoryChange" :category="animalCategory.subcategory" :cls="animalCategory.category" :value="plan.subcategories.filter(sc => sc[1] === animalCategory.subcategory)[0][0]"></categorySlider>
+            <subCategorySlider v-on:changed="onCategoryChange" :subCategory="animalCategory.subCategory"
+            :category="animalCategory.category"
+            :value="plan.subCategories.filter(sc => sc[1] === animalCategory.subCategory)[0][0]"></subCategorySlider>
           </div>
           <div class="column is-2">
-            <a v-on:click="toggleLockCategory(animalCategory.subcategory)" class="button is-primary has-icon">
+            <a v-on:click="toggleLockCategory(animalCategory.subCategory)" class="button is-primary has-icon">
               <span class="icon">
-                <i v-if="locks.indexOf(animalCategory.subcategory) === -1" class="fa fa-unlock"></i>
+                <i v-if="locks.indexOf(animalCategory.subCategory) === -1" class="fa fa-unlock"></i>
                 <i v-else class="fa fa-lock"></i>
               </span>
             </a>
@@ -83,19 +85,19 @@
       <template v-for="vegetablesCategory in vegetablesCategories">
         <div class="columns">
           <div class="column is-2">
-            <span class="is-pulled-right">{{vegetablesCategory.subcategory}}</span>
+            <span class="is-pulled-right">{{vegetablesCategory.subCategory}}</span>
           </div>
           <div class="column is-8">
-            <categorySlider
+            <subCategorySlider
               v-on:changed="onCategoryChange"
-              :category="vegetablesCategory.subcategory"
-              :cls="vegetablesCategory.category"
-              :value="plan.subcategories.filter(sc => sc[1] === vegetablesCategory.subcategory)[0][0]"></categorySlider>
+              :subCategory="vegetablesCategory.subCategory"
+              :category="vegetablesCategory.category"
+              :value="plan.subCategories.filter(sc => sc[1] === vegetablesCategory.subCategory)[0][0]"></subCategorySlider>
           </div>
           <div class="column is-2">
-            <a v-on:click="toggleLockCategory(vegetablesCategory.subcategory)" class="button is-primary has-icon">
+            <a v-on:click="toggleLockCategory(vegetablesCategory.subCategory)" class="button is-primary has-icon">
               <span class="icon">
-                <i v-if="locks.indexOf(vegetablesCategory.subcategory) === -1" class="fa fa-unlock"></i>
+                <i v-if="locks.indexOf(vegetablesCategory.subCategory) === -1" class="fa fa-unlock"></i>
                 <i v-else class="fa fa-lock"></i>
               </span>
             </a>
@@ -108,14 +110,14 @@
 
 <script>
 import vueSlider from 'vue-slider-component'
-import categorySlider from '@/components/CategorySlider'
+import subCategorySlider from '@/components/SubCategorySlider'
 
 export default {
   name: 'planPanel',
   props: ['plan'],
   components: {
     vueSlider,
-    categorySlider
+    subCategorySlider
   },
   data () {
     return {
@@ -144,14 +146,14 @@ export default {
     }
   },
   computed: {
-    subcategories () {
-      return this.$store.getters.subcategories
+    subCategories () {
+      return this.$store.getters.subCategories
     },
     animalCategories () {
-      return this.$store.getters.subcategories.filter(c => c.category === 'animal')
+      return this.$store.getters.subCategories.filter(c => c.category === 'animal')
     },
     vegetablesCategories () {
-      return this.$store.getters.subcategories.filter(c => c.category === 'vegetables')
+      return this.$store.getters.subCategories.filter(c => c.category === 'vegetables')
     }
   },
   methods: {
@@ -167,20 +169,20 @@ export default {
     onCategoryChange (category, cls) {
       let diff = 0
       let untouched = []
-      for (let subcategory of this.plan.subcategories) {
-        if (subcategory[1] === category[1]) {
-          diff = category[0] - subcategory[0]
+      for (let subCategory of this.plan.subCategories) {
+        if (subCategory[1] === category[1]) {
+          diff = category[0] - subCategory[0]
         } else {
-          untouched.push(subcategory)
+          untouched.push(subCategory)
         }
       }
       if (!diff) return
       let increase = diff > 0
       let decrease = diff < 0
       let adjust = []
-      for (let c of this.subcategories) {
-        if (c.category === cls && c.subcategory !== category[1] && this.locks.indexOf(c.subcategory) === -1) {
-          adjust.push(untouched.filter(u => u[1] === c.subcategory)[0])
+      for (let c of this.subCategories) {
+        if (c.category === cls && c.subCategory !== category[1] && this.locks.indexOf(c.subCategory) === -1) {
+          adjust.push(untouched.filter(u => u[1] === c.subCategory)[0])
         }
       }
       if (!adjust.length) {
@@ -190,38 +192,38 @@ export default {
       let touched = []
       let diffPerCategory = Math.floor(Math.abs(diff) / adjust.length)
       let rest = Math.abs(diff) % adjust.length
-      for (let subcategory of adjust.sort((a, b) => a[0] - b[0])) {
+      for (let subCategory of adjust.sort((a, b) => a[0] - b[0])) {
         if (increase) {
-          let n = (subcategory[0] - diffPerCategory - rest)
+          let n = (subCategory[0] - diffPerCategory - rest)
           if (n >= 0) {
-            touched.push([n, subcategory[1]])
+            touched.push([n, subCategory[1]])
             rest = 0
           } else {
             rest = Math.abs(n)
-            touched.push([0, subcategory[1]])
+            touched.push([0, subCategory[1]])
           }
         }
         if (decrease) {
-          let n = (subcategory[0] + diffPerCategory + rest)
+          let n = (subCategory[0] + diffPerCategory + rest)
           if (n <= 100) {
-            touched.push([n, subcategory[1]])
+            touched.push([n, subCategory[1]])
             rest = 0
           } else {
             rest = (n - 100)
-            touched.push([100, subcategory[1]])
+            touched.push([100, subCategory[1]])
           }
         }
       }
       touched.push(category)
       this.$store.commit('UPDATE_PLAN_CATEGORIES', {
         plan: this.plan.id,
-        subcategories: touched
+        subCategories: touched
       })
       this.$forceUpdate()
     },
     getCategorySliderData (category) {
       let slider = JSON.parse(JSON.stringify(this.slider))
-      slider.value = (parseFloat(this.plan.subcategories.filter(sub => sub[1] === category)[0]))
+      slider.value = (parseFloat(this.plan.subCategories.filter(sub => sub[1] === category)[0]))
       return slider
     },
     getBaseCategorySliderData (baseCategory) {

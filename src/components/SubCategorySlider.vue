@@ -6,7 +6,8 @@
 import vueSlider from 'vue-slider-component'
 
 export default {
-  props: ['category', 'cls', 'value'],
+  name: 'subCategorySlider',
+  props: ['subCategory', 'category', 'value'],
   components: {
     vueSlider
   },
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     changed (v) {
-      this.$emit('changed', [v, this.category], this.cls)
+      this.$emit('changed', [v, this.subCategory], this.category)
     },
     currentValue () {
       return this.value

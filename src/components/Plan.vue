@@ -4,9 +4,9 @@
       <div class="hero-body">
         <div class="container">
           <nav class="level">
-            <div v-for="category in subcategories" class="level-item has-text-centered">
+            <div v-for="category in subCategories" class="level-item has-text-centered">
               <div>
-                <p class="heading">{{category.subcategory}}</p>
+                <p class="heading">{{category.subCategory}}</p>
                 <p class="title">0</p>
               </div>
             </div>
@@ -58,8 +58,8 @@ export default {
     }
   },
   computed: {
-    subcategories () {
-      return this.$store.getters.subcategories
+    subCategories () {
+      return this.$store.getters.subCategories
     },
     plan () {
       return this.$store.state.plans.filter(p => p.id === this.selectedPlan)[0]

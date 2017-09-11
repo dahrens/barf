@@ -101,8 +101,8 @@ export default new Vuex.Store({
     },
     [UPDATE_PLAN_CATEGORIES] (state, payload) {
       let plan = state.plans.filter(p => p.id === payload.plan)[0]
-      for (let category of payload.subcategories) {
-        for (let p of plan.subcategories) {
+      for (let category of payload.subCategories) {
+        for (let p of plan.subCategories) {
           if (category[1] === p[1]) {
             p[0] = category[0]
           }
@@ -115,13 +115,13 @@ export default new Vuex.Store({
       let exclude = ['ids', 'categories']
       return Object.keys(state).filter(e => exclude.indexOf(e) === -1)
     },
-    subcategories: state => {
+    subCategories: state => {
       let options = []
       for (let category of Object.keys(state.categories)) {
-        let subcategories = state.categories[category]
-        for (let subcategory of subcategories) {
+        let subCategories = state.categories[category]
+        for (let subCategory of subCategories) {
           options.push({
-            subcategory,
+            subCategory,
             category
           })
         }
