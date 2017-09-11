@@ -34,12 +34,16 @@
               <span class="icon has-text-primary">
                 <i class="fa fa-cog"></i>
               </span>
-              Einstellungen
             </a>
-
             <div class="navbar-dropdown is-right">
               <a class="navbar-item">
-                load default store data
+                load defaults
+              </a>
+              <a class="navbar-item">
+                import data
+              </a>
+              <a class="navbar-item">
+                export data
               </a>
             </div>
           </div>
@@ -93,7 +97,7 @@ export default {
 // 1. Import the initial variables
 @import "../node_modules/bulma/sass/utilities/initial-variables"
 
-$primary: orange
+$primary: green
 
 @import "../node_modules/bulma/bulma"
 

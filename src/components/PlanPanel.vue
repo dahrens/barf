@@ -135,12 +135,12 @@ export default {
         },
         sliderStyle: [
           { 'backgroundColor': '#363636' },
-          { 'backgroundColor': 'orange' }
+          { 'backgroundColor': 'green' }
         ],
         processStyle: { 'backgroundColor': '#363636' },
         tooltipStyle: [
-          { 'backgroundColor': 'orange', 'borderColor': 'orange' },
-          { 'backgroundColor': 'orange', 'borderColor': 'orange' }
+          { 'backgroundColor': 'green', 'borderColor': 'green' },
+          { 'backgroundColor': 'green', 'borderColor': 'green' }
         ]
       }
     }

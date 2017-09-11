@@ -4,8 +4,8 @@
         <span v-if="ingredientsAvailable" class="button is-light is-large">
           <span class="icon has-text-success"><i class="fa fa-check"></i></span>
         </span>
-        <span v-else class="button is-danger is-large">
-          <span class="icon"><i class="fa fa-exclamation"></i></span>
+        <span v-else class="button is-warning is-large">
+          <span class="icon"><i class="fa fa-warning"></i></span>
         </span>
       </p>
       <p class="control is-expanded">
@@ -22,7 +22,7 @@
         </a>
       </p>
       <p class="control">
-        <a v-on:click="order()" class="button is-dark is-large" title="Put into stash">
+        <a v-on:click="order()" class="button is-primary is-large" title="Put into stash">
           <span class="icon"><i class="fa fa-cutlery"></i></span>
         </a>
       </p>

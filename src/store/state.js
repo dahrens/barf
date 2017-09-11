@@ -62,6 +62,16 @@ export default {
       defaultAmount: 500
     }
   ],
+  recipes: [
+    {
+      id: 1,
+      name: 'Normale Fleisch Mahlzeit',
+      ingredients: [
+        { ingredient: 1, amount: 250 },
+        { ingredient: 3, amount: 10 }
+      ]
+    }
+  ],
   stash: [
     {
       ingredient: 1,
@@ -76,16 +86,6 @@ export default {
     {
       recipe: 1,
       quantity: 2
-    }
-  ],
-  recipes: [
-    {
-      id: 1,
-      name: 'Normale Fleisch Mahlzeit',
-      ingredients: [
-        { ingredient: 1, amount: 250 },
-        { ingredient: 3, amount: 10 }
-      ]
     }
   ],
   plans: [
