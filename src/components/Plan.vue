@@ -10,7 +10,7 @@
     <div class="plan container">
       <div class="columns">
         <div class="column is-5">
-          <kitchen></kitchen>
+          <kitchen :collapsed="true"></kitchen>
           <planPanel :plan="plan"></planPanel>
           <nav class="panel">
             <p class="panel-heading">

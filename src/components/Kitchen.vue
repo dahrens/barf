@@ -70,12 +70,15 @@ export default {
     showCreate: {
       required: false,
       default: () => (true)
+    },
+    collapsed: {
+      required: false,
+      default: () => (false)
     }
   },
   data () {
     return {
       expandAll: false,
-      collapsed: false,
       expandedCreate: false,
       active: []
     }

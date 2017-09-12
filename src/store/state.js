@@ -108,10 +108,6 @@ export default {
           Gemüse: 40
         }
       },
-      subCategories: [
-        [40, 'Fleisch'], [20, 'Innereien'], [30, 'Magen'], [10, 'Knochen'],
-        [40, 'Getreide'], [20, 'Früchte'], [40, 'Gemüse']
-      ],
       week: [
         [{ recipe: 1 }],
         [], [], [], [], [], []

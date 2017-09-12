@@ -33,7 +33,8 @@ export const STASH_INGREDIENT = 'STASH_INGREDIENT'
 export const STASH_RECIPE = 'STASH_RECIPE'
 export const INSERT_RECIPE = 'INSERT_RECIPE'
 export const REMOVE_RECIPE = 'REMOVE_RECIPE'
-export const UPDATE_PLAN_CATEGORIES = 'UPDATE_PLAN_CATEGORIES'
+export const UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION = 'UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION'
+export const UPDATE_PLAN_CATEGORY_DISTRIBUTION = 'UPDATE_PLAN_CATEGORY_DISTRIBUTION'
 
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
@@ -121,15 +122,16 @@ export default new Vuex.Store({
       state.stash.push(payload)
       persist(state)
     },
-    [UPDATE_PLAN_CATEGORIES] (state, payload) {
+    [UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION] (state, payload) {
       let plan = state.plans.filter(p => p.id === payload.plan)[0]
-      for (let category of payload.subCategories) {
-        for (let p of plan.subCategories) {
-          if (category[1] === p[1]) {
-            p[0] = category[0]
-          }
-        }
-      }
+      plan.distribution[payload.category] = payload.distribution
+      persist(state)
+    },
+    [UPDATE_PLAN_CATEGORY_DISTRIBUTION] (state, payload) {
+      let plan = state.plans.filter(p => p.id === payload.plan)[0]
+      plan.animal = payload.value
+      plan.vegetables = 100 - payload.value
+      persist(state)
     }
   },
   getters: {

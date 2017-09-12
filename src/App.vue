@@ -30,8 +30,8 @@
             {{ today }}
           </span>
           <div class="navbar-item has-dropdown is-hoverable ">
-            <a class="navbar-link">
-              <span class="icon has-text-primary">
+            <a class="navbar-item">
+              <span class="icon">
                 <i class="fa fa-cog"></i>
               </span>
             </a>
