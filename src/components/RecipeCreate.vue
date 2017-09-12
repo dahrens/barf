@@ -52,7 +52,7 @@
       </div>
     </template>
     <div class="panel-block">
-      <button title="Add ingredient" class="button is-primary is-outlined is-fullwidth" v-on:click="createNewRecipe()" :disabled="!isValid">
+      <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewRecipe()" :disabled="!isValid">
         <span class="icon">
           <i class="fa fa-save"></i>
         </span>

@@ -3,14 +3,7 @@
     <section class="hero is-light">
       <div class="hero-body">
         <div class="container">
-          <nav class="level">
-            <div v-for="category in subCategories" class="level-item has-text-centered">
-              <div>
-                <p class="heading">{{category.subCategory}}</p>
-                <p class="title">0</p>
-              </div>
-            </div>
-          </nav>
+          <planStats :plan="plan"></planStats>
         </div>
       </div>
     </section>
@@ -43,13 +36,15 @@
 </template>
 
 <script>
-import kitchen from '@/components/Kitchen'
 import planPanel from '@/components/PlanPanel'
+import planStats from '@/components/PlanStats'
+import kitchen from '@/components/Kitchen'
 
 export default {
   name: 'plan',
   components: {
     planPanel,
+    planStats,
     kitchen
   },
   data () {
