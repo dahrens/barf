@@ -85,7 +85,7 @@ export default {
       selectedPlan: 1,
       sliderConfig: {
         value: 0,
-        min: 1,
+        min: 0,
         max: 100,
         speed: 0.5,
         bgStyle: {

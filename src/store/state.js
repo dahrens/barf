@@ -109,7 +109,7 @@ export default {
         }
       },
       week: [
-        [{ recipe: 1 }],
+        [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
         [], [], [], [], [], []
       ]
     }

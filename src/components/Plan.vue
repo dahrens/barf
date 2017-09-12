@@ -19,15 +19,8 @@
           </nav>
         </div>
         <div class="columns column is-7 is-multiline">
-          <div v-for="weekday in weekdays" class="column is-4">
-            <nav class="panel">
-              <p class="panel-heading">
-                {{weekday}}
-              </p>
-              <a class="panel-block" v-if="weekday === 'Mi' || weekday === 'Do' || weekday === 'Fr'">
-                Normale Fleisch Mahlzeit
-              </a>
-            </nav>
+          <div v-for="(weekday, index) in weekdays" class="column is-4">
+            <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
           </div>
         </div>
       </div>
@@ -38,6 +31,7 @@
 <script>
 import planPanel from '@/components/PlanPanel'
 import planStats from '@/components/PlanStats'
+import planDay from '@/components/PlanDay'
 import kitchen from '@/components/Kitchen'
 
 export default {
@@ -45,6 +39,7 @@ export default {
   components: {
     planPanel,
     planStats,
+    planDay,
     kitchen
   },
   data () {
