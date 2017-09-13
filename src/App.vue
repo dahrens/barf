@@ -13,15 +13,15 @@
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath ==='/stash'}"
-              :to="{ name: 'Stash' }">
-              Vorräte
-            </router-link>
-            <router-link
-              class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath ==='/plan'}"
               :to="{ name: 'Plan' }">
               Pläne
+            </router-link>
+            <router-link
+              class="nav-item is-tab is-hidden-mobile"
+              :class="{'is-active': $route.fullPath ==='/stash'}"
+              :to="{ name: 'Stash' }">
+              Vorräte
             </router-link>
           </div>
         </div>

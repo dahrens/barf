@@ -8,13 +8,21 @@ export default {
   event_meta: {
     types: ['meal']
   },
+  activities: {
+    'unactive': 1,
+    'moderate': 1.25,
+    'active': 1.5,
+    'highly': 2
+  },
   dogs: [
     {
       id: 1,
       name: 'Delphi',
       birthday: new Date(2012, 2, 15),
       sex: 'm',
+      castrated: true,
       weight: 15000,
+      activity: 'moderate',
       plan: 1,
       meals: new Map([
         [new Date(), [

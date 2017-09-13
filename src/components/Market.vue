@@ -1,7 +1,7 @@
 <template>
   <nav class="panel market-panel">
     <p class="panel-heading">
-      Markt
+      Zutaten
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <i v-if="!collapsed" class="fa fa-caret-down"></i>
         <i v-if="collapsed" class="fa fa-caret-right"></i>

@@ -10,7 +10,7 @@
     <div class="plan container">
       <div class="columns">
         <div class="column is-5">
-          <kitchen :collapsed="true"></kitchen>
+
           <planPanel :plan="plan"></planPanel>
           <nav class="panel">
             <p class="panel-heading">
@@ -18,9 +18,21 @@
             </p>
           </nav>
         </div>
-        <div class="columns column is-7 is-multiline">
-          <div v-for="(weekday, index) in weekdays" class="column is-4">
-            <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
+        <div class="column is-7">
+          <div class="columns is-gapless is-multiline">
+            <div v-for="(weekday, index) in weekdays" class="column is-4 weekday">
+              <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
+            </div>
+            <div class="column is-12">
+              <div class="columns meals">
+                <div class="column is-6">
+                  <kitchen></kitchen>
+                </div>
+                <div class="column is-6">
+                  <market></market>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -33,6 +45,7 @@ import planPanel from '@/components/PlanPanel'
 import planStats from '@/components/PlanStats'
 import planDay from '@/components/PlanDay'
 import kitchen from '@/components/Kitchen'
+import market from '@/components/Market'
 
 export default {
   name: 'plan',
@@ -40,7 +53,8 @@ export default {
     planPanel,
     planStats,
     planDay,
-    kitchen
+    kitchen,
+    market
   },
   data () {
     return {
@@ -63,5 +77,9 @@ export default {
 <style scoped>
 .plan {
   margin-top: 1em;
+}
+
+.meals {
+  margin-top: 2em;
 }
 </style>

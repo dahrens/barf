@@ -152,6 +152,14 @@ export default new Vuex.Store({
       }
       return options
     },
+    emptyDistribution (state, getters) {
+      let distribution = {}
+      for (let c of getters.subCategories) {
+        if (!distribution.hasOwnProperty(c.category)) distribution[c.category] = {}
+        distribution[c.category][c.subCategory] = 0
+      }
+      return distribution
+    },
     ingredientNeedsCascade: (state) => (ingredient) => {
       for (let item of state.stash) {
         if (item.hasOwnProperty('ingredient')) {
@@ -248,6 +256,58 @@ export default new Vuex.Store({
         }
       }
       return recipeMetas
+    },
+    dogFoodQuantityPerDay: (state) => (dogId) => {
+      let dog = state.dogs.filter(d => d.id === dogId)[0]
+      let factor = state.activities[dog.activity]
+      if (dog.castrated) factor = factor * 0.8
+      return dog.weight * 0.02 * factor
+    },
+    planRequirements: (state, getters) => (plan) => {
+      let foodPerDay = getters.dogFoodQuantityPerDay(plan.dog)
+      return foodPerDay
+    },
+    mealsDistribution: (state, getters) => (meals) => {
+      let ingredientMeals = []
+      for (let meal of meals) {
+        if (meal.hasOwnProperty('recipe')) {
+          let recipe = state.recipes.filter(r => r.id === meal.recipe)[0]
+          ingredientMeals = ingredientMeals.concat(recipe.ingredients)
+        } else if (meal.hasOwnProperty('ingredient')) {
+          ingredientMeals.push(meal)
+        }
+      }
+      let distribution = JSON.parse(JSON.stringify(getters.emptyDistribution))
+      for (let ingredientMeal of ingredientMeals) {
+        let ingredient = state.ingredients.filter(i => i.id === ingredientMeal.ingredient)[0]
+        for (let d of ingredient.subCategories) {
+          if (state.categories.animal.indexOf(d[1]) !== -1) {
+            distribution.animal[d[1]] = d[0] * ingredientMeal.amount
+          }
+        }
+      }
+      return distribution
+    },
+    planDistribution: (state, getters) => (plan) => {
+      let dog = state.dogs.filter(d => d.id === plan.dog)[0]
+      console.log(dog)
+      let overall = getters.dogFoodQuantityPerDay(dog.id)
+      let animal = overall * (plan.animal / 100)
+      let vegetables = overall - animal
+      console.log(overall, animal, vegetables)
+      let distribution = JSON.parse(JSON.stringify(getters.emptyDistribution))
+      console.log(distribution)
+      for (let category in plan.distribution) {
+        for (let subcategory in plan.distribution[category]) {
+          let value
+          let p = plan.distribution[category][subcategory]
+          if (p === 0) value = 0
+          else if (category === 'animal') value = (p / 100) * animal * plan.week.length
+          else if (category === 'vegetables') value = (p / 100) * vegetables * plan.week.length
+          distribution[category][subcategory] = value
+        }
+      }
+      return distribution
     }
   }
 })

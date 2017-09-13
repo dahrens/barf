@@ -49,13 +49,13 @@
         </div>
       </div>
       <div class="columns distribution-slider">
-        <div class="column is-2">
+        <div class="column is-3">
           <span class="is-pulled-right">tierisch</span>
         </div>
-        <div class="column is-8">
+        <div class="column is-6">
           <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
         </div>
-        <div class="column is-2">
+        <div class="column is-3">
           <span class="is-pulled-left">pflanzlich</span>
         </div>
       </div>
@@ -88,6 +88,7 @@ export default {
         min: 0,
         max: 100,
         speed: 0.5,
+        formatter: '{value}%',
         bgStyle: {
           'backgroundColor': 'whitesmoke',
           'boxShadow': 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'

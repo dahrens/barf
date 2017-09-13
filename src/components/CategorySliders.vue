@@ -2,15 +2,20 @@
   <div class="category-sliders">
     <template v-for="subCategory in subCategories">
       <div class="columns">
-        <div class="column is-2">
-          <span class="is-pulled-right">{{ subCategory }}</span>
+        <div class="column is-3">
+          <span class="is-pulled-right">
+            <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>
+          </span>
         </div>
-        <div class="column is-8">
+        <div class="column is-6">
           <subCategorySlider
             v-on:changed="onCategoryChange"
             :sliderConfig="sliderConfig"
             :subCategory="subCategory"
             :value="plan.distribution[category][subCategory]"></subCategorySlider>
+        </div>
+        <div class="column is-3">
+          <span class="is-pulled-right">{{ parseInt(mealsDistribution[subCategory]) }}g / {{ parseInt(planDistribution[subCategory]) }}g</span>
         </div>
       </div>
     </template>
@@ -19,12 +24,14 @@
 
 <script>
 import subCategorySlider from '@/components/SubCategorySlider'
+import subCategoryTag from '@/components/SubCategoryTag'
 
 export default {
   name: 'planPanel',
   props: ['plan', 'category', 'sliderConfig'],
   components: {
-    subCategorySlider
+    subCategorySlider,
+    subCategoryTag
   },
   data () {
     return {
@@ -34,6 +41,12 @@ export default {
   computed: {
     subCategories () {
       return this.$store.getters.subCategories.filter(c => c.category === this.category).map(e => e.subCategory)
+    },
+    mealsDistribution () {
+      return this.$store.getters.mealsDistribution(this.plan.week.reduce((a, b) => a.concat(b)))[this.category]
+    },
+    planDistribution () {
+      return this.$store.getters.planDistribution(this.plan)[this.category]
     }
   },
   methods: {
