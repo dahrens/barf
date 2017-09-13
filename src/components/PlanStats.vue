@@ -9,14 +9,6 @@
       <p class="title">{{ expectedQuantityWeek }}g</p>
     </div>
     <div>
-      <p class="heading">{{ foo }}</p>
-      <p class="title">{{ expectedQuantityPlan }}g</p>
-    </div>
-    <div>
-      <p class="heading">{{ bar }}</p>
-      <p class="title">{{ expectedQuantityPlan }}g</p>
-    </div>
-    <div>
       <p class="heading">Nahrung im Plan</p>
       <p class="title">{{ expectedQuantityPlan }}g</p>
     </div>
@@ -29,22 +21,19 @@
 <script>
 export default {
   name: 'PlanStats',
-  props: ['plan'],
+  props: ['dog'],
   computed: {
+    plan () {
+      return this.dog.plan
+    },
     expectedQuantityPerDay () {
-      return this.$store.getters.planRequirements(this.plan)
+      return this.$store.getters.planRequirements(this.dog)
     },
     expectedQuantityWeek () {
       return this.plan.week.length * this.expectedQuantityPerDay
     },
     expectedQuantityPlan () {
       return '?'
-    },
-    foo () {
-      console.log('meal dist', this.$store.getters.mealsDistribution(this.plan.week.reduce((a, b) => a.concat(b))))
-    },
-    bar () {
-      console.log('plan dist', this.$store.getters.planDistribution(this.plan))
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      Plan
+      Dog &amp; Plan
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <i v-if="!collapsed" class="fa fa-caret-down"></i>
         <i v-if="collapsed" class="fa fa-caret-right"></i>
@@ -19,24 +19,8 @@
         <div class="control is-expanded">
           <div class="select is-fullwidth">
             <select name="country">
-              <option value="Argentina">Delphi's Plan</option>
-            </select>
-          </div>
-        </div>
-        <div class="control">
-          <button type="submit" class="button is-primary">
-            <span class="icon">
-              <i class="fa fa-save"></i>
-            </span>
-          </button>
-        </div>
-      </div>
-      <div class="field has-addons">
-        <div class="control is-expanded">
-          <div class="select is-fullwidth">
-            <select name="country">
-              <option value="1">Delphi</option>
-              <option value="2">Loni</option>
+              <option value="Delphi">Delphi</option>
+              <option value="Delphi">Loni</option>
             </select>
           </div>
         </div>
@@ -59,8 +43,8 @@
           <span class="is-pulled-left">pflanzlich</span>
         </div>
       </div>
-      <categorySliders :plan="plan" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
-      <categorySliders :plan="plan" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
+      <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
+      <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
     </template>
   </nav>
 </template>
@@ -72,7 +56,7 @@ import categorySliders from '@/components/CategorySliders'
 
 export default {
   name: 'planPanel',
-  props: ['plan'],
+  props: ['dog'],
   components: {
     vueSlider,
     subCategorySlider,
@@ -106,6 +90,9 @@ export default {
     }
   },
   computed: {
+    plan () {
+      return this.dog.plan
+    },
     getPlanCategoryDistribution () {
       let slider = JSON.parse(JSON.stringify(this.sliderConfig))
       slider.value = this.plan.animal
@@ -114,7 +101,7 @@ export default {
   },
   methods: {
     setPlanCategoryDistribution (value) {
-      this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {plan: this.plan.id, value: value})
+      this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {dog: this.dog.id, value: value})
     }
   }
 }

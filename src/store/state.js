@@ -2,8 +2,7 @@ export default {
   ids: {
     dogs: 3,
     ingredients: 4,
-    recipes: 2,
-    plans: 2
+    recipes: 2
   },
   event_meta: {
     types: ['meal']
@@ -23,7 +22,27 @@ export default {
       castrated: true,
       weight: 15000,
       activity: 'moderate',
-      plan: 1,
+      plan: {
+        animal: 80,
+        vegetables: 20,
+        distribution: {
+          animal: {
+            Fleisch: 40,
+            Innereien: 20,
+            Magen: 30,
+            Knochen: 10
+          },
+          vegetables: {
+            Getreide: 40,
+            Früchte: 20,
+            Gemüse: 40
+          }
+        },
+        week: [
+          [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
+          [], [], [], [], [], []
+        ]
+      },
       meals: new Map([
         [new Date(), [
           { name: 'Rindermuskelfleisch', amount: 250, unit: 'g', parts: [1, 'Fleisch'] }
@@ -94,32 +113,6 @@ export default {
     {
       recipe: 1,
       quantity: 2
-    }
-  ],
-  plans: [
-    {
-      id: 1,
-      name: 'Delphi\'s Plan',
-      dog: 1,
-      animal: 80,
-      vegetables: 20,
-      distribution: {
-        animal: {
-          Fleisch: 40,
-          Innereien: 20,
-          Magen: 30,
-          Knochen: 10
-        },
-        vegetables: {
-          Getreide: 40,
-          Früchte: 20,
-          Gemüse: 40
-        }
-      },
-      week: [
-        [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
-        [], [], [], [], [], []
-      ]
     }
   ]
 }

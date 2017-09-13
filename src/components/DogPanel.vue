@@ -105,7 +105,7 @@
             <dog-needs :dog="dog"></dog-needs>
           </div>
           <div v-if="showPlan" class="column">
-            <dog-plan :dog="dog" :plan="planForDog(dog)"></dog-plan>
+            <dog-plan :dog="dog" :plan="dog.plan"></dog-plan>
           </div>
         </div>
       </div>

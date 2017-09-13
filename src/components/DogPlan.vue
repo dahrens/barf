@@ -71,7 +71,12 @@
 <script>
 export default {
   name: 'dogPlan',
-  props: ['dog', 'plan']
+  props: ['dog'],
+  computed: {
+    plan () {
+      return this.dog.plan
+    }
+  }
 }
 </script>
 

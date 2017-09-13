@@ -28,7 +28,7 @@ import subCategoryTag from '@/components/SubCategoryTag'
 
 export default {
   name: 'planPanel',
-  props: ['plan', 'category', 'sliderConfig'],
+  props: ['dog', 'category', 'sliderConfig'],
   components: {
     subCategorySlider,
     subCategoryTag
@@ -39,6 +39,9 @@ export default {
     }
   },
   computed: {
+    plan () {
+      return this.dog.plan
+    },
     subCategories () {
       return this.$store.getters.subCategories.filter(c => c.category === this.category).map(e => e.subCategory)
     },
@@ -46,7 +49,7 @@ export default {
       return this.$store.getters.mealsDistribution(this.plan.week.reduce((a, b) => a.concat(b)))[this.category]
     },
     planDistribution () {
-      return this.$store.getters.planDistribution(this.plan)[this.category]
+      return this.$store.getters.planDistribution(this.dog)[this.category]
     }
   },
   methods: {
@@ -108,7 +111,7 @@ export default {
       this.plan.distribution[this.category][subCategory] = newValue
       // and commit everything into the store
       this.$store.commit('UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION', {
-        plan: this.plan.id,
+        dog: this.dog.id,
         category: this.category,
         distribution: distribution
       })
@@ -116,7 +119,7 @@ export default {
       this.$forceUpdate()
     },
     setPlanCategoryDistrubution (value) {
-      this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {plan: this.plan.id, value: value})
+      this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {dog: this.dog.id, value: value})
     }
   }
 }

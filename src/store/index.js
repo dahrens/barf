@@ -123,12 +123,14 @@ export default new Vuex.Store({
       persist(state)
     },
     [UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION] (state, payload) {
-      let plan = state.plans.filter(p => p.id === payload.plan)[0]
+      let dog = state.dogs.filter(d => d.id === payload.dog)
+      let plan = dog.plan
       plan.distribution[payload.category] = payload.distribution
       persist(state)
     },
     [UPDATE_PLAN_CATEGORY_DISTRIBUTION] (state, payload) {
-      let plan = state.plans.filter(p => p.id === payload.plan)[0]
+      let dog = state.dogs.filter(d => d.id === payload.dog)
+      let plan = dog.plan
       plan.animal = payload.value
       plan.vegetables = 100 - payload.value
       persist(state)
@@ -257,14 +259,13 @@ export default new Vuex.Store({
       }
       return recipeMetas
     },
-    dogFoodQuantityPerDay: (state) => (dogId) => {
-      let dog = state.dogs.filter(d => d.id === dogId)[0]
+    dogFoodQuantityPerDay: (state) => (dog) => {
       let factor = state.activities[dog.activity]
       if (dog.castrated) factor = factor * 0.8
       return dog.weight * 0.02 * factor
     },
-    planRequirements: (state, getters) => (plan) => {
-      let foodPerDay = getters.dogFoodQuantityPerDay(plan.dog)
+    planRequirements: (state, getters) => (dog) => {
+      let foodPerDay = getters.dogFoodQuantityPerDay(dog)
       return foodPerDay
     },
     mealsDistribution: (state, getters) => (meals) => {
@@ -288,9 +289,11 @@ export default new Vuex.Store({
       }
       return distribution
     },
-    planDistribution: (state, getters) => (plan) => {
-      let dog = state.dogs.filter(d => d.id === plan.dog)[0]
-      let overall = getters.dogFoodQuantityPerDay(dog.id)
+    planDistribution: (state, getters) => (dog) => {
+      console.log('planDistribution: ', dog)
+      let plan = dog.plan
+      console.log('dog: ', dog, 'plan: ', plan)
+      let overall = getters.dogFoodQuantityPerDay(dog)
       let animal = overall * (plan.animal / 100)
       let vegetables = overall - animal
       let distribution = JSON.parse(JSON.stringify(getters.emptyDistribution))

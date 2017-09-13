@@ -3,15 +3,14 @@
     <section class="hero is-light">
       <div class="hero-body">
         <div class="container">
-          <planStats :plan="plan"></planStats>
+          <planStats :dog="dog"></planStats>
         </div>
       </div>
     </section>
     <div class="plan container">
       <div class="columns">
         <div class="column is-5">
-
-          <planPanel :plan="plan"></planPanel>
+          <planPanel :dog="dog"></planPanel>
           <nav class="panel">
             <p class="panel-heading">
               Geplante Mahlzeiten
@@ -58,16 +57,19 @@ export default {
   },
   data () {
     return {
-      weekdays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-      selectedPlan: 1
+      weekdays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
     }
   },
   computed: {
     subCategories () {
       return this.$store.getters.subCategories
     },
+    dog () {
+      return this.$store.state.dogs[0]
+    },
     plan () {
-      return this.$store.state.plans.filter(p => p.id === this.selectedPlan)[0]
+      console.log('Plans PLAN!', this.dog.plan)
+      return this.dog.plan
     }
   }
 }
