@@ -26,10 +26,10 @@
             <div class="column is-12">
               <div class="columns meals">
                 <div class="column is-6">
-                  <kitchen></kitchen>
+                  <ingredients></ingredients>
                 </div>
                 <div class="column is-6">
-                  <market></market>
+                  <recipes></recipes>
                 </div>
               </div>
             </div>
@@ -44,8 +44,8 @@
 import planPanel from '@/components/PlanPanel'
 import planStats from '@/components/PlanStats'
 import planDay from '@/components/PlanDay'
-import kitchen from '@/components/Kitchen'
-import market from '@/components/Market'
+import ingredients from '@/components/Ingredients'
+import recipes from '@/components/Recipes'
 
 export default {
   name: 'plan',
@@ -53,8 +53,8 @@ export default {
     planPanel,
     planStats,
     planDay,
-    kitchen,
-    market
+    ingredients,
+    recipes
   },
   data () {
     return {

@@ -290,13 +290,10 @@ export default new Vuex.Store({
     },
     planDistribution: (state, getters) => (plan) => {
       let dog = state.dogs.filter(d => d.id === plan.dog)[0]
-      console.log(dog)
       let overall = getters.dogFoodQuantityPerDay(dog.id)
       let animal = overall * (plan.animal / 100)
       let vegetables = overall - animal
-      console.log(overall, animal, vegetables)
       let distribution = JSON.parse(JSON.stringify(getters.emptyDistribution))
-      console.log(distribution)
       for (let category in plan.distribution) {
         for (let subcategory in plan.distribution[category]) {
           let value

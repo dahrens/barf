@@ -62,7 +62,7 @@ import stashIngredient from '@/components/StashIngredient'
 import subCategoryTag from '@/components/SubCategoryTag'
 
 export default {
-  name: 'market',
+  name: 'ingredients',
   components: {
     ingredientCreate,
     stashIngredient,

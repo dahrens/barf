@@ -61,7 +61,7 @@ import StashRecipe from '@/components/StashRecipe'
 import RecipeCreate from '@/components/RecipeCreate'
 
 export default {
-  name: 'kitchen',
+  name: 'recipes',
   components: {
     'stash-recipe': StashRecipe,
     'create-recipe': RecipeCreate

@@ -114,7 +114,6 @@ export default {
   },
   methods: {
     setPlanCategoryDistribution (value) {
-      console.log('setPlanCategoryDistribution')
       this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {plan: this.plan.id, value: value})
     }
   }

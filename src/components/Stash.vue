@@ -50,22 +50,22 @@
         </nav>
       </div>
       <div class="column is-half">
-        <kitchen></kitchen>
-        <market></market>
+        <ingredients></ingredients>
+        <recipes></recipes>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import market from '@/components/Market'
-import kitchen from '@/components/Kitchen'
+import recipes from '@/components/Recipes'
+import ingredients from '@/components/Ingredients'
 
 export default {
   name: 'Stash',
   components: {
-    market,
-    kitchen
+    recipes,
+    ingredients
   },
   data () {
     return {
