@@ -129,7 +129,7 @@ export default new Vuex.Store({
       persist(state)
     },
     [UPDATE_PLAN_CATEGORY_DISTRIBUTION] (state, payload) {
-      let dog = state.dogs.filter(d => d.id === payload.dog)
+      let dog = state.dogs.filter(d => d.id === payload.dog)[0]
       let plan = dog.plan
       plan.animal = payload.value
       plan.vegetables = 100 - payload.value

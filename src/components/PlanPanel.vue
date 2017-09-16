@@ -20,7 +20,7 @@
           <div class="select is-fullwidth">
             <select name="country">
               <option value="Delphi">Delphi</option>
-              <option value="Delphi">Loni</option>
+              <option value="Loni">Loni</option>
             </select>
           </div>
         </div>
