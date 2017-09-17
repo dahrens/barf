@@ -117,9 +117,11 @@ export default new Vuex.Store({
       let included = state.stash.filter((i) => i.hasOwnProperty('recipe') && i.recipe === payload.recipe)
       if (included.length === 1) {
         console.log(payload)
-        included[0].quantity += payload.quantity
+        let recipe = included[0]
+        recipe.quantity += payload.quantity
+      } else {
+        state.stash.push(payload)
       }
-      state.stash.push(payload)
       persist(state)
     },
     [UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION] (state, payload) {

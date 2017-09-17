@@ -69,7 +69,6 @@ export default {
   },
   data () {
     return {
-      collapsedKitchen: false,
       activeStashItems: []
     }
   },
