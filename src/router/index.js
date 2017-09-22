@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Stash from '@/components/Stash'
-import Plan from '@/components/Plan'
+import Home from '@/pages/Home'
+import Stash from '@/pages/Stash'
+import Plan from '@/pages/Plan'
 
 Vue.use(Router)
 
