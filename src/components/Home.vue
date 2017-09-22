@@ -8,7 +8,7 @@
       </div>
       <div class="column is-8">
         <template v-for="dog in dogs">
-          <dogPanel :dog="dog"></dogPanel>
+          <dogCard :dog="dog"></dogCard>
         </template>
       </div>
     </div>
@@ -17,13 +17,13 @@
 
 <script>
 
-import dogPanel from '@/components/DogPanel'
+import dogCard from '@/components/DogCard'
 import eventMessage from '@/components/EventMessage'
 
 export default {
   name: 'home',
   components: {
-    dogPanel,
+    dogCard,
     eventMessage
   },
   computed: {
