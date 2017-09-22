@@ -1,37 +1,13 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      Dog &amp; Plan
+      Plan
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <i v-if="!collapsed" class="fa fa-caret-down"></i>
         <i v-if="collapsed" class="fa fa-caret-right"></i>
       </a>
     </p>
     <template v-if="!collapsed">
-      <div class="field has-addons">
-        <div class="control">
-          <button type="submit" class="button is-primary">
-            <span class="icon">
-              <i class="fa fa-plus"></i>
-            </span>
-          </button>
-        </div>
-        <div class="control is-expanded">
-          <div class="select is-fullwidth">
-            <select name="country">
-              <option value="Delphi">Delphi</option>
-              <option value="Loni">Loni</option>
-            </select>
-          </div>
-        </div>
-        <div class="control">
-          <button type="submit" class="button is-primary">
-            <span class="icon">
-              <i class="fa fa-save"></i>
-            </span>
-          </button>
-        </div>
-      </div>
       <div class="columns distribution-slider">
         <div class="column is-3">
           <span class="is-pulled-right">tierisch</span>

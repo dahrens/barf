@@ -144,9 +144,6 @@ export default {
         age--
       }
       return age
-    },
-    planForDog (dog) {
-      return this.$store.state.plans.filter(p => p.id === dog.plan)[0]
     }
   }
 }

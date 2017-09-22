@@ -10,6 +10,7 @@
     <div class="plan container">
       <div class="columns">
         <div class="column is-5">
+          <dogPanel :dog="dog"></dogPanel>
           <planPanel :dog="dog"></planPanel>
           <nav class="panel">
             <p class="panel-heading">
@@ -43,6 +44,7 @@
 import planPanel from '@/components/PlanPanel'
 import planStats from '@/components/PlanStats'
 import planDay from '@/components/PlanDay'
+import dogPanel from '@/components/DogPanel'
 import ingredients from '@/components/Ingredients'
 import recipes from '@/components/Recipes'
 
@@ -52,6 +54,7 @@ export default {
     planPanel,
     planStats,
     planDay,
+    dogPanel,
     ingredients,
     recipes
   },

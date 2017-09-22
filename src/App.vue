@@ -7,15 +7,15 @@
             <a class="nav-item"><h1 class="title">B.A.R.F.</h1></a>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath === '/'}"
-              :to="{ name: 'Home' }">
-              Übersicht
+              :class="{'is-active': $route.fullPath ==='/plan'}"
+              :to="{ name: 'Plan' }">
+              Planen
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath ==='/plan'}"
-              :to="{ name: 'Plan' }">
-              Pläne
+              :class="{'is-active': $route.fullPath === '/'}"
+              :to="{ name: 'Home' }">
+              Übersicht
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
@@ -29,55 +29,9 @@
           <span class="navbar-item">
             {{ today }}
           </span>
-          <div class="navbar-item has-dropdown is-hoverable ">
-            <a class="navbar-item">
-              <span class="icon">
-                <i class="fa fa-cog"></i>
-              </span>
-            </a>
-            <div class="navbar-dropdown is-right">
-              <a class="navbar-item">
-                load defaults
-              </a>
-              <a class="navbar-item">
-                import data
-              </a>
-              <a class="navbar-item">
-                export data
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </nav>
-    <!-- <section class="barf-title hero is-primary is-marginless">
-      <div class="hero-body">
-        <div v-if="$route.fullPath ==='/'" class="container">
-          <h1 class="title">
-            Hunde, Essen und Aktionen
-          </h1>
-          <h2 class="subtitle">
-            Schau was deine Hunde in den kommenden Tagen benötigen und bestätige inwiefern die deine Pläne eingehalten hast.
-          </h2>
-        </div>
-        <div v-if="$route.fullPath ==='/stash'" class="container">
-          <h1 class="title">
-            Zutaten, Rezepte und Vorräte
-          </h1>
-          <h2 class="subtitle">
-            Erstelle Rezepte und deren Zutaten und lege fest was du vorrätig hast
-          </h2>
-        </div>
-        <div v-if="$route.fullPath ==='/plan'" class="container">
-          <h1 class="title">
-            Plane auf Wochen-Basis
-          </h1>
-          <h2 class="subtitle">
-            Damit du nicht mehr selbst rechnen musst
-          </h2>
-        </div>
-      </div>
-    </section> -->
     <router-view></router-view>
   </div>
 </template>

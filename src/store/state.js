@@ -28,14 +28,14 @@ export default {
         distribution: {
           animal: {
             Fleisch: 40,
-            Innereien: 20,
             Magen: 30,
+            Innereien: 20,
             Knochen: 10
           },
           vegetables: {
             Getreide: 40,
-            Früchte: 20,
-            Gemüse: 40
+            Gemüse: 40,
+            Früchte: 20
           }
         },
         week: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
@@ -48,21 +48,17 @@ export default {
           [],
           []   // sunday
         ],
-        meals: [
+        meals: [  // which ingredients / meals are regulary bound to each day
           [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
           [], [], [], [], [], []
         ]
       },
-      meals: []  // dogs meal history if active
+      meals: new Map([  // // dogs meal history if active
+        ['20170924', [
+          { name: 'Rindermuskelfleisch', amount: 250, unit: 'g', parts: [1, 'Fleisch'] }
+        ]]
+      ])
     }
-    // {
-    //   id: 2,
-    //   name: 'Loni',
-    //   birthday: new Date(2014, 6, 25),
-    //   sex: 'f',
-    //   weight: 18000,
-    //   plan: null
-    // }
   ],
   categories: {
     animal: ['Fleisch', 'Innereien', 'Magen', 'Knochen'],
