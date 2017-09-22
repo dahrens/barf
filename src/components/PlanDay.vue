@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     meals () {
-      return this.plan.week[this.index]
+      return this.plan.meals[this.index]
     },
     mealsValues () {
       // create one big list of ingredients (cut recipe based meals into pieces)

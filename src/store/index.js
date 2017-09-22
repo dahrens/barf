@@ -33,8 +33,8 @@ export const STASH_INGREDIENT = 'STASH_INGREDIENT'
 export const STASH_RECIPE = 'STASH_RECIPE'
 export const INSERT_RECIPE = 'INSERT_RECIPE'
 export const REMOVE_RECIPE = 'REMOVE_RECIPE'
-export const UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION = 'UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION'
 export const UPDATE_PLAN_CATEGORY_DISTRIBUTION = 'UPDATE_PLAN_CATEGORY_DISTRIBUTION'
+export const UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION = 'UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION'
 
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
@@ -197,7 +197,7 @@ export default new Vuex.Store({
       for (let plan of state.plans) {
         for (let dow in plan.week) {
           for (let meal in plan.week[dow]) {
-            let known = () => recipes.map(r => r.id).indexOf(plan.week[dow][meal].recipe) !== -1
+            let known = () => recipes.map(r => r.id).indexOf(plan.meals[dow][meal].recipe) !== -1
             if (plan.week[dow][meal].hasOwnProperty('ingredient')) {
               planMeals.push({ plan: plan.id, dow, meal })
             } else if (plan.week[dow][meal].hasOwnProperty('recipe') && known()) {
@@ -292,9 +292,7 @@ export default new Vuex.Store({
       return distribution
     },
     planDistribution: (state, getters) => (dog) => {
-      console.log('planDistribution: ', dog)
       let plan = dog.plan
-      console.log('dog: ', dog, 'plan: ', plan)
       let overall = getters.dogFoodQuantityPerDay(dog)
       let animal = overall * (plan.animal / 100)
       let vegetables = overall - animal

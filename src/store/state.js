@@ -38,16 +38,22 @@ export default {
             Gemüse: 40
           }
         },
-        week: [
+        week: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+        allocation: [
+          [],  // monday
+          [],
+          [],
+          [],
+          [],
+          [],
+          []   // sunday
+        ],
+        meals: [
           [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
           [], [], [], [], [], []
         ]
       },
-      meals: new Map([
-        [new Date(), [
-          { name: 'Rindermuskelfleisch', amount: 250, unit: 'g', parts: [1, 'Fleisch'] }
-        ]]
-      ])
+      meals: []  // dogs meal history if active
     }
     // {
     //   id: 2,
