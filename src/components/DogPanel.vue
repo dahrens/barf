@@ -3,12 +3,12 @@
     <p class="panel-heading">
       Dog
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <i v-if="!collapsed" class="fa fa-caret-down"></i>
-        <i v-if="collapsed" class="fa fa-caret-right"></i>
+        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
+        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
       </a>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <i v-if="!edit" class="fa fa-edit"></i>
-        <i v-if="edit" class="fa fa-save"></i>
+        <font-awesome-icon v-if="!edit" pack="solid" name="edit" />
+        <font-awesome-icon v-if="edit" pack="solid" name="save" />
       </a>
     </p>
     <template v-if="!collapsed">
@@ -19,14 +19,14 @@
         <div class="field-body">
           <div v-if="edit" class="field">
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Name">
-              <span class="icon is-small is-left">
-                <i class="fa fa-id-card-o"></i>
+              <input v-model="dog.name" class="input" type="text" placeholder="Name">
+              <span class="icon is-left">
+                <font-awesome-icon pack="solid" name="address-card" />
               </span>
             </p>
           </div>
           <div v-else>
-            Delphi
+            {{ dog.name }}
           </div>
         </div>
       </div>
@@ -37,14 +37,14 @@
         <div class="field-body">
           <div v-if="edit" class="field">
             <p class="control has-icons-left">
-              <input class="input" type="number" placeholder="Name" value="15000" min="0" max="150000" step="50">
-              <span class="icon is-small is-left">
-                <i class="fa fa-anchor"></i>
+              <input v-model="dog.weight" class="input" type="number" placeholder="weight" min="0" max="150000" step="50">
+              <span class="icon is-left">
+                <font-awesome-icon pack="solid" name="tachometer-alt" />
               </span>
             </p>
           </div>
           <div v-else>
-            15000g
+            {{ dog.weight }}g
           </div>
         </div>
       </div>
@@ -53,13 +53,21 @@
           <label class="label">Aktivität</label>
         </div>
         <div class="field-body">
-          <div v-if="edit" class="field is-narrow">
-            <div class="control">
+          <div v-if="edit" class="field is-expanded">
+            <div class="field has-addons">
+              <div class="control">
+                <a class="button is-static">
+                  <span class="icon is-left">
+                    <font-awesome-icon pack="solid" name="futbol" />
+                  </span>
+                </a>
+              </div>
               <div class="select is-fullwidth">
-                <select>
-                  <option>moderate</option>
-                  <option>Marketing</option>
-                  <option>Sales</option>
+                <select v-model="dog.activity">
+                  <option>unactive</option>
+                  <option selected>moderate</option>
+                  <option>active</option>
+                  <option>highly</option>
                 </select>
               </div>
             </div>
@@ -79,44 +87,46 @@
               <label class="radio">
                 <input type="radio" name="member">
                 <span class="icon">
-                  <i class="fa fa-mars"></i>
+                  <font-awesome-icon pack="solid" name="mars" />
                 </span>
               </label>
               <label class="radio">
                 <input type="radio" name="member">
                 <span class="icon">
-                  <i class="fa fa-venus"></i>
+                  <font-awesome-icon pack="solid" name="venus" />
                 </span>
               </label>
             </div>
           </div>
           <div v-else>
             <span class="icon">
-              <i class="fa fa-mars"></i>
+              <font-awesome-icon pack="solid" name="mars" />
             </span>
           </div>
         </div>
       </div>
       <div class="panel-block">
         <div class="field-label is-normal">
-          <label class="label">Kastriert</label>
+          <label class="label">
+            Kastriert
+          </label>
         </div>
         <div class="field-body">
           <input v-if="edit" type="checkbox">
           <div v-else>
             <span class="icon">
-              <i class="fa fa-check"></i>
+              <font-awesome-icon pack="solid" name="check" />
             </span>
           </div>
         </div>
-
       </div>
       <div class="panel-block">
         <div class="field-label">
           <label class="label">Ration</label>
         </div>
         <div class="field-body">
-          2100g
+          {{ dog.weight }}g * 0.02 * {{ dogActivity }}
+          <template v-if="dog.castrated">* 0.8</template> = 2100g
         </div>
       </div>
     </template>
@@ -126,11 +136,23 @@
 <script>
 export default {
   name: 'dogPanel',
+  props: ['dog'],
   data () {
     return {
       collapsed: false,
       edit: false
     }
+  },
+  computed: {
+    dogActivity () {
+      return this.$store.state.activities[this.dog.activity]
+    }
   }
 }
 </script>
+
+<style>
+.field-label {
+  width: 500px;
+}
+</style>

@@ -15,7 +15,7 @@
             :value="plan.distribution[category][subCategory]"></subCategorySlider>
         </div>
         <div class="column is-3">
-          <span class="is-pulled-right">{{ parseInt(mealsDistribution[subCategory]) }}g / {{ parseInt(planDistribution[subCategory]) }}g</span>
+          <span>{{ parseInt(mealsDistribution[subCategory]) }}g / {{ parseInt(planDistribution[subCategory]) }}g</span>
         </div>
       </div>
     </template>

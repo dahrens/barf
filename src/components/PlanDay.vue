@@ -7,22 +7,9 @@
         <i v-if="collapsed" class="fa fa-caret-right"></i>
       </a>
       <button v-on:click="expandedCreate = !expandedCreate" class="button is-small is-light is-pulled-right">
-        <span v-if="!expandedCreate" class="icon">
-          <i class="fa fa-eye"></i>
-        </span>
-        <span v-else class="icon">
-          <i class="fa fa-eye-slash"></i>
-        </span>
         <span class="icon is-small">
           <i class="fa fa-plus"></i>
         </span>
-      </button>
-      <button v-on:click="expandAll = !expandAll" class="button is-small is-light is-pulled-right">
-        <span class="icon is-small">
-          <i class="fa fa-expand"></i>
-        </span>
-        <span v-if="!expandAll" class="is-size-7">1</span>
-        <span v-else>&#8734;</span>
       </button>
     </p>
     <a v-if="!collapsed" class="panel-block" v-for="meal in meals">
@@ -55,7 +42,7 @@ export default {
   },
   computed: {
     meals () {
-      return this.plan.meals[this.index]
+      return this.plan.week[this.index]
     },
     mealsValues () {
       // create one big list of ingredients (cut recipe based meals into pieces)

@@ -3,25 +3,34 @@
     <p class="panel-heading">
       Plan
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <i v-if="!collapsed" class="fa fa-caret-down"></i>
-        <i v-if="collapsed" class="fa fa-caret-right"></i>
+        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
+        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
+      </a>
+      <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
+        <font-awesome-icon v-if="!edit" pack="solid" name="edit" />
+        <font-awesome-icon v-if="edit" pack="solid" name="save" />
       </a>
     </p>
-    <template v-if="!collapsed">
-      <div class="columns distribution-slider">
-        <div class="column is-3">
-          <span class="is-pulled-right">tierisch</span>
+    <p v-if="!collapsed" class="faked-panel-block">
+      <template v-if="!collapsed && edit">
+        <div class="columns distribution-slider">
+          <div class="column is-3">
+            <span class="is-pulled-right">tierisch</span>
+          </div>
+          <div class="column is-6">
+            <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
+          </div>
+          <div class="column is-3">
+            <span class="is-pulled-left">pflanzlich</span>
+          </div>
         </div>
-        <div class="column is-6">
-          <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
-        </div>
-        <div class="column is-3">
-          <span class="is-pulled-left">pflanzlich</span>
-        </div>
-      </div>
-      <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
-      <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
-    </template>
+        <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
+        <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
+      </template>
+      <template v-if="!collapsed && !edit">
+        hi
+      </template>
+    </p>
   </nav>
 </template>
 
@@ -40,7 +49,7 @@ export default {
   },
   data () {
     return {
-      locks: [],
+      edit: false,
       collapsed: false,
       selectedPlan: 1,
       sliderConfig: {
@@ -86,5 +95,12 @@ export default {
 <style scoped>
 .distribution-slider {
   margin-top: 2.2em;
+}
+
+.faked-panel-block {
+  padding: 1em ;
+  border-bottom: 1px solid #dbdbdb;
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
 }
 </style>

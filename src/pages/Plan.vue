@@ -11,27 +11,17 @@
       <div class="columns">
         <div class="column is-5">
           <dogPanel :dog="dog"></dogPanel>
-          <planPanel :dog="dog"></planPanel>
-          <nav class="panel">
-            <p class="panel-heading">
-              Geplante Mahlzeiten
-            </p>
-          </nav>
+          <ingredients></ingredients>
+          <recipes></recipes>
         </div>
         <div class="column is-7">
+          <planPanel :dog="dog"></planPanel>
           <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in weekdays" class="column is-4 weekday">
+            <div v-for="(weekday, index) in weekdays" class="column is-12 weekday">
               <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
             </div>
             <div class="column is-12">
-              <div class="columns meals">
-                <div class="column is-6">
-                  <ingredients></ingredients>
-                </div>
-                <div class="column is-6">
-                  <recipes></recipes>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
