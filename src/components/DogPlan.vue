@@ -6,7 +6,7 @@
         <td>Rindermuskelfleisch</td>
         <td>
           <span class="icon has-text-success">
-            <font-awesome-icon pack="solid" name="check" />
+            <fa pack="solid" name="check" />
           </span>
         </td>
       </tr>
@@ -15,7 +15,7 @@
         <td>Rindermuskelfleisch</td>
         <td>
           <span class="icon has-text-success">
-            <font-awesome-icon pack="solid" name="check" />
+            <fa pack="solid" name="check" />
           </span>
         </td>
       </tr>
@@ -24,7 +24,7 @@
         <td>Blättermagen</td>
         <td>
           <span class="icon has-text-danger">
-            <font-awesome-icon pack="solid" name="times" />
+            <fa pack="solid" name="times" />
           </span>
         </td>
       </tr>
@@ -33,7 +33,7 @@
         <td>Rindermuskelfleisch</td>
         <td>
           <span class="icon has-text-success">
-            <font-awesome-icon pack="solid" name="check" />
+            <fa pack="solid" name="check" />
           </span>
         </td>
       </tr>
@@ -42,7 +42,7 @@
         <td>Rindermuskelfleisch</td>
         <td>
           <span class="icon has-text-success">
-            <font-awesome-icon pack="solid" name="check" />
+            <fa pack="solid" name="check" />
           </span>
         </td>
       </tr>
@@ -51,7 +51,7 @@
         <td>Rindermuskelfleisch</td>
         <td>
           <span class="icon has-text-success">
-            <font-awesome-icon pack="solid" name="check" />
+            <fa pack="solid" name="check" />
           </span>
         </td>
       </tr>
@@ -60,7 +60,7 @@
         <td>Rindermuskelfleisch</td>
         <td>
           <span class="icon has-text-success">
-            <font-awesome-icon pack="solid" name="check" />
+            <fa pack="solid" name="check" />
           </span>
         </td>
       </tr>

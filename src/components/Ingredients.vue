@@ -3,23 +3,23 @@
     <p class="panel-heading">
       Zutaten
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
-        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="caret-down" />
+        <fa v-if="collapsed" pack="solid" name="caret-right" />
       </a>
       <button v-on:click="showCreate = !showCreate" class="button is-small is-light is-pulled-right">
         <span v-if="!showCreate" class="icon">
-          <font-awesome-icon pack="solid" name="eye" />
+          <fa pack="solid" name="eye" />
         </span>
         <span v-else class="icon">
-          <font-awesome-icon pack="solid" name="eye-slash" />
+          <fa pack="solid" name="eye-slash" />
         </span>
         <span class="icon is-small">
-          <font-awesome-icon pack="solid" name="plus" />
+          <fa pack="solid" name="plus" />
         </span>
       </button>
       <button v-on:click="expandAll = !expandAll" class="button is-small is-light is-pulled-right">
         <span class="icon is-small">
-          <font-awesome-icon pack="solid" name="arrows-alt-v" />
+          <fa pack="solid" name="arrows-alt-v" />
         </span>
         <span v-if="!expandAll" >1</span>
         <span v-else>&#8734;</span>
@@ -32,7 +32,7 @@
       <p class="control has-icons-left">
         <input class="input is-small" type="text" placeholder="search">
         <span class="icon is-small is-left">
-          <font-awesome-icon pack="solid" name="search" />
+          <fa pack="solid" name="search" />
         </span>
       </p>
     </div>
@@ -40,8 +40,8 @@
       <template v-for="ingredient in ingredients">
           <a v-on:click="activate(ingredient)" class="panel-block" :class="{'is-active': isActive(ingredient)}">
             <p class="panel-icon has-text-dark">
-              <font-awesome-icon v-if ="!isActive(ingredient)" pack="solid" name="caret-right" />
-              <font-awesome-icon v-if ="isActive(ingredient)" pack="solid" name="caret-down" />
+              <fa v-if ="!isActive(ingredient)" pack="solid" name="caret-right" />
+              <fa v-if ="isActive(ingredient)" pack="solid" name="caret-down" />
             </p>
             {{ ingredient.name }}&nbsp;
             <template v-for="part in ingredient.subcategories">

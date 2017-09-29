@@ -3,12 +3,12 @@
     <p class="panel-heading">
       Dog
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
-        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="caret-down" />
+        <fa v-if="collapsed" pack="solid" name="caret-right" />
       </a>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <font-awesome-icon v-if="!edit" pack="solid" name="edit" />
-        <font-awesome-icon v-if="edit" pack="solid" name="save" />
+        <fa v-if="!edit" pack="solid" name="edit" />
+        <fa v-if="edit" pack="solid" name="save" />
       </a>
     </p>
     <template v-if="!collapsed">
@@ -21,7 +21,7 @@
             <p class="control has-icons-left">
               <input v-model="dog.name" class="input" type="text" placeholder="Name">
               <span class="icon is-left">
-                <font-awesome-icon pack="solid" name="address-card" />
+                <fa pack="solid" name="address-card" />
               </span>
             </p>
           </div>
@@ -39,7 +39,7 @@
             <p class="control has-icons-left">
               <input v-model="dog.weight" class="input" type="number" placeholder="weight" min="0" max="150000" step="50">
               <span class="icon is-left">
-                <font-awesome-icon pack="solid" name="tachometer-alt" />
+                <fa pack="solid" name="tachometer-alt" />
               </span>
             </p>
           </div>
@@ -58,7 +58,7 @@
               <div class="control">
                 <a class="button is-static">
                   <span class="icon is-left">
-                    <font-awesome-icon pack="solid" name="futbol" />
+                    <fa pack="solid" name="futbol" />
                   </span>
                 </a>
               </div>
@@ -87,20 +87,20 @@
               <label class="radio">
                 <input type="radio" name="member">
                 <span class="icon">
-                  <font-awesome-icon pack="solid" name="mars" />
+                  <fa pack="solid" name="mars" />
                 </span>
               </label>
               <label class="radio">
                 <input type="radio" name="member">
                 <span class="icon">
-                  <font-awesome-icon pack="solid" name="venus" />
+                  <fa pack="solid" name="venus" />
                 </span>
               </label>
             </div>
           </div>
           <div v-else>
             <span class="icon">
-              <font-awesome-icon pack="solid" name="mars" />
+              <fa pack="solid" name="mars" />
             </span>
           </div>
         </div>
@@ -115,7 +115,7 @@
           <input v-if="edit" type="checkbox">
           <div v-else>
             <span class="icon">
-              <font-awesome-icon pack="solid" name="check" />
+              <fa pack="solid" name="check" />
             </span>
           </div>
         </div>

@@ -3,12 +3,12 @@
     <p class="panel-heading">
       Plan
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
-        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="caret-down" />
+        <fa v-if="collapsed" pack="solid" name="caret-right" />
       </a>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <font-awesome-icon v-if="!edit" pack="solid" name="edit" />
-        <font-awesome-icon v-if="edit" pack="solid" name="save" />
+        <fa v-if="!edit" pack="solid" name="edit" />
+        <fa v-if="edit" pack="solid" name="save" />
       </a>
     </p>
     <p v-if="!collapsed" class="faked-panel-block">

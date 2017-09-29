@@ -3,11 +3,11 @@
     <p class="panel-heading">
       {{weekday}}
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
-        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="caret-down" />
+        <fa v-if="collapsed" pack="solid" name="caret-right" />
       </a>
       <a class="is-pulled-right has-text-dark">
-        <font-awesome-icon v-on:click="expandedCreate = !expandedCreate" pack="solid" name="plus" />
+        <fa v-on:click="expandedCreate = !expandedCreate" pack="solid" name="plus" />
       </a>
     </p>
     <a v-if="!collapsed" class="panel-block" v-for="meal in meals">
