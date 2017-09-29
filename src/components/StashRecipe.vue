@@ -2,10 +2,14 @@
     <div class="field has-addons has-addons-right has-addons-left">
       <p class="control">
         <span v-if="ingredientsAvailable" class="button is-light is-large">
-          <span class="icon has-text-success"><i class="fa fa-check"></i></span>
+          <span class="icon has-text-success">
+            <font-awesome-icon pack="solid" name="check" />
+          </span>
         </span>
         <span v-else class="button is-warning is-large">
-          <span class="icon"><i class="fa fa-warning"></i></span>
+          <span class="icon">
+            <font-awesome-icon pack="solid" name="warning" />
+          </span>
         </span>
       </p>
       <p class="control is-expanded">
@@ -13,17 +17,23 @@
       </p>
       <p class="control">
         <a :disabled="quantity <= 1" v-on:click="quantity--" class="button is-dark is-large" title="Verringere Anzahl">
-          <span class="icon"><i class="fa fa-minus"></i></span>
+          <span class="icon">
+            <font-awesome-icon pack="solid" name="minus" />
+          </span>
         </a>
       </p>
       <p class="control">
         <a v-on:click="quantity++" class="button is-dark is-large" title="Erhöhe Anzahl">
-          <span class="icon"><i class="fa fa-plus"></i></span>
+          <span class="icon">
+            <font-awesome-icon pack="solid" name="plus" />
+          </span>
         </a>
       </p>
       <p class="control">
         <a v-on:click="order()" class="button is-primary is-large" title="Put into stash">
-          <span class="icon"><i class="fa fa-cutlery"></i></span>
+          <span class="icon">
+            <font-awesome-icon pack="solid" name="utensils" />
+          </span>
         </a>
       </p>
     </div>

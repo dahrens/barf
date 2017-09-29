@@ -15,7 +15,7 @@
         <p class="control">
           <a class="button is-outlined">
             <span class="icon is-small has-text-success">
-              <i class="fa fa-check"></i>
+              <font-awesome-icon pack="solid" name="check" />
             </span>
             <span>Ja</span>
           </a>
@@ -23,7 +23,7 @@
         <p class="control">
           <a class="button is-outlined">
             <span class="icon is-small has-text-danger">
-              <i class="fa fa-times"></i>
+              <font-awesome-icon pack="solid" name="times" />
             </span>
             <span>Nein</span>
           </a>
@@ -31,7 +31,7 @@
         <p class="control">
           <a class="button is-outlined">
             <span class="icon is-small has-text-info">
-              <i class="fa fa-edit"></i>
+              <font-awesome-icon pack="solid" name="edit" />
             </span>
             <span>Anpassen</span>
           </a>

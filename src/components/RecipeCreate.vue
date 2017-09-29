@@ -10,11 +10,11 @@
                       'is-danger': !isNameValid && this.newRecipe.name !== '',
                       'is-success': isNameValid && newRecipe.name !== ''
                     }">
-              <span v-if="newRecipe.name" class="icon is-small is-right">
-                <i v-if="isNameValid" class="fa fa-check has-text-success"></i>
+              <span v-if="newRecipe.name" class="icon is-small is-right has-text-success">
+                <font-awesome-icon v-if="isNameValid" pack="solid" name="check" />
               </span>
-              <span v-if="!isNameValid && newRecipe.name !== ''" class="icon is-small is-right">
-                <i v-if="!isNameValid" class="fa fa-times has-text-danger"></i>
+              <span v-if="!isNameValid && newRecipe.name !== ''" class="icon is-small is-right has-text-danger">
+                <font-awesome-icon v-if="!isNameValid" pack="solid" name="times" />
               </span>
             </div>
             <p v-if="this.newRecipe.name === ''" class="help is-danger">Wähle einen Namen für das neue Rezept</p>
@@ -39,12 +39,12 @@
           <p class="control">
             <a class="button" v-on:click="addIngredient()">
               <span class="icon">
-                <i class="fa fa-plus"></i>
+                <font-awesome-icon pack="solid" name="plus" />
               </span>
             </a>
             <a v-on:click="removeIngredient(ingredient)" v-if="newRecipe.ingredients.length !== 1" class="button">
               <span class="icon">
-                <i class="fa fa-trash"></i>
+                <font-awesome-icon pack="solid" name="trash" />
               </span>
             </a>
           </p>
@@ -54,7 +54,7 @@
     <div class="panel-block">
       <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewRecipe()" :disabled="!isValid">
         <span class="icon">
-          <i class="fa fa-save"></i>
+          <font-awesome-icon pack="solid" name="save" />
         </span>
       </button>
     </div>

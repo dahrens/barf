@@ -3,14 +3,12 @@
     <p class="panel-heading">
       {{weekday}}
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <i v-if="!collapsed" class="fa fa-caret-down"></i>
-        <i v-if="collapsed" class="fa fa-caret-right"></i>
+        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
+        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
       </a>
-      <button v-on:click="expandedCreate = !expandedCreate" class="button is-small is-light is-pulled-right">
-        <span class="icon is-small">
-          <i class="fa fa-plus"></i>
-        </span>
-      </button>
+      <a class="is-pulled-right has-text-dark">
+        <font-awesome-icon v-on:click="expandedCreate = !expandedCreate" pack="solid" name="plus" />
+      </a>
     </p>
     <a v-if="!collapsed" class="panel-block" v-for="meal in meals">
       {{getMealName(meal)}}

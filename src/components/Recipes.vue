@@ -3,23 +3,23 @@
     <p class="panel-heading">
       Rezepte
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <i v-if="!collapsed" class="fa fa-caret-down"></i>
-        <i v-if="collapsed" class="fa fa-caret-right"></i>
+        <font-awesome-icon v-if="!collapsed" pack="solid" name="caret-down" />
+        <font-awesome-icon v-if="collapsed" pack="solid" name="caret-right" />
       </a>
       <button v-if="showCreate" v-on:click="expandedCreate = !expandedCreate" class="button is-small is-light is-pulled-right">
         <span v-if="!expandedCreate" class="icon">
-          <i class="fa fa-eye"></i>
+          <font-awesome-icon pack="solid" name="eye" />
         </span>
         <span v-else class="icon">
-          <i class="fa fa-eye-slash"></i>
+          <font-awesome-icon pack="solid" name="eye-slash" />
         </span>
         <span class="icon is-small">
-          <i class="fa fa-plus"></i>
+          <font-awesome-icon pack="solid" name="plus" />
         </span>
       </button>
       <button v-on:click="expandAll = !expandAll" class="button is-small is-light is-pulled-right">
         <span class="icon is-small">
-          <i class="fa fa-expand"></i>
+          <font-awesome-icon pack="solid" name="arrows-alt-v" />
         </span>
         <span v-if="!expandAll" class="is-size-7">1</span>
         <span v-else>&#8734;</span>
@@ -32,16 +32,16 @@
       <p class="control has-icons-left">
         <input class="input is-small" type="text" placeholder="search">
         <span class="icon is-small is-left">
-          <i class="fa fa-search"></i>
+          <font-awesome-icon pack="solid" name="search" />
         </span>
       </p>
     </div>
     <template v-if="!collapsed">
       <template v-for="recipe in recipes">
           <a v-on:click="activate(recipe)" class="panel-block" :class="{'is-active': isActive(recipe)}">
-            <p class="panel-icon">
-              <i v-if ="!isActive(recipe)" class="fa fa-caret-right"></i>
-              <i v-if ="isActive(recipe)" class="fa fa-caret-down"></i>
+            <p class="panel-icon has-text-dark">
+              <font-awesome-icon v-if ="!isActive(recipe)" pack="solid" name="caret-right" />
+              <font-awesome-icon v-if ="isActive(recipe)" pack="solid" name="caret-down" />
             </p>
             {{ recipe.name }}&nbsp;
             <template v-for="part in recipe.subcategories">

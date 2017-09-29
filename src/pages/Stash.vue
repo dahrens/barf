@@ -10,15 +10,15 @@
             <p class="control has-icons-left">
               <input class="input is-small" type="text" placeholder="search">
               <span class="icon is-small is-left">
-                <i class="fa fa-search"></i>
+                <font-awesome-icon pack="solid" name="search" />
               </span>
             </p>
           </div>
           <template v-for="ingredientMeta in ingredientStash">
             <a v-on:click="activateStashItem(ingredientMeta.item)" class="panel-block" :class="{'is-active': isActiveStashItem(ingredientMeta.item)}">
               <p class="panel-icon">
-                <i v-if ="!isActiveStashItem(ingredientMeta.item)" class="fa fa-caret-right"></i>
-                <i v-if ="isActiveStashItem(ingredientMeta.item)" class="fa fa-caret-down"></i>
+                <font-awesome-icon v-if ="!isActiveStashItem(ingredientMeta.item)" pack="solid" name="caret-right" />
+                <font-awesome-icon v-if ="isActiveStashItem(ingredientMeta.item)" pack="solid" name="caret-down" />
               </p>
               {{ ingredientMeta.ingredient.name }}&nbsp;
               <template v-for="amountMeta in ingredientMeta.amounts">
@@ -29,14 +29,14 @@
               </template>
             </a>
             <span v-if="isActiveStashItem(ingredientMeta.item)"class="panel-block">
-              hi there
+              stash not implemented
             </span>
           </template>
           <template v-for="recipeMeta of recipeStash">
             <a v-on:click="activateStashItem(recipeMeta.recipe)" class="panel-block" :class="{'is-active': isActiveStashItem(recipeMeta.recipe)}">
               <p class="panel-icon">
-                <i v-if ="!isActiveStashItem(recipeMeta.recipe)" class="fa fa-caret-right"></i>
-                <i v-if ="isActiveStashItem(recipeMeta.recipe)" class="fa fa-caret-down"></i>
+                <font-awesome-icon v-if ="!isActiveStashItem(recipeMeta.recipe)" pack="solid" name="caret-right" />
+                <font-awesome-icon v-if ="isActiveStashItem(recipeMeta.recipe)" pack="solid" name="caret-down" />
               </p>
               {{ recipeMeta.recipe.name }}&nbsp;
               <span class="tag is-dark">
@@ -44,7 +44,7 @@
               </span>
             </a>
             <span v-if="isActiveStashItem(recipeMeta.recipe)"class="panel-block">
-              hi there
+              stash not implemented
             </span>
           </template>
         </nav>
