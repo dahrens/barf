@@ -3,8 +3,8 @@
     <p class="panel-heading">
       Zutaten
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="solid" name="caret-down" />
-        <fa v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="chevron-down" />
+        <fa v-if="collapsed" pack="solid" name="chevron-right" />
       </a>
       <button v-on:click="showCreate = !showCreate" class="button is-small is-light is-pulled-right">
         <span v-if="!showCreate" class="icon">
@@ -40,8 +40,8 @@
       <template v-for="ingredient in ingredients">
           <a v-on:click="activate(ingredient)" class="panel-block" :class="{'is-active': isActive(ingredient)}">
             <p class="panel-icon has-text-dark">
-              <fa v-if ="!isActive(ingredient)" pack="solid" name="caret-right" />
-              <fa v-if ="isActive(ingredient)" pack="solid" name="caret-down" />
+              <fa v-if ="!isActive(ingredient)" pack="solid" name="chevron-right" />
+              <fa v-if ="isActive(ingredient)" pack="solid" name="chevron-down" />
             </p>
             {{ ingredient.name }}&nbsp;
             <template v-for="part in ingredient.subcategories">

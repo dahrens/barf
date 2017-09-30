@@ -3,8 +3,8 @@
     <p class="panel-heading">
       {{weekday}}
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="solid" name="caret-down" />
-        <fa v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="chevron-down" />
+        <fa v-if="collapsed" pack="solid" name="chevron-right" />
       </a>
       <a class="is-pulled-right has-text-dark">
         <fa v-on:click="expandedCreate = !expandedCreate" pack="solid" name="plus" />

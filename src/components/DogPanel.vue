@@ -3,8 +3,8 @@
     <p class="panel-heading">
       Dog
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="solid" name="caret-down" />
-        <fa v-if="collapsed" pack="solid" name="caret-right" />
+        <fa v-if="!collapsed" pack="solid" name="chevron-down" />
+        <fa v-if="collapsed" pack="solid" name="chevron-right" />
       </a>
       <a v-on:click="toggleEdit()" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" pack="solid" name="edit" />

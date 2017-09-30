@@ -16,8 +16,8 @@
         </a>
         <a  v-on:click="collapsed = !collapsed" class="card-header-icon">
           <span class="icon">
-            <fa v-if="!collapsed" pack="solid" name="caret-down" />
-            <fa v-if="collapsed" pack="solid" name="caret-right" />
+            <fa v-if="!collapsed" pack="solid" name="chevron-down" />
+            <fa v-if="collapsed" pack="solid" name="chevron-right" />
           </span>
         </a>
       </header>
