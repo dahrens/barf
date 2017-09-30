@@ -70,10 +70,10 @@ export default {
       return options
     },
     needsCascade () {
-      return this.$store.getters.ingredientNeedsCascade(this.ingredient)
+      return this.$store.getters.ingredientHasRelations(this.ingredient)
     },
     getCascaded () {
-      return this.$store.getters.getIngredientsCascaded(this.ingredient)
+      return this.$store.getters.ingredientRelations(this.ingredient)
     }
   },
   methods: {

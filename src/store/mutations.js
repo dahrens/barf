@@ -2,7 +2,6 @@ import * as types from './mutation-types'
 
 export default {
   [types.UPDATE_DOG] (state, payload) {
-    console.log(payload, state.dogs)
     let idx = state.dogs.map(d => d.id).indexOf(payload.id)
     if (idx === -1) {
       throw new Error('Unknown Dog for update')
@@ -29,10 +28,6 @@ export default {
     }
     for (let recipe of payload.cascade.recipes) {
       state.recipes.splice(state.recipes.indexOf(recipe), 1)
-    }
-    for (let planMeal of payload.cascade.planMeals) {
-      let plan = state.plans.filter(p => planMeal.plan)[0]
-      plan.week[planMeal.dow].splice(planMeal.meal, 1)
     }
   },
   [types.STASH_INGREDIENT] (state, payload) {

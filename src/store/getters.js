@@ -1,8 +1,4 @@
 export default {
-  entities: state => {
-    let exclude = ['ids', 'categories']
-    return Object.keys(state).filter(e => exclude.indexOf(e) === -1)
-  },
   subCategories: state => {
     let options = []
     for (let category of Object.keys(state.categories)) {
@@ -24,7 +20,7 @@ export default {
     }
     return distribution
   },
-  ingredientNeedsCascade: (state) => (ingredient) => {
+  ingredientHasRelations: (state) => (ingredient) => {
     for (let item of state.stash) {
       if (item.hasOwnProperty('ingredient')) {
         if (item.ingredient === ingredient.id) return true
@@ -37,10 +33,9 @@ export default {
     }
     return false
   },
-  getIngredientsCascaded: (state) => (ingredient) => {
+  ingredientRelations: (state) => (ingredient) => {
     let stashContent = []
     let recipes = []
-    let planMeals = []
     for (let recipe of state.recipes) {
       for (let i of recipe.ingredients) {
         if (i.ingredient === ingredient.id) recipes.push(recipe)
@@ -54,22 +49,9 @@ export default {
         if (recipes.map(r => r.id).indexOf(item.recipe) !== -1) stashContent.push(item)
       }
     }
-    for (let plan of state.plans) {
-      for (let dow in plan.week) {
-        for (let meal in plan.week[dow]) {
-          let known = () => recipes.map(r => r.id).indexOf(plan.meals[dow][meal].recipe) !== -1
-          if (plan.week[dow][meal].hasOwnProperty('ingredient')) {
-            planMeals.push({ plan: plan.id, dow, meal })
-          } else if (plan.week[dow][meal].hasOwnProperty('recipe') && known()) {
-            planMeals.push({ plan: plan.id, dow, meal })
-          }
-        }
-      }
-    }
     return {
       stashContent,
-      recipes,
-      planMeals
+      recipes
     }
   },
   stashedIngredients: state => {

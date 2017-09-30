@@ -80,7 +80,6 @@ export default {
   },
   methods: {
     order: function () {
-      console.log('order')
       let stashItem = {
         recipe: this.recipe.id,
         quantity: this.quantity
