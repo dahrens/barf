@@ -39,7 +39,7 @@
     <template v-if="!collapsed">
       <template v-for="recipe in recipes">
           <a v-on:click="activate(recipe)" class="panel-block" :class="{'is-active': isActive(recipe)}">
-            <p class="panel-icon has-text-dark">
+            <p class="panel-icon">
               <fa v-if ="!isActive(recipe)" pack="fas" name="chevron-right" />
               <fa v-if ="isActive(recipe)" pack="fas" name="chevron-down" />
             </p>
@@ -70,14 +70,11 @@ export default {
     showCreate: {
       required: false,
       default: () => (true)
-    },
-    collapsed: {
-      required: false,
-      default: () => (false)
     }
   },
   data () {
     return {
+      collapsed: false,
       expandAll: false,
       expandedCreate: false,
       active: []

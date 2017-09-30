@@ -39,7 +39,7 @@
     <template v-if="!collapsed">
       <template v-for="ingredient in ingredients">
           <a v-on:click="activate(ingredient)" class="panel-block" :class="{'is-active': isActive(ingredient)}">
-            <p class="panel-icon has-text-dark">
+            <p class="panel-icon">
               <fa v-if ="!isActive(ingredient)" pack="fas" name="chevron-right" />
               <fa v-if ="isActive(ingredient)" pack="fas" name="chevron-down" />
             </p>
