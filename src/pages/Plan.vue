@@ -8,7 +8,7 @@
         <div class="column is-8">
           <planPanel :dog="dog"></planPanel>
           <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in plan.week" class="column is-6 weekday">
+            <div v-for="(weekday, index) in plan.week" class="column is-4 weekday">
               <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
             </div>
           </div>
@@ -34,6 +34,9 @@ export default {
     subCategories () {
       return this.$store.getters.subCategories
     },
+    dogs () {
+      return this.$store.state.dogs
+    },
     dog () {
       return this.$store.state.dogs[0]
     },
@@ -43,14 +46,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.plan {
-  margin-top: 1em;
-}
-
-.meals {
-  margin-top: 2em;
-}
-</style>
