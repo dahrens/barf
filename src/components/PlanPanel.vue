@@ -3,12 +3,12 @@
     <p class="panel-heading">
       Plan
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="solid" name="chevron-down" />
-        <fa v-if="collapsed" pack="solid" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
+        <fa v-if="collapsed" pack="fas" name="chevron-right" />
       </a>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!edit" pack="solid" name="edit" />
-        <fa v-if="edit" pack="solid" name="save" />
+        <fa v-if="!edit" pack="fas" name="edit" />
+        <fa v-if="edit" pack="fas" name="save" />
       </a>
     </p>
     <p v-if="!collapsed" class="faked-panel-block">
@@ -100,8 +100,8 @@ export default {
 
 .faked-panel-block {
   padding: 1em ;
-  border-bottom: 1px solid #dbdbdb;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
+  border-bottom: 1px fas #dbdbdb;
+  border-left: 1px fas #dbdbdb;
+  border-right: 1px fas #dbdbdb;
 }
 </style>

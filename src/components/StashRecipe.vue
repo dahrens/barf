@@ -3,12 +3,12 @@
       <p class="control">
         <span v-if="ingredientsAvailable" class="button is-light is-large">
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </span>
         <span v-else class="button is-warning is-large">
           <span class="icon">
-            <fa pack="solid" name="warning" />
+            <fa pack="fas" name="warning" />
           </span>
         </span>
       </p>
@@ -18,21 +18,21 @@
       <p class="control">
         <a :disabled="quantity <= 1" v-on:click="quantity--" class="button is-dark is-large" title="Verringere Anzahl">
           <span class="icon">
-            <fa pack="solid" name="minus" />
+            <fa pack="fas" name="minus" />
           </span>
         </a>
       </p>
       <p class="control">
         <a v-on:click="quantity++" class="button is-dark is-large" title="Erhöhe Anzahl">
           <span class="icon">
-            <fa pack="solid" name="plus" />
+            <fa pack="fas" name="plus" />
           </span>
         </a>
       </p>
       <p class="control">
         <a v-on:click="order()" class="button is-primary is-large" title="Put into stash">
           <span class="icon">
-            <fa pack="solid" name="utensils" />
+            <fa pack="fas" name="utensils" />
           </span>
         </a>
       </p>

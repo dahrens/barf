@@ -11,10 +11,10 @@
                       'is-success': isNameValid && newIngredient.name !== ''
                     }">
               <span v-if="newIngredient.name" class="icon is-small is-right">
-                <fa v-if="isNameValid" pack="solid" name="check" />
+                <fa v-if="isNameValid" pack="fas" name="check" />
               </span>
               <span v-if="!isNameValid && newIngredient.name !== ''" class="icon is-small is-right has-text-danger">
-                <fa v-if="!isNameValid" pack="solid" name="times" />
+                <fa v-if="!isNameValid" pack="fas" name="times" />
               </span>
             </div>
             <p v-if="this.newIngredient.name === ''" class="help is-danger">Pick a name</p>
@@ -54,12 +54,12 @@
           <p class="control">
             <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subCategory)">
               <span class="icon">
-                <fa pack="solid" name="plus" />
+                <fa pack="fas" name="plus" />
               </span>
             </a>
             <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subCategory)">
               <span class="icon">
-                <fa pack="solid" name="trash" />
+                <fa pack="fas" name="trash" />
               </span>
             </a>
           </p>
@@ -70,7 +70,7 @@
     <div class="panel-block">
       <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewIngredient()" :disabled="!isValid">
         <span class="icon">
-          <fa pack="solid" name="save" />
+          <fa pack="fas" name="save" />
         </span>
       </button>
     </div>

@@ -17,14 +17,14 @@
       <p class="control">
         <a v-on:click="order()" class="button is-primary is-large" title="Put into stash">
           <span class="icon">
-            <fa pack="solid" name="shopping-cart" />
+            <fa pack="fas" name="shopping-cart" />
           </span>
         </a>
       </p>
       <p class="control">
         <a v-on:click="remove()" class="button is-danger is-pulled-right is-large" title="Delete from inventory">
           <span class="icon is-small">
-            <fa pack="solid" name="trash" />
+            <fa pack="fas" name="trash" />
           </span>
         </a>
       </p>

@@ -6,18 +6,18 @@
           {{ dog.name }}
         </p>
         <a class="card-header-icon">
-          <fa pack="solid" name="edit" />
+          <fa pack="fas" name="edit" />
         </a>
         <a class="card-header-icon">
-          <fa pack="solid" name="chart-area" />
+          <fa pack="fas" name="chart-area" />
         </a>
         <a v-on:click="showConfig = !showConfig" class="card-header-icon">
-          <fa pack="solid" name="cog" />
+          <fa pack="fas" name="cog" />
         </a>
         <a  v-on:click="collapsed = !collapsed" class="card-header-icon">
           <span class="icon">
-            <fa v-if="!collapsed" pack="solid" name="chevron-down" />
-            <fa v-if="collapsed" pack="solid" name="chevron-right" />
+            <fa v-if="!collapsed" pack="fas" name="chevron-down" />
+            <fa v-if="collapsed" pack="fas" name="chevron-right" />
           </span>
         </a>
       </header>
@@ -32,10 +32,10 @@
                 <button v-on:click="showInfo = !showInfo" class="button is-light">
                   <span>Bild & Statistik</span>
                   <span v-if="showInfo" class="icon has-text-success">
-                    <fa pack="solid" name="check" />
+                    <fa pack="fas" name="check" />
                   </span>
                   <span v-else class="icon has-text-danger">
-                    <fa pack="solid" name="times" />
+                    <fa pack="fas" name="times" />
                   </span>
                 </button>
               </div>
@@ -44,10 +44,10 @@
               <button v-on:click="showNeeds = !showNeeds" class="button is-light">
                 <span>Bedarf</span>
                 <span v-if="showNeeds" class="icon has-text-success">
-                  <fa pack="solid" name="check" />
+                  <fa pack="fas" name="check" />
                 </span>
                 <span v-else class="icon has-text-danger">
-                  <fa pack="solid" name="times" />
+                  <fa pack="fas" name="times" />
                 </span>
               </button>
             </div>
@@ -56,10 +56,10 @@
                 <button v-on:click="showPlan = !showPlan" class="button is-light">
                   <span>Mahlzeiten</span>
                   <span v-if="showPlan" class="icon has-text-success">
-                    <fa pack="solid" name="check" />
+                    <fa pack="fas" name="check" />
                   </span>
                   <span v-else class="icon has-text-danger">
-                    <fa pack="solid" name="times" />
+                    <fa pack="fas" name="times" />
                   </span>
                 </button>
               </div>
@@ -89,10 +89,10 @@
             </nav>
             <div class="has-text-centered">
               <span v-if="dog.sex === 'm'" class="icon is-medium">
-                <fa size="2x" pack="solid" name="mars" />
+                <fa size="2x" pack="fas" name="mars" />
               </span>
               <span v-else class="icon is-large">
-                <fa size="2x" pack="solid" name="venus" />
+                <fa size="2x" pack="fas" name="venus" />
               </span>
             </div>
           </div>

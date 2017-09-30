@@ -3,11 +3,11 @@
     <p class="panel-heading">
       {{weekday}}
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="solid" name="chevron-down" />
-        <fa v-if="collapsed" pack="solid" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
+        <fa v-if="collapsed" pack="fas" name="chevron-right" />
       </a>
       <a class="is-pulled-right has-text-dark">
-        <fa v-on:click="expandedCreate = !expandedCreate" pack="solid" name="plus" />
+        <fa v-on:click="expandedCreate = !expandedCreate" pack="fas" name="plus" />
       </a>
     </p>
     <a v-if="!collapsed" class="panel-block" v-for="meal in meals">

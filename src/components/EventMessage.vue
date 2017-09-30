@@ -15,7 +15,7 @@
         <p class="control">
           <a class="button is-outlined">
             <span class="icon is-small has-text-success">
-              <fa pack="solid" name="check" />
+              <fa pack="fas" name="check" />
             </span>
             <span>Yes</span>
           </a>
@@ -23,7 +23,7 @@
         <p class="control">
           <a class="button is-outlined">
             <span class="icon is-small has-text-danger">
-              <fa pack="solid" name="times" />
+              <fa pack="fas" name="times" />
             </span>
             <span>No</span>
           </a>
@@ -31,7 +31,7 @@
         <p class="control">
           <a class="button is-outlined">
             <span class="icon is-small has-text-info">
-              <fa pack="solid" name="edit" />
+              <fa pack="fas" name="edit" />
             </span>
             <span>Adjust</span>
           </a>

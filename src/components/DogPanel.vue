@@ -3,12 +3,12 @@
     <p class="panel-heading">
       Dog
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="solid" name="chevron-down" />
-        <fa v-if="collapsed" pack="solid" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
+        <fa v-if="collapsed" pack="fas" name="chevron-right" />
       </a>
       <a v-on:click="toggleEdit()" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!edit" pack="solid" name="edit" />
-        <fa v-if="edit" pack="solid" name="save" />
+        <fa v-if="!edit" pack="fas" name="edit" />
+        <fa v-if="edit" pack="fas" name="save" />
       </a>
     </p>
     <template v-if="!collapsed">
@@ -21,7 +21,7 @@
             <p class="control has-icons-left">
               <input v-model="dog.name" class="input" type="text" placeholder="Name">
               <span class="icon is-left">
-                <fa pack="solid" name="address-card" />
+                <fa pack="fas" name="address-card" />
               </span>
             </p>
           </div>
@@ -39,7 +39,7 @@
             <p class="control has-icons-left">
               <input v-model="dog.weight" class="input" type="number" placeholder="weight" min="0" max="150000" step="50">
               <span class="icon is-left">
-                <fa pack="solid" name="tachometer-alt" />
+                <fa pack="fas" name="tachometer-alt" />
               </span>
             </p>
           </div>
@@ -58,7 +58,7 @@
               <div class="control">
                 <a class="button is-static">
                   <span class="icon is-left">
-                    <fa pack="solid" name="futbol" />
+                    <fa pack="fas" name="futbol" />
                   </span>
                 </a>
               </div>
@@ -84,20 +84,20 @@
               <label class="radio">
                 <input type="radio" name="sex" v-model="dog.sex" value="m">
                 <span class="icon">
-                  <fa pack="solid" name="mars" />
+                  <fa pack="fas" name="mars" />
                 </span>
               </label>
               <label class="radio">
                 <input type="radio" name="sex" v-model="dog.sex" value="f">
                 <span class="icon">
-                  <fa pack="solid" name="venus" />
+                  <fa pack="fas" name="venus" />
                 </span>
               </label>
             </div>
           </div>
           <div v-else>
             <span class="icon">
-              <fa pack="solid" name="mars" />
+              <fa pack="fas" name="mars" />
             </span>
           </div>
         </div>
@@ -112,7 +112,7 @@
           <input v-if="edit" type="checkbox" v-model="dog.castrated">
           <div v-else>
             <span class="icon">
-              <fa pack="solid" name="check" />
+              <fa pack="fas" name="check" />
             </span>
           </div>
         </div>

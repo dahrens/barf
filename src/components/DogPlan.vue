@@ -6,7 +6,7 @@
         <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </td>
       </tr>
@@ -15,7 +15,7 @@
         <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </td>
       </tr>
@@ -24,7 +24,7 @@
         <td>Omasum</td>
         <td>
           <span class="icon has-text-danger">
-            <fa pack="solid" name="times" />
+            <fa pack="fas" name="times" />
           </span>
         </td>
       </tr>
@@ -33,7 +33,7 @@
         <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </td>
       </tr>
@@ -42,7 +42,7 @@
         <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </td>
       </tr>
@@ -51,7 +51,7 @@
         <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </td>
       </tr>
@@ -60,7 +60,7 @@
         <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
-            <fa pack="solid" name="check" />
+            <fa pack="fas" name="check" />
           </span>
         </td>
       </tr>

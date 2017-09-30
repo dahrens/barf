@@ -4,7 +4,7 @@
       <tr v-for="category in subCategories">
         <td>
           <span class="icon has-text-danger">
-            <fa pack="solid" name="chevron-down" />
+            <fa pack="fas" name="chevron-down" />
           </span>
         </td>
         <td>
