@@ -4,8 +4,6 @@
       <div class="columns">
         <div class="column is-4">
           <dogPanel :dog="dog"></dogPanel>
-          <ingredients></ingredients>
-          <recipes></recipes>
         </div>
         <div class="column is-8">
           <planPanel :dog="dog"></planPanel>
@@ -24,17 +22,13 @@
 import planPanel from '@/components/PlanPanel'
 import planDay from '@/components/PlanDay'
 import dogPanel from '@/components/DogPanel'
-import ingredients from '@/components/Ingredients'
-import recipes from '@/components/Recipes'
 
 export default {
   name: 'plan',
   components: {
     planPanel,
     planDay,
-    dogPanel,
-    ingredients,
-    recipes
+    dogPanel
   },
   computed: {
     subCategories () {

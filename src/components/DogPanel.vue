@@ -12,6 +12,11 @@
       </a>
     </p>
     <template v-if="!collapsed">
+      <div class="card-image">
+        <figure class="image is-1by1">
+          <img src="/static/img/delphi.jpg">
+        </figure>
+      </div>
       <div class="panel-block">
         <div class="field-label is-normal">
           <label class="label">Name</label>
