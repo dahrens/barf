@@ -6,10 +6,10 @@
     </div>
     <div class="message-body is-clearfix">
       <p v-if="event.name === 'meal'">
-        Hat {{ dog.name }}
-        {{ this.event.day | moment("from") }}
+        Has {{ dog.name }} received
         {{ this.event.amount }}{{ this.event.unit }}
-        {{ this.recipe.name }} bekommen?
+        {{ this.recipe.name }}
+        {{ this.event.day | moment("from") }}?
       </p>
       <div class="field has-addons is-pulled-right">
         <p class="control">
@@ -17,7 +17,7 @@
             <span class="icon is-small has-text-success">
               <fa pack="solid" name="check" />
             </span>
-            <span>Ja</span>
+            <span>Yes</span>
           </a>
         </p>
         <p class="control">
@@ -25,7 +25,7 @@
             <span class="icon is-small has-text-danger">
               <fa pack="solid" name="times" />
             </span>
-            <span>Nein</span>
+            <span>No</span>
           </a>
         </p>
         <p class="control">
@@ -33,7 +33,7 @@
             <span class="icon is-small has-text-info">
               <fa pack="solid" name="edit" />
             </span>
-            <span>Anpassen</span>
+            <span>Adjust</span>
           </a>
         </p>
       </div>

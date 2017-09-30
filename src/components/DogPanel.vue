@@ -32,7 +32,7 @@
       </div>
       <div class="panel-block">
         <div class="field-label is-normal">
-          <label class="label">Gewicht</label>
+          <label class="label">Weight</label>
         </div>
         <div class="field-body">
           <div v-if="edit" class="field">
@@ -50,7 +50,7 @@
       </div>
       <div class="panel-block">
         <div class="field-label is-normal">
-          <label class="label">Aktivität</label>
+          <label class="label">Activity</label>
         </div>
         <div class="field-body">
           <div v-if="edit" class="field is-expanded">
@@ -76,7 +76,7 @@
       </div>
       <div class="panel-block">
         <div class="field-label">
-          <label class="label">Geschlecht</label>
+          <label class="label">Sex</label>
         </div>
         <div class="field-body">
           <div v-if="edit" class="field is-narrow">
@@ -105,7 +105,7 @@
       <div class="panel-block">
         <div class="field-label is-normal">
           <label class="label">
-            Kastriert
+            Castrated
           </label>
         </div>
         <div class="field-body">

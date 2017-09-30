@@ -1,12 +1,5 @@
 <template>
   <div class="is-marginless">
-    <section class="hero is-light">
-      <div class="hero-body">
-        <div class="container">
-          <planStats :dog="dog"></planStats>
-        </div>
-      </div>
-    </section>
     <div class="plan container">
       <div class="columns">
         <div class="column is-5">
@@ -17,7 +10,7 @@
         <div class="column is-7">
           <planPanel :dog="dog"></planPanel>
           <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in weekdays" class="column is-12 weekday">
+            <div v-for="(weekday, index) in plan.week" class="column is-12 weekday">
               <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
             </div>
             <div class="column is-12">
@@ -32,7 +25,6 @@
 
 <script>
 import planPanel from '@/components/PlanPanel'
-import planStats from '@/components/PlanStats'
 import planDay from '@/components/PlanDay'
 import dogPanel from '@/components/DogPanel'
 import ingredients from '@/components/Ingredients'
@@ -42,16 +34,10 @@ export default {
   name: 'plan',
   components: {
     planPanel,
-    planStats,
     planDay,
     dogPanel,
     ingredients,
     recipes
-  },
-  data () {
-    return {
-      weekdays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
-    }
   },
   computed: {
     subCategories () {
@@ -61,7 +47,6 @@ export default {
       return this.$store.state.dogs[0]
     },
     plan () {
-      console.log('Plans PLAN!', this.dog.plan)
       return this.dog.plan
     }
   }

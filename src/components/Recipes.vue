@@ -1,7 +1,7 @@
 <template>
   <nav class="panel market-panel">
     <p class="panel-heading">
-      Rezepte
+      Recipes
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="solid" name="chevron-down" />
         <fa v-if="collapsed" pack="solid" name="chevron-right" />

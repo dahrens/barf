@@ -17,8 +17,8 @@
                 <fa v-if="!isNameValid" pack="solid" name="times" />
               </span>
             </div>
-            <p v-if="this.newRecipe.name === ''" class="help is-danger">Wähle einen Namen für das neue Rezept</p>
-            <p v-if="!isNameValid && this.newRecipe.name !== ''" class="help is-danger">Ein Rezept mit diesem Namen gibt es schon</p>
+            <p v-if="this.newRecipe.name === ''" class="help is-danger">Pick a name for the recipe</p>
+            <p v-if="!isNameValid && this.newRecipe.name !== ''" class="help is-danger">A recipe with this name already exists</p>
           </div>
         </div>
       </div>

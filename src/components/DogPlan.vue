@@ -3,7 +3,7 @@
     <tbody>
       <tr>
         <th>Mo</th>
-        <td>Rindermuskelfleisch</td>
+        <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
             <fa pack="solid" name="check" />
@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <th></th>
-        <td>Rindermuskelfleisch</td>
+        <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
             <fa pack="solid" name="check" />
@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <th>Di</th>
-        <td>Blättermagen</td>
+        <td>Omasum</td>
         <td>
           <span class="icon has-text-danger">
             <fa pack="solid" name="times" />
@@ -30,7 +30,7 @@
       </tr>
       <tr>
         <th></th>
-        <td>Rindermuskelfleisch</td>
+        <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
             <fa pack="solid" name="check" />
@@ -39,7 +39,7 @@
       </tr>
       <tr>
         <th>Mi</th>
-        <td>Rindermuskelfleisch</td>
+        <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
             <fa pack="solid" name="check" />
@@ -48,7 +48,7 @@
       </tr>
       <tr>
         <th>Do</th>
-        <td>Rindermuskelfleisch</td>
+        <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
             <fa pack="solid" name="check" />
@@ -57,7 +57,7 @@
       </tr>
       <tr v-on:click="" class="link">
         <th></th>
-        <td>Rindermuskelfleisch</td>
+        <td>Beef muscle meat</td>
         <td>
           <span class="icon has-text-success">
             <fa pack="solid" name="check" />

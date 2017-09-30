@@ -85,7 +85,7 @@ export default {
   data () {
     let newIngredient = {
       name: '',
-      subCategories: [[1, 'Fleisch']],
+      subCategories: [[1, 'meat']],
       unit: 'g',
       defaultAmount: 2000
     }

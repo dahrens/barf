@@ -27,18 +27,18 @@ export default {
         vegetables: 20,
         distribution: {
           animal: {
-            Fleisch: 40,
-            Magen: 30,
-            Innereien: 20,
-            Knochen: 10
+            meat: 40,
+            stomach: 30,
+            entrails: 20,
+            bones: 10
           },
           vegetables: {
-            Getreide: 40,
-            Gemüse: 40,
-            Früchte: 20
+            grains: 40,
+            vegetables: 40,
+            fruits: 20
           }
         },
-        week: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+        week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         allocation: [
           [],  // monday
           [],
@@ -55,15 +55,15 @@ export default {
       },
       meals: new Map([  // // dogs meal history if active
         ['20170924', [
-          { name: 'Rindermuskelfleisch', amount: 250, unit: 'g', parts: [1, 'Fleisch'] }
+          { name: 'Beef muscle meat', amount: 250, unit: 'g', parts: [1, 'meat'] }
         ]]
       ])
     }
   ],
   categories: {
-    animal: ['Fleisch', 'Innereien', 'Magen', 'Knochen'],
-    vegetables: ['Getreide', 'Früchte', 'Gemüse'],
-    additives: ['Vitamine']
+    animal: ['meat', 'entrails', 'stomach', 'bones'],
+    vegetables: ['grains', 'fruits', 'vegetables'],
+    additives: ['vitamin']
   },
   units: [
     'g', 'ml'
@@ -71,22 +71,22 @@ export default {
   ingredients: [
     {
       id: 1,
-      name: 'Rindermuskelfleisch',
-      subCategories: [[1, 'Fleisch']],
+      name: 'Beef muscle meat',
+      subCategories: [[1, 'meat']],
       unit: 'g',
       defaultAmount: 2000
     },
     {
       id: 2,
-      name: 'Knorpelfleisch',
-      subCategories: [[0.2, 'Knochen'], [0.8, 'Fleisch']],
+      name: 'Gristle meat',
+      subCategories: [[0.2, 'bones'], [0.8, 'meat']],
       unit: 'g',
       defaultAmount: 2000
     },
     {
       id: 3,
-      name: 'Dorschlebertran',
-      subCategories: [[1, 'Vitamine']],
+      name: 'Codfish liver',
+      subCategories: [[1, 'vitamin']],
       unit: 'ml',
       defaultAmount: 500
     }
@@ -94,7 +94,7 @@ export default {
   recipes: [
     {
       id: 1,
-      name: 'Normale Fleisch Mahlzeit',
+      name: 'Common meat meal',
       ingredients: [
         { ingredient: 1, amount: 250 },
         { ingredient: 3, amount: 10 }

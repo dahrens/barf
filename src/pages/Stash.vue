@@ -4,7 +4,7 @@
       <div class="column is-half">
         <nav class="panel">
           <p class="panel-heading">
-            Vorräte
+            Stash
           </p>
           <div class="panel-block">
             <p class="control has-icons-left">

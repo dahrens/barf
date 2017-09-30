@@ -7,21 +7,21 @@
             <a class="nav-item"><h1 class="title">B.A.R.F.</h1></a>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath ==='/plan'}"
-              :to="{ name: 'Plan' }">
-              Planen
+              :class="{'is-active': $route.fullPath === '/'}"
+              :to="{ name: 'Home' }">
+              Home
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath === '/'}"
-              :to="{ name: 'Home' }">
-              Übersicht
+              :class="{'is-active': $route.fullPath ==='/plan'}"
+              :to="{ name: 'Plan' }">
+              Plan
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath ==='/stash'}"
               :to="{ name: 'Stash' }">
-              Vorräte
+              Stash
             </router-link>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default {
   name: 'app',
   computed: {
     today () {
-      return this.$moment().format('[Heute ist ]dddd [der] D. MMMM YYYY')
+      return this.$moment().format('[Today is ]dddd [the] D. MMMM YYYY')
     }
   }
 }

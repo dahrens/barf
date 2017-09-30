@@ -5,13 +5,14 @@ import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
 
-const moment = require('moment')
-require('moment/locale/de')
+// const moment = require('moment')
+// require('moment/locale/de')
 
-Vue.use(VueMoment, {
-  moment
-})
+// Vue.use(VueMoment, {
+//   moment
+// })
 
+Vue.use(VueMoment)
 Vue.use(Vuex)
 
 const localStorage = window.localStorage
