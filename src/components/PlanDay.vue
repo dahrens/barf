@@ -6,19 +6,63 @@
         <fa v-if="!collapsed" pack="fas" name="chevron-down" />
         <fa v-if="collapsed" pack="fas" name="chevron-right" />
       </a>
-      <a class="is-pulled-right has-text-dark">
-        <fa v-on:click="expandedCreate = !expandedCreate" pack="fas" name="plus" />
-      </a>
     </p>
-    <a v-if="!collapsed" class="panel-block" v-for="meal in meals">
-      {{getMealName(meal)}}
-    </a>
-    <div class="panel-block">
-      {{ meals.length }} M
-      {{ Object.values(mealsValues.animal).reduce((a, c) => a + c) }}g F
-      {{ Object.values(mealsValues.vegetables).reduce((a, c) => a + c) }}g V
-    </div>
-    </div>
+    <span v-if="!collapsed && allocation.length" v-for="a in allocation" class="panel-block">
+      <div class="field has-addons has-addons-right has-addons-left">
+        <p class="control">
+          <span class="select">
+            <select v-model="a.subCategory">
+              <option v-for="option in subCategoryOptions" v-model="a.subCategory">{{ option.subCategory}}</option>
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          <input class="input" type="number" min="0" max="99999" step="25" v-model="a.amount">
+        </p>
+        <p class="control">
+          <a class="button" v-on:click="">
+            <span class="icon">
+              <fa pack="fas" name="plus" />
+            </span>
+          </a>
+        </p>
+        <p class="control">
+          <a class="button" v-on:click="">
+            <span class="icon">
+              <fa pack="fas" name="trash" />
+            </span>
+          </a>
+        </p>
+      </div>
+    </span>
+    <span v-if="!collapsed && !allocation.length" class="panel-block">
+      <div class="field has-addons has-addons-right has-addons-left">
+        <p class="control">
+          <span class="select">
+            <select v-model="newAllocation.subCategory">
+              <option v-for="option in subCategoryOptions" v-model="newAllocation.subCategory">{{ option.subCategory}}</option>
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          <input class="input" type="number" min="0" max="99999" step="25" v-model="newAllocation.amount">
+        </p>
+        <p class="control">
+          <a class="button" v-on:click="">
+            <span class="icon">
+              <fa pack="fas" name="plus" />
+            </span>
+          </a>
+        </p>
+        <p class="control">
+          <a class="button" v-on:click="" disabled>
+            <span class="icon">
+              <fa pack="fas" name="trash" />
+            </span>
+          </a>
+        </p>
+      </div>
+    </span>
   </nav>
 </template>
 
@@ -35,26 +79,19 @@ export default {
     return {
       expandedCreate: true,
       expandAll: false,
-      collapsed: true
+      collapsed: false,
+      newAllocation: {
+        subCategory: 'meat',
+        amount: 0
+      }
     }
   },
   computed: {
-    meals () {
-      return this.plan.week[this.index]
+    allocation () {
+      return this.plan.allocation[this.index]
     },
-    mealsValues () {
-      // create one big list of ingredients (cut recipe based meals into pieces)
-      let distribution = this.$store.getters.mealsDistribution(this.meals)
-      return distribution
-    }
-  },
-  methods: {
-    getMealName (item) {
-      if (item.hasOwnProperty('ingredient')) {
-        return this.$store.state.ingredients.filter(i => i.id === item.ingredient)[0].name
-      } else if (item.hasOwnProperty('recipe')) {
-        return this.$store.state.recipes.filter(r => r.id === item.recipe)[0].name
-      }
+    subCategoryOptions () {
+      return this.$store.getters.subCategories
     }
   }
 }

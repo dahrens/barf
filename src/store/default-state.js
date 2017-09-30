@@ -40,12 +40,12 @@ export default {
         },
         week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         allocation: [
-          [],  // monday
+          [{subCategory: 'meat', amount: 250}],  // monday
           [],
           [],
           [],
           [],
-          [],
+          [{subCategory: 'vegetables', amount: 150}],
           []   // sunday
         ],
         meals: [  // which ingredients / meals are regulary bound to each day

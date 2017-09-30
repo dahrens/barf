@@ -112,27 +112,6 @@ export default {
     let foodPerDay = getters.dogFoodQuantityPerDay(dog)
     return foodPerDay
   },
-  mealsDistribution: (state, getters) => (meals) => {
-    let ingredientMeals = []
-    for (let meal of meals) {
-      if (meal.hasOwnProperty('recipe')) {
-        let recipe = state.recipes.filter(r => r.id === meal.recipe)[0]
-        ingredientMeals = ingredientMeals.concat(recipe.ingredients)
-      } else if (meal.hasOwnProperty('ingredient')) {
-        ingredientMeals.push(meal)
-      }
-    }
-    let distribution = JSON.parse(JSON.stringify(getters.emptyDistribution))
-    for (let ingredientMeal of ingredientMeals) {
-      let ingredient = state.ingredients.filter(i => i.id === ingredientMeal.ingredient)[0]
-      for (let d of ingredient.subCategories) {
-        if (state.categories.animal.indexOf(d[1]) !== -1) {
-          distribution.animal[d[1]] = d[0] * ingredientMeal.amount
-        }
-      }
-    }
-    return distribution
-  },
   planDistribution: (state, getters) => (dog) => {
     let plan = dog.plan
     let overall = getters.dogFoodQuantityPerDay(dog)
@@ -150,5 +129,15 @@ export default {
       }
     }
     return distribution
+  },
+  planAllocation: (state, getters) => (dog) => {
+    let allocation = JSON.parse(JSON.stringify(getters.emptyDistribution))
+    for (let day of dog.plan.allocation) {
+      for (let a of day) {
+        let category = getters.subCategories.filter(c => c.subCategory === a.subCategory)[0].category
+        allocation[category][a.subCategory] += a.amount
+      }
+    }
+    return allocation
   }
 }

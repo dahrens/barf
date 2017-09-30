@@ -1,36 +1,36 @@
 <template>
     <div class="field has-addons has-addons-right has-addons-left">
       <p class="control">
-        <span v-if="ingredientsAvailable" class="button is-light is-large">
+        <span v-if="ingredientsAvailable" class="button is-light">
           <span class="icon has-text-success">
             <fa pack="fas" name="check" />
           </span>
         </span>
-        <span v-else class="button is-warning is-large">
+        <span v-else class="button is-warning">
           <span class="icon">
             <fa pack="fas" name="warning" />
           </span>
         </span>
       </p>
-      <p class="control is-expanded">
-        <input v-model="quantity" class="input is-large" type="number" placeholder="Anzahl">
+      <p class="control">
+        <input v-model="quantity" class="input" type="number" placeholder="Anzahl">
       </p>
       <p class="control">
-        <a :disabled="quantity <= 1" v-on:click="quantity--" class="button is-dark is-large" title="Verringere Anzahl">
+        <a :disabled="quantity <= 1" v-on:click="quantity--" class="button is-dark" title="Verringere Anzahl">
           <span class="icon">
             <fa pack="fas" name="minus" />
           </span>
         </a>
       </p>
       <p class="control">
-        <a v-on:click="quantity++" class="button is-dark is-large" title="Erhöhe Anzahl">
+        <a v-on:click="quantity++" class="button is-dark" title="Erhöhe Anzahl">
           <span class="icon">
             <fa pack="fas" name="plus" />
           </span>
         </a>
       </p>
       <p class="control">
-        <a v-on:click="order()" class="button is-primary is-large" title="Put into stash">
+        <a v-on:click="order()" class="button is-primary" title="Put into stash">
           <span class="icon">
             <fa pack="fas" name="utensils" />
           </span>

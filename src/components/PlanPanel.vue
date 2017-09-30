@@ -34,7 +34,13 @@
           <strong>{{ dog.plan.animal }}%</strong>
           Animal
           <strong>
-            <span class="has-text-danger">0000g</span>
+            <span
+              :class="{
+                'has-text-danger': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) > 50,
+                'has-text-success': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) < 50
+              }">
+              {{ planAnimalAllocation }}g
+            </span>
             / {{ expectedQuantityWeek * dog.plan.animal / 100 }}g per week
           </strong>
         </span>
@@ -43,7 +49,13 @@
         <strong>{{val}}%&nbsp;</strong>
         <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
         <strong>
-          <span class="has-text-danger">000g</span>
+          <span
+            :class="{
+              'has-text-danger': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) > 50,
+              'has-text-success': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) < 50
+            }">
+            {{ planAllocation['animal'][subCategory] }}g
+          </span>
           / {{ expectedAnimalDistribution[subCategory] }}g
         </strong>
       </p>
@@ -52,7 +64,13 @@
           <strong>{{ dog.plan.vegetables }}%</strong>
           Vegetables
           <strong>
-            <span class="has-text-danger">000g</span>
+            <span
+              :class="{
+                'has-text-danger': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) > 50,
+                'has-text-success': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) < 50
+              }">
+              {{ planVegetablesAllocation }}g
+            </span>
             / {{ expectedQuantityWeek * dog.plan.vegetables / 100 }}g per week
           </strong>
         </span>
@@ -61,7 +79,13 @@
         <strong>{{val}}%&nbsp;</strong>
         <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
         <strong>
-          <span class="has-text-danger">000g</span>
+          <span
+            :class="{
+              'has-text-danger': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) > 50,
+              'has-text-success': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) < 50
+            }">
+            {{ planAllocation['vegetables'][subCategory] }}g
+          </span>
           / {{ expectedVegetablesDistribution[subCategory] }}g
         </strong>
       </p>
@@ -115,6 +139,15 @@ export default {
   computed: {
     plan () {
       return this.dog.plan
+    },
+    planAllocation () {
+      return this.$store.getters.planAllocation(this.dog)
+    },
+    planAnimalAllocation () {
+      return Object.values(this.$store.getters.planAllocation(this.dog)['animal']).reduce((a, c) => a + c)
+    },
+    planVegetablesAllocation () {
+      return Object.values(this.$store.getters.planAllocation(this.dog)['vegetables']).reduce((a, c) => a + c)
     },
     getPlanCategoryDistribution () {
       let slider = JSON.parse(JSON.stringify(this.sliderConfig))

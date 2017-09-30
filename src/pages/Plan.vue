@@ -2,15 +2,15 @@
   <div class="is-marginless">
     <div class="plan container">
       <div class="columns">
-        <div class="column is-5">
+        <div class="column is-4">
           <dogPanel :dog="dog"></dogPanel>
           <ingredients></ingredients>
           <recipes></recipes>
         </div>
-        <div class="column is-7">
+        <div class="column is-8">
           <planPanel :dog="dog"></planPanel>
           <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in plan.week" class="column is-3 weekday">
+            <div v-for="(weekday, index) in plan.week" class="column is-6 weekday">
               <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
             </div>
           </div>
