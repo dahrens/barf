@@ -100,8 +100,8 @@ export default {
 
 .faked-panel-block {
   padding: 1em ;
-  border-bottom: 1px fas #dbdbdb;
-  border-left: 1px fas #dbdbdb;
-  border-right: 1px fas #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
 }
 </style>
