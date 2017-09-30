@@ -2,7 +2,8 @@ import * as types from './mutation-types'
 
 export default {
   [types.UPDATE_DOG] (state, payload) {
-    let idx = state.dogs.indexOf(payload.id)
+    console.log(payload, state.dogs)
+    let idx = state.dogs.map(d => d.id).indexOf(payload.id)
     if (idx === -1) {
       throw new Error('Unknown Dog for update')
     }
@@ -13,11 +14,6 @@ export default {
     state.ids.dogs++
     state.dogs.push(payload)
   },
-  // [types.FEED_DOG] (state, payload) {
-  //   state.stash = state.stash.filter(e => e.id !== payload.food.id)
-  //   let dog = state.dogs.filter(e => e === e.payload.dog.id)
-  //   dog.meals.push(payload.food)
-  // },
   [types.INSERT_INGREDIENT] (state, payload) {
     payload.id = state.ids.ingredients
     state.ids.ingredients++

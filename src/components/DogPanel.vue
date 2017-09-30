@@ -6,7 +6,7 @@
         <fa v-if="!collapsed" pack="solid" name="caret-down" />
         <fa v-if="collapsed" pack="solid" name="caret-right" />
       </a>
-      <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
+      <a v-on:click="toggleEdit()" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" pack="solid" name="edit" />
         <fa v-if="edit" pack="solid" name="save" />
       </a>
@@ -64,10 +64,7 @@
               </div>
               <div class="select is-fullwidth">
                 <select v-model="dog.activity">
-                  <option>unactive</option>
-                  <option selected>moderate</option>
-                  <option>active</option>
-                  <option>highly</option>
+                  <option v-for="option in activities" v-model="dog.activity">{{ option.activity }}</option>
                 </select>
               </div>
             </div>
@@ -85,13 +82,13 @@
           <div v-if="edit" class="field is-narrow">
             <div class="control">
               <label class="radio">
-                <input type="radio" name="member">
+                <input type="radio" name="sex" v-model="dog.sex" value="m">
                 <span class="icon">
                   <fa pack="solid" name="mars" />
                 </span>
               </label>
               <label class="radio">
-                <input type="radio" name="member">
+                <input type="radio" name="sex" v-model="dog.sex" value="f">
                 <span class="icon">
                   <fa pack="solid" name="venus" />
                 </span>
@@ -112,7 +109,7 @@
           </label>
         </div>
         <div class="field-body">
-          <input v-if="edit" type="checkbox">
+          <input v-if="edit" type="checkbox" v-model="dog.castrated">
           <div v-else>
             <span class="icon">
               <fa pack="solid" name="check" />
@@ -126,7 +123,8 @@
         </div>
         <div class="field-body">
           {{ dog.weight }}g * 0.02 * {{ dogActivity }}
-          <template v-if="dog.castrated">* 0.8</template> = 2100g
+          <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
+          * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
         </div>
       </div>
     </template>
@@ -134,6 +132,8 @@
 </template>
 
 <script>
+import { UPDATE_DOG } from '@/store/mutation-types'
+
 export default {
   name: 'dogPanel',
   props: ['dog'],
@@ -146,6 +146,31 @@ export default {
   computed: {
     dogActivity () {
       return this.$store.state.activities[this.dog.activity]
+    },
+    activities () {
+      let options = []
+      for (let activity in this.$store.state.activities) {
+        let value = this.$store.state.activities[activity]
+        options.push({
+          activity,
+          value
+        })
+      }
+      return options
+    },
+    expectedQuantityPerDay () {
+      return this.$store.getters.planRequirements(this.dog)
+    },
+    expectedQuantityWeek () {
+      return this.dog.plan.week.length * this.expectedQuantityPerDay
+    }
+  },
+  methods: {
+    toggleEdit () {
+      if (this.edit) {
+        this.$store.commit(UPDATE_DOG, this.dog)
+      }
+      this.edit = !this.edit
     }
   }
 }
