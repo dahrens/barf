@@ -27,41 +27,6 @@
         <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
         <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
       </template>
-
-        <!--
-        <div class="pricing-table">
-          <div class="pricing-plan">
-            <div class="plan-header">Animal</div>
-            <div class="plan-price">
-              <span class="plan-price-amount is-pulled-left"><span class="plan-price-currency"></span>{{ dog.plan.animal }}%</span>
-              <span class="is-pulled-right">
-                <span class="plan-price-amount"><span class="plan-price-currency">g</span>{{ expectedQuantityWeek * dog.plan.animal / 100 }}</span>/week
-              </span>
-            </div>
-            <div class="plan-items">
-              <div v-for="(val, subCategory) in dog.plan.distribution.animal" class="plan-item">
-                <subCategoryTag :subCategory="subCategory" :size="'is-size-6'" :textBefore="val + '%'"></subCategoryTag>
-                <span class="is-size-5">{{ expectedAnimalDistribution[subCategory] }}g</span>
-              </div>
-            </div>
-          </div>
-          <div class="pricing-plan">
-            <div class="plan-header">Vegetables</div>
-            <div class="plan-price">
-              <span class="plan-price-amount is-pulled-left"><span class="plan-price-currency"></span>{{ dog.plan.vegetables }}%</span>
-              <span class="is-pulled-right">
-                <span class="plan-price-amount"><span class="plan-price-currency">g</span>{{ expectedQuantityWeek * dog.plan.vegetables / 100 }}</span>/week
-              </span>
-            </div>
-            <div class="plan-items">
-              <div v-for="(val, subCategory) in dog.plan.distribution.vegetables" class="plan-item">
-                <subCategoryTag :subCategory="subCategory" :size="'is-size-6'" :textAfter="val + '%'"></subCategoryTag>
-                <span class="is-size-5">{{ expectedVegetablesDistribution[subCategory] }}g</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      -->
     </p>
     <template v-if="!collapsed && !edit">
       <p class="panel-heading">
