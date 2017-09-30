@@ -1,6 +1,7 @@
 <template>
   <span class="tag is-dark" :class="size">
-    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>{{ subCategory }}</span>
+    <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>
+    {{ textBefore }} {{ subCategory }} {{ textAfter }}
   </span>
 </template>
 
@@ -21,6 +22,14 @@ export default {
       required: false,
       type: String,
       default: () => ('is-small')
+    },
+    textAfter: {
+      required: false,
+      type: String
+    },
+    textBefore: {
+      required: false,
+      type: String
     }
   },
   computed: {

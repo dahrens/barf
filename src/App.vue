@@ -53,7 +53,6 @@ export default {
 </script>
 
 <style lang="sass">
-// 1. Import the initial variables
 @import "../node_modules/bulma/sass/utilities/initial-variables"
 
 $primary: green

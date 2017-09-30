@@ -11,31 +11,97 @@
         <fa v-if="edit" pack="fas" name="save" />
       </a>
     </p>
-    <p v-if="!collapsed" class="faked-panel-block">
-      <template v-if="!collapsed && edit">
+    <p v-if="!collapsed && edit" class="faked-panel-block">
+      <template>
         <div class="columns distribution-slider">
           <div class="column is-3">
-            <span class="is-pulled-right">tierisch</span>
+            <span class="is-pulled-right">animal</span>
           </div>
           <div class="column is-6">
             <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
           </div>
           <div class="column is-3">
-            <span class="is-pulled-left">pflanzlich</span>
+            <span class="is-pulled-left">vegetables</span>
           </div>
         </div>
         <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
         <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
       </template>
-      <template v-if="!collapsed && !edit">
-        need to show plan here - maybe using level?
-      </template>
+
+        <!--
+        <div class="pricing-table">
+          <div class="pricing-plan">
+            <div class="plan-header">Animal</div>
+            <div class="plan-price">
+              <span class="plan-price-amount is-pulled-left"><span class="plan-price-currency"></span>{{ dog.plan.animal }}%</span>
+              <span class="is-pulled-right">
+                <span class="plan-price-amount"><span class="plan-price-currency">g</span>{{ expectedQuantityWeek * dog.plan.animal / 100 }}</span>/week
+              </span>
+            </div>
+            <div class="plan-items">
+              <div v-for="(val, subCategory) in dog.plan.distribution.animal" class="plan-item">
+                <subCategoryTag :subCategory="subCategory" :size="'is-size-6'" :textBefore="val + '%'"></subCategoryTag>
+                <span class="is-size-5">{{ expectedAnimalDistribution[subCategory] }}g</span>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-plan">
+            <div class="plan-header">Vegetables</div>
+            <div class="plan-price">
+              <span class="plan-price-amount is-pulled-left"><span class="plan-price-currency"></span>{{ dog.plan.vegetables }}%</span>
+              <span class="is-pulled-right">
+                <span class="plan-price-amount"><span class="plan-price-currency">g</span>{{ expectedQuantityWeek * dog.plan.vegetables / 100 }}</span>/week
+              </span>
+            </div>
+            <div class="plan-items">
+              <div v-for="(val, subCategory) in dog.plan.distribution.vegetables" class="plan-item">
+                <subCategoryTag :subCategory="subCategory" :size="'is-size-6'" :textAfter="val + '%'"></subCategoryTag>
+                <span class="is-size-5">{{ expectedVegetablesDistribution[subCategory] }}g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      -->
     </p>
+    <template v-if="!collapsed && !edit">
+      <p class="panel-heading">
+        <span class="is-size-5">
+          {{ dog.plan.animal }}%
+          Animal
+          <span class="has-text-danger">0000g</span>
+          / {{ expectedQuantityWeek * dog.plan.animal / 100 }}g per week
+        </span>
+      </p>
+      <p v-for="(val, subCategory) in dog.plan.distribution.animal" class="panel-block">
+        {{val}}%&nbsp;
+        <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
+        <strong>
+          <span class="has-text-danger">000g</span>
+          / {{ expectedAnimalDistribution[subCategory] }}g
+        </strong>
+      </p>
+      <p class="panel-heading">
+        <span class="is-size-5">
+          {{ dog.plan.vegetables }}%
+          Vegetables
+          <span class="has-text-danger">000g</span>
+          / {{ expectedQuantityWeek * dog.plan.vegetables / 100 }}g per week
+        </span>
+      </p>
+      <p v-for="(val, subCategory) in dog.plan.distribution.vegetables" class="panel-block">
+        <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
+        <strong>
+          <span class="has-text-danger">000g</span>
+          / {{ expectedVegetablesDistribution[subCategory] }}g
+        </strong>
+      </p>
+    </template>
   </nav>
 </template>
 
 <script>
 import vueSlider from 'vue-slider-component'
+import subCategoryTag from '@/components/SubCategoryTag'
 import subCategorySlider from '@/components/SubCategorySlider'
 import categorySliders from '@/components/CategorySliders'
 import { UPDATE_PLAN_CATEGORY_DISTRIBUTION } from '@/store/mutation-types'
@@ -46,6 +112,7 @@ export default {
   components: {
     vueSlider,
     subCategorySlider,
+    subCategoryTag,
     categorySliders
   },
   data () {
@@ -83,6 +150,18 @@ export default {
       let slider = JSON.parse(JSON.stringify(this.sliderConfig))
       slider.value = this.plan.animal
       return slider
+    },
+    expectedQuantityPerDay () {
+      return this.$store.getters.planRequirements(this.dog)
+    },
+    expectedQuantityWeek () {
+      return this.plan.week.length * this.expectedQuantityPerDay
+    },
+    expectedAnimalDistribution () {
+      return this.$store.getters.planDistribution(this.dog)['animal']
+    },
+    expectedVegetablesDistribution () {
+      return this.$store.getters.planDistribution(this.dog)['vegetables']
     }
   },
   methods: {

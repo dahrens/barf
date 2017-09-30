@@ -15,7 +15,7 @@
             :value="plan.distribution[category][subCategory]"></subCategorySlider>
         </div>
         <div class="column is-3">
-          <span>{{ parseInt(mealsDistribution[subCategory]) }}g / {{ parseInt(planDistribution[subCategory]) }}g</span>
+          <span>{{ parseInt(planDistribution[subCategory]) }}g</span>
         </div>
       </div>
     </template>
@@ -45,9 +45,6 @@ export default {
     },
     subCategories () {
       return this.$store.getters.subCategories.filter(c => c.category === this.category).map(e => e.subCategory)
-    },
-    mealsDistribution () {
-      return this.$store.getters.mealsDistribution(this.plan.week.reduce((a, b) => a.concat(b)))[this.category]
     },
     planDistribution () {
       return this.$store.getters.planDistribution(this.dog)[this.category]

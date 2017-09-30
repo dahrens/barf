@@ -10,11 +10,8 @@
         <div class="column is-7">
           <planPanel :dog="dog"></planPanel>
           <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in plan.week" class="column is-12 weekday">
+            <div v-for="(weekday, index) in plan.week" class="column is-3 weekday">
               <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
-            </div>
-            <div class="column is-12">
-
             </div>
           </div>
         </div>
