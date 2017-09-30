@@ -31,14 +31,16 @@
     <template v-if="!collapsed && !edit">
       <p class="panel-heading">
         <span class="is-size-5">
-          {{ dog.plan.animal }}%
+          <strong>{{ dog.plan.animal }}%</strong>
           Animal
-          <span class="has-text-danger">0000g</span>
-          / {{ expectedQuantityWeek * dog.plan.animal / 100 }}g per week
+          <strong>
+            <span class="has-text-danger">0000g</span>
+            / {{ expectedQuantityWeek * dog.plan.animal / 100 }}g per week
+          </strong>
         </span>
       </p>
       <p v-for="(val, subCategory) in dog.plan.distribution.animal" class="panel-block">
-        {{val}}%&nbsp;
+        <strong>{{val}}%&nbsp;</strong>
         <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
         <strong>
           <span class="has-text-danger">000g</span>
@@ -47,13 +49,16 @@
       </p>
       <p class="panel-heading">
         <span class="is-size-5">
-          {{ dog.plan.vegetables }}%
+          <strong>{{ dog.plan.vegetables }}%</strong>
           Vegetables
-          <span class="has-text-danger">000g</span>
-          / {{ expectedQuantityWeek * dog.plan.vegetables / 100 }}g per week
+          <strong>
+            <span class="has-text-danger">000g</span>
+            / {{ expectedQuantityWeek * dog.plan.vegetables / 100 }}g per week
+          </strong>
         </span>
       </p>
       <p v-for="(val, subCategory) in dog.plan.distribution.vegetables" class="panel-block">
+        <strong>{{val}}%&nbsp;</strong>
         <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
         <strong>
           <span class="has-text-danger">000g</span>
