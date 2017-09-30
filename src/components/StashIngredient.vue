@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import { STASH_INGREDIENT, REMOVE_INGREDIENT } from '@/store/mutation-types'
+
 export default {
   name: 'stashIngredient',
   props: ['ingredient'],
@@ -81,7 +83,7 @@ export default {
         amount: this.newOrder.amount
       }
       for (let x = 1; x <= this.newOrder.quantity; x++) {
-        this.$store.commit('STASH_INGREDIENT', JSON.parse(JSON.stringify(stashItem)))
+        this.$store.commit(STASH_INGREDIENT, JSON.parse(JSON.stringify(stashItem)))
       }
       this.newOrder = JSON.parse(this.newOrderBlueprint)
     },
@@ -89,7 +91,7 @@ export default {
       if (this.needsCascade && !this.showCascade) {
         this.showCascade = true
       } else if ((this.needsCascade && this.showCascade) || !this.needsCascade) {
-        this.$store.commit('REMOVE_INGREDIENT', {
+        this.$store.commit(REMOVE_INGREDIENT, {
           ingredient: this.ingredient,
           cascade: this.getCascaded
         })

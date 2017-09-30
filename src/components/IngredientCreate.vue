@@ -78,6 +78,8 @@
 </template>
 
 <script>
+import { INSERT_INGREDIENT } from '@/store/mutation-types'
+
 export default {
   name: 'createIngredient',
   data () {
@@ -146,7 +148,7 @@ export default {
       if (!this.isValid) {
         return
       }
-      this.$store.commit('INSERT_INGREDIENT', this.newIngredient)
+      this.$store.commit(INSERT_INGREDIENT, this.newIngredient)
       this.newIngredient = JSON.parse(this.newIngredientBlueprint)
     }
   }

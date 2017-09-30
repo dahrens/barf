@@ -25,6 +25,7 @@
 <script>
 import subCategorySlider from '@/components/SubCategorySlider'
 import subCategoryTag from '@/components/SubCategoryTag'
+import { UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION } from '@/store/mutation-types'
 
 export default {
   name: 'planPanel',
@@ -110,16 +111,13 @@ export default {
       // finally set the requested value
       this.plan.distribution[this.category][subCategory] = newValue
       // and commit everything into the store
-      this.$store.commit('UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION', {
+      this.$store.commit(UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION, {
         dog: this.dog.id,
         category: this.category,
         distribution: distribution
       })
       // force updating this component for the sliders to react
       this.$forceUpdate()
-    },
-    setPlanCategoryDistrubution (value) {
-      this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {dog: this.dog.id, value: value})
     }
   }
 }

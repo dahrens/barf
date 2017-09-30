@@ -38,6 +38,7 @@
 import vueSlider from 'vue-slider-component'
 import subCategorySlider from '@/components/SubCategorySlider'
 import categorySliders from '@/components/CategorySliders'
+import { UPDATE_PLAN_CATEGORY_DISTRIBUTION } from '@/store/mutation-types'
 
 export default {
   name: 'planPanel',
@@ -86,7 +87,7 @@ export default {
   },
   methods: {
     setPlanCategoryDistribution (value) {
-      this.$store.commit('UPDATE_PLAN_CATEGORY_DISTRIBUTION', {dog: this.dog.id, value: value})
+      this.$store.commit(UPDATE_PLAN_CATEGORY_DISTRIBUTION, {dog: this.dog.id, value: value})
     }
   }
 }

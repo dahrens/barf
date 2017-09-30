@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { INSERT_RECIPE } from '@/store/mutation-types'
+
 export default {
   name: 'createRecipe',
   data () {
@@ -111,7 +113,7 @@ export default {
       if (!this.isValid) {
         return
       }
-      this.$store.commit('INSERT_RECIPE', this.newRecipe)
+      this.$store.commit(INSERT_RECIPE, this.newRecipe)
       this.newRecipe = JSON.parse(this.newRecipeBlueprint)
     }
   }

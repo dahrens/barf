@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { STASH_RECIPE } from '@/store/mutation-types'
+
 export default {
   name: 'stashRecipe',
   props: ['recipe'],
@@ -83,7 +85,7 @@ export default {
         recipe: this.recipe.id,
         quantity: this.quantity
       }
-      this.$store.commit('STASH_RECIPE', stashItem)
+      this.$store.commit(STASH_RECIPE, stashItem)
       this.quantity = 1
     }
   }
