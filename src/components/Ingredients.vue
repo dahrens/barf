@@ -6,26 +6,28 @@
         <fa v-if="!collapsed" pack="fas" name="chevron-down" />
         <fa v-if="collapsed" pack="fas" name="chevron-right" />
       </a>
-      <button v-on:click="showCreate = !showCreate" class="button is-small is-light is-pulled-right">
-        <span v-if="!showCreate" class="icon">
-          <fa pack="fas" name="eye" />
+      <a v-if="showCreate" v-on:click="expandedCreate = !expandedCreate" class="is-light is-pulled-right">
+        <span class="icon has-text-dark panel-heading-icon">
+          <span class="fa-layers fa-fw">
+            <fa v-if="!expandedCreate" pack="fas" name="eye" />
+            <fa v-if="expandedCreate" pack="fas" name="eye-slash"/>
+            <span>
+              <fa pack="fas" name="plus" size="sm" transform="right-20"/>
+            </span>
+          </span>
         </span>
-        <span v-else class="icon">
-          <fa pack="fas" name="eye-slash" />
+      </a>
+      <a v-on:click="expandAll = !expandAll" class="is-light is-pulled-right">
+        <span class="icon has-text-dark panel-heading-icon">
+          <span>
+            <fa pack="fas" name="arrows-alt-v" size="sm" transform="right-20"/>
+          </span>
+          <span v-if="!expandAll">1</span>
+          <span v-else>&#8734;</span>
         </span>
-        <span class="icon is-small">
-          <fa pack="fas" name="plus" />
-        </span>
-      </button>
-      <button v-on:click="expandAll = !expandAll" class="button is-small is-light is-pulled-right">
-        <span class="icon is-small">
-          <fa pack="fas" name="arrows-alt-v" />
-        </span>
-        <span v-if="!expandAll" >1</span>
-        <span v-else>&#8734;</span>
-      </button>
+      </a>
     </p>
-    <template v-if="showCreate">
+    <template v-if="expandedCreate">
       <ingredientCreate></ingredientCreate>
     </template>
     <div v-if="!collapsed" class="panel-block">
@@ -68,11 +70,17 @@ export default {
     stashIngredient,
     subCategoryTag
   },
+  props: {
+    showCreate: {
+      required: false,
+      default: () => (true)
+    }
+  },
   data () {
     return {
       expandAll: false,
+      expandedCreate: false,
       collapsed: false,
-      showCreate: false,
       active: []
     }
   },
