@@ -28,7 +28,7 @@
         <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
       </template>
       <template v-if="!collapsed && !edit">
-        hi
+        need to show plan here - maybe using level?
       </template>
     </p>
   </nav>
