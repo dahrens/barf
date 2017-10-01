@@ -2,6 +2,7 @@ export default {
   subCategories: state => {
     let options = []
     for (let category of Object.keys(state.categories)) {
+      if (category === 'additives') continue
       let subCategories = state.categories[category]
       for (let subCategory of subCategories) {
         options.push({
@@ -135,7 +136,7 @@ export default {
     for (let day of dog.plan.allocation) {
       for (let a of day) {
         let category = getters.subCategories.filter(c => c.subCategory === a.subCategory)[0].category
-        allocation[category][a.subCategory] += a.amount
+        allocation[category][a.subCategory] += parseInt(a.amount)
       }
     }
     return allocation

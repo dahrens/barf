@@ -2,6 +2,16 @@
   <nav class="panel">
     <p class="panel-heading">
       Plan
+      <strong>
+        <span
+          :class="{
+            'has-text-danger': Math.abs(planAnimalAllocation + planVegetablesAllocation - expectedQuantityWeek) > variance,
+            'has-text-success': Math.abs(planAnimalAllocation + planVegetablesAllocation - expectedQuantityWeek) < variance
+          }">
+          {{ planAnimalAllocation + planVegetablesAllocation }}g
+        </span>
+        / {{ expectedQuantityWeek }}g per week
+      </strong>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="chevron-down" />
         <fa v-if="collapsed" pack="fas" name="chevron-right" />
@@ -36,8 +46,8 @@
           <strong>
             <span
               :class="{
-                'has-text-danger': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) > 50,
-                'has-text-success': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) < 50
+                'has-text-danger': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) > variance,
+                'has-text-success': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) < variance
               }">
               {{ planAnimalAllocation }}g
             </span>
@@ -51,8 +61,8 @@
         <strong>
           <span
             :class="{
-              'has-text-danger': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) > 50,
-              'has-text-success': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) < 50
+              'has-text-danger': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) > variance,
+              'has-text-success': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) < variance
             }">
             {{ planAllocation['animal'][subCategory] }}g
           </span>
@@ -66,8 +76,8 @@
           <strong>
             <span
               :class="{
-                'has-text-danger': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) > 50,
-                'has-text-success': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) < 50
+                'has-text-danger': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) > variance,
+                'has-text-success': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) < variance
               }">
               {{ planVegetablesAllocation }}g
             </span>
@@ -81,8 +91,8 @@
         <strong>
           <span
             :class="{
-              'has-text-danger': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) > 50,
-              'has-text-success': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) < 50
+              'has-text-danger': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) > variance,
+              'has-text-success': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) < variance
             }">
             {{ planAllocation['vegetables'][subCategory] }}g
           </span>
@@ -113,7 +123,7 @@ export default {
     return {
       edit: false,
       collapsed: false,
-      selectedPlan: 1,
+      variance: 50,
       sliderConfig: {
         value: 0,
         min: 0,
@@ -144,10 +154,14 @@ export default {
       return this.$store.getters.planAllocation(this.dog)
     },
     planAnimalAllocation () {
-      return Object.values(this.$store.getters.planAllocation(this.dog)['animal']).reduce((a, c) => a + c)
+      return Object.values(
+        this.$store.getters.planAllocation(this.dog)['animal']
+      ).reduce((a, c) => parseInt(a) + parseInt(c))
     },
     planVegetablesAllocation () {
-      return Object.values(this.$store.getters.planAllocation(this.dog)['vegetables']).reduce((a, c) => a + c)
+      return Object.values(
+        this.$store.getters.planAllocation(this.dog)['vegetables']
+      ).reduce((a, c) => parseInt(a) + parseInt(c))
     },
     getPlanCategoryDistribution () {
       let slider = JSON.parse(JSON.stringify(this.sliderConfig))
@@ -169,7 +183,10 @@ export default {
   },
   methods: {
     setPlanCategoryDistribution (value) {
-      this.$store.commit(UPDATE_PLAN_CATEGORY_DISTRIBUTION, {dog: this.dog.id, value: value})
+      this.$store.commit(
+        UPDATE_PLAN_CATEGORY_DISTRIBUTION,
+        {dog: this.dog.id, value: value}
+      )
     }
   }
 }

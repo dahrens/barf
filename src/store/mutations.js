@@ -62,5 +62,23 @@ export default {
     let plan = dog.plan
     plan.animal = payload.value
     plan.vegetables = 100 - payload.value
+  },
+  [types.ADD_OR_UPDATE_DAY_ALLOCATION] (state, payload) {
+    let dog = state.dogs.filter(d => d.id === payload.dog)[0]
+    let subCategory = payload.allocation.subCategory
+    let idx = dog.plan.allocation[payload.day].map(v => v.subCategory).indexOf(subCategory)
+    if (idx === -1) {
+      dog.plan.allocation[payload.day].push(payload.allocation)
+    } else {
+      dog.plan.allocation[payload.day][idx].amount = payload.allocation.amount
+    }
+  },
+  [types.REMOVE_DAY_ALLOCATION] (state, payload) {
+    let dog = state.dogs.filter(d => d.id === payload.dog)[0]
+    let subCategory = payload.allocation.subCategory
+    let idx = dog.plan.allocation[payload.day].map(v => v.subCategory).indexOf(subCategory)
+    if (idx !== -1) {
+      dog.plan.allocation[payload.day].splice(idx, 1)
+    }
   }
 }

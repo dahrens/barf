@@ -8,8 +8,8 @@
         <div class="column is-8">
           <planPanel :dog="dog"></planPanel>
           <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in plan.week" class="column is-4 weekday">
-              <planDay :plan="plan" :weekday="weekday" :index="index"></planDay>
+            <div v-for="(weekday, index) in dog.plan.week" class="column is-6 weekday">
+              <planDay :dog="dog" :weekday="weekday" :index="index"></planDay>
             </div>
           </div>
         </div>
@@ -39,9 +39,6 @@ export default {
     },
     dog () {
       return this.$store.state.dogs[0]
-    },
-    plan () {
-      return this.dog.plan
     }
   }
 }

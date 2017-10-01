@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      Dog
+      <strong>{{ dog.name }}</strong>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="chevron-down" />
         <fa v-if="collapsed" pack="fas" name="chevron-right" />
@@ -12,17 +12,12 @@
       </a>
     </p>
     <template v-if="!collapsed">
-      <div class="card-image">
-        <figure class="image is-1by1">
-          <img src="/static/img/delphi.jpg">
-        </figure>
-      </div>
-      <div class="panel-block">
+      <div v-if="edit" class="panel-block">
         <div class="field-label is-normal">
           <label class="label">Name</label>
         </div>
         <div class="field-body">
-          <div v-if="edit" class="field">
+          <div class="field">
             <p class="control has-icons-left">
               <input v-model="dog.name" class="input" type="text" placeholder="Name">
               <span class="icon is-left">
@@ -30,10 +25,18 @@
               </span>
             </p>
           </div>
-          <div v-else>
-            {{ dog.name }}
-          </div>
         </div>
+      </div>
+      <div class="card-image">
+        <figure class="image is-1by1">
+          <img src="/static/img/delphi.jpg">
+        </figure>
+      </div>
+      <div class="panel-block">
+        <strong>Ration</strong>&nbsp;
+        {{ dog.weight }}g * 0.02 * {{ dogActivity }}
+        <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
+        * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
       </div>
       <div class="panel-block">
         <div class="field-label is-normal">
@@ -120,16 +123,6 @@
               <fa pack="fas" name="check" />
             </span>
           </div>
-        </div>
-      </div>
-      <div class="panel-block">
-        <div class="field-label">
-          <label class="label">Ration</label>
-        </div>
-        <div class="field-body">
-          {{ dog.weight }}g * 0.02 * {{ dogActivity }}
-          <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
-          * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
         </div>
       </div>
     </template>
