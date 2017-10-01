@@ -7,6 +7,7 @@ import store from './store'
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'
 import solid from '@fortawesome/fontawesome-free-solid'
+import VueChartist from 'vue-chartist'
 
 Vue.config.productionTip = false
 
@@ -22,6 +23,8 @@ if (JSON && !JSON.dateParser) {
     return value
   }
 }
+
+Vue.use(VueChartist)
 
 /* eslint-disable no-new */
 new Vue({

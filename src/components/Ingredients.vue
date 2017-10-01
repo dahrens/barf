@@ -3,8 +3,8 @@
     <p class="panel-heading">
       Ingredients
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
-        <fa v-if="collapsed" pack="fas" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="caret-down" />
+        <fa v-if="collapsed" pack="fas" name="caret-right" />
       </a>
       <a v-if="showCreate" v-on:click="expandedCreate = !expandedCreate" class="is-light is-pulled-right">
         <span class="icon has-text-dark panel-heading-icon">
@@ -42,8 +42,8 @@
       <template v-for="ingredient in ingredients">
           <a v-on:click="activate(ingredient)" class="panel-block" :class="{'is-active': isActive(ingredient)}">
             <p class="panel-icon">
-              <fa v-if ="!isActive(ingredient)" pack="fas" name="chevron-right" />
-              <fa v-if ="isActive(ingredient)" pack="fas" name="chevron-down" />
+              <fa v-if ="!isActive(ingredient)" pack="fas" name="caret-right" />
+              <fa v-if ="isActive(ingredient)" pack="fas" name="caret-down" />
             </p>
             {{ ingredient.name }}&nbsp;
             <template v-for="part in ingredient.subcategories">

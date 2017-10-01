@@ -13,14 +13,24 @@
         / {{ expectedQuantityWeek }}g per week
       </strong>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
-        <fa v-if="collapsed" pack="fas" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="caret-down" />
+        <fa v-if="collapsed" pack="fas" name="caret-right" />
       </a>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" pack="fas" name="edit" />
         <fa v-if="edit" pack="fas" name="save" />
       </a>
     </p>
+    <div v-if="!collapsed && !edit" class="columns is-gapless faked-panel-block">
+      <div class="column">
+        <span class="subtitle">Distribution (expected)</span>
+        <doughnutChart :chartData="distributionChart"></doughnutChart>
+      </div>
+      <div class="column">
+        <span class="subtitle">Allocation</span>
+        <doughnutChart :chartData="allocationChart"></doughnutChart>
+      </div>
+    </div>
     <p v-if="!collapsed && edit" class="faked-panel-block">
       <template>
         <div class="columns distribution-slider">
@@ -38,68 +48,6 @@
         <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
       </template>
     </p>
-    <template v-if="!collapsed && !edit">
-      <p class="panel-heading">
-        <span class="is-size-5">
-          <strong>{{ dog.plan.animal }}%</strong>
-          Animal
-          <strong>
-            <span
-              :class="{
-                'has-text-danger': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) > variance,
-                'has-text-success': Math.abs(planAnimalAllocation - (expectedQuantityWeek * dog.plan.animal / 100)) < variance
-              }">
-              {{ planAnimalAllocation }}g
-            </span>
-            / {{ expectedQuantityWeek * dog.plan.animal / 100 }}g per week
-          </strong>
-        </span>
-      </p>
-      <p v-for="(val, subCategory) in dog.plan.distribution.animal" class="panel-block">
-        <strong>{{val}}%&nbsp;</strong>
-        <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
-        <strong>
-          <span
-            :class="{
-              'has-text-danger': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) > variance,
-              'has-text-success': Math.abs(expectedAnimalDistribution[subCategory] - planAllocation['animal'][subCategory]) < variance
-            }">
-            {{ planAllocation['animal'][subCategory] }}g
-          </span>
-          / {{ expectedAnimalDistribution[subCategory] }}g
-        </strong>
-      </p>
-      <p class="panel-heading">
-        <span class="is-size-5">
-          <strong>{{ dog.plan.vegetables }}%</strong>
-          Vegetables
-          <strong>
-            <span
-              :class="{
-                'has-text-danger': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) > variance,
-                'has-text-success': Math.abs(planVegetablesAllocation - (expectedQuantityWeek * dog.plan.vegetables / 100)) < variance
-              }">
-              {{ planVegetablesAllocation }}g
-            </span>
-            / {{ expectedQuantityWeek * dog.plan.vegetables / 100 }}g per week
-          </strong>
-        </span>
-      </p>
-      <p v-for="(val, subCategory) in dog.plan.distribution.vegetables" class="panel-block">
-        <strong>{{val}}%&nbsp;</strong>
-        <subCategoryTag :subCategory="subCategory" :size="'is-size-7'"></subCategoryTag>&nbsp;
-        <strong>
-          <span
-            :class="{
-              'has-text-danger': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) > variance,
-              'has-text-success': Math.abs(expectedVegetablesDistribution[subCategory] - planAllocation['vegetables'][subCategory]) < variance
-            }">
-            {{ planAllocation['vegetables'][subCategory] }}g
-          </span>
-          / {{ expectedVegetablesDistribution[subCategory] }}g
-        </strong>
-      </p>
-    </template>
   </nav>
 </template>
 
@@ -108,6 +56,7 @@ import vueSlider from 'vue-slider-component'
 import subCategoryTag from '@/components/SubCategoryTag'
 import subCategorySlider from '@/components/SubCategorySlider'
 import categorySliders from '@/components/CategorySliders'
+import doughnutChart from '@/components/DoughnutChart'
 import { UPDATE_PLAN_CATEGORY_DISTRIBUTION } from '@/store/mutation-types'
 
 export default {
@@ -117,7 +66,8 @@ export default {
     vueSlider,
     subCategorySlider,
     subCategoryTag,
-    categorySliders
+    categorySliders,
+    doughnutChart
   },
   data () {
     return {
@@ -149,6 +99,54 @@ export default {
   computed: {
     plan () {
       return this.dog.plan
+    },
+    allocationChart () {
+      let chartData = {
+        datasets: [{
+          data: [],
+          backgroundColor: []
+        }],
+        labels: []
+      }
+      for (let category in this.$store.getters.planAllocation(this.dog)) {
+        let subCategories = this.$store.getters.planAllocation(this.dog)[category]
+        for (let subCategory in subCategories) {
+          let amount = subCategories[subCategory]
+          chartData.datasets[0].data.push(amount)
+          chartData.datasets[0].backgroundColor.push(
+            this.$store.state.ui.subCategoryColors[subCategory]
+          )
+          chartData.labels.push(subCategory)
+        }
+      }
+      let diff = this.expectedQuantityWeek - (this.planAnimalAllocation + this.planVegetablesAllocation)
+      if (diff > 0) {
+        chartData.datasets[0].data.push(diff)
+        chartData.datasets[0].backgroundColor.push('#FF272D')
+        chartData.labels.push('missing to fit expected value')
+      }
+      return chartData
+    },
+    distributionChart () {
+      let chartData = {
+        datasets: [{
+          data: [],
+          backgroundColor: []
+        }],
+        labels: []
+      }
+      for (let category in this.$store.getters.planDistribution(this.dog)) {
+        let subCategories = this.$store.getters.planDistribution(this.dog)[category]
+        for (let subCategory in subCategories) {
+          let amount = subCategories[subCategory]
+          chartData.datasets[0].data.push(amount)
+          chartData.datasets[0].backgroundColor.push(
+            this.$store.state.ui.subCategoryColors[subCategory]
+          )
+          chartData.labels.push(subCategory)
+        }
+      }
+      return chartData
     },
     planAllocation () {
       return this.$store.getters.planAllocation(this.dog)

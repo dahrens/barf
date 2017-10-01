@@ -3,8 +3,8 @@
     <p class="panel-heading">
       {{weekday}}
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
-        <fa v-if="collapsed" pack="fas" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="caret-down" />
+        <fa v-if="collapsed" pack="fas" name="caret-right" />
       </a>
       <a v-on:click="addAllocation()" :disabled="allocation.length === subCategoryOptions.length" class="icon is-pulled-right has-text-dark">
         <fa pack="fas" name="plus" />
@@ -25,14 +25,14 @@
         <p class="control">
           <a class="button" v-on:click="decreaseAllocation(a)" :disabled="a.amount === 0">
             <span class="icon">
-              <fa pack="fas" name="minus" />
+              <fa pack="fas" name="chevron-down" />
             </span>
           </a>
         </p>
         <p class="control">
           <a class="button" v-on:click="increaseAllocation(a)">
             <span class="icon">
-              <fa pack="fas" name="plus" />
+              <fa pack="fas" name="chevron-up" />
             </span>
           </a>
         </p>

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/pages/Home'
 import Stash from '@/pages/Stash'
 import Plan from '@/pages/Plan'
+import Settings from '@/pages/Settings'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/plan',
       name: 'Plan',
       component: Plan
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     }
   ]
 })

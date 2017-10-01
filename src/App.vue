@@ -9,19 +9,28 @@
               class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath === '/'}"
               :to="{ name: 'Home' }">
-              Home
+              <span class="icon is-large">
+                <fa size="2x" pack="fas" name="home"/>
+              </span>
+              <span class="is-size-5">Home</span>
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath ==='/plan'}"
               :to="{ name: 'Plan' }">
-              Plan
+              <span class="icon is-large">
+                <fa size="2x" pack="fas" name="calculator"/>
+              </span>
+              <span class="is-size-5">Plan</span>
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath ==='/stash'}"
               :to="{ name: 'Stash' }">
-              Stash
+              <span class="icon is-large">
+                <fa size="2x" pack="fas" name="briefcase"/>
+              </span>
+              <span class="is-size-5">Stash</span>
             </router-link>
           </div>
         </div>
@@ -29,6 +38,15 @@
           <span class="navbar-item">
             {{ today }}
           </span>
+          <router-link
+            class="nav-item is-tab is-hidden-mobile"
+            :class="{'is-active': $route.fullPath === '/settings'}"
+            :to="{ name: 'Settings' }">
+            <span class="icon is-large">
+              <fa size="2x" pack="fas" name="cog"/>
+            </span>
+            <span class="is-size-5">Settings</span>
+          </router-link>
         </div>
       </div>
     </nav>

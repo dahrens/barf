@@ -65,6 +65,17 @@ export default {
     vegetables: ['grains', 'fruits', 'vegetables'],
     additives: ['vitamin']
   },
+  ui: {
+    subCategoryColors: {
+      'meat': '#E87E42',
+      'entrails': '#FFEB48',
+      'stomach': '#FFB855',
+      'bones': '#E8C153',
+      'grains': '#FFF92F',
+      'fruits': '#3CE881',
+      'vegetables': '#95E82B'
+    }
+  },
   units: [
     'g', 'ml'
   ],

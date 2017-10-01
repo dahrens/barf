@@ -3,8 +3,8 @@
     <p class="panel-heading">
       Recipes
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="chevron-down" />
-        <fa v-if="collapsed" pack="fas" name="chevron-right" />
+        <fa v-if="!collapsed" pack="fas" name="caret-down" />
+        <fa v-if="collapsed" pack="fas" name="caret-right" />
       </a>
       <a v-if="showCreate" v-on:click="expandedCreate = !expandedCreate" class="is-light is-pulled-right">
         <span class="icon has-text-dark panel-heading-icon">
@@ -42,8 +42,8 @@
       <template v-for="recipe in recipes">
           <a v-on:click="activate(recipe)" class="panel-block" :class="{'is-active': isActive(recipe)}">
             <p class="panel-icon">
-              <fa v-if ="!isActive(recipe)" pack="fas" name="chevron-right" />
-              <fa v-if ="isActive(recipe)" pack="fas" name="chevron-down" />
+              <fa v-if ="!isActive(recipe)" pack="fas" name="caret-right" />
+              <fa v-if ="isActive(recipe)" pack="fas" name="caret-down" />
             </p>
             {{ recipe.name }}&nbsp;
             <template v-for="part in recipe.subcategories">
