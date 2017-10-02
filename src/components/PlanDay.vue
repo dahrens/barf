@@ -32,16 +32,16 @@
           <input class="input" type="number" min="0" max="99999" step="25" v-model="a.amount" v-on:change="writeAllocation(a)">
         </p>
         <p class="control">
-          <a class="button" v-on:click="decreaseAllocation(a)" :disabled="a.amount === 0">
+          <a class="button" v-on:click="increaseAllocation(a)">
             <span class="icon">
-              <fa pack="fas" name="chevron-down" />
+              <fa pack="fas" name="chevron-up" />
             </span>
           </a>
         </p>
         <p class="control">
-          <a class="button" v-on:click="increaseAllocation(a)">
+          <a class="button" v-on:click="decreaseAllocation(a)" :disabled="a.amount === 0">
             <span class="icon">
-              <fa pack="fas" name="chevron-up" />
+              <fa pack="fas" name="chevron-down" />
             </span>
           </a>
         </p>
