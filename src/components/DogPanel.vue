@@ -33,7 +33,7 @@
         <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
         * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
       </div>
-      <div class="panel-block">
+      <div class="faked-panel-block">
         <distributionChart :chartData="distributionChartData"></distributionChart>
       </div>
       <planEdit v-if="edit" :dog="dog"></planEdit>
@@ -181,7 +181,7 @@ export default {
             this.$store.state.ui.subCategoryColors[subCategory]
           )
           chartData.datasets[0].borderWidth.push(3)
-          chartData.labels.push(subCategory)
+          chartData.labels.push(recommendedAmount + 'g ' + subCategory)
         }
       }
       return chartData
@@ -223,3 +223,13 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+
+.faked-panel-block
+  padding: 1em
+  border-bottom: 1px solid #dbdbdb
+  border-left: 1px solid #dbdbdb
+  border-right: 1px solid #dbdbdb
+
+</style>

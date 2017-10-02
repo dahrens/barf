@@ -1,17 +1,18 @@
 <template>
   <div class="is-marginless">
-    <div class="plan container">
-      <div class="columns">
-        <div class="column is-4">
+    <div class="container">
+      <div class="columns is-mobile is-multiline">
+        <div class="column is-12-mobile is-half-tablet is-half-desktop is-one-third-widescreen">
           <dogPanel :dog="dog"></dogPanel>
         </div>
-        <div class="column is-4">
+        <div class="column is-12-mobile is-half-tablet is-half-desktop is-one-third-widescreen">
+          <planPanel :dog="dog"></planPanel>
+        </div>
+        <div class="column is-12-mobile is-12-tablet is-half-desktop is-one-third-widescreen">
+
           <div v-for="(weekday, index) in dog.plan.week" class="weekday">
             <planDay :dog="dog" :weekday="weekday" :index="index"></planDay>
           </div>
-        </div>
-        <div class="column is-4">
-          <planPanel :dog="dog"></planPanel>
         </div>
       </div>
     </div>
@@ -40,3 +41,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.weekday
+  margin-bottom: 0.75em
+</style>

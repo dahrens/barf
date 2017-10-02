@@ -19,7 +19,7 @@
               <span class="icon is-large">
                 <fa size="2x" pack="fas" name="calculator"/>
               </span>
-              <span class="is-size-5">Plan</span>
+              <span class="is-size-5">PLAN</span>
             </router-link>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
@@ -28,7 +28,7 @@
               <span class="icon is-large">
                 <fa size="2x" pack="fas" name="briefcase"/>
               </span>
-              <span class="is-size-5">Stash</span>
+              <span class="is-size-5">STASH</span>
             </router-link>
           </div>
         </div>
@@ -41,18 +41,16 @@
             :class="{'is-active': $route.fullPath === '/settings'}"
             :to="{ name: 'Settings' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="cog"/>
+              <fa pack="fas" name="cog"/>
             </span>
-            <span class="is-size-5">Settings</span>
           </router-link>
           <router-link
             class="nav-item is-tab is-hidden-mobile"
             :class="{'is-active': $route.fullPath === '/about'}"
             :to="{ name: 'About' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="info"/>
+              <fa pack="fas" name="info"/>
             </span>
-            <span class="is-size-5">About</span>
           </router-link>
         </div>
       </div>

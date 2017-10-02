@@ -36,7 +36,7 @@ export default {
           data: [],
           stack: 'recommended',
           backgroundColor: [],
-          label: 'assigned'
+          label: 'recommended'
         },
         {
           data: [],
@@ -77,7 +77,7 @@ export default {
             chartData.datasets[2].data.push(0)
             chartData.datasets[2].backgroundColor.push('grey')
           }
-          chartData.labels.push(subCategory)
+          chartData.labels.push(currentAmount + 'g / ' + recommendedAmount + 'g ' + subCategory)
         }
       }
       return chartData

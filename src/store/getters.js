@@ -126,7 +126,7 @@ export default {
         if (p === 0) value = 0
         else if (category === 'animal') value = (p / 100) * animal * plan.week.length
         else if (category === 'vegetables') value = (p / 100) * vegetables * plan.week.length
-        distribution[category][subcategory] = value
+        distribution[category][subcategory] = parseInt(value)
       }
     }
     return distribution
