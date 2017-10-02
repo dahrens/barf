@@ -30,8 +30,8 @@ if (state === null) {
 const persistPlugin = store => {
   store.subscribe((mutation, state) => {
     // The mutation comes in the format of `{ type, payload }`.
-    console.log('persist is disabled', state)
-    // localStorage.setItem('barf', JSON.stringify(state))
+    console.log('persist is enabled', state)
+    localStorage.setItem('barf', JSON.stringify(state))
   })
 }
 

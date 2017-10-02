@@ -2,14 +2,13 @@
   <div class="is-marginless">
     <div class="container">
       <div class="columns is-mobile is-multiline">
-        <div class="column is-12-mobile is-half-tablet is-half-desktop is-one-third-widescreen">
+        <div class="column is-one-third">
           <dogPanel :dog="dog"></dogPanel>
         </div>
-        <div class="column is-12-mobile is-half-tablet is-half-desktop is-one-third-widescreen">
+        <div class="column is-one-third">
           <planPanel :dog="dog"></planPanel>
         </div>
-        <div class="column is-12-mobile is-12-tablet is-half-desktop is-one-third-widescreen">
-
+        <div class="column">
           <div v-for="(weekday, index) in dog.plan.week" class="weekday">
             <planDay :dog="dog" :weekday="weekday" :index="index"></planDay>
           </div>
@@ -22,7 +21,7 @@
 <script>
 import planDay from '@/components/PlanDay'
 import dogPanel from '@/components/DogPanel'
-import planPanel from '@/components/PlanPanel'
+import planPanel from '@/components/PlanAllocationPanel'
 
 export default {
   name: 'plan',

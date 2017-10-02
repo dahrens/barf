@@ -83,6 +83,12 @@ $primary: green
 @import "../node_modules/bulma/bulma"
 
 .navbar
-  margin-bottom: 1em
+  margin-bottom: 0.75em
+
+.faked-panel-block
+  padding: 1em
+  border-bottom: 1px solid $light
+  border-left: 1px solid $light
+  border-right: 1px solid $light
 
 </style>
