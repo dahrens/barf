@@ -4,13 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import fontawesome from '@fortawesome/fontawesome'
-import brands from '@fortawesome/fontawesome-free-brands'
-import solid from '@fortawesome/fontawesome-free-solid'
+import './font-awesome'
 
-Vue.config.productionTip = false
-
-fontawesome.library.add(brands, solid)
+Vue.config.productionTip = true
 
 if (JSON && !JSON.dateParser) {
   var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/
