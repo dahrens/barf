@@ -154,8 +154,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.ingredient-create {
-  color: #ff0;
-}

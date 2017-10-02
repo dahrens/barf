@@ -82,15 +82,9 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 
 .distribution-slider
   margin-top: 2.2em
-
-.faked-panel-block
-  padding: 1em
-  border-bottom: 1px solid #dbdbdb
-  border-left: 1px solid #dbdbdb
-  border-right: 1px solid #dbdbdb
 
 </style>

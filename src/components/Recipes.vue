@@ -103,9 +103,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.panel-heading-icon {
-  margin-right: 24px;
-}
-</style>

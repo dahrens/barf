@@ -129,11 +129,11 @@ export default {
 }
 </script>
 
-<style scoped>
-.category-sliders {
-  margin-top: 1.5em;
-}
-.vue-slider-component {
-  margin-bottom: 0.5em;
-}
+<style lang="sass">
+.category-sliders
+  margin-top: 1.5em
+
+.vue-slider-component
+  margin-bottom: 0.5em
+
 </style>
