@@ -1,5 +1,5 @@
 <template>
-  <div class="data container">
+  <div class="stash container">
     <div class="columns">
       <div class="column is-half">
         <nav class="panel">
@@ -98,22 +98,7 @@ export default {
 }
 </script>
 
-<style>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-.panel-block.is-active {
-  background-color: whitesmoke
-}
+<style lang="sass">
+.stash
+  margin-top: 0.75em
 </style>

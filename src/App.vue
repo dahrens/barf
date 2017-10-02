@@ -41,7 +41,7 @@
             :class="{'is-active': $route.fullPath === '/settings'}"
             :to="{ name: 'Settings' }">
             <span class="icon is-large">
-              <fa pack="fas" name="cog"/>
+              <fa size="2x" pack="fas" name="cog" />
             </span>
           </router-link>
           <router-link
@@ -49,7 +49,7 @@
             :class="{'is-active': $route.fullPath === '/about'}"
             :to="{ name: 'About' }">
             <span class="icon is-large">
-              <fa pack="fas" name="info"/>
+              <fa size="2x" pack="fas" name="info"/>
             </span>
           </router-link>
         </div>
@@ -81,9 +81,6 @@ export default {
 $primary: green
 
 @import "../node_modules/bulma/bulma"
-
-.navbar
-  margin-bottom: 0.75em
 
 .faked-panel-block
   padding: 1em

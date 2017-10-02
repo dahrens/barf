@@ -1,5 +1,5 @@
 <template>
-  <div class="is-marginless">
+  <div class="plan">
     <div class="container">
       <div class="columns is-mobile is-multiline">
         <div class="column is-one-third">
@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style lang="sass">
+.plan
+  margin-top: 0.75em
+
 .weekday
   margin-bottom: 0.75em
 </style>
