@@ -14,16 +14,7 @@
           <div class="navbar-start">
             <router-link
               class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath === '/'}"
-              :to="{ name: 'Home' }">
-              <span class="icon is-large">
-                <fa size="2x" pack="fas" name="home"/>
-              </span>
-              <span class="is-size-5">Home</span>
-            </router-link>
-            <router-link
-              class="nav-item is-tab is-hidden-mobile"
-              :class="{'is-active': $route.fullPath ==='/plan'}"
+              :class="{'is-active': $route.fullPath ==='/'}"
               :to="{ name: 'Plan' }">
               <span class="icon is-large">
                 <fa size="2x" pack="fas" name="calculator"/>

@@ -48,7 +48,7 @@ export default {
           data: [],
           stack: 'assignement',
           backgroundColor: [],
-          label: 'missing until recommended'
+          label: 'missing'
         }],
         labels: []
       }
