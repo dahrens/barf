@@ -5,13 +5,13 @@
         <div class="column is-4">
           <dogPanel :dog="dog"></dogPanel>
         </div>
-        <div class="column is-8">
-          <planPanel :dog="dog"></planPanel>
-          <div class="columns is-gapless is-multiline">
-            <div v-for="(weekday, index) in dog.plan.week" class="column is-6 weekday">
-              <planDay :dog="dog" :weekday="weekday" :index="index"></planDay>
-            </div>
+        <div class="column is-4">
+          <div v-for="(weekday, index) in dog.plan.week" class="weekday">
+            <planDay :dog="dog" :weekday="weekday" :index="index"></planDay>
           </div>
+        </div>
+        <div class="column is-4">
+          <planPanel :dog="dog"></planPanel>
         </div>
       </div>
     </div>
@@ -19,23 +19,20 @@
 </template>
 
 <script>
-import planPanel from '@/components/PlanPanel'
 import planDay from '@/components/PlanDay'
 import dogPanel from '@/components/DogPanel'
+import planPanel from '@/components/PlanPanel'
 
 export default {
   name: 'plan',
   components: {
-    planPanel,
     planDay,
-    dogPanel
+    dogPanel,
+    planPanel
   },
   computed: {
     subCategories () {
       return this.$store.getters.subCategories
-    },
-    dogs () {
-      return this.$store.state.dogs
     },
     dog () {
       return this.$store.state.dogs[0]

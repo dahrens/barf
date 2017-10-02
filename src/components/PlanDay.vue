@@ -19,7 +19,7 @@
             </select>
           </span>
         </p>
-        <p class="control">
+        <p class="control is-expanded">
           <input class="input" type="number" min="0" max="99999" step="25" v-model="a.amount" v-on:change="writeAllocation(a)">
         </p>
         <p class="control">

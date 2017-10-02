@@ -66,14 +66,18 @@ export default {
     additives: ['vitamin']
   },
   ui: {
+    categoryColors: {
+      'animal': '#E8122B',
+      'vegetables': '#42FF3C'
+    },
     subCategoryColors: {
-      'meat': '#E87E42',
-      'entrails': '#FFEB48',
-      'stomach': '#FFB855',
-      'bones': '#E8C153',
-      'grains': '#FFF92F',
-      'fruits': '#3CE881',
-      'vegetables': '#95E82B'
+      'meat': '#E8122B',
+      'entrails': '#FF3826',
+      'stomach': '#E84715',
+      'bones': '#FF7119',
+      'grains': '#2FFFA2',
+      'fruits': '#3CE869',
+      'vegetables': '#42FF3C'
     }
   },
   units: [

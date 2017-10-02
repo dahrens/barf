@@ -4,6 +4,7 @@ import Home from '@/pages/Home'
 import Stash from '@/pages/Stash'
 import Plan from '@/pages/Plan'
 import Settings from '@/pages/Settings'
+import About from '@/pages/About'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/settings',
       name: 'Settings',
       component: Settings
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })

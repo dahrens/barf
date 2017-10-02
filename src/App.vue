@@ -1,10 +1,17 @@
 <template>
-  <div id="app">
-    <nav class="navbar">
+  <div class="app">
+    <nav class="navbar is-light">
       <div class="container">
+        <div class="navbar-brand">
+          <a class="nav-item" href="/">
+            <span class="icon is-large has-text-primary">
+              <fa size="2x" pack="fas" name="paw"/>
+            </span>
+            <h1 class="title">B.A.R.F.</h1>
+          </a>
+        </div>
         <div class="navbar-menu">
           <div class="navbar-start">
-            <a class="nav-item"><h1 class="title">B.A.R.F.</h1></a>
             <router-link
               class="nav-item is-tab is-hidden-mobile"
               :class="{'is-active': $route.fullPath === '/'}"
@@ -47,6 +54,15 @@
             </span>
             <span class="is-size-5">Settings</span>
           </router-link>
+          <router-link
+            class="nav-item is-tab is-hidden-mobile"
+            :class="{'is-active': $route.fullPath === '/about'}"
+            :to="{ name: 'About' }">
+            <span class="icon is-large">
+              <fa size="2x" pack="fas" name="info"/>
+            </span>
+            <span class="is-size-5">About</span>
+          </router-link>
         </div>
       </div>
     </nav>
@@ -77,7 +93,7 @@ $primary: green
 
 @import "../node_modules/bulma/bulma"
 
-.barf-title
+.navbar
   margin-bottom: 1em
 
 </style>

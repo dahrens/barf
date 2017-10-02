@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      <strong>{{ dog.name }}</strong>
+      Plan for <strong>{{ dog.name }}</strong>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
@@ -27,17 +27,16 @@
           </div>
         </div>
       </div>
-      <div class="card-image">
-        <figure class="image is-1by1">
-          <img src="/static/img/delphi.jpg">
-        </figure>
-      </div>
       <div class="panel-block">
         <strong>Ration</strong>&nbsp;
         {{ dog.weight }}g * 0.02 * {{ dogActivity }}
         <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
         * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
       </div>
+      <div class="panel-block">
+        <distributionChart :chartData="distributionChartData"></distributionChart>
+      </div>
+      <planEdit v-if="edit" :dog="dog"></planEdit>
       <div class="panel-block">
         <div class="field-label is-normal">
           <label class="label">Weight</label>
@@ -130,11 +129,19 @@
 </template>
 
 <script>
+import planEdit from '@/components/PlanEdit'
+import distributionChart from '@/components/DistributionChart'
+import allocationChart from '@/components/AllocationChart'
 import { UPDATE_DOG } from '@/store/mutation-types'
 
 export default {
   name: 'dogPanel',
   props: ['dog'],
+  components: {
+    planEdit,
+    distributionChart,
+    allocationChart
+  },
   data () {
     return {
       collapsed: false,
@@ -156,11 +163,54 @@ export default {
       }
       return options
     },
+    distributionChartData () {
+      let chartData = {
+        datasets: [{
+          data: [],
+          backgroundColor: [],
+          borderWidth: []
+        }],
+        labels: []
+      }
+      for (let category in this.$store.getters.planDistribution(this.dog)) {
+        let distSubCategories = this.$store.getters.planDistribution(this.dog)[category]
+        for (let subCategory in distSubCategories) {
+          let recommendedAmount = distSubCategories[subCategory]
+          chartData.datasets[0].data.push(recommendedAmount)
+          chartData.datasets[0].backgroundColor.push(
+            this.$store.state.ui.subCategoryColors[subCategory]
+          )
+          chartData.datasets[0].borderWidth.push(3)
+          chartData.labels.push(subCategory)
+        }
+      }
+      return chartData
+    },
     expectedQuantityPerDay () {
       return this.$store.getters.planRequirements(this.dog)
     },
     expectedQuantityWeek () {
       return this.dog.plan.week.length * this.expectedQuantityPerDay
+    },
+    planedAnimalAllocation () {
+      return Object.values(
+        this.$store.getters.planAllocation(this.dog)['animal']
+      ).reduce((a, c) => parseInt(a) + parseInt(c))
+    },
+    planedVegetablesAllocation () {
+      return Object.values(
+        this.$store.getters.planAllocation(this.dog)['vegetables']
+      ).reduce((a, c) => parseInt(a) + parseInt(c))
+    },
+    expectedAnimalAllocation () {
+      return Object.values(
+        this.$store.getters.planDistribution(this.dog)['animal']
+      ).reduce((a, c) => parseInt(a) + parseInt(c))
+    },
+    expectedVegetablesAllocation () {
+      return Object.values(
+        this.$store.getters.planDistribution(this.dog)['vegetables']
+      ).reduce((a, c) => parseInt(a) + parseInt(c))
     }
   },
   methods: {
@@ -173,9 +223,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.field-label {
-  width: 500px;
-}
-</style>
