@@ -51,12 +51,12 @@ export default {
         },
         sliderStyle: [
           { 'backgroundColor': '#363636' },
-          { 'backgroundColor': 'green' }
+          { 'backgroundColor': '#363636' }
         ],
         processStyle: { 'backgroundColor': '#363636' },
         tooltipStyle: [
-          { 'backgroundColor': 'green', 'borderColor': 'green' },
-          { 'backgroundColor': 'green', 'borderColor': 'green' }
+          { 'backgroundColor': '#363636', 'borderColor': '#363636' },
+          { 'backgroundColor': '#363636', 'borderColor': '#363636' }
         ]
       }
     }
