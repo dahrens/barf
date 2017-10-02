@@ -13,9 +13,18 @@
     <span v-if="!collapsed" v-for="a in allocation" class="panel-block">
       <div class="field has-addons">
         <p class="control">
+          <a class="button is-static">
+            <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(a.subCategory) }">
+              <fa size="2x" pack="fas" name="square"/>
+            </span>
+          </a>
+        </p>
+        <p class="control">
           <span class="select">
             <select v-model="a.subCategory" v-on:change="writeAllocation(a)">
-              <option v-for="option in subCategoryOptions" v-model="a.subCategory">{{ option.subCategory }}</option>
+              <option v-for="option in subCategoryOptions" v-model="a.subCategory">
+                {{ option.subCategory }}
+              </option>
             </select>
           </span>
         </p>
@@ -81,6 +90,10 @@ export default {
     }
   },
   methods: {
+    subCategoryColor (subCategory) {
+      console.log(subCategory)
+      return this.$store.state.ui.subCategoryColors[subCategory]
+    },
     addAllocation () {
       this.collapsed = false
       if (this.allocation.length === this.subCategoryOptions.length) return
