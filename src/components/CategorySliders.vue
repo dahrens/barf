@@ -8,7 +8,7 @@
         <div class="column is-6">
           <subCategorySlider
             v-on:changed="onCategoryChange"
-            :sliderConfig="sliderConfig"
+            :sliderConfig="coloredSliderConfig(subCategory)"
             :subCategory="subCategory"
             :value="plan.distribution[category][subCategory]"></subCategorySlider>
         </div>
@@ -113,6 +113,17 @@ export default {
       })
       // force updating this component for the sliders to react
       this.$forceUpdate()
+    },
+    coloredSliderConfig (subCategory) {
+      let config = JSON.parse(JSON.stringify(this.sliderConfig))
+      let color = this.$store.state.ui.subCategoryColors[subCategory]
+      config.tooltipStyle[0].backgroundColor = color
+      config.tooltipStyle[0].borderColor = color
+      config.tooltipStyle[1].backgroundColor = color
+      config.tooltipStyle[1].borderColor = color
+      config.sliderStyle[1].backgroundColor = color
+      config.processStyle.backgroundColor = color
+      return config
     }
   }
 }

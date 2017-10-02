@@ -75,7 +75,7 @@ export default {
       'entrails': '#FF3826',
       'stomach': '#E84715',
       'bones': '#FF7119',
-      'grains': '#2FFFA2',
+      'grains': '#4BE80C',
       'fruits': '#3CE869',
       'vegetables': '#42FF3C'
     }
