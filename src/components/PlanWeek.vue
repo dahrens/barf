@@ -10,6 +10,9 @@
         <fa v-if="!edit" pack="fas" name="edit" />
         <fa v-if="edit" pack="fas" name="save" />
       </a>
+      <a v-on:click="wizard = !wizard" class="icon is-pulled-right has-text-dark">
+        <fa pack="fas" name="magic" />
+      </a>
     </p>
     <template v-if="!collapsed && edit" v-for="(weekday, index) in dog.plan.week">
       <p class="faked-panel-block">
@@ -71,21 +74,25 @@
         </template>
       </p>
     </template>
+    <planAllocationWizard :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
   </nav>
 </template>
 
 <script>
 import subCategoryTag from '@/components/SubCategoryTag'
+import planAllocationWizard from '@/components/PlanAllocationWizard'
 import { ADD_OR_UPDATE_DAY_ALLOCATION, REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 
 export default {
   name: 'planDay',
   props: ['dog'],
   components: {
+    planAllocationWizard,
     subCategoryTag
   },
   data () {
     return {
+      wizard: false,
       expandedCreate: true,
       collapsed: false,
       edit: false,

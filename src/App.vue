@@ -88,4 +88,7 @@ $primary: green
   border-left: 1px solid $light
   border-right: 1px solid $light
 
+.panel-heading .icon
+  margin-left: 0.5em
+
 </style>
