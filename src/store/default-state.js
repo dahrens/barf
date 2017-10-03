@@ -4,9 +4,6 @@ export default {
     ingredients: 4,
     recipes: 2
   },
-  event_meta: {
-    types: ['meal']
-  },
   activities: {
     'unactive': 1,
     'moderate': 1.25,
@@ -22,6 +19,51 @@ export default {
       castrated: true,
       weight: 15000,
       activity: 'moderate',
+      plan: {
+        animal: 80,
+        vegetables: 20,
+        distribution: {
+          animal: {
+            meat: 40,
+            stomach: 30,
+            entrails: 20,
+            bones: 10
+          },
+          vegetables: {
+            grains: 40,
+            vegetables: 40,
+            fruits: 20
+          }
+        },
+        week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        allocation: [
+          [{subCategory: 'meat', amount: 250}],  // monday
+          [],
+          [],
+          [],
+          [],
+          [{subCategory: 'vegetables', amount: 150}],
+          []   // sunday
+        ],
+        meals: [  // which ingredients / meals are regulary bound to each day
+          [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
+          [], [], [], [], [], []
+        ]
+      },
+      meals: new Map([  // // dogs meal history if active
+        ['20170924', [
+          { name: 'Beef muscle meat', amount: 250, unit: 'g', parts: [1, 'meat'] }
+        ]]
+      ])
+    },
+    {
+      id: 2,
+      name: 'Loni',
+      birthday: new Date(2009, 2, 15),
+      sex: 'f',
+      castrated: false,
+      weight: 35000,
+      activity: 'unactive',
       plan: {
         animal: 80,
         vegetables: 20,

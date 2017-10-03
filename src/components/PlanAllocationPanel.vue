@@ -80,6 +80,7 @@ export default {
           chartData.labels.push(currentAmount + 'g / ' + recommendedAmount + 'g ' + subCategory)
         }
       }
+      console.log(chartData)
       return chartData
     }
   }

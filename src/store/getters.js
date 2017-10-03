@@ -114,6 +114,7 @@ export default {
     return foodPerDay
   },
   planDistribution: (state, getters) => (dog) => {
+    console.log(dog)
     let plan = dog.plan
     let overall = getters.dogFoodQuantityPerDay(dog)
     let animal = overall * (plan.animal / 100)
