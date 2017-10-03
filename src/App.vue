@@ -26,7 +26,7 @@
               :class="{'is-active': $route.fullPath ==='/stash'}"
               :to="{ name: 'Stash' }">
               <span class="icon is-large">
-                <fa size="2x" pack="fas" name="briefcase"/>
+                <fa size="2x" pack="fas" name="archive"/>
               </span>
               <span class="is-size-5">STASH</span>
             </router-link>
@@ -83,12 +83,9 @@ $primary: green
 @import "../node_modules/bulma/bulma"
 
 .faked-panel-block
-  padding: 1em
+  padding: 0.5em 0.75em
   border-bottom: 1px solid $light
   border-left: 1px solid $light
   border-right: 1px solid $light
-
-.panel-heading-icon
-  margin-right: 24px
 
 </style>

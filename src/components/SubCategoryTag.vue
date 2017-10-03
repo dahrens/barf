@@ -1,5 +1,8 @@
 <template>
-  <span class="tag is-dark" :class="size">
+  <span class="tag" :class="size" v-bind:style="{
+    backgroundColor: subCategoryColor(subCategory),
+    color: categoryColor,
+    }">
     <span v-if="amount !== 1">{{amount * 100 }}%&nbsp;</span>
     {{ textBefore }} {{ subCategory }} {{ textAfter }}
   </span>
@@ -35,6 +38,14 @@ export default {
   computed: {
     category () {
       return this.$store.getters.subCategories.filter(c => c.subCategory === this.subCategory)[0].category
+    },
+    categoryColor () {
+      if (this.category === 'animal') return 'whitesmoke'
+    }
+  },
+  methods: {
+    subCategoryColor (subCategory) {
+      return this.$store.state.ui.subCategoryColors[subCategory]
     }
   }
 }

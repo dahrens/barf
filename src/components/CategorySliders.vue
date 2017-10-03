@@ -111,8 +111,6 @@ export default {
         category: this.category,
         distribution: distribution
       })
-      // force updating this component for the sliders to react
-      this.$forceUpdate()
     },
     coloredSliderConfig (subCategory) {
       let config = JSON.parse(JSON.stringify(this.sliderConfig))

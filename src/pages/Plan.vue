@@ -8,7 +8,7 @@
               <div class="field has-addons has-addons-right is-pulled-left">
                 <p class="control">
                   <a class="button is-static">
-                    <span><strong>selected dog</strong>:</span>
+                    <span><strong>selected dog</strong></span>
                   </a>
                 </p>
                 <div class="control">
@@ -56,15 +56,13 @@
           <planPanel :dog="dog"></planPanel>
         </div>
         <div class="column">
-          <div v-for="(weekday, index) in dog.plan.week" class="weekday">
-            <planDay :dog="dog" :weekday="weekday" :index="index"></planDay>
-          </div>
+            <planWeek :dog="dog"></planWeek>
         </div>
       </div>
     </div>
     <div v-if="view === 'meals'" class="container">
       <div class="columns is-mobile is-multiline">
-        MEALS!
+        <div class="column">MEALS!</div>
       </div>
     </div>
   </div>
@@ -72,14 +70,14 @@
 </template>
 
 <script>
-import planDay from '@/components/PlanDay'
+import planWeek from '@/components/PlanWeek'
 import dogPanel from '@/components/DogPanel'
 import planPanel from '@/components/PlanAllocationPanel'
 
 export default {
   name: 'plan',
   components: {
-    planDay,
+    planWeek,
     dogPanel,
     planPanel
   },
@@ -113,7 +111,4 @@ export default {
 .plan-tabs
   margin-bottom: 0.75em
   background-color: whitesmoke
-
-.weekday
-  margin-bottom: 0.75em
 </style>

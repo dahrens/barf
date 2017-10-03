@@ -1,7 +1,7 @@
 <template>
   <div class="ingredient-create">
     <div class="panel-block">
-      <div class="field is-horizontal">
+      <div class="field has-addons has-addons-right">
         <div class="field-body">
           <div class="field">
             <div class="control has-icons-right">
@@ -38,6 +38,11 @@
     <template v-for="subCategory in newIngredient.subCategories">
       <div class="panel-block">
         <div v-model="newIngredient.subCategories" class="field has-addons">
+          <a class="button is-static">
+            <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(subCategory[1]) }">
+              <fa size="2x" pack="fas" name="square"/>
+            </span>
+          </a>
           <p class="control">
             <span class="select">
               <select v-model="subCategory[1]">
@@ -131,6 +136,9 @@ export default {
     }
   },
   methods: {
+    subCategoryColor (subCategory) {
+      return this.$store.state.ui.subCategoryColors[subCategory]
+    },
     splitNewSubcategory: function (subCategory) {
       subCategory[0] = subCategory[0] / 2
       let idx = this.newIngredient.subCategories.indexOf(subCategory)
