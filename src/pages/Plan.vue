@@ -161,6 +161,8 @@ export default {
 </script>
 
 <style lang="sass">
+@import "../assets/sass/variables"
+
 .plan-tabs
   margin-bottom: 0.75em
   background-color: whitesmoke

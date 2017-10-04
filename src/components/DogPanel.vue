@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      Plan for <strong>{{ dog.name }}</strong>
+      <span>Dog</span>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
