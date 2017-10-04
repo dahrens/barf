@@ -35,6 +35,7 @@ export default {
       castrated: true,
       weight: 15000,
       activity: 'moderate',
+      percentOfWeight: 2,
       plan: {
         animal: 80,
         vegetables: 20,

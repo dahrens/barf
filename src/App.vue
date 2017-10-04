@@ -51,7 +51,7 @@
               :class="{'is-active': $route.fullPath === '/settings'}"
               :to="{ name: 'Settings' }">
               <span class="icon is-large">
-                <fa size="2x" pack="fas" name="cog" />
+                <fa size="2x" pack="fas" name="wrench" />
               </span>
               <span class="is-size-5">SETTINGS</span>
             </router-link>
@@ -107,9 +107,9 @@ export default {
 
 .faked-panel-block
   padding: 0.5em 0.75em
-  border-bottom: 1px solid $light
-  border-left: 1px solid $light
-  border-right: 1px solid $light
+  border-bottom: 1px solid $border
+  border-left: 1px solid $border
+  border-right: 1px solid $border
 
 .panel-heading .icon
   margin-left: 0.5em

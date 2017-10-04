@@ -8,6 +8,31 @@
       </a>
     </p>
     <template v-if="!collapsed">
+      <div class="faked-panel-block">
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">
+                portion per day
+              </p>
+              <p class="subtitle">{{ expectedQuantityPerDay }}g</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">
+                portion per week
+              </p>
+              <p class="subtitle">{{ expectedQuantityWeek }}g</p>
+            </div>
+          </div>
+        </nav>
+        <p class="help is-info has-text-centered">
+          {{ dog.weight }}g * {{ dog.percentOfWeight / 100 }} * {{ dogActivity }}
+          <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
+          * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
+        </p>
+      </div>
       <div class="panel-block">
         <allocationChart :chartData="allocationChartData"></allocationChart>
       </div>
@@ -30,6 +55,15 @@ export default {
     }
   },
   computed: {
+    dogActivity () {
+      return this.$store.state.activities[this.dog.activity]
+    },
+    expectedQuantityPerDay () {
+      return parseInt(this.$store.getters.planRequirements(this.dog))
+    },
+    expectedQuantityWeek () {
+      return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
+    },
     allocationChartData () {
       let chartData = {
         datasets: [{

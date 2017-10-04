@@ -17,6 +17,18 @@
     </div>
     <div class="panel-block">
       <div class="field-label is-normal">
+        <label class="label">Birthday</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <p class="control">
+            <datepicker placeholder="31.05.2009" :config="{ dateFormat: 'd.m.Y', static: true }"></datepicker>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="panel-block">
+      <div class="field-label is-normal">
         <label class="label">Weight</label>
       </div>
       <div class="field-body">
@@ -90,9 +102,14 @@
 </template>
 
 <script>
+import Datepicker from 'vue-bulma-datepicker'
+
 export default {
   name: 'dogEdit',
   props: ['dog'],
+  components: {
+    Datepicker
+  },
   computed: {
     activities () {
       let options = []
