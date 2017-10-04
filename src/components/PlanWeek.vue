@@ -74,7 +74,7 @@
         </template>
       </p>
     </template>
-    <planAllocationWizard :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
+    <planAllocationWizard :dog="dog" :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
   </nav>
 </template>
 

@@ -8,7 +8,7 @@
         </span>
         <span v-else class="button is-warning">
           <span class="icon">
-            <!--<fa pack="fas" name="warning" />-->
+            <fa pack="fas" name="info" />
           </span>
         </span>
       </p>

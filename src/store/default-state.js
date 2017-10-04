@@ -103,7 +103,7 @@ export default {
     }
   ],
   categories: {
-    animal: ['meat', 'entrails', 'stomach', 'bones'],
+    animal: ['meat', 'stomach', 'entrails', 'bones'],
     vegetables: ['grains', 'fruits', 'vegetables'],
     additives: ['vitamin']
   },

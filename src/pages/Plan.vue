@@ -46,7 +46,7 @@
       </div>
     </nav>
     <div v-if="view === 'base'" class="container">
-      <div class="columns is-multiline">
+      <div class="columns">
         <div class="column is-one-third">
           <dogPanel :dog="dog"></dogPanel>
         </div>
@@ -81,7 +81,7 @@ export default {
   },
   data () {
     return {
-      selectedDog: 2,
+      selectedDog: 1,
       view: 'base'
     }
   },

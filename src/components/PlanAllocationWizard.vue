@@ -1,155 +1,130 @@
 <template>
   <div class="modal">
-    <div class="modal-background"></div>
+    <div class="modal-background" v-on:click="close()"></div>
     <div class="modal-content">
-      <article class="message is-dark">
-        <div class="message-header">
-          <p>Automatic allocation</p>
-          <button v-on:click="close()" class="delete" aria-label="delete"></button>
-        </div>
-        <div class="message-body">
+      <nav class="panel">
+        <p class="panel-heading">
+          Automatic allocation
+          <a v-on:click="close()" class="icon is-pulled-right has-text-dark">
+            <fa pack="fas" name="times" />
+          </a>
+        </p>
+        <div class="panel-block">
           <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">From</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <p class="control is-expanded has-icons-left">
-                  <input class="input" type="text" placeholder="Name">
-                  <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
-                  </span>
-                </p>
-              </div>
-              <div class="field">
-                <p class="control is-expanded has-icons-left has-icons-right">
-                  <input class="input is-success" type="email" placeholder="Email" value="alex@smith.com">
-                  <span class="icon is-small is-left">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                  <span class="icon is-small is-right">
-                    <i class="fa fa-check"></i>
-                  </span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field-label"></div>
+            <div class="field-label">Fasting Days</div>
             <div class="field-body">
               <div class="field is-expanded">
-                <div class="field has-addons">
-                  <p class="control">
-                    <a class="button is-static">
-                      +44
-                    </a>
-                  </p>
+                <div class="field">
                   <p class="control is-expanded">
-                    <input class="input" type="tel" placeholder="Your phone number">
+                    <div class="field has-addons">
+                      <p v-for="(weekday, idx) in dog.plan.week" class="control">
+                        <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenDays[idx]}">
+                          <span>{{ weekday.substring(0, 2) }}</span>
+                          <span class="icon">
+                            <fa v-if="fastenDays[idx]" pack="fas" name="check" />
+                            <fa v-else pack="fas" name="times" />
+                          </span>
+                        </a>
+                      </p>
+                    </div>
                   </p>
                 </div>
-                <p class="help">Do not enter the first zero</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">Department</label>
-            </div>
-            <div class="field-body">
-              <div class="field is-narrow">
-                <div class="control">
-                  <div class="select is-fullwidth">
-                    <select>
-                      <option>Business development</option>
-                      <option>Marketing</option>
-                      <option>Sales</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label">Already a member?</label>
-            </div>
-            <div class="field-body">
-              <div class="field is-narrow">
-                <div class="control">
-                  <label class="radio">
-                    <input type="radio" name="member">
-                    Yes
-                  </label>
-                  <label class="radio">
-                    <input type="radio" name="member">
-                    No
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">Subject</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input class="input is-danger" type="text" placeholder="e.g. Partnership opportunity">
-                </div>
-                <p class="help is-danger">
-                  This field is required
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">Question</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <!-- Left empty for spacing -->
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <button class="button is-primary">
-                    Send message
-                  </button>
-                </div>
+                <p v-if="fastenDays.filter(fd => fd === true).length > 2" class="help is-danger">Are you sure that your dog should not eat on more than 2 days?</p>
+                <p class="help is-info">Click on a day to toggle whether it is a fasten day or not</p>
               </div>
             </div>
           </div>
         </div>
-      </article>
+        <div class="panel-block">
+          <div class="field is-horizontal">
+            <div class="field-label">Vegetarian Days</div>
+            <div class="field-body">
+              <div class="field is-expanded">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <div class="field has-addons">
+                      <p v-for="(weekday, idx) in dog.plan.week" class="control">
+                        <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianDays[idx]}">
+                          <span>{{ weekday.substring(0, 2) }}</span>
+                          <span class="icon">
+                            <fa v-if="vegetarianDays[idx]" pack="fas" name="check" />
+                            <fa v-else pack="fas" name="times" />
+                          </span>
+                        </a>
+                      </p>
+                    </div>
+                  </p>
+                </div>
+                <p v-if="fastenDays.filter(fd => fd === true).length > 2" class="help is-danger">Are you sure that your dog should not eat on more than 2 days?</p>
+                <p class="help is-info">Click on a day to toggle whether it is a fasten day or not</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-block">
+          <div class="notification is-warning is-fullwidth">
+            <span class="icon is-large fa-fw">
+              <fa size="2x" pack="fas" name="exclamation-triangle" />
+            </span>
+            <span class="is-size-5">Automatic allocation overrides all existing allocations</span>
+          </div>
+        </div>
+        <p class="panel-block">
+          <button v-on:click="allocate" class="button is-primary is-fullwidth">
+            <span class="icon">
+              <fa pack="fas" name="save" />
+            </span>
+          </button>
+        </p>
+      </nav>
     </div>
-    <button v-on:click="close()" class="modal-close is-large" aria-label="close"></button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'subCategorySlider',
+  name: 'planAllocationWizard',
+  props: ['dog'],
+  data () {
+    return {
+      fastenDays: [false, false, false, false, false, false, false],
+      vegetarianDays: [false, false, false, false, false, false, false]
+    }
+  },
   methods: {
+    toggleFastenDay (day) {
+      this.fastenDays[day] = !this.fastenDays[day]
+      this.$forceUpdate()
+    },
+    toggleVegetarianDay (day) {
+      this.vegetarianDays[day] = !this.vegetarianDays[day]
+      this.$forceUpdate()
+    },
     close (value) {
       this.$emit('close')
+    },
+    allocate () {
+      this.$store.dispatch('allocate', {
+        dog: this.dog,
+        fastenDays: this.fastenDays
+          .map((b, i) => [b, i])
+          .filter((i) => i[0])
+          .map((d) => d[1]),
+        vegetarianDays: this.vegetarianDays
+          .map((b, i) => [b, i])
+          .filter((i) => i[0])
+          .map((d) => d[1])
+      }).then(() => this.close())
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.is-expaned
+  display: flex
+  flex: 0 0 100%
+
+.panel-block
+  background-color: white
+</style>

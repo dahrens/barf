@@ -4,6 +4,7 @@ import VueMoment from 'vue-moment'
 import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
+import actions from './actions'
 
 // const moment = require('moment')
 // require('moment/locale/de')
@@ -38,6 +39,7 @@ const persistPlugin = store => {
 export default new Vuex.Store({
   state: state,
   plugins: [persistPlugin],
-  mutations: mutations,
-  getters: getters
+  mutations,
+  getters,
+  actions
 })

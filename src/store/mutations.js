@@ -80,5 +80,9 @@ export default {
     if (idx !== -1) {
       dog.plan.allocation[payload.day].splice(idx, 1)
     }
+  },
+  [types.UPDATE_PLAN_ALLOCATION] (state, payload) {
+    let dog = state.dogs.filter(d => d.id === payload.dog)[0]
+    dog.plan.allocation = payload.allocation
   }
 }

@@ -10,7 +10,7 @@ import solid from '@fortawesome/fontawesome-free-solid'
 
 fontawesome.library.add(brands, solid)
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
 
 if (JSON && !JSON.dateParser) {
   var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/

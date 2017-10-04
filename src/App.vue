@@ -76,6 +76,7 @@ export default {
 </script>
 
 <style lang="sass">
+@charset "utf-8"
 @import "../node_modules/bulma/sass/utilities/initial-variables"
 
 $primary: green
