@@ -5,7 +5,7 @@ const { reactiveProp } = mixins
 export default Doughnut.extend({
   mixins: [reactiveProp],
   mounted () {
-    this.renderChart(this.chartData, {maintainAspectRatio: true})
+    this.renderChart(this.chartData, { maintainAspectRatio: true, responsive: true })
   }
 })
 </script>

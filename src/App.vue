@@ -33,23 +33,25 @@
           </div>
         </div>
         <div class="navbar-end">
-          <span class="navbar-item">
-            {{ today }}
-          </span>
           <router-link
-            class="nav-item is-tab is-hidden-mobile"
-            :class="{'is-active': $route.fullPath === '/settings'}"
-            :to="{ name: 'Settings' }">
-            <span class="icon is-large">
-              <fa size="2x" pack="fas" name="cog" />
-            </span>
-          </router-link>
-          <router-link
-            class="nav-item is-tab is-hidden-mobile"
+            class="nav-item is-tab"
             :class="{'is-active': $route.fullPath === '/about'}"
             :to="{ name: 'About' }">
             <span class="icon is-large">
               <fa size="2x" pack="fas" name="info"/>
+            </span>
+          </router-link>
+          <a class="nav-item is-tab">
+            <span class="icon is-large">
+              <fa size="2x" pack="fas" name="question"/>
+            </span>
+          </a>
+          <router-link
+            class="nav-item is-tab"
+            :class="{'is-active': $route.fullPath === '/settings'}"
+            :to="{ name: 'Settings' }">
+            <span class="icon is-large">
+              <fa size="2x" pack="fas" name="cog" />
             </span>
           </router-link>
         </div>
@@ -66,12 +68,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 Vue.component('fa', FontAwesomeIcon)
 
 export default {
-  name: 'app',
-  computed: {
-    today () {
-      return this.$moment().format('[Today is ]dddd [the] D. MMMM YYYY')
-    }
-  }
+  name: 'barf'
 }
 </script>
 

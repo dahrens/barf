@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      Food category allocation
+      Meal allocation
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
@@ -19,7 +19,7 @@
 import allocationChart from '@/components/charts/AllocationChart'
 
 export default {
-  name: 'planAllocationPanel',
+  name: 'mealAllocationPanel',
   props: ['dog'],
   components: {
     allocationChart

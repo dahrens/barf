@@ -4,6 +4,22 @@ export default {
     ingredients: 4,
     recipes: 2
   },
+  ui: {
+    activePlanView: 'base',
+    categoryColors: {
+      'animal': '#E8122B',
+      'vegetables': '#42FF3C'
+    },
+    subCategoryColors: {
+      'meat': '#E8122B',
+      'entrails': '#FF3826',
+      'stomach': '#E84715',
+      'bones': '#FF7119',
+      'grains': '#4BE80C',
+      'fruits': '#3CE869',
+      'vegetables': '#42FF3C'
+    }
+  },
   activities: {
     'unactive': 1,
     'moderate': 1.25,
@@ -45,6 +61,7 @@ export default {
           [{subCategory: 'vegetables', amount: 150}],
           []   // sunday
         ],
+        mealAllocation: 'manual',
         meals: [  // which ingredients / meals are regulary bound to each day
           [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
           [], [], [], [], [], []
@@ -106,21 +123,6 @@ export default {
     animal: ['meat', 'stomach', 'entrails', 'bones'],
     vegetables: ['grains', 'fruits', 'vegetables'],
     additives: ['vitamin']
-  },
-  ui: {
-    categoryColors: {
-      'animal': '#E8122B',
-      'vegetables': '#42FF3C'
-    },
-    subCategoryColors: {
-      'meat': '#E8122B',
-      'entrails': '#FF3826',
-      'stomach': '#E84715',
-      'bones': '#FF7119',
-      'grains': '#4BE80C',
-      'fruits': '#3CE869',
-      'vegetables': '#42FF3C'
-    }
   },
   units: [
     'g', 'ml'

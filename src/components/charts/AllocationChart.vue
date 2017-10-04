@@ -8,7 +8,8 @@ export default HorizontalBar.extend({
     this.renderChart(this.chartData, {
       legend: {
         display: false
-      }
+      },
+      maintainAspectRatio: true
     })
   }
 })
