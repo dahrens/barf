@@ -12,12 +12,12 @@
     </section>
     <nav class="planbar">
       <div class="columns is-gapless">
-        <div class="column is-one-third dog-selector">
+        <div class="column is-one-quarter dog-selector">
           <div class="field has-addons has-addons-right has-addons-left">
             <p class="control">
-              <a v-on:click="createDog()" class="button is-medium is-success">
+              <a v-on:click="deleteSelectedDog()" class="button is-medium is-danger" :disabled="selectedDog === 0">
                 <span class="icon is-medium">
-                  <fa pack="fas" name="plus"/>
+                  <fa pack="fas" name="trash"/>
                 </span>
               </a>
             </p>
@@ -33,9 +33,9 @@
               </div>
             </div>
             <p class="control">
-              <a v-on:click="deleteSelectedDog()" class="button is-medium is-danger" :disabled="selectedDog === 0">
+              <a v-on:click="createDog()" class="button is-medium is-success">
                 <span class="icon is-medium">
-                  <fa pack="fas" name="trash"/>
+                  <fa pack="fas" name="plus"/>
                 </span>
               </a>
             </p>
@@ -226,6 +226,19 @@ export default {
 
 .tabs a
   color: white !important
+
+.tabs ul
+  border: 0 !important
+
+.tabs li
+  border-bottom: 1px solid $dark !important
+
+.tabs li a:hover
+  border-bottom: 1px solid $grey-dark !important
+
+.tabs li.is-active
+  border-top: 1px solid $dark !important
+  border-bottom: 0 !important
 
 .tabs li.is-active a
   color: $dark !important
