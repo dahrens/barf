@@ -23,36 +23,17 @@ export default {
   },
   ingredientHasRelations: (state) => (ingredient) => {
     for (let item of state.stash) {
-      if (item.hasOwnProperty('ingredient')) {
-        if (item.ingredient === ingredient.id) return true
-      }
-    }
-    for (let recipe of state.recipes) {
-      for (let i of recipe.ingredients) {
-        if (i.indredient === ingredient.id) return true
-      }
+      if (item.ingredient === ingredient.id) return true
     }
     return false
   },
   ingredientRelations: (state) => (ingredient) => {
     let stashContent = []
-    let recipes = []
-    for (let recipe of state.recipes) {
-      for (let i of recipe.ingredients) {
-        if (i.ingredient === ingredient.id) recipes.push(recipe)
-      }
-    }
     for (let item of state.stash) {
-      if (item.hasOwnProperty('ingredient')) {
-        if (item.ingredient === ingredient.id) stashContent.push(item)
-      }
-      if (item.hasOwnProperty('recipe')) {
-        if (recipes.map(r => r.id).indexOf(item.recipe) !== -1) stashContent.push(item)
-      }
+      if (item.ingredient === ingredient.id) stashContent.push(item)
     }
     return {
-      stashContent,
-      recipes
+      stashContent
     }
   },
   stashedIngredients: state => {
@@ -82,27 +63,6 @@ export default {
       }
     }
     return ingredients
-  },
-  stashedRecipes: state => {
-    let recipeMetas = []
-    for (let item of state.stash) {
-      if (item.hasOwnProperty('recipe')) {
-        let recipe = state.recipes.filter(i => i.id === item.recipe)[0]
-        let idx = recipeMetas.map(rm => rm.recipe).indexOf(recipe)
-        if (idx !== -1) {
-          // already found this one
-          let recipeMeta = recipeMetas[idx]
-          recipeMeta.quantity++
-        } else {
-          // first occurency
-          recipeMetas.push({
-            recipe,
-            quantity: 1
-          })
-        }
-      }
-    }
-    return recipeMetas
   },
   dogFoodQuantityPerDay: (state) => (dog) => {
     let factor = state.activities[dog.activity]

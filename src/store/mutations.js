@@ -50,25 +50,6 @@ export default {
   [types.STASH_INGREDIENT] (state, payload) {
     state.stash.push(payload)
   },
-  [types.INSERT_RECIPE] (state, payload) {
-    payload.id = state.ids.recipes
-    state.ids.recipes++
-    state.recipes.push(payload)
-  },
-  [types.REMOVE_RECIPE] (state, payload) {
-    let idx = state.recipes.indexOf(payload)
-    if (idx === -1) return
-    state.recipes.splice(idx, 1)
-  },
-  [types.STASH_RECIPE] (state, payload) {
-    let included = state.stash.filter((i) => i.hasOwnProperty('recipe') && i.recipe === payload.recipe)
-    if (included.length === 1) {
-      let recipe = included[0]
-      recipe.quantity += payload.quantity
-    } else {
-      state.stash.push(payload)
-    }
-  },
   [types.UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
     let plan = dog.plan

@@ -171,7 +171,7 @@ export default {
   margin: 0 0.5em
 
 .tabs li
-  background-color: $dark
+  background-color: $primary
 
 .tabs a
   color: white !important
@@ -180,20 +180,20 @@ export default {
   border: 0 !important
 
 .tabs li
-  border-bottom: 1px solid $dark !important
+  border-bottom: 1px solid $primary !important
 
 .tabs li a:hover
-  border-bottom: 1px solid $grey-dark !important
+  border-bottom: 1px solid $success !important
 
 .tabs li.is-active
-  border-top: 1px solid $dark !important
+  border-top: 1px solid $primary !important
   border-bottom: 0 !important
 
 .tabs li.is-active a
-  color: $dark !important
+  color: $primary !important
 
 .tabs a:hover
-  background-color: $grey-dark !important
+  background-color: $success !important
 
 .tabs li.is-active a:hover
   background-color: white !important

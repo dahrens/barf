@@ -10,7 +10,7 @@
         </div>
       </div>
     </section>
-    <div class="stash container">
+    <div class="stash">
       <div class="columns">
         <div class="column is-half">
           <nav class="panel">
@@ -62,7 +62,6 @@
         </div>
         <div class="column is-half">
           <ingredients></ingredients>
-          <recipes></recipes>
         </div>
       </div>
     </div>
@@ -70,13 +69,11 @@
 </template>
 
 <script>
-import recipes from '@/components/Recipes'
 import ingredients from '@/components/Ingredients'
 
 export default {
   name: 'Stash',
   components: {
-    recipes,
     ingredients
   },
   data () {

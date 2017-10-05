@@ -101,16 +101,6 @@ export default {
       defaultAmount: 500
     }
   ],
-  recipes: [
-    {
-      id: 1,
-      name: 'Common meat meal',
-      ingredients: [
-        { ingredient: 1, amount: 250 },
-        { ingredient: 3, amount: 10 }
-      ]
-    }
-  ],
   stash: [
     {
       ingredient: 1,
@@ -121,10 +111,6 @@ export default {
       ingredient: 3,
       amount: 500,
       unit: 'ml'
-    },
-    {
-      recipe: 1,
-      quantity: 2
     }
   ]
 }
