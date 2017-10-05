@@ -1,8 +1,11 @@
 export default {
   ids: {
-    dogs: 3,
+    dogs: 1,
     ingredients: 4,
     recipes: 2
+  },
+  settings: {
+    useStash: true
   },
   ui: {
     activePlanView: 'base',
@@ -26,100 +29,39 @@ export default {
     'active': 1.5,
     'highly': 2
   },
-  dogs: [
-    {
-      id: 1,
-      name: 'Delphi',
-      birthday: new Date(2012, 2, 15),
-      sex: 'm',
-      castrated: true,
-      weight: 15000,
-      activity: 'moderate',
-      percentOfWeight: 2,
-      plan: {
-        animal: 80,
-        vegetables: 20,
-        distribution: {
-          animal: {
-            meat: 40,
-            stomach: 30,
-            entrails: 20,
-            bones: 10
-          },
-          vegetables: {
-            grains: 40,
-            vegetables: 40,
-            fruits: 20
-          }
+  newDog: {
+    name: 'Delphi',
+    birthday: new Date(2012, 2, 15),
+    sex: 'm',
+    castrated: true,
+    weight: 15000,
+    activity: 'moderate',
+    percentOfWeight: 2,
+    plan: {
+      animal: 80,
+      vegetables: 20,
+      distribution: {
+        animal: {
+          meat: 40,
+          stomach: 30,
+          entrails: 20,
+          bones: 10
         },
-        week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        allocation: [
-          [{subCategory: 'meat', amount: 250}],  // monday
-          [],
-          [],
-          [],
-          [],
-          [{subCategory: 'vegetables', amount: 150}],
-          []   // sunday
-        ],
-        mealAllocation: 'manual',
-        meals: [  // which ingredients / meals are regulary bound to each day
-          [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
-          [], [], [], [], [], []
-        ]
+        vegetables: {
+          grains: 40,
+          vegetables: 40,
+          fruits: 20
+        }
       },
-      meals: new Map([  // // dogs meal history if active
-        ['20170924', [
-          { name: 'Beef muscle meat', amount: 250, unit: 'g', parts: [1, 'meat'] }
-        ]]
-      ])
+      week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      allocation: [[], [], [], [], [], [], []],
+      mealAllocation: 'manual',
+      meals: [[], [], [], [], [], [], []]
     },
-    {
-      id: 2,
-      name: 'Loni',
-      birthday: new Date(2009, 2, 15),
-      sex: 'f',
-      castrated: false,
-      weight: 35000,
-      activity: 'unactive',
-      plan: {
-        animal: 80,
-        vegetables: 20,
-        distribution: {
-          animal: {
-            meat: 40,
-            stomach: 30,
-            entrails: 20,
-            bones: 10
-          },
-          vegetables: {
-            grains: 40,
-            vegetables: 40,
-            fruits: 20
-          }
-        },
-        week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        allocation: [
-          [{subCategory: 'meat', amount: 250}],  // monday
-          [],
-          [],
-          [],
-          [],
-          [{subCategory: 'vegetables', amount: 150}],
-          []   // sunday
-        ],
-        meals: [  // which ingredients / meals are regulary bound to each day
-          [{ recipe: 1 }, { ingredient: 2, amount: 250 }],
-          [], [], [], [], [], []
-        ]
-      },
-      meals: new Map([  // // dogs meal history if active
-        ['20170924', [
-          { name: 'Beef muscle meat', amount: 250, unit: 'g', parts: [1, 'meat'] }
-        ]]
-      ])
-    }
-  ],
+    meals: new Map()
+  },
+  selectedDog: 0,
+  dogs: [],
   categories: {
     animal: ['meat', 'stomach', 'entrails', 'bones'],
     vegetables: ['grains', 'fruits', 'vegetables'],

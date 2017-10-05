@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+// import VueMoment from 'vue-moment'
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'
 import solid from '@fortawesome/fontawesome-free-solid'
@@ -11,6 +12,15 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 fontawesome.library.add(brands, solid)
 Vue.component('fa', FontAwesomeIcon)
+
+// const moment = require('moment')
+// require('moment/locale/de')
+
+// Vue.use(VueMoment, {
+//   moment
+// })
+
+// Vue.use(VueMoment)
 
 Vue.config.productionTip = false
 

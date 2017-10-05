@@ -1,12 +1,127 @@
 <template>
-  <div class="container">
-    Settings
+  <div class="settings">
+    <a id="downloadAnchorElem" style="display:none"></a>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Settings</h2>
+          <p class="subtitle">
+            Technical stuff related to this app.
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <div class="settings-form">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Data</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="field has-addons">
+                <p class="control">
+                  <div class="file">
+                    <label class="file-label">
+                      <input class="file-input" type="file" name="resume">
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <fa pack="fas" name="upload" />
+                        </span>
+                        <span class="file-label">
+                          Import
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </p>
+                <p class="control">
+                  <a v-on:click="exportData()" class="button">
+                    <span class="icon">
+                      <fa pack="fas" name="download" />
+                    </span>
+                    <span>export</span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a v-on:click="resetData()" class="button">
+                    <span class="icon">
+                      <fa pack="fas" name="bomb" />
+                    </span>
+                    <span>reset</span>
+                  </a>
+                </p>
+              </div>
+              <p class="help is-info">The size of your data is {{ dataSize }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">Enable Stash?</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="member">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="member">
+                  No
+                </label>
+              </div>
+              <p class="help is-info">This feature is experimental</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import jsonSize from 'json-size'
+import { version } from '../../package.json'
+import { SET_VERSION } from '@/store/mutation-types'
+import defaultState from '@/store/default-state'
+
+function bytesToSize (bytes) {
+  var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+  if (bytes === 0) return '0 Byte'
+  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
+};
 
 export default {
-  name: 'settings'
+  name: 'settings',
+  computed: {
+    dataSize () {
+      return bytesToSize(jsonSize(this.$store.state))
+    }
+  },
+  methods: {
+    exportData () {
+      let data = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.$store.state))
+      let dlAnchorElem = document.getElementById('downloadAnchorElem')
+      dlAnchorElem.setAttribute('href', data)
+      dlAnchorElem.setAttribute('download', 'barf.json')
+      dlAnchorElem.click()
+    },
+    importData () {
+
+    },
+    resetData () {
+      console.log(defaultState)
+      this.$store.replaceState(defaultState)
+      this.$store.commit(SET_VERSION, version)
+    }
+  }
 }
 </script>
+
+<style lang="sass">
+.settings-form
+  margin: 0.5em
+</style>

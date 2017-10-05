@@ -1,6 +1,9 @@
 import * as types from './mutation-types'
 
 export default {
+  [types.SET_VERSION] (state, version) {
+    state.version = version
+  },
   [types.UPDATE_DOG] (state, payload) {
     let idx = state.dogs.map(d => d.id).indexOf(payload.id)
     if (idx === -1) {
@@ -12,6 +15,7 @@ export default {
     payload.id = state.ids.dogs
     state.ids.dogs++
     state.dogs.push(payload)
+    state.selectedDog = payload.id
   },
   [types.INSERT_INGREDIENT] (state, payload) {
     payload.id = state.ids.ingredients
@@ -87,5 +91,8 @@ export default {
   },
   [types.SET_ACTIVE_PLAN_VIEW] (state, payload) {
     state.ui.activePlanView = payload.view
+  },
+  [types.SELECT_DOG] (state, payload) {
+    state.selectedDog = payload
   }
 }

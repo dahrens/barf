@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      <span>Dog</span>
+      <span>{{ dog.name }}</span>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
@@ -68,25 +68,11 @@ export default {
       }
       return chartData
     },
-    planedAnimalAllocation () {
-      return Object.values(
-        this.$store.getters.planAllocation(this.dog)['animal']
-      ).reduce((a, c) => parseInt(a) + parseInt(c))
+    expectedQuantityPerDay () {
+      return parseInt(this.$store.getters.planRequirements(this.dog))
     },
-    planedVegetablesAllocation () {
-      return Object.values(
-        this.$store.getters.planAllocation(this.dog)['vegetables']
-      ).reduce((a, c) => parseInt(a) + parseInt(c))
-    },
-    expectedAnimalAllocation () {
-      return Object.values(
-        this.$store.getters.planDistribution(this.dog)['animal']
-      ).reduce((a, c) => parseInt(a) + parseInt(c))
-    },
-    expectedVegetablesAllocation () {
-      return Object.values(
-        this.$store.getters.planDistribution(this.dog)['vegetables']
-      ).reduce((a, c) => parseInt(a) + parseInt(c))
+    expectedQuantityWeek () {
+      return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
     }
   },
   methods: {

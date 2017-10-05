@@ -75,9 +75,6 @@
             <a class="icon" href="https://github.com/dahrens/barf">
               <fa pack="fab" name="github" />
             </a>
-            <a class="icon" href="https://stackoverflow.com/users/5992118/dahrens">
-              <fa pack="fab" name="stack-overflow" />
-            </a>
           </p>
         </div>
       </div>
@@ -101,9 +98,6 @@ export default {
 @import "./assets/sass/variables"
 
 @import "../node_modules/bulma/bulma"
-
-.footer
-  margin-top: 0.5em
 
 .faked-panel-block
   padding: 0.5em 0.75em

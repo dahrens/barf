@@ -1,5 +1,15 @@
 <template>
   <div class="plan">
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Plan</h2>
+          <p class="subtitle">
+            Create an individual plan to barf your dog.
+          </p>
+        </div>
+      </div>
+    </section>
     <nav class="plan-tabs">
       <div class="container is-clearfix">
         <div class="dog-selector field has-addons has-addons-right is-pulled-left">
@@ -10,13 +20,14 @@
           </p>
           <div class="control is-expanded">
             <div class="select">
-              <select v-model="selectedDog" v-on:change="dogSelect()">
+              <select v-model="selectedDog" v-on:change="selectDog()" placeholder="foo">
+                <option v-if="dogs.length === 0" disabled selected value="0">! please create a dog -></option>
                 <option v-for="d in dogs" v-bind:value="d.id">{{ d.name }}</option>
               </select>
             </div>
           </div>
           <p class="control">
-            <a class="button">
+            <a v-on:click="createDog()" class="button">
               <span class="icon is-medium">
                 <fa pack="fas" name="plus"/>
               </span>
@@ -45,8 +56,16 @@
         </div>
       </div>
     </nav>
+    <div v-if="!dog" class="container">
+      <div class="notification is-info">
+        <span class="icon">
+          <fa size="2x" pack="fas" name="info" />
+        </span>
+        There is currently no dog selected. Please click the plus button above and provide some data regarding your dog.
+      </div>
+    </div>
     <div v-if="view === 'base'" class="container">
-      <div class="columns">
+      <div v-if="dog" class="columns">
         <div class="column is-one-third">
           <dogPanel :dog="dog"></dogPanel>
         </div>
@@ -59,7 +78,7 @@
       </div>
     </div>
     <div v-if="view === 'meals'" class="container">
-      <div class="meals-config">
+      <div v-if="dog" class="meals-config">
         <div class="field has-addons">
           <p class="control">
             <a class="button">
@@ -118,7 +137,7 @@ import planAllocationPanel from '@/components/PlanAllocationPanel'
 import mealAllocationPanel from '@/components/MealAllocationPanel'
 import ingredients from '@/components/Ingredients'
 import recipes from '@/components/Recipes'
-import { SET_ACTIVE_PLAN_VIEW } from '@/store/mutation-types'
+import { SET_ACTIVE_PLAN_VIEW, SELECT_DOG, INSERT_DOG } from '@/store/mutation-types'
 
 export default {
   name: 'plan',
@@ -132,8 +151,11 @@ export default {
   },
   data () {
     return {
-      selectedDog: 1
+      selectedDog: 0
     }
+  },
+  created () {
+    this.selectedDog = this.$store.state.selectedDog
   },
   computed: {
     view () {
@@ -146,6 +168,9 @@ export default {
       return this.$store.state.dogs
     },
     dog () {
+      if (this.dogs.length === 0 || !this.selectedDog) {
+        return false
+      }
       return this.$store.state.dogs.filter(d => d.id === this.selectedDog)[0]
     }
   },
@@ -153,8 +178,14 @@ export default {
     setActiveView (view) {
       this.$store.commit(SET_ACTIVE_PLAN_VIEW, { view })
     },
-    dogSelect () {
+    selectDog () {
+      this.$store.commit(SELECT_DOG, this.selectedDog)
       this.$forceUpdate()
+    },
+    createDog () {
+      let dog = JSON.parse(JSON.stringify(this.$store.state.newDog))
+      this.$store.commit(INSERT_DOG, dog)
+      this.selectedDog = dog.id
     }
   }
 }
@@ -162,6 +193,9 @@ export default {
 
 <style lang="sass">
 @import "../assets/sass/variables"
+
+.plan
+  margin-bottom: 0.5em
 
 .plan-tabs
   margin-bottom: 0.75em
@@ -177,7 +211,6 @@ export default {
 .meals-config
   display: flex
   justify-content: center
-  margin: 0.5em
 
 .meals-config .field
   margin: 0.5em

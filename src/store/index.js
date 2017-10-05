@@ -1,37 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueMoment from 'vue-moment'
 import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
 import actions from './actions'
+import { version } from '../../package.json'
 
-// const moment = require('moment')
-// require('moment/locale/de')
-
-// Vue.use(VueMoment, {
-//   moment
-// })
-
-Vue.use(VueMoment)
 Vue.use(Vuex)
 
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
+if (state !== null && state.version !== version) {
+  console.warn('Your data was written by an another version!' + version + ' / ' + state.version)
+}
 if (state === null) {
+  defaultState.version = version
   state = defaultState
-  state.events = [
-    { name: 'meal', day: Vue.moment().subtract(4, 'days'), dog: 1, recipe: 1, amount: 500, unit: 'g' },
-    { name: 'meal', day: Vue.moment().subtract(3, 'days'), dog: 1, recipe: 1, amount: 500, unit: 'g' },
-    { name: 'meal', day: Vue.moment().subtract(2, 'days'), dog: 1, recipe: 1, amount: 500, unit: 'g' },
-    { name: 'meal', day: Vue.moment().subtract(1, 'days'), dog: 1, recipe: 1, amount: 500, unit: 'g' }
-  ]
 }
 
 const persistPlugin = store => {
   store.subscribe((mutation, state) => {
-    // The mutation comes in the format of `{ type, payload }`.
-    console.log('persist is enabled', state)
     localStorage.setItem('barf', JSON.stringify(state))
   })
 }

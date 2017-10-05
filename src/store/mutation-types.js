@@ -1,5 +1,6 @@
-export const PERSIST_STORE = 'PERSIST_STORE'
+export const SET_VERSION = 'SET_VERSION'
 
+export const SELECT_DOG = 'SELECT_DOG'
 export const UPDATE_DOG = 'UPDATE_DOG'
 export const INSERT_DOG = 'INSERT_DOG'
 
