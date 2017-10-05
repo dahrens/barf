@@ -23,7 +23,7 @@
                 <p class="control">
                   <div class="file">
                     <label class="file-label">
-                      <input class="file-input" type="file" name="resume">
+                      <input id="import-file" class="file-input" type="file" name="resume" v-on:change="importData()">
                       <span class="file-cta">
                         <span class="file-icon">
                           <fa pack="fas" name="upload" />
@@ -110,10 +110,22 @@ export default {
       dlAnchorElem.click()
     },
     importData () {
-
+      if (window.FileReader) {
+        if (document.getElementById('import-file').files.length !== 1) return
+        let file = document.getElementById('import-file').files[0]
+        let reader = new window.FileReader()
+        reader.onloadend = (e) => {
+          let loadedState = JSON.parse(e.target.result)
+          this.$store.replaceState(loadedState)
+          // to trigger persist!
+          this.$store.commit(SET_VERSION, version)
+        }
+        reader.readAsText(file)
+      } else {
+        console.error('your browser does not support loading files locally.')
+      }
     },
     resetData () {
-      console.log(defaultState)
       this.$store.replaceState(defaultState)
       this.$store.commit(SET_VERSION, version)
     }

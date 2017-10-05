@@ -20,6 +20,9 @@
             This also means that it is <strong>your responsibility to take care</strong> of it.
           </p>
           <p class="subtitle">
+            With default browser settings the data should be persistent.
+          </p>
+          <p class="subtitle">
             If you want to use different devices it might be a little tricky.
             Currently B.A.R.F. does not support anything else except of importing and exporting the data.
             Visit the <router-link class="has-text-primary" :to="{ name: 'Settings' }">settings</router-link> for those features.

@@ -1,7 +1,7 @@
 {
   "name": "barf",
   "version": "1.0.0",
-  "description": "Create barf plans for your dogs and track what they ate.",
+  "description": "Create a barf plan for your dog(s).",
   "author": "Denis Ahrens <dennis.ahrens@mailbox.org>",
   "private": true,
   "scripts": {
