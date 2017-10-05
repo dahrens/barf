@@ -7,6 +7,12 @@ export default {
   [types.WRITE_SETTINGS] (state, settings) {
     state.settings = settings
   },
+  [types.INSERT_DOG] (state, payload) {
+    payload.id = state.ids.dogs
+    state.ids.dogs++
+    state.dogs.push(payload)
+    state.selectedDog = payload.id
+  },
   [types.UPDATE_DOG] (state, payload) {
     let idx = state.dogs.map(d => d.id).indexOf(payload.id)
     if (idx === -1) {
@@ -14,11 +20,12 @@ export default {
     }
     state.dogs[idx] = payload
   },
-  [types.INSERT_DOG] (state, payload) {
-    payload.id = state.ids.dogs
-    state.ids.dogs++
-    state.dogs.push(payload)
-    state.selectedDog = payload.id
+  [types.REMOVE_DOG] (state, dogId) {
+    let idx = state.dogs.map(d => d.id).indexOf(dogId)
+    if (idx === -1) {
+      throw new Error('Remove dog: Unknown DogId ' + dogId)
+    }
+    state.dogs.splice(idx, 1)
   },
   [types.SELECT_DOG] (state, payload) {
     state.ui.selectedDog = payload
