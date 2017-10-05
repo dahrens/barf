@@ -1,4 +1,5 @@
 export const SET_VERSION = 'SET_VERSION'
+export const WRITE_SETTINGS = 'WRITE_SETTINGS'
 
 export const SELECT_DOG = 'SELECT_DOG'
 export const UPDATE_DOG = 'UPDATE_DOG'

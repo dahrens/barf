@@ -5,9 +5,10 @@ export default {
     recipes: 2
   },
   settings: {
-    useStash: true
+    useStash: false
   },
   ui: {
+    selectedDog: 0,
     activePlanView: 'base',
     categoryColors: {
       'animal': '#E8122B',
@@ -60,7 +61,6 @@ export default {
     },
     meals: new Map()
   },
-  selectedDog: 0,
   dogs: [],
   categories: {
     animal: ['meat', 'stomach', 'entrails', 'bones'],

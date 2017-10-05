@@ -89,7 +89,7 @@
             </a>
           </p>
         </div>
-        <div class="field has-addons">
+        <div v-if="settings.useStash" class="field has-addons">
           <p class="control">
             <a class="button">
               <span class="icon">
@@ -155,9 +155,12 @@ export default {
     }
   },
   created () {
-    this.selectedDog = this.$store.state.selectedDog
+    this.selectedDog = this.$store.state.ui.selectedDog
   },
   computed: {
+    settings () {
+      return this.$store.state.settings
+    },
     view () {
       return this.$store.state.ui.activePlanView
     },
@@ -185,7 +188,13 @@ export default {
     createDog () {
       let dog = JSON.parse(JSON.stringify(this.$store.state.newDog))
       this.$store.commit(INSERT_DOG, dog)
+      this.$store.dispatch('allocate', {
+        dog,
+        fastenDays: [6],
+        vegetarianDays: []
+      })
       this.selectedDog = dog.id
+      this.selectDog()
     }
   }
 }

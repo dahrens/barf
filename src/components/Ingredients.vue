@@ -43,7 +43,7 @@
             </template>
           </a>
           <span v-if="isActive(ingredient)" class="panel-block">
-            <stashIngredient :ingredient="ingredient"></stashIngredient>
+            <stashIngredient v-if="settings.useStash" :ingredient="ingredient"></stashIngredient>
           </span>
       </template>
     </template>
@@ -77,6 +77,9 @@ export default {
     }
   },
   computed: {
+    settings () {
+      return this.$store.state.settings
+    },
     ingredients () {
       return this.$store.state.ingredients
     }

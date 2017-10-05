@@ -27,6 +27,7 @@
               <span class="is-size-5">PLAN</span>
             </router-link>
             <router-link
+              v-if="settings.useStash"
               class="nav-item is-tab"
               :class="{'is-active': $route.fullPath ==='/stash'}"
               :to="{ name: 'Stash' }">
@@ -88,6 +89,11 @@ export default {
   data () {
     return {
       mobileMenu: false
+    }
+  },
+  computed: {
+    settings () {
+      return this.$store.state.settings
     }
   }
 }

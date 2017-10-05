@@ -64,11 +64,11 @@
             <div class="field">
               <div class="control">
                 <label class="radio">
-                  <input type="radio" name="member">
+                  <input type="radio" name="useStash" :value="true" v-model="settings.useStash" v-on:change="writeSettings()">
                   Yes
                 </label>
                 <label class="radio">
-                  <input type="radio" name="member">
+                  <input type="radio" name="useStash" :value="false" v-model="settings.useStash" v-on:change="writeSettings()">
                   No
                 </label>
               </div>
@@ -84,7 +84,7 @@
 <script>
 import jsonSize from 'json-size'
 import { version } from '../../package.json'
-import { SET_VERSION } from '@/store/mutation-types'
+import { SET_VERSION, WRITE_SETTINGS } from '@/store/mutation-types'
 import defaultState from '@/store/default-state'
 
 function bytesToSize (bytes) {
@@ -97,11 +97,18 @@ function bytesToSize (bytes) {
 export default {
   name: 'settings',
   computed: {
+    settings () {
+      return this.$store.state.settings
+    },
     dataSize () {
       return bytesToSize(jsonSize(this.$store.state))
     }
   },
   methods: {
+    writeSettings () {
+      this.$store.commit(WRITE_SETTINGS, this.settings)
+      this.$forceUpdate()
+    },
     exportData () {
       let data = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.$store.state))
       let dlAnchorElem = document.getElementById('downloadAnchorElem')
