@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading">
-      <span>{{ dog.name }}</span>
+      <span>Dog: <strong>{{ dog.name }}</strong></span>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
@@ -14,65 +14,32 @@
     <template v-if="!collapsed">
       <dogDetail v-if="!edit" :dog="dog"></dogDetail>
       <dogEdit v-if="edit" :dog="dog"></dogEdit>
-      <planEdit v-if="edit" :dog="dog"></planEdit>
-      <div class="faked-panel-block">
-        <distributionChart :chartData="distributionChartData"></distributionChart>
-      </div>
+      <planMetaEdit v-if="edit" :dog="dog"></planMetaEdit>
+      <planDistributionEdit v-if="edit" :dog="dog"></planDistributionEdit>
     </template>
   </nav>
 </template>
 
 <script>
-import planEdit from '@/components/PlanEdit'
 import dogEdit from '@/components/DogEdit'
 import dogDetail from '@/components/DogDetail'
-import distributionChart from '@/components/charts/DistributionChart'
+import planMetaEdit from '@/components/PlanMetaEdit'
+import planDistributionEdit from '@/components/PlanDistributionEdit'
 import { UPDATE_DOG } from '@/store/mutation-types'
 
 export default {
   name: 'dogPanel',
   props: ['dog'],
   components: {
-    planEdit,
     dogEdit,
     dogDetail,
-    distributionChart
+    planMetaEdit,
+    planDistributionEdit
   },
   data () {
     return {
       collapsed: false,
       edit: false
-    }
-  },
-  computed: {
-    distributionChartData () {
-      let chartData = {
-        datasets: [{
-          data: [],
-          backgroundColor: [],
-          borderWidth: []
-        }],
-        labels: []
-      }
-      for (let category in this.$store.getters.planDistribution(this.dog)) {
-        let distSubCategories = this.$store.getters.planDistribution(this.dog)[category]
-        for (let subCategory in distSubCategories) {
-          let recommendedAmount = distSubCategories[subCategory]
-          chartData.datasets[0].data.push(recommendedAmount)
-          chartData.datasets[0].backgroundColor.push(
-            this.$store.state.ui.subCategoryColors[subCategory]
-          )
-          chartData.datasets[0].borderWidth.push(3)
-          chartData.labels.push(recommendedAmount + 'g ' + subCategory)
-        }
-      }
-      return chartData
-    },
-    expectedQuantityPerDay () {
-      return parseInt(this.$store.getters.planRequirements(this.dog))
-    },
-    expectedQuantityWeek () {
-      return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
     }
   },
   methods: {

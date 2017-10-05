@@ -67,7 +67,7 @@ export default {
   dogFoodQuantityPerDay: (state) => (dog) => {
     let factor = state.activities[dog.activity]
     if (dog.castrated) factor = factor * 0.8
-    return dog.weight * (dog.percentOfWeight / 100) * factor
+    return dog.plan.idealWeight * (dog.plan.percentOfWeight / 100) * factor
   },
   planRequirements: (state, getters) => (dog) => {
     let foodPerDay = getters.dogFoodQuantityPerDay(dog)

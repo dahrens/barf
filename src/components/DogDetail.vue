@@ -1,56 +1,102 @@
 <template>
   <div class="dog-detail">
-    <div class="faked-panel-block">
-      <nav class="level">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">
-              <span class="icon is-large">
-                <fa v-if="dog.sex === 'm'" size="5x" pack="fas" name="mars" />
-                <fa v-else size="5x" pack="fas" name="venus" />
-              </span>
-            </p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">
-              <span class="icon is-large">
-                <fa size="3x" pack="fas" name="tachometer-alt" />
-              </span>
-            </p>
-            <p class="subtitle"> {{ dog.weight }}g</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">
-              <span class="icon is-large">
-                <fa size="3x" pack="fas" name="futbol" />
-              </span>
-            </p>
-            <p class="subtitle"> {{ dog.activity }}</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">
-              <span class="icon is-large">
-                <fa v-if="dog.castrated" size="3x" pack="fas" name="check" />
-                <fa v-else size="3x" pack="fas" name="times" />
-              </span>
-            </p>
-            <p class="subtitle">castrated</p>
-          </div>
-        </div>
-      </nav>
-    </div>
+    <levelBlock
+      :data="[{
+        label: 'portion per day',
+        value: expectedQuantityPerDay + 'g'
+      }, {
+        label: 'portion per week',
+        value: expectedQuantityPerWeek + 'g'
+      }]"
+      :helpText="formulaString">
+    </levelBlock>
+    <levelBlock
+      :data="[{
+        label: 'ideal weight',
+        value: parseInt(dog.plan.idealWeight / 1000) + 'kg'
+      }, {
+        label: 'current weight',
+        value: parseInt(dog.currentWeight / 1000) + 'kg'
+        }]">
+    </levelBlock>
+    <levelBlock
+      :data="[{
+        label: 'birthday-cake',
+        value: 5,
+        iconLabel: true
+      }, {
+        label: 'futbol',
+        value: dog.activity,
+        iconLabel: true
+      }]">
+    </levelBlock>
+    <levelBlock
+      :data="[{
+        label: 'sex',
+        value: sexIcon,
+        iconValue: true
+      }, {
+        label: 'castrated',
+        value: castratedIcon,
+        iconValue: true
+      }]">
+    </levelBlock>
   </div>
 </template>
 
 <script>
+import levelBlock from '@/components/include/LevelBlock'
+
 export default {
   name: 'dogDetail',
-  props: ['dog']
+  props: ['dog'],
+  components: {
+    levelBlock
+  },
+  computed: {
+    castratedIcon () {
+      if (this.dog.castrated) return 'check-circle'
+      return 'times-circle'
+    },
+    sexIcon () {
+      if (this.dog.sex === 'm') return 'mars'
+      return 'venus'
+    },
+    dogActivity () {
+      return this.$store.state.activities[this.dog.activity]
+    },
+    expectedQuantityPerDay () {
+      return parseInt(this.$store.getters.planRequirements(this.dog))
+    },
+    expectedQuantityPerWeek () {
+      return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
+    },
+    formulaString () {
+      let f = this.dog.plan.idealWeight + 'g * '
+      f += (this.dog.plan.percentOfWeight / 100)
+      f += ' * ' + this.dogActivity
+      if (this.dog.castrated) {
+        f += ' * 0.8'
+      }
+      f += ' = ' + this.expectedQuantityPerDay + 'g'
+      f += ' * ' + this.dog.plan.week.length + ' = '
+      f += this.expectedQuantityPerWeek + 'g'
+      return f
+    }
+  },
+  methods: {
+    calculateAge () {
+      console.log(this.dog.birthday)
+      let birthday = this.dog.birthday
+      if (!birthday) return
+      let today = new Date()
+      var age = today.getFullYear() - birthday.getFullYear()
+      var m = today.getMonth() - birthday.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+        age--
+      }
+      return age
+    }
+  }
 }
 </script>

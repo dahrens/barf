@@ -49,14 +49,14 @@
     </div>
     <div v-if="view === 'base'">
       <div v-if="dog" class="columns">
-        <div class="column is-one-third">
+        <div class="column is-one-quarter">
+          <planAllocationPanel :dog="dog"></planAllocationPanel>
+        </div>
+        <div class="column is-one-quarter">
           <dogPanel :dog="dog"></dogPanel>
         </div>
         <div class="column">
           <planAllocationWeek :dog="dog"></planAllocationWeek>
-        </div>
-        <div class="column is-one-third">
-          <planAllocationPanel :dog="dog"></planAllocationPanel>
         </div>
       </div>
     </div>

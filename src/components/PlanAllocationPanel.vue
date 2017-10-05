@@ -9,29 +9,7 @@
     </p>
     <template v-if="!collapsed">
       <div class="faked-panel-block">
-        <nav class="level">
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">
-                portion per day
-              </p>
-              <p class="subtitle">{{ expectedQuantityPerDay }}g</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">
-                portion per week
-              </p>
-              <p class="subtitle">{{ expectedQuantityWeek }}g</p>
-            </div>
-          </div>
-        </nav>
-        <p class="help is-info has-text-centered">
-          {{ dog.weight }}g * {{ dog.percentOfWeight / 100 }} * {{ dogActivity }}
-          <template v-if="dog.castrated">* 0.8</template> = {{ expectedQuantityPerDay }}g
-          * {{ dog.plan.week.length }} = {{ expectedQuantityWeek }}g
-        </p>
+        <distributionChart :chartData="distributionChartData"></distributionChart>
       </div>
       <div class="panel-block">
         <allocationChart :chartData="allocationChartData"></allocationChart>
@@ -41,6 +19,7 @@
 </template>
 
 <script>
+import distributionChart from '@/components/charts/DistributionChart'
 import allocationChart from '@/components/charts/AllocationChart'
 
 export default {
@@ -51,7 +30,8 @@ export default {
     }
   },
   components: {
-    allocationChart
+    allocationChart,
+    distributionChart
   },
   data () {
     return {
@@ -59,14 +39,34 @@ export default {
     }
   },
   computed: {
-    dogActivity () {
-      return this.$store.state.activities[this.dog.activity]
-    },
     expectedQuantityPerDay () {
       return parseInt(this.$store.getters.planRequirements(this.dog))
     },
     expectedQuantityWeek () {
       return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
+    },
+    distributionChartData () {
+      let chartData = {
+        datasets: [{
+          data: [],
+          backgroundColor: [],
+          borderWidth: []
+        }],
+        labels: []
+      }
+      for (let category in this.$store.getters.planDistribution(this.dog)) {
+        let distSubCategories = this.$store.getters.planDistribution(this.dog)[category]
+        for (let subCategory in distSubCategories) {
+          let recommendedAmount = distSubCategories[subCategory]
+          chartData.datasets[0].data.push(recommendedAmount)
+          chartData.datasets[0].backgroundColor.push(
+            this.$store.state.ui.subCategoryColors[subCategory]
+          )
+          chartData.datasets[0].borderWidth.push(3)
+          chartData.labels.push(recommendedAmount + 'g ' + subCategory)
+        }
+      }
+      return chartData
     },
     allocationChartData () {
       let chartData = {

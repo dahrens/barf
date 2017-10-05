@@ -35,10 +35,12 @@ export default {
     birthday: null,
     sex: 'm',
     castrated: true,
-    weight: 25000,
+    currentWeight: 25000,
     activity: 'moderate',
-    percentOfWeight: 2,
     plan: {
+      idealWeight: 25000,
+      percentOfWeight: 2,
+      calculated: true,
       animal: 80,
       vegetables: 20,
       distribution: {

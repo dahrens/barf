@@ -1,20 +1,22 @@
 <template>
-  <div class="faked-panel-block">
-    <template>
-      <div class="columns distribution-slider">
-        <div class="column is-3">
-          animal
+  <div class="plan-distribution-edit">
+    <div class="faked-panel-block">
+      <template>
+        <div class="columns distribution-slider">
+          <div class="column is-3">
+            animal
+          </div>
+          <div class="column is-6">
+            <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
+          </div>
+          <div class="column is-3">
+            <span class="is-pulled-left">vegetables</span>
+          </div>
         </div>
-        <div class="column is-6">
-          <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
-        </div>
-        <div class="column is-3">
-          <span class="is-pulled-left">vegetables</span>
-        </div>
-      </div>
-      <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
-      <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
-    </template>
+        <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
+        <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
+      </template>
+    </div>
   </div>
 </template>
 

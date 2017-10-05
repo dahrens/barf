@@ -70,7 +70,7 @@
             </div>
           </div>
           <dogEdit v-if="step === 1" :dog="newDog"></dogEdit>
-          <planEdit v-if="step === 2" :dog="newDog"></planEdit>
+          <planDistributionEdit v-if="step === 2" :dog="newDog"></planDistributionEdit>
           <dogDetail v-if="step === 3" :dog="newDog"></dogDetail>
           <div class="faked-panel-block">
             <div class="field has-addons">
@@ -108,7 +108,7 @@
 
 <script>
 import dogEdit from '@/components/DogEdit'
-import planEdit from '@/components/PlanEdit'
+import planDistributionEdit from '@/components/PlanDistributionEdit'
 import dogDetail from '@/components/DogDetail'
 import { SELECT_DOG, INSERT_DOG, REMOVE_DOG } from '@/store/mutation-types'
 
@@ -116,7 +116,7 @@ export default {
   name: 'dogSelector',
   components: {
     dogEdit,
-    planEdit,
+    planDistributionEdit,
     dogDetail
   },
   data () {
