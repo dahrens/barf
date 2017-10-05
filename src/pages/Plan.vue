@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="column">
-          <div class="tabs is-fullwidth is-toggle">
+          <div class="tabs is-fullwidth is-boxed">
             <ul>
               <li :class="{'is-active': view === 'base'}">
                 <a v-on:click="setActiveView('base')">
@@ -206,6 +206,7 @@ export default {
 
 <style lang="sass">
 @import "../assets/sass/variables"
+@import "../../node_modules/bulma/bulma"
 
 .plan
   margin-bottom: 0.5em
@@ -219,6 +220,21 @@ export default {
 
 .dog-selector .field
   margin: 0 0.5em
+
+.tabs li
+  background-color: $dark
+
+.tabs a
+  color: white !important
+
+.tabs li.is-active a
+  color: $dark !important
+
+.tabs a:hover
+  background-color: $grey-dark !important
+
+.tabs li.is-active a:hover
+  background-color: white !important
 
 .meals-config
   display: flex
