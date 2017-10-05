@@ -31,11 +31,11 @@ export default {
     'highly': 2
   },
   newDog: {
-    name: 'Delphi',
-    birthday: new Date(2012, 2, 15),
+    name: '',
+    birthday: null,
     sex: 'm',
     castrated: true,
-    weight: 15000,
+    weight: 25000,
     activity: 'moderate',
     percentOfWeight: 2,
     plan: {

@@ -7,11 +7,12 @@
       <div class="field-body">
         <div class="field">
           <p class="control has-icons-left">
-            <input v-model="dog.name" class="input" type="text" placeholder="Name">
+            <input v-model="dog.name" class="input" required type="text" placeholder="Name" :class="{'is-danger': dog.name === '', 'is-success': dog.name !== ''}">
             <span class="icon is-left">
               <fa pack="fas" name="address-card" />
             </span>
           </p>
+          <p v-if="dog.name === ''" class="help is-danger">Name can not be empty.</p>
         </div>
       </div>
     </div>
@@ -34,7 +35,7 @@
       <div class="field-body">
         <div class="field">
           <p class="control has-icons-left">
-            <input v-model="dog.weight" class="input" type="number" placeholder="weight" min="0" max="150000" step="50">
+            <input v-model="dog.weight" class="input" type="number" placeholder="weight" min="0" max="150000" step="500">
             <span class="icon is-left">
               <fa pack="fas" name="tachometer-alt" />
             </span>
@@ -47,20 +48,18 @@
         <label class="label">Activity</label>
       </div>
       <div class="field-body">
-        <div class="field is-expanded">
-          <div class="field has-addons">
-            <div class="control">
-              <a class="button is-static">
-                <span class="icon is-left">
-                  <fa pack="fas" name="futbol" />
-                </span>
-              </a>
-            </div>
-            <div class="select is-fullwidth">
-              <select v-model="dog.activity">
-                <option v-for="option in activities" v-model="dog.activity">{{ option.activity }}</option>
-              </select>
-            </div>
+        <div class="field is-expanded has-addons">
+          <div class="control">
+            <a class="button is-static">
+              <span class="icon is-left">
+                <fa pack="fas" name="futbol" />
+              </span>
+            </a>
+          </div>
+          <div class="select is-fullwidth">
+            <select v-model="dog.activity">
+              <option v-for="option in activities" v-model="dog.activity">{{ option.activity }}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -95,7 +94,9 @@
         </label>
       </div>
       <div class="field-body">
-        <input type="checkbox" v-model="dog.castrated">
+        <div class="field">
+          <input type="checkbox" v-model="dog.castrated">
+        </div>
       </div>
     </div>
   </div>

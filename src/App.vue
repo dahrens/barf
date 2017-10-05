@@ -100,6 +100,7 @@ export default {
 @import "./assets/sass/variables"
 
 @import "../node_modules/bulma/bulma"
+@import "./assets/sass/steps"
 
 .faked-panel-block
   padding: 0.5em 0.75em

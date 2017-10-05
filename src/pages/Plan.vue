@@ -53,7 +53,7 @@
           <dogPanel :dog="dog"></dogPanel>
         </div>
         <div class="column">
-          <planWeek :dog="dog"></planWeek>
+          <planAllocationWeek :dog="dog"></planAllocationWeek>
         </div>
         <div class="column is-one-third">
           <planAllocationPanel :dog="dog"></planAllocationPanel>
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import planWeek from '@/components/PlanWeek'
+import planAllocationWeek from '@/components/PlanAllocationWeek'
 import planMeal from '@/components/PlanMeal'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
@@ -117,7 +117,7 @@ import { SET_ACTIVE_PLAN_VIEW } from '@/store/mutation-types'
 export default {
   name: 'plan',
   components: {
-    planWeek,
+    planAllocationWeek,
     planMeal,
     dogPanel,
     dogSelector,
@@ -165,13 +165,13 @@ export default {
   background-color: whitesmoke
 
 .dog-selector
-  background-color: $primary
+  background-color: $dark
 
 .dog-selector .field
   margin: 0 0.5em
 
 .tabs li
-  background-color: $primary
+  background-color: $dark
 
 .tabs a
   color: white !important
@@ -180,20 +180,20 @@ export default {
   border: 0 !important
 
 .tabs li
-  border-bottom: 1px solid $primary !important
+  border-bottom: 1px solid $dark !important
 
 .tabs li a:hover
-  border-bottom: 1px solid $success !important
+  border-bottom: 1px solid $grey-light !important
 
 .tabs li.is-active
-  border-top: 1px solid $primary !important
+  border-top: 1px solid $dark !important
   border-bottom: 0 !important
 
 .tabs li.is-active a
-  color: $primary !important
+  color: $dark !important
 
 .tabs a:hover
-  background-color: $success !important
+  background-color: $grey-light !important
 
 .tabs li.is-active a:hover
   background-color: white !important

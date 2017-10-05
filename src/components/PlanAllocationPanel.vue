@@ -45,7 +45,11 @@ import allocationChart from '@/components/charts/AllocationChart'
 
 export default {
   name: 'planAllocationPanel',
-  props: ['dog'],
+  props: {
+    dog: {
+      required: true
+    }
+  },
   components: {
     allocationChart
   },

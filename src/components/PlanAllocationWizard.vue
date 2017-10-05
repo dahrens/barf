@@ -84,7 +84,15 @@
 <script>
 export default {
   name: 'planAllocationWizard',
-  props: ['dog'],
+  props: {
+    dog: {
+      required: true
+    },
+    showWarning: {
+      required: false,
+      default: () => (true)
+    }
+  },
   data () {
     return {
       fastenDays: [false, false, false, false, false, false, false],

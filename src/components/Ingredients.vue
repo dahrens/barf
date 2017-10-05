@@ -31,8 +31,11 @@
       </p>
     </div>
     <p v-if="!collapsed" class="panel-tabs">
-      <a v-on:click="subCategoryFilter = 'all'" :class="{'is-active': subCategoryFilter === 'all'}">all</a>
-      <a v-on:click="subCategoryFilter = subCategory" v-for="subCategory in subCategories" :class="{'is-active': subCategoryFilter === subCategory}">{{ subCategory }}</a>
+      <a v-on:click="subCategoryFilter = 'all'"
+        :class="{'is-active': subCategoryFilter === 'all'}">all</a>
+      <a v-for="subCategory in subCategories"
+        v-on:click="subCategoryFilter = subCategory"
+        :class="{'is-active': subCategoryFilter === subCategory}">{{ subCategory }}</a>
     </p>
     <template v-if="!collapsed">
       <template v-for="ingredient in ingredients">
