@@ -13,33 +13,7 @@
     <nav class="planbar">
       <div class="columns is-gapless">
         <div class="column is-one-quarter dog-selector">
-          <div class="field has-addons has-addons-right has-addons-left">
-            <p class="control">
-              <a v-on:click="deleteSelectedDog()" class="button is-medium is-danger" :disabled="selectedDog === 0">
-                <span class="icon is-medium">
-                  <fa pack="fas" name="trash"/>
-                </span>
-              </a>
-            </p>
-            <div class="control has-icons-left is-expanded">
-              <div class="select is-fullwidth is-medium">
-                <select v-model="selectedDog" v-on:change="selectDog()">
-                  <option v-if="dogs.length === 0" disabled selected value="0">create a dog by clicking the plus icon</option>
-                  <option v-for="d in dogs" v-bind:value="d.id">{{ d.name }}</option>
-                </select>
-                <div class="icon is-left has-text-primary">
-                  <fa pack="fas" name="paw" />
-                </div>
-              </div>
-            </div>
-            <p class="control">
-              <a v-on:click="createDog()" class="button is-medium is-success">
-                <span class="icon is-medium">
-                  <fa pack="fas" name="plus"/>
-                </span>
-              </a>
-            </p>
-          </div>
+          <dogSelector></dogSelector>
         </div>
         <div class="column">
           <div class="tabs is-fullwidth is-boxed">
@@ -134,10 +108,11 @@
 import planWeek from '@/components/PlanWeek'
 import planMeal from '@/components/PlanMeal'
 import dogPanel from '@/components/DogPanel'
+import dogSelector from '@/components/DogSelector'
 import planAllocationPanel from '@/components/PlanAllocationPanel'
 import mealAllocationPanel from '@/components/MealAllocationPanel'
 import ingredients from '@/components/Ingredients'
-import { SET_ACTIVE_PLAN_VIEW, SELECT_DOG, INSERT_DOG } from '@/store/mutation-types'
+import { SET_ACTIVE_PLAN_VIEW } from '@/store/mutation-types'
 
 export default {
   name: 'plan',
@@ -145,21 +120,10 @@ export default {
     planWeek,
     planMeal,
     dogPanel,
+    dogSelector,
     planAllocationPanel,
     mealAllocationPanel,
     ingredients
-  },
-  data () {
-    return {
-      selectedDog: 0
-    }
-  },
-  created () {
-    this.selectedDog = this.$store.state.ui.selectedDog
-    if (this.selectedDog === 0 && this.dogs.length) {
-      this.selectedDog = this.dogs[0].id
-      this.selectDog()
-    }
   },
   computed: {
     settings () {
@@ -175,30 +139,15 @@ export default {
       return this.$store.state.dogs
     },
     dog () {
-      if (this.dogs.length === 0 || !this.selectedDog) {
+      if (this.dogs.length === 0 || !this.$store.state.ui.selectedDog) {
         return false
       }
-      return this.$store.state.dogs.filter(d => d.id === this.selectedDog)[0]
+      return this.$store.state.dogs.filter(d => d.id === this.$store.state.ui.selectedDog)[0]
     }
   },
   methods: {
     setActiveView (view) {
       this.$store.commit(SET_ACTIVE_PLAN_VIEW, { view })
-    },
-    selectDog () {
-      this.$store.commit(SELECT_DOG, this.selectedDog)
-      this.$forceUpdate()
-    },
-    createDog () {
-      let dog = JSON.parse(JSON.stringify(this.$store.state.newDog))
-      this.$store.commit(INSERT_DOG, dog)
-      this.$store.dispatch('allocate', {
-        dog,
-        fastenDays: [],
-        vegetarianDays: [2, 5]
-      })
-      this.selectedDog = dog.id
-      this.selectDog()
     }
   }
 }
