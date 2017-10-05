@@ -122,7 +122,8 @@ export default {
   data () {
     return {
       showCreate: false,
-      step: 0
+      step: 0,
+      newDog: null
     }
   },
   computed: {
@@ -137,12 +138,8 @@ export default {
         this.$store.commit(SELECT_DOG, dogId)
       }
     },
-    newDog () {
-      return this.$store.state.newDog
-    },
     canStepFurther () {
       if (this.step === 1) {
-        console.log(this.newDog)
         if (!this.newDog.name) return false
       }
       return true
@@ -177,6 +174,7 @@ export default {
     createDog () {
       this.showCreate = true
       this.step = 1
+      this.newDog = JSON.parse(JSON.stringify(this.$store.state.newDog))
     },
     saveNewDog () {
       let dog = JSON.parse(JSON.stringify(this.newDog))
