@@ -10,49 +10,58 @@
         </div>
       </div>
     </section>
-    <nav class="plan-tabs">
-      <div class="container is-clearfix">
-        <div class="dog-selector field has-addons has-addons-right is-pulled-left">
-          <p class="control">
-            <a class="button is-static">
-              <span><strong>selected dog</strong></span>
-            </a>
-          </p>
-          <div class="control is-expanded">
-            <div class="select">
-              <select v-model="selectedDog" v-on:change="selectDog()" placeholder="foo">
-                <option v-if="dogs.length === 0" disabled selected value="0">! please create a dog -></option>
-                <option v-for="d in dogs" v-bind:value="d.id">{{ d.name }}</option>
-              </select>
+    <nav class="planbar">
+      <div class="columns is-gapless">
+        <div class="column is-one-third dog-selector">
+          <div class="field has-addons has-addons-right has-addons-left">
+            <p class="control">
+              <a v-on:click="createDog()" class="button is-medium is-success">
+                <span class="icon is-medium">
+                  <fa pack="fas" name="plus"/>
+                </span>
+              </a>
+            </p>
+            <div class="control has-icons-left is-expanded">
+              <div class="select is-fullwidth is-medium">
+                <select v-model="selectedDog" v-on:change="selectDog()">
+                  <option v-if="dogs.length === 0" disabled selected value="0">create a dog by clicking the plus icon</option>
+                  <option v-for="d in dogs" v-bind:value="d.id">{{ d.name }}</option>
+                </select>
+                <div class="icon is-left has-text-primary">
+                  <fa pack="fas" name="paw" />
+                </div>
+              </div>
             </div>
+            <p class="control">
+              <a v-on:click="deleteSelectedDog()" class="button is-medium is-danger" :disabled="selectedDog === 0">
+                <span class="icon is-medium">
+                  <fa pack="fas" name="trash"/>
+                </span>
+              </a>
+            </p>
           </div>
-          <p class="control">
-            <a v-on:click="createDog()" class="button">
-              <span class="icon is-medium">
-                <fa pack="fas" name="plus"/>
-              </span>
-            </a>
-          </p>
         </div>
-        <div class="tabs is-pulled-right">
-          <ul>
-            <li :class="{'is-active': view === 'base'}">
-              <a v-on:click="setActiveView('base')">
-                <span class="icon is-medium">
-                  <fa pack="fas" name="chart-pie"/>
-                </span>
-                BASEMENT
-              </a>
-            </li>
-            <li :class="{'is-active': view === 'meals'}">
-              <a v-on:click="setActiveView('meals')">
-                <span class="icon is-medium">
-                  <fa pack="fas" name="calendar-alt"/>
-                </span>
-                MEALS
-              </a>
-            </li>
-          </ul>
+        <div class="column">
+          <div class="tabs is-fullwidth is-toggle">
+            <ul>
+              <li :class="{'is-active': view === 'base'}">
+                <a v-on:click="setActiveView('base')">
+                  <span class="icon is-medium">
+                    <fa pack="fas" name="chart-pie"/>
+                  </span>
+                  BASEMENT
+                </a>
+              </li>
+              <li :class="{'is-active': view === 'meals'}">
+                <a v-on:click="setActiveView('meals')">
+                  <span class="icon is-medium">
+                    <fa pack="fas" name="calendar-alt"/>
+                  </span>
+                  MEALS
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -61,10 +70,10 @@
         <span class="icon">
           <fa size="2x" pack="fas" name="info" />
         </span>
-        There is currently no dog selected. Please click the plus button above and provide some data regarding your dog.
+        There is currently no dog available. Please click the plus button above and provide some data regarding your dog.
       </div>
     </div>
-    <div v-if="view === 'base'" class="container">
+    <div v-if="view === 'base'">
       <div v-if="dog" class="columns">
         <div class="column is-one-third">
           <dogPanel :dog="dog"></dogPanel>
@@ -77,8 +86,8 @@
         </div>
       </div>
     </div>
-    <div v-if="view === 'meals'" class="container">
-      <div v-if="dog" class="meals-config">
+    <div v-if="view === 'meals' && dog">
+      <div class="meals-config">
         <div class="field has-addons">
           <p class="control">
             <a class="button">
@@ -108,19 +117,10 @@
           </p>
         </div>
       </div>
-      <div class="columns">
-        <div v-for="day in dog.plan.week" class="column">
-          <div class="weekday">
-            <strong>{{ day.toUpperCase() }}</strong>
-          </div>
-        </div>
-      </div>
+      <planMeal :dog="dog"></planMeal>
       <div class="columns">
         <div class="column">
           <ingredients></ingredients>
-        </div>
-        <div class="column">
-          <recipes></recipes>
         </div>
         <div class="column">
           <mealAllocationPanel :dog="dog"></mealAllocationPanel>
@@ -132,22 +132,22 @@
 
 <script>
 import planWeek from '@/components/PlanWeek'
+import planMeal from '@/components/PlanMeal'
 import dogPanel from '@/components/DogPanel'
 import planAllocationPanel from '@/components/PlanAllocationPanel'
 import mealAllocationPanel from '@/components/MealAllocationPanel'
 import ingredients from '@/components/Ingredients'
-import recipes from '@/components/Recipes'
 import { SET_ACTIVE_PLAN_VIEW, SELECT_DOG, INSERT_DOG } from '@/store/mutation-types'
 
 export default {
   name: 'plan',
   components: {
     planWeek,
+    planMeal,
     dogPanel,
     planAllocationPanel,
     mealAllocationPanel,
-    ingredients,
-    recipes
+    ingredients
   },
   data () {
     return {
@@ -156,6 +156,10 @@ export default {
   },
   created () {
     this.selectedDog = this.$store.state.ui.selectedDog
+    if (this.selectedDog === 0 && this.dogs.length) {
+      this.selectedDog = this.dogs[0].id
+      this.selectDog()
+    }
   },
   computed: {
     settings () {
@@ -190,8 +194,8 @@ export default {
       this.$store.commit(INSERT_DOG, dog)
       this.$store.dispatch('allocate', {
         dog,
-        fastenDays: [6],
-        vegetarianDays: []
+        fastenDays: [],
+        vegetarianDays: [2, 5]
       })
       this.selectedDog = dog.id
       this.selectDog()
@@ -206,16 +210,15 @@ export default {
 .plan
   margin-bottom: 0.5em
 
-.plan-tabs
-  margin-bottom: 0.75em
+.planbar
+  margin-bottom: 0.5em
   background-color: whitesmoke
 
 .dog-selector
-  position: relative
-  top: 0.5em
+  background-color: $primary
 
-.weekday
-  border: 1px solid whitesmoke
+.dog-selector .field
+  margin: 0 0.5em
 
 .meals-config
   display: flex

@@ -44,7 +44,7 @@
                   </a>
                 </p>
                 <p class="control">
-                  <a v-on:click="resetData()" class="button">
+                  <a v-on:click="resetData()" class="button is-danger">
                     <span class="icon">
                       <fa pack="fas" name="bomb" />
                     </span>

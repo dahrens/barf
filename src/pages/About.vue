@@ -10,7 +10,7 @@
         </div>
       </div>
     </section>
-    <section class="hero is-medium is-dark">
+    <section class="hero is-medium is-light">
       <div class="hero-body">
         <div class="container">
           <h2 class="title">DATA &amp; PRIVACY</h2>

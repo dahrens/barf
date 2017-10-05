@@ -57,7 +57,15 @@ export default {
       week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       allocation: [[], [], [], [], [], [], []],
       mealAllocation: 'manual',
-      meals: [[], [], [], [], [], [], []]
+      meals: [
+        { morning: [], evening: [] },
+        { morning: [], evening: [] },
+        { morning: [], evening: [] },
+        { morning: [], evening: [] },
+        { morning: [], evening: [] },
+        { morning: [], evening: [] },
+        { morning: [], evening: [] }
+      ]
     },
     meals: new Map()
   },
