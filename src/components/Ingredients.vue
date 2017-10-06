@@ -12,10 +12,10 @@
           <fa v-if="expandedCreate" pack="fas" name="times"/>
         </span>
       </a>
-      <a v-on:click="expandAll = !expandAll" class="is-light is-pulled-right">
+      <a v-on:click="expandMany = !expandMany" class="is-light is-pulled-right">
         <span class="icon has-text-dark panel-heading-icon">
-          <fa v-if="expandAll" pack="fas" name="arrows-alt-v" size="sm" />
-          <fa v-if="!expandAll" pack="fas" name="crosshairs" size="sm" />
+          <fa v-if="expandMany" pack="fas" name="arrows-alt-v" size="sm" />
+          <fa v-if="!expandMany" pack="fas" name="crosshairs" size="sm" />
         </span>
       </a>
     </p>
@@ -77,7 +77,7 @@ export default {
   },
   data () {
     return {
-      expandAll: false,
+      expandMany: false,
       expandedCreate: false,
       collapsed: false,
       active: [],
@@ -107,10 +107,10 @@ export default {
   methods: {
     activate: function (record) {
       if (this.active.indexOf(record) === -1) {
-        if (!this.expandAll) this.active = []
+        if (!this.expandMany) this.active = []
         this.active.push(record)
       } else {
-        if (!this.expandAll) this.active = []
+        if (!this.expandMany) this.active = []
         this.active.splice(this.active.indexOf(record), 1)
       }
     },

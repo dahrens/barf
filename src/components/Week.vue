@@ -13,6 +13,12 @@
       <a v-on:click="wizard = !wizard" class="icon is-pulled-right has-text-dark">
         <fa pack="fas" name="magic" />
       </a>
+      <a v-on:click="expandMany = !expandMany" class="is-light is-pulled-right">
+        <span class="icon has-text-dark panel-heading-icon">
+          <fa v-if="expandMany" pack="fas" name="arrows-alt-v" size="sm" />
+          <fa v-if="!expandMany" pack="fas" name="crosshairs" size="sm" />
+        </span>
+      </a>
     </p>
     <template v-if="!collapsed && edit" v-for="(weekday, index) in dog.plan.week">
       <p class="faked-panel-block">
@@ -67,12 +73,19 @@
       </span>
     </template>
     <template v-if="!collapsed && !edit" v-for="(weekday, index) in dog.plan.week">
-      <p class="panel-block">
+      <a v-on:click="activate(weekday)" class="panel-block" :class="{'is-active': isActive(weekday)}">
+        <p class="panel-icon">
+          <fa v-if ="!isActive(weekday)" pack="fas" name="caret-right" />
+          <fa v-if ="isActive(weekday)" pack="fas" name="caret-down" />
+        </p>
         <span>{{ weekday }}</span>&nbsp;
         <template v-for="a in allocation(index)">
           <subCategoryTag :subCategory="a.subCategory" :textBefore="a.amount + 'g '"></subCategoryTag>&nbsp;
         </template>
-      </p>
+      </a>
+      <span v-if="isActive(weekday)" class="panel-block">
+        hi there
+      </span>
     </template>
     <planAllocationWizard :dog="dog" :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
   </nav>
@@ -93,9 +106,10 @@ export default {
   data () {
     return {
       wizard: false,
-      expandedCreate: true,
       collapsed: false,
       edit: false,
+      active: [],
+      expandMany: false,
       newAllocation: {
         subCategory: 'meat',
         amount: 100
@@ -113,6 +127,18 @@ export default {
   methods: {
     subCategoryColor (subCategory) {
       return this.$store.state.ui.subCategoryColors[subCategory]
+    },
+    activate: function (day) {
+      if (this.active.indexOf(day) === -1) {
+        if (!this.expandMany) this.active = []
+        this.active.push(day)
+      } else {
+        if (!this.expandMany) this.active = []
+        this.active.splice(this.active.indexOf(day), 1)
+      }
+    },
+    isActive: function (day) {
+      return this.active.indexOf(day) !== -1
     },
     allocation (index) {
       return this.plan.allocation[index]
