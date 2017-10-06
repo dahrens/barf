@@ -18,6 +18,7 @@
           </span>
         </p>
         <p v-if="!validate(val)" class="help is-danger">{{ validateError }}</p>
+        <p v-if="validate(val)" class="help" :class="helpTextClass">{{ helpText }}</p>
       </div>
     </div>
   </div>
@@ -25,7 +26,7 @@
 
 <script>
 export default {
-  name: 'formInputPanelBlock',
+  name: 'editNumber',
   props: {
     value: {
       required: true

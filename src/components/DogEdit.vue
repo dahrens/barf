@@ -1,13 +1,13 @@
 <template>
   <div>
-    <stringInputField
+    <stringInput
       label="Name"
       :value="instance.name"
       @change="(val) => instance.name = val"
       :validate="validateName"
       validateError="Name must be not empty and unique"
       iconLeft="address-card">
-    </stringInputField>
+    </stringInput>
 
     <div class="panel-block">
       <div class="field-label is-normal">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <numberInputField
+    <numberInput
       label="Weight"
       :min="1000" :max="150000" :step="500"
       :value="instance.currentWeight"
@@ -31,7 +31,7 @@
       helpText="The weight your dog currently has in gram"
       validateError="Weight in gram must be a positive integer value."
       iconLeft="tachometer-alt">
-    </numberInputField>
+    </numberInput>
 
     <div class="panel-block">
       <div class="field-label is-normal">
@@ -77,24 +77,19 @@
         </div>
       </div>
     </div>
-    <div class="panel-block">
-      <div class="field-label is-normal">
-        <label class="label">
-          Castrated
-        </label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <input type="checkbox" v-model="dog.castrated">
-        </div>
-      </div>
-    </div>
+    <booleanInput
+      label="Castrated"
+      :value="instance.castrated"
+      @change="(val) => instance.castrated = val"
+      helpText="Is you dog castrated? Click me to switch">
+    </booleanInput>
   </div>
 </template>
 
 <script>
-import stringInputField from '@/components/include/EditString'
-import numberInputField from '@/components/include/EditNumber'
+import stringInput from '@/components/include/EditString'
+import numberInput from '@/components/include/EditNumber'
+import booleanInput from '@/components/include/EditBoolean'
 import Datepicker from 'vue-bulma-datepicker'
 
 export default {
@@ -106,8 +101,9 @@ export default {
     }
   },
   components: {
-    stringInputField,
-    numberInputField,
+    stringInput,
+    numberInput,
+    booleanInput,
     Datepicker
   },
   created () {
