@@ -100,7 +100,7 @@ export default {
           data: [],
           stack: 'assignement',
           backgroundColor: [],
-          label: 'missing'
+          label: 'difference'
         }],
         labels: []
       }

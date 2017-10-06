@@ -6,10 +6,6 @@
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
       </a>
-      <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!edit" pack="fas" name="edit" />
-        <fa v-if="edit" pack="fas" name="save" />
-      </a>
       <a v-on:click="wizard = !wizard" class="icon is-pulled-right has-text-dark">
         <fa pack="fas" name="magic" />
       </a>
@@ -19,91 +15,60 @@
           <fa v-if="!expandMany" pack="fas" name="crosshairs" size="sm" />
         </span>
       </a>
+      <a v-on:click="expandAll()" class="is-light is-pulled-right">
+        <span class="icon has-text-dark panel-heading-icon">
+          <fa pack="fas" name="expand-arrows-alt" size="sm" />
+        </span>
+      </a>
     </p>
-    <template v-if="!collapsed && edit" v-for="(weekday, index) in dog.plan.week">
-      <p class="faked-panel-block">
-        <a v-on:click="addAllocation(index)" :disabled="allocation(index).length === subCategoryOptions.length" class="icon is-pulled-right has-text-dark">
-          <fa pack="fas" name="plus" />
-        </a>
-        {{weekday}}
-      </p>
-      <span v-for="a in allocation(index)" class="panel-block">
-        <div class="field has-addons">
-          <p class="control">
-            <a class="button is-static">
-              <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(a.subCategory) }">
-                <fa size="2x" pack="fas" name="square"/>
-              </span>
-            </a>
-          </p>
-          <p class="control">
-            <span class="select">
-              <select v-model="a.subCategory" v-on:change="writeAllocation(a, index)">
-                <option v-for="option in subCategoryOptions" v-model="a.subCategory">
-                  {{ option.subCategory }}
-                </option>
-              </select>
-            </span>
-          </p>
-          <p class="control is-expanded">
-            <input class="input" type="number" min="0" max="99999" step="25" v-model="a.amount" v-on:change="writeAllocation(a, index)">
-          </p>
-          <p class="control">
-            <a class="button" v-on:click="increaseAllocation(a)">
-              <span class="icon">
-                <fa pack="fas" name="chevron-up" />
-              </span>
-            </a>
-          </p>
-          <p class="control">
-            <a class="button" v-on:click="decreaseAllocation(a)" :disabled="a.amount === 0">
-              <span class="icon">
-                <fa pack="fas" name="chevron-down" />
-              </span>
-            </a>
-          </p>
-          <p class="control">
-            <a class="button" v-on:click="deleteAllocation(a, index)">
-              <span class="icon">
-                <fa pack="fas" name="trash" />
-              </span>
-            </a>
-          </p>
-        </div>
-      </span>
-    </template>
-    <template v-if="!collapsed && !edit" v-for="(weekday, index) in dog.plan.week">
+
+    <!-- iterate weekdays weekday = monday, index = 0 -->
+    <template v-if="!collapsed" v-for="(weekday, index) in dog.plan.week">
+      <!-- day heading -->
       <a v-on:click="activate(weekday)" class="panel-block" :class="{'is-active': isActive(weekday)}">
         <p class="panel-icon">
           <fa v-if ="!isActive(weekday)" pack="fas" name="caret-right" />
           <fa v-if ="isActive(weekday)" pack="fas" name="caret-down" />
         </p>
-        <span class="is-size-5 is-uppercase">{{ weekday.slice(0, 2) }}</span>&nbsp;
-        <template v-for="a in allocation(index)">
+        <span v-if="!isActive(weekday)" class="is-size-5 is-uppercase">{{ weekday.slice(0, 2) }}&nbsp;</span>
+        <span v-else class="is-size-5 is-uppercase">{{ weekday }}</span>
+        <template v-if="!isActive(weekday)" v-for="a in allocation(index)">
           <subCategoryTag :subCategory="a.subCategory" :textBefore="a.amount + 'g '"></subCategoryTag>&nbsp;
         </template>
       </a>
+
+      <!-- categories overview -->
+      <div v-if="isActive(weekday)" class="faked-panel-block">
+        <span class="has-text-weight-bold">Categories</span>
+        <template v-if="isActive(weekday)" v-for="a in allocation(index)">
+          <subCategoryTag :subCategory="a.subCategory" :textBefore="a.amount + 'g '"></subCategoryTag>&nbsp;
+        </template>
+        <a v-on:click="toggleDayAllocationEdit(weekday)" class="icon has-text-dark is-pulled-right">
+          <fa v-if="!hasAllocationEdit(weekday)" pack="fas" name="edit" />
+          <fa v-else pack="fas" name="save" />
+        </a>
+        <a v-on:click="addAllocation(index)" :disabled="allocation(index).length === subCategoryOptions.length" class="icon is-pulled-right has-text-dark">
+          <fa pack="fas" name="plus" />
+        </a>
+        <div class="is-clearfix"/>
+      </div>
+
+      <!-- categories edit -->
+      <template v-if="hasAllocationEdit(weekday)">
+        <dayAllocationEdit :dog="dog" :day="index"></dayAllocationEdit>
+      </template>
+
+      <!-- meals for that day -->
       <div v-if="isActive(weekday)" class="faked-panel-block">
         <nav class="level">
-          <div class="level-item has-text-centered">
+          <div v-for="timeOfDay in ['morning', 'evening']" class="level-item has-text-centered">
             <div>
-              <p class="heading is-size-6">morning</p>
-              <p v-if="plan.meals[index]['morning'].length" class="subtitle">
+              <p class="heading is-size-6">{{ timeOfDay }}</p>
+              <p v-if="plan.meals[index][timeOfDay].length" class="subtitle">
                 <ul>
-                  <li v-for="meal in plan.meals[index]['morning']">
+                  <li v-for="meal in plan.meals[index][timeOfDay]">
                     {{ getIngredient(meal.ingredient).name }}
                   </li>
-                </ul>
-              </p>
-              <p v-else class="subtitle">nothing</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading is-size-6">evening</p>
-              <p v-if="plan.meals[index]['evening'].length" class="subtitle">
-                <ul>
-                  <li v-for="meal in plan.meals[index]['evening']">foo</li>
                 </ul>
               </p>
               <p v-else class="subtitle">nothing</p>
@@ -118,21 +83,22 @@
 
 <script>
 import subCategoryTag from '@/components/include/SubCategoryTag'
+import dayAllocationEdit from '@/components/DayAllocationEdit'
 import planAllocationWizard from '@/components/PlanAllocationWizard'
-import { ADD_OR_UPDATE_DAY_ALLOCATION, REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 
 export default {
   name: 'planDay',
   props: ['dog'],
   components: {
     planAllocationWizard,
+    dayAllocationEdit,
     subCategoryTag
   },
   data () {
     return {
       wizard: false,
       collapsed: false,
-      edit: false,
+      allocationEdit: [],  // list of weekday with activated edit panel
       active: [],
       expandMany: false,
       newAllocation: {
@@ -150,8 +116,35 @@ export default {
     }
   },
   methods: {
-    subCategoryColor (subCategory) {
-      return this.$store.state.ui.subCategoryColors[subCategory]
+    allocation (day) {
+      return this.plan.allocation[day]
+    },
+    addAllocation (day) {
+      if (!this.hasAllocationEdit(this.plan.week[day])) {
+        this.toggleDayAllocationEdit(this.plan.week[day])
+      }
+      if (this.allocation(day).length === this.subCategoryOptions.length) return
+      let fresh = JSON.parse(JSON.stringify(this.newAllocation))
+      let freshSubCategory = this.subCategoryOptions.filter(s => this.allocation(day).map(a => a.subCategory).indexOf(s.subCategory) === -1)[0].subCategory
+      fresh.subCategory = freshSubCategory
+      this.allocation(day).push(fresh)
+    },
+    expandAll () {
+      this.expandMany = true
+      for (let day of this.plan.week) {
+        this.activate(day)
+      }
+    },
+    toggleDayAllocationEdit (weekday) {
+      let idx = this.allocationEdit.indexOf(weekday)
+      if (idx === -1) {
+        this.allocationEdit.push(weekday)
+      } else {
+        this.allocationEdit.splice(idx, 1)
+      }
+    },
+    hasAllocationEdit (weekday) {
+      return this.allocationEdit.indexOf(weekday) !== -1
     },
     getIngredient (id) {
       return this.$store.getters.ingredientById(id)
@@ -167,40 +160,6 @@ export default {
     },
     isActive: function (day) {
       return this.active.indexOf(day) !== -1
-    },
-    allocation (index) {
-      return this.plan.allocation[index]
-    },
-    addAllocation (index) {
-      this.collapsed = false
-      if (this.allocation(index).length === this.subCategoryOptions.length) return
-      let fresh = JSON.parse(JSON.stringify(this.newAllocation))
-      let freshSubCategory = this.subCategoryOptions.filter(s => this.allocation(index).map(a => a.subCategory).indexOf(s.subCategory) === -1)[0].subCategory
-      fresh.subCategory = freshSubCategory
-      this.allocation(index).push(fresh)
-    },
-    increaseAllocation (allocation) {
-      allocation.amount += 25
-      this.writeAllocation(allocation)
-    },
-    decreaseAllocation (allocation) {
-      allocation.amount -= 25
-      this.writeAllocation(allocation)
-    },
-    writeAllocation (allocation, index) {
-      allocation.amount = parseInt(allocation.amount)
-      this.$store.commit(ADD_OR_UPDATE_DAY_ALLOCATION, {
-        dog: this.dog.id,
-        day: index,
-        allocation
-      })
-    },
-    deleteAllocation (allocation, index) {
-      this.$store.commit(REMOVE_DAY_ALLOCATION, {
-        dog: this.dog.id,
-        day: index,
-        allocation
-      })
     }
   }
 }
