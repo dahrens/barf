@@ -8,7 +8,7 @@ export default {
     useStash: false
   },
   ui: {
-    selectedDog: 0,
+    selectedDogId: 0,
     categoryColors: {
       'animal': '#E8122B',
       'vegetables': '#42FF3C'

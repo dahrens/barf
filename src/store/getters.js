@@ -14,10 +14,10 @@ export default {
     return options
   },
   selectedDog: (state) => {
-    if (state.dogs.length === 0 || !state.ui.selectedDog) {
+    if (state.dogs.length === 0 || !state.ui.selectedDogId) {
       return false
     }
-    return state.dogs.filter(d => d.id === state.ui.selectedDog)[0]
+    return state.dogs.filter(d => d.id === state.ui.selectedDogId)[0]
   },
   emptyDistribution (state, getters) {
     let distribution = {}

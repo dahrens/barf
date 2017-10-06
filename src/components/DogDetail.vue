@@ -118,6 +118,7 @@ export default {
   },
   methods: {
     calculateAge () {
+      if (!this.dog.birthday) return '?'
       var dateParts = this.dog.birthday.split('.')
       var birthday = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0])
       if (!birthday) return

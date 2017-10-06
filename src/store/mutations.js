@@ -28,7 +28,7 @@ export default {
     state.dogs.splice(idx, 1)
   },
   [types.SELECT_DOG] (state, dogId) {
-    state.ui.selectedDog = dogId
+    state.ui.selectedDogId = dogId
   },
   [types.INSERT_INGREDIENT] (state, ingredient) {
     ingredient.id = state.ids.ingredients

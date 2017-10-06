@@ -113,6 +113,7 @@
         </div>
       </div>
     </div>
+
     <div class="panel-block">
       <div class="field-label">
         <label class="label">Sex</label>
@@ -172,7 +173,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$refs, this.$refs[this.pickrId], this.pickrId, flatpickr)
     this.pickr = flatpickr(this.$refs[this.pickrId], {
       clickOpens: false,
       allowInput: true,
@@ -203,7 +203,7 @@ export default {
         }
         reader.readAsDataURL(file)
       } else {
-        console.error('your browser does not support loading files locally.')
+        console.error('your browser does not support loading local files.')
       }
     },
     validate () {

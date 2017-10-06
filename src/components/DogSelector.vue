@@ -1,7 +1,7 @@
 <template>
   <div class="field has-addons has-addons-right has-addons-left">
     <p class="control">
-      <a v-on:click="deleteDog()" class="button is-medium is-danger" :disabled="selectedDog === 0">
+      <a v-on:click="deleteDog()" class="button is-medium is-danger" :disabled="selectedDogId === 0">
         <span class="icon is-medium">
           <fa pack="fas" name="trash"/>
         </span>
@@ -9,8 +9,8 @@
     </p>
     <div class="control has-icons-left is-expanded">
       <div class="select is-fullwidth is-medium">
-        <select v-model="selectedDog">
-          <option v-if="dogs.length === 0" disabled selected value="0">no dogs, create one</option>
+        <select v-model="selectedDogId" :disabled="selectedDogId === 0">
+          <option v-if="dogs.length === 0" disabled selected value="0">no dog available - create one!</option>
           <option v-for="d in dogs" v-bind:value="d.id">{{ d.name }}</option>
         </select>
         <div class="icon is-left has-text-primary">
@@ -90,7 +90,7 @@
           <div class="faked-panel-block">
             <div class="field has-addons is-centered">
               <p class="control is-expanded">
-                <a v-on:click="prevStep()" class="button is-dark" :disabled="step < 2">
+                <a v-on:click="prevStep()" class="button is-primary" :disabled="step < 2">
                   <span class="icon">
                     <fa pack="fas" name="angle-left" />
                   </span>
@@ -145,9 +145,9 @@ export default {
     dogs () {
       return this.$store.state.dogs
     },
-    selectedDog: {
+    selectedDogId: {
       get () {
-        return this.$store.state.ui.selectedDog
+        return this.$store.state.ui.selectedDogId
       },
       set (dogId) {
         this.$store.commit(SELECT_DOG, dogId)
@@ -200,15 +200,15 @@ export default {
         fastenDays: [],
         vegetarianDays: [2, 5]
       })
-      this.selectedDog = dog.id
+      this.selectedDogId = dog.id
       this.cancelCreate()
     },
     deleteDog () {
-      this.$store.commit(REMOVE_DOG, this.selectedDog)
+      this.$store.commit(REMOVE_DOG, this.selectedDogId)
       if (this.dogs.length > 0) {
-        this.selectedDog = this.dogs[0].id
+        this.selectedDogId = this.dogs[0].id
       } else {
-        this.selectedDog = 0
+        this.selectedDogId = 0
       }
     }
   }
