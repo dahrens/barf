@@ -7,14 +7,14 @@
             <span class="has-text-dark">animal</span>
           </div>
           <div class="column is-6">
-            <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
+            <vue-slider @callback="setAnimalVegetable" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
           </div>
           <div class="column is-3">
             <span class="has-text-dark is-pulled-left">vegetables</span>
           </div>
         </div>
-        <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
-        <categorySliders :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
+        <categorySliders @changed="setDistribution" :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>
+        <categorySliders @changed="setDistribution" :dog="dog" :category="'vegetables'" :sliderConfig="sliderConfig"></categorySliders>
       </template>
     </div>
   </div>
@@ -25,11 +25,21 @@ import vueSlider from 'vue-slider-component'
 import subCategoryTag from '@/components/SubCategoryTag'
 import subCategorySlider from '@/components/SubCategorySlider'
 import categorySliders from '@/components/CategorySliders'
-import { UPDATE_PLAN_CATEGORY_DISTRIBUTION } from '@/store/mutation-types'
+import {
+  UPDATE_PLAN_DISTRIBUTION, UPDATE_PLAN_CATEGORY_DISTRIBUTION
+} from '@/store/mutation-types'
 
 export default {
   name: 'planPanel',
-  props: ['dog'],
+  props: {
+    dog: {
+      required: true
+    },
+    commit: {
+      required: false,
+      default: () => (true)
+    }
+  },
   components: {
     vueSlider,
     subCategorySlider,
@@ -74,11 +84,26 @@ export default {
     }
   },
   methods: {
-    setPlanCategoryDistribution (value) {
-      this.$store.commit(
-        UPDATE_PLAN_CATEGORY_DISTRIBUTION,
-        {dog: this.dog.id, value: value}
-      )
+    setAnimalVegetable (value) {
+      if (this.commit) {
+        this.$store.commit(
+          UPDATE_PLAN_CATEGORY_DISTRIBUTION,
+          {dog: this.dog.id, value}
+        )
+      } else {
+        this.plan.animal = value
+        this.plan.vegetables = 100 - value
+      }
+    },
+    setDistribution (distribution) {
+      if (this.commit) {
+        this.$store.commit(UPDATE_PLAN_DISTRIBUTION, {
+          dog: this.dog.id,
+          distribution
+        })
+      } else {
+        this.plan.distribution = distribution
+      }
     }
   }
 }

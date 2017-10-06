@@ -50,10 +50,10 @@ export default {
   [types.STASH_INGREDIENT] (state, payload) {
     state.stash.push(payload)
   },
-  [types.UPDATE_PLAN_SUBCATEGORY_DISTRIBUTION] (state, payload) {
+  [types.UPDATE_PLAN_DISTRIBUTION] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
     let plan = dog.plan
-    plan.distribution[payload.category] = payload.distribution
+    plan.distribution = payload.distribution
   },
   [types.UPDATE_PLAN_CATEGORY_DISTRIBUTION] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
