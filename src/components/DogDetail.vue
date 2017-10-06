@@ -1,5 +1,10 @@
 <template>
   <div class="dog-detail">
+    <div v-if="dog.image" class="card-image">
+      <figure class="image is-square">
+        <img :src="dog.image" />
+      </figure>
+    </div>
     <levelBlock
       :data="[{
         label: 'portion per day',

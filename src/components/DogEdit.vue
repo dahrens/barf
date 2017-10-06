@@ -21,6 +21,50 @@
       </div>
     </div>
 
+
+    <div class="panel-block">
+      <div class="field-label is-normal">
+        <label class="label">Image</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="field has-addons">
+            <p class="control">
+              <div class="file">
+                <label class="file-label">
+                  <input id="import-image" class="file-input" type="file" v-on:change="importImage()">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <fa pack="fas" name="upload" />
+                    </span>
+                    <span class="file-label">
+                      import
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </p>
+            <p class="control">
+              <a v-on:click="dog.image = null" class="button">
+                <span class="icon">
+                  <fa pack="fas" name="times" />
+                </span>
+                <span>clear</span>
+              </a>
+            </p>
+          </div>
+          <p class="help is-info">The image should be of format 1:1</p>
+        </div>
+        <div class="field">
+          <p v-if="dog.image" class="control">
+            <figure class="image is-128x128">
+              <img :src="dog.image">
+            </figure>
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="panel-block">
       <div class="field-label is-normal">
         <label class="label">Birthday</label>
@@ -123,6 +167,19 @@ export default {
     }
   },
   methods: {
+    importImage () {
+      if (window.FileReader) {
+        if (document.getElementById('import-image').files.length !== 1) return
+        let file = document.getElementById('import-image').files[0]
+        let reader = new window.FileReader()
+        reader.onloadend = (e) => {
+          this.dog.image = e.target.result
+        }
+        reader.readAsDataURL(file)
+      } else {
+        console.error('your browser does not support loading files locally.')
+      }
+    },
     validate () {
       let results = [
         this.validateName()

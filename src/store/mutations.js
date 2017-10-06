@@ -82,8 +82,5 @@ export default {
   [types.UPDATE_PLAN_ALLOCATION] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
     dog.plan.allocation = payload.allocation
-  },
-  [types.SET_ACTIVE_PLAN_VIEW] (state, payload) {
-    state.ui.activePlanView = payload.view
   }
 }

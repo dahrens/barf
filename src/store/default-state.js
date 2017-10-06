@@ -9,7 +9,6 @@ export default {
   },
   ui: {
     selectedDog: 0,
-    activePlanView: 'base',
     categoryColors: {
       'animal': '#E8122B',
       'vegetables': '#42FF3C'
