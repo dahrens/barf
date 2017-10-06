@@ -19,6 +19,20 @@
           <p v-if="!validateWeight()" class="help is-danger">Weight in gram must be a positive integer value.</p>
           <p v-if="validateWeight()" class="help is-info">The weight in gram your dog has right now.</p>
         </div>
+        <div class="field">
+          <p class="control has-icons-left">
+            <input type="number"
+              :min="1000" :max="150000" :step="500"
+              class="input"
+              :class="{'is-danger': !validateWeight(), 'is-success': validateWeight()}"
+              v-model="dog.plan.idealWeight">
+            <span class="icon is-left">
+              <fa pack="fas" name="tachometer-alt" />
+            </span>
+          </p>
+          <p v-if="!validateWeight()" class="help is-danger">Weight in gram must be a positive integer value.</p>
+          <p v-if="validateWeight()" class="help is-info">The weight in gram your dog should have.</p>
+        </div>
       </div>
     </div>
 

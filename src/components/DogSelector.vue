@@ -50,7 +50,7 @@
               <div class="step-item" :class="{'is-active': step === 2, 'is-completed is-success': step > 2}">
                 <div class="step-marker">
                   <span class="icon">
-                    <fa pack="fas" name="sliders-h" />
+                    <fa pack="fas" name="question" />
                   </span>
                 </div>
                 <div class="step-details">
@@ -58,6 +58,16 @@
                 </div>
               </div>
               <div class="step-item" :class="{'is-active': step === 3, 'is-completed is-success': step > 3}">
+                <div class="step-marker">
+                  <span class="icon">
+                    <fa pack="fas" name="sliders-h" />
+                  </span>
+                </div>
+                <div class="step-details">
+                  <p class="step-title">Distribution</p>
+                </div>
+              </div>
+              <div class="step-item" :class="{'is-active': step === 4, 'is-completed is-success': step > 4}">
                 <div class="step-marker">
                   <span class="icon">
                     <fa pack="fas" name="flag" />
@@ -70,8 +80,9 @@
             </div>
           </div>
           <dogEdit v-if="step === 1" :dog="newDog"></dogEdit>
-          <planDistributionEdit v-if="step === 2" :dog="newDog"></planDistributionEdit>
-          <dogDetail v-if="step === 3" :dog="newDog"></dogDetail>
+          <planMetaEdit v-if="step === 2" :dog="newDog"></planMetaEdit>
+          <planDistributionEdit v-if="step === 3" :dog="newDog"></planDistributionEdit>
+          <dogDetail v-if="step === 4" :dog="newDog"></dogDetail>
           <div class="faked-panel-block">
             <div class="field has-addons">
               <p class="control is-expanded">
@@ -83,7 +94,7 @@
                 </a>
               </p>
               <p class="control">
-                <a v-on:click="nextStep()" class="button is-dark" :disabled="!canStepFurther || step > 2">
+                <a v-on:click="nextStep()" class="button is-dark" :disabled="!canStepFurther || step > 3">
                   <span>next step</span>
                   <span class="icon">
                     <fa pack="fas" name="angle-right" />
@@ -92,7 +103,7 @@
               </p>
             </div>
           </div>
-          <div v-if="step === 3" class="panel-block">
+          <div v-if="step === 4" class="panel-block">
             <button v-on:click="saveNewDog()" class="button is-primary is-outlined is-fullwidth">
               <span class="icon">
                 <fa pack="fas" name="save" />
@@ -108,6 +119,7 @@
 
 <script>
 import dogEdit from '@/components/DogEdit'
+import planMetaEdit from '@/components/PlanMetaEdit'
 import planDistributionEdit from '@/components/PlanDistributionEdit'
 import dogDetail from '@/components/DogDetail'
 import { SELECT_DOG, INSERT_DOG, REMOVE_DOG } from '@/store/mutation-types'
@@ -116,6 +128,7 @@ export default {
   name: 'dogSelector',
   components: {
     dogEdit,
+    planMetaEdit,
     planDistributionEdit,
     dogDetail
   },
