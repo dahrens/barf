@@ -1,9 +1,28 @@
 <template>
   <div class="dog-detail">
-    <div v-if="dog.image" class="card-image">
+    <div v-if="dog.image && !imageSmall" class="card-image">
       <figure class="image is-square">
         <img :src="dog.image" />
       </figure>
+    </div>
+    <div class="faked-panel-block">
+      <nav class="level">
+        <div class="level-item has-text-centered has-text-dark">
+          <div>
+            <p class="heading">name</p>
+            <p class="subtitle has-text-weight-bold has-text-dark">{{ dog.name }}</p>
+          </div>
+        </div>
+        <div v-if="dog.image && imageSmall" class="level-item has-text-centered has-text-dark">
+          <div>
+            <div class="is-pulled-right">
+              <figure class="image is-128x128">
+                <img :src="dog.image" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
     <levelBlock
       :data="[{
@@ -54,7 +73,15 @@ import levelBlock from '@/components/include/LevelBlock'
 
 export default {
   name: 'dogDetail',
-  props: ['dog'],
+  props: {
+    dog: {
+      required: true
+    },
+    imageSmall: {
+      required: false,
+      default: () => (false)
+    }
+  },
   components: {
     levelBlock
   },
@@ -104,3 +131,5 @@ export default {
   }
 }
 </script>
+
+<style

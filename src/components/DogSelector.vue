@@ -86,7 +86,7 @@
           <dogEdit v-if="step === 1" :dog="newDog"></dogEdit>
           <planMetaEdit v-if="step === 2" :dog="newDog"></planMetaEdit>
           <planDistributionEdit v-if="step === 3" :dog="newDog" :commit="false"></planDistributionEdit>
-          <dogDetail v-if="step === 4" :dog="newDog"></dogDetail>
+          <dogDetail v-if="step === 4" :dog="newDog" :imageSmall="true"></dogDetail>
           <div class="faked-panel-block">
             <div class="field has-addons is-centered">
               <p class="control is-expanded">
