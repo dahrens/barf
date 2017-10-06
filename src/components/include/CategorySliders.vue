@@ -26,6 +26,11 @@ import subCategorySlider from '@/components/include/SubCategorySlider'
 export default {
   name: 'planPanel',
   props: ['dog', 'category', 'sliderConfig'],
+  data () {
+    return {
+      used: []
+    }
+  },
   components: {
     subCategorySlider
   },
@@ -97,6 +102,7 @@ export default {
       }
       // finally set the requested value
       this.plan.distribution[this.category][subCategory] = newValue
+      console.log('will emit', distribution)
       this.$emit('changed', this.plan.distribution)
     },
     coloredSliderConfig (subCategory) {
