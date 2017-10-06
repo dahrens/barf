@@ -8,6 +8,7 @@
         <div class="field">
           <p class="control has-icons-left">
             <input type="text"
+              v-focus
               class="input"
               :class="{'is-danger': !validateName(), 'is-success': validateName()}"
               v-model="dog.name"

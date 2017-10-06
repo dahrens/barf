@@ -35,6 +35,12 @@ if (JSON && !JSON.dateParser) {
   }
 }
 
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
