@@ -11,13 +11,13 @@
         </div>
       </div>
     </section>
-    <section v-if="!dog" class="hero is-warning">
+    <section v-if="!dog" class="hero is-medium is-info">
       <div class="hero-body">
         <div class="container">
           <div class="columns">
             <div class="column is-1">
               <span class="icon is-large">
-                <fa size="4x" pack="fas" name="exclamation-triangle" />
+                <fa size="4x" pack="fas" name="info" />
               </span>
             </div>
             <div class="column">
