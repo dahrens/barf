@@ -102,7 +102,6 @@ export default {
       }
       // finally set the requested value
       this.plan.distribution[this.category][subCategory] = newValue
-      console.log('will emit', distribution)
       this.$emit('changed', this.plan.distribution)
     },
     coloredSliderConfig (subCategory) {

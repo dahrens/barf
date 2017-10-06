@@ -178,7 +178,6 @@ export default {
       if (this.step > 1) this.step -= 1
     },
     nextStep () {
-      console.log(this.newDog)
       if (this.canStepFurther && this.step < 4) {
         this.step += 1
       }
