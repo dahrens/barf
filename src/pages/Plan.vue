@@ -38,11 +38,11 @@
           <dogPanel :dog="dog"></dogPanel>
         </div>
         <div class="column">
-          <planAllocationWeek :dog="dog"></planAllocationWeek>
+          <week :dog="dog"></week>
           <ingredients></ingredients>
         </div>
         <div class="column is-one-quarter">
-          <planAllocationPanel :dog="dog"></planAllocationPanel>
+          <statistics :dog="dog"></statistics>
         </div>
       </div>
     </div>
@@ -50,10 +50,10 @@
 </template>
 
 <script>
-import planAllocationWeek from '@/components/PlanAllocationWeek'
+import week from '@/components/Week'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
-import planAllocationPanel from '@/components/PlanAllocationPanel'
+import statistics from '@/components/Statistics'
 import ingredients from '@/components/Ingredients'
 
 export default {
@@ -61,8 +61,8 @@ export default {
   components: {
     dogPanel,
     dogSelector,
-    planAllocationPanel,
-    planAllocationWeek,
+    statistics,
+    week,
     ingredients
   },
   computed: {
