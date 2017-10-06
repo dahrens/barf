@@ -90,26 +90,24 @@
                   <span class="icon">
                     <fa pack="fas" name="angle-left" />
                   </span>
-                  <span>previous step</span>
+                  <span>back</span>
                 </a>
               </p>
               <p class="control">
-                <a v-on:click="nextStep()" class="button is-dark" :disabled="!canStepFurther || step > 3">
-                  <span>next step</span>
+                <a v-if="step < 4" v-on:click="nextStep()" class="button is-primary" >
+                  <span>next</span>
                   <span class="icon">
                     <fa pack="fas" name="angle-right" />
                   </span>
                 </a>
+                <button v-else v-on:click="saveNewDog()" class="button is-primary">
+                  <span class="icon">
+                    <fa pack="fas" name="save" />
+                  </span>
+                  <span>save</span>
+                </button>
               </p>
             </div>
-          </div>
-          <div v-if="step === 4" class="panel-block">
-            <button v-on:click="saveNewDog()" class="button is-primary is-outlined is-fullwidth">
-              <span class="icon">
-                <fa pack="fas" name="save" />
-              </span>
-              <span>Save</span>
-            </button>
           </div>
         </nav>
       </div>
@@ -173,10 +171,10 @@ export default {
       return classes.join(' ')
     },
     prevStep () {
-      this.step -= 1
+      if (this.step > 1) this.step -= 1
     },
     nextStep () {
-      if (this.canStepFurther) {
+      if (this.canStepFurther && this.step < 4) {
         this.step += 1
       }
     },
