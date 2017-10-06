@@ -11,16 +11,29 @@
         </div>
       </div>
     </section>
-    <div class="plan-content">
-      <div v-if="!dog" class="container">
-        <div class="notification is-info">
-          <span class="icon">
-            <fa size="2x" pack="fas" name="info" />
-          </span>
-          There is currently no dog available. Please click the plus button above and provide some data regarding your dog.
+    <section v-if="!dog" class="hero is-warning">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-1">
+              <span class="icon is-large">
+                <fa size="4x" pack="fas" name="exclamation-triangle" />
+              </span>
+            </div>
+            <div class="column">
+              <h2 class="title">
+                No dog available
+              </h2>
+              <p class="subtitle">
+                Please click the plus button above and provide some data regarding your dog.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div v-if="dog" class="columns">
+    </section>
+    <div v-if="dog" class="plan-content">
+      <div class="columns">
         <div class="column is-one-quarter">
           <dogPanel :dog="dog"></dogPanel>
         </div>

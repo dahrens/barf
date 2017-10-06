@@ -36,7 +36,7 @@
                   </div>
                 </p>
                 <p class="control">
-                  <a v-on:click="exportData()" class="button">
+                  <a v-on:click="exportData()" class="button is-dark">
                     <span class="icon">
                       <fa pack="fas" name="download" />
                     </span>
