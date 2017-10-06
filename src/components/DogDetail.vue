@@ -46,7 +46,7 @@
     <levelBlock
       :data="[{
         label: 'birthday-cake',
-        value: 5,
+        value: calculateAge(),
         iconLabel: true
       }, {
         label: 'futbol',
@@ -118,7 +118,8 @@ export default {
   },
   methods: {
     calculateAge () {
-      let birthday = this.dog.birthday
+      var dateParts = this.dog.birthday.split('.')
+      var birthday = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0])
       if (!birthday) return
       let today = new Date()
       var age = today.getFullYear() - birthday.getFullYear()

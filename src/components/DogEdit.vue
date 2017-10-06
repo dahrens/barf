@@ -22,7 +22,6 @@
       </div>
     </div>
 
-
     <div class="panel-block">
       <div class="field-label is-normal">
         <label class="label">Image</label>
@@ -71,10 +70,24 @@
         <label class="label">Birthday</label>
       </div>
       <div class="field-body">
-        <div class="field">
-          <p class="control">
-            <datepicker placeholder="31.05.2009" :config="{ dateFormat: 'd.m.Y', static: true }"></datepicker>
+        <div class="field has-addons">
+          <p class="control has-icons-left">
+            <input :ref="pickrId"
+              type="text"
+              class="input"
+              v-model="dog.birthday"
+              placeholder="dd.mm.yyyy">
+            <span class="icon is-left">
+              <fa pack="fas" name="birthday-cake" />
+            </span>
           </p>
+          <div class="control">
+            <a v-on:click="pickr.open()" class="button">
+              <span class="icon is-left">
+                <fa pack="fas" name="calendar-alt" />
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -147,13 +160,24 @@
 </template>
 
 <script>
-import Datepicker from 'vue-bulma-datepicker'
+import flatpickr from 'flatpickr'
 
 export default {
   name: 'dogEdit',
   props: ['dog'],
-  components: {
-    Datepicker
+  data () {
+    return {
+      pickrId: 'pickr-' + Math.random().toString(36).slice(2),
+      pickr: null
+    }
+  },
+  mounted () {
+    console.log(this.$refs, this.$refs[this.pickrId], this.pickrId, flatpickr)
+    this.pickr = flatpickr(this.$refs[this.pickrId], {
+      clickOpens: false,
+      allowInput: true,
+      dateFormat: 'd.m.Y'
+    })
   },
   computed: {
     activities () {
@@ -205,3 +229,7 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+@import '~flatpickr/src/style/flatpickr'
+</style>

@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'formInputPanelBlock',
+  name: 'levelBlock',
   props: {
     data: {
       required: false
