@@ -16,7 +16,7 @@
         value: parseInt(dog.plan.idealWeight / 1000) + 'kg'
       }, {
         label: 'current weight',
-        value: parseInt(dog.currentWeight / 1000) + 'kg'
+        value: parseInt(dog.plan.currentWeight / 1000) + 'kg'
         }]">
     </levelBlock>
     <levelBlock

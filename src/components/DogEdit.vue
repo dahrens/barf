@@ -86,13 +86,13 @@
       <div class="field-body">
         <div class="field">
           <p class="control">
-            <a class="button"
-            v-on:click="dog.castrated = !dog.castrated">
-            <span class="icon" :class="{'has-text-success': dog.castrated, 'has-text-danger': !dog.castrated}">
-              <fa v-if="dog.castrated" pack="fas" name="check-circle" />
-              <fa v-else pack="fas" name="times-circle" />
-            </span>
-          </a>
+            <a class="button" v-on:click="dog.castrated = !dog.castrated">
+              <span class="icon" :class="{'has-text-success': dog.castrated, 'has-text-danger': !dog.castrated}">
+                <fa v-if="dog.castrated" pack="fas" name="check-circle" />
+                <fa v-else pack="fas" name="times-circle" />
+              </span>
+            </a>
+          </p>
           <p class="help is-info">Is you dog castrated? Click me to switch</p>
         </div>
       </div>
