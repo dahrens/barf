@@ -1,7 +1,7 @@
 <template>
   <div class="settings">
     <a id="downloadAnchorElem" style="display:none"></a>
-    <section class="hero is-primary">
+    <section class="hero is-primary is-bold">
       <div class="hero-body">
         <div class="container">
           <h2 class="title">Settings</h2>

@@ -1,6 +1,6 @@
 <template>
   <div class="plan">
-    <section class="hero is-primary">
+    <section class="hero is-primary is-bold">
       <div class="hero-body">
         <div class="container">
           <h2 class="title">Plan</h2>
