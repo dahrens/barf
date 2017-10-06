@@ -27,6 +27,9 @@ export default {
     }
     return distribution
   },
+  ingredientById: (state) => (ingredientId) => {
+    return state.ingredients.filter((i) => i.id === ingredientId)[0]
+  },
   ingredientHasRelations: (state) => (ingredient) => {
     for (let item of state.stash) {
       if (item.ingredient === ingredient.id) return true

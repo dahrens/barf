@@ -78,14 +78,39 @@
           <fa v-if ="!isActive(weekday)" pack="fas" name="caret-right" />
           <fa v-if ="isActive(weekday)" pack="fas" name="caret-down" />
         </p>
-        <span>{{ weekday }}</span>&nbsp;
+        <span class="is-size-5 is-uppercase">{{ weekday.slice(0, 2) }}</span>&nbsp;
         <template v-for="a in allocation(index)">
           <subCategoryTag :subCategory="a.subCategory" :textBefore="a.amount + 'g '"></subCategoryTag>&nbsp;
         </template>
       </a>
-      <span v-if="isActive(weekday)" class="panel-block">
-        hi there
-      </span>
+      <div v-if="isActive(weekday)" class="faked-panel-block">
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading is-size-6">morning</p>
+              <p v-if="plan.meals[index]['morning'].length" class="subtitle">
+                <ul>
+                  <li v-for="meal in plan.meals[index]['morning']">
+                    {{ getIngredient(meal.ingredient).name }}
+                  </li>
+                </ul>
+              </p>
+              <p v-else class="subtitle">nothing</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading is-size-6">evening</p>
+              <p v-if="plan.meals[index]['evening'].length" class="subtitle">
+                <ul>
+                  <li v-for="meal in plan.meals[index]['evening']">foo</li>
+                </ul>
+              </p>
+              <p v-else class="subtitle">nothing</p>
+            </div>
+          </div>
+        </nav>
+      </div>
     </template>
     <planAllocationWizard :dog="dog" :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
   </nav>
@@ -127,6 +152,9 @@ export default {
   methods: {
     subCategoryColor (subCategory) {
       return this.$store.state.ui.subCategoryColors[subCategory]
+    },
+    getIngredient (id) {
+      return this.$store.getters.ingredientById(id)
     },
     activate: function (day) {
       if (this.active.indexOf(day) === -1) {
