@@ -15,7 +15,7 @@
                 </span>
               </a>
             </p>
-            <p class="control has-icons-left">
+            <p class="control is-expanded has-icons-left">
               <input type="number"
                 class="input"
                 :min="100" :max="10000" :step="50"
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="panel-block">
       <div class="field-label is-normal">
         <label class="label">Weight</label>

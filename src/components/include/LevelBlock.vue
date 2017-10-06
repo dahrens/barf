@@ -1,7 +1,7 @@
 <template>
   <div class="faked-panel-block">
     <nav class="level">
-      <div v-if="data" v-for="item in data" class="level-item has-text-centered">
+      <div v-if="data" v-for="item in data" class="level-item has-text-centered has-text-dark">
         <div>
           <p v-if="item.label && !item.iconLabel" class="heading">{{ item.label }}</p>
           <p v-else>
@@ -9,7 +9,7 @@
               <fa size="2x" pack="fas" :name="item.label" />
             </span>
           </p>
-          <p v-if="item.value && !item.iconValue" class="subtitle">{{ item.value }}</p>
+          <p v-if="item.value && !item.iconValue" class="subtitle has-text-dark">{{ item.value }}</p>
           <p v-else>
             <span class="icon">
               <fa size="2x" pack="fas" :name="item.value" />

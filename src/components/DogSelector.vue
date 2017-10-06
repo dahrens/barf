@@ -30,13 +30,13 @@
       <div class="modal-content">
         <nav class="panel">
           <p class="panel-heading">
-            New Dog
+            Please provide a few details
             <a v-on:click="cancelCreate()" class="icon is-pulled-right has-text-dark">
               <fa pack="fas" name="times" />
             </a>
           </p>
           <div class="faked-panel-block">
-            <div class="steps">
+            <div class="steps is-medium">
               <div class="step-item" :class="stepClasses(1)">
                 <div class="step-marker">
                   <span class="icon">
@@ -45,6 +45,7 @@
                 </div>
                 <div class="step-details">
                   <p class="step-title">Dog</p>
+                  <p class="is-size-7 is-uppercase">general info</p>
                 </div>
               </div>
               <div class="step-item" :class="{'is-active': step === 2, 'is-completed is-success': step > 2}">
@@ -55,6 +56,7 @@
                 </div>
                 <div class="step-details">
                   <p class="step-title">Plan</p>
+                  <p class="is-size-7 is-uppercase">general info</p>
                 </div>
               </div>
               <div class="step-item" :class="{'is-active': step === 3, 'is-completed is-success': step > 3}">
@@ -65,6 +67,7 @@
                 </div>
                 <div class="step-details">
                   <p class="step-title">Distribution</p>
+                  <p class="is-size-7 is-uppercase">what and how much</p>
                 </div>
               </div>
               <div class="step-item" :class="{'is-active': step === 4, 'is-completed is-success': step > 4}">
@@ -74,7 +77,8 @@
                   </span>
                 </div>
                 <div class="step-details">
-                  <p class="step-title">Save?</p>
+                  <p class="step-title">Done</p>
+                  <p class="is-size-7 is-uppercase">summary</p>
                 </div>
               </div>
             </div>
@@ -84,7 +88,7 @@
           <planDistributionEdit v-if="step === 3" :dog="newDog"></planDistributionEdit>
           <dogDetail v-if="step === 4" :dog="newDog"></dogDetail>
           <div class="faked-panel-block">
-            <div class="field has-addons">
+            <div class="field has-addons is-centered">
               <p class="control is-expanded">
                 <a v-on:click="prevStep()" class="button is-dark" :disabled="step < 2">
                   <span class="icon">
@@ -174,6 +178,7 @@ export default {
       if (this.step > 1) this.step -= 1
     },
     nextStep () {
+      console.log(this.newDog)
       if (this.canStepFurther && this.step < 4) {
         this.step += 1
       }
@@ -211,8 +216,15 @@ export default {
 </script>
 
 <style lang="sass">
+@import "../assets/sass/variables"
+@import "../../node_modules/bulma/bulma"
+
 .modal .panel-block,
 .modal .faked-panel-block,
 .modal .steps
   background-color: white
+  color: $dark
+
+.steps
+  margin-bottom: 0 !important
 </style>

@@ -4,13 +4,13 @@
       <template>
         <div class="columns distribution-slider">
           <div class="column is-3">
-            animal
+            <span class="has-text-dark">animal</span>
           </div>
           <div class="column is-6">
             <vue-slider @callback="setPlanCategoryDistribution" v-bind="getPlanCategoryDistribution" v-model="getPlanCategoryDistribution.value"></vue-slider>
           </div>
           <div class="column is-3">
-            <span class="is-pulled-left">vegetables</span>
+            <span class="has-text-dark is-pulled-left">vegetables</span>
           </div>
         </div>
         <categorySliders :dog="dog" :category="'animal'" :sliderConfig="sliderConfig"></categorySliders>

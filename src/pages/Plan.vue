@@ -51,7 +51,6 @@
 
 <script>
 import planAllocationWeek from '@/components/PlanAllocationWeek'
-import planMeal from '@/components/PlanMeal'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
 import planAllocationPanel from '@/components/PlanAllocationPanel'
@@ -60,7 +59,6 @@ import ingredients from '@/components/Ingredients'
 export default {
   name: 'plan',
   components: {
-    planMeal,
     dogPanel,
     dogSelector,
     planAllocationPanel,

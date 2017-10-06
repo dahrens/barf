@@ -3,7 +3,7 @@
     <template v-for="subCategory in subCategories">
       <div class="columns">
         <div class="column is-3">
-          {{ subCategory }}
+          <span class="has-text-dark">{{ subCategory }}</span>
         </div>
         <div class="column is-6">
           <subCategorySlider
@@ -13,7 +13,7 @@
             :value="plan.distribution[category][subCategory]"></subCategorySlider>
         </div>
         <div class="column is-3">
-          <span class="subtitle"><strong>{{ parseInt(planDistribution[subCategory]) }}g</strong></span>
+          <span class="has-text-dark"><strong>{{ parseInt(planDistribution[subCategory]) }}g</strong></span>
         </div>
       </div>
     </template>

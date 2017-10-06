@@ -135,9 +135,10 @@
                 <fa v-if="dog.castrated" pack="fas" name="check-circle" />
                 <fa v-else pack="fas" name="times-circle" />
               </span>
+              <span v-if="dog.castrated" class="is-size-7">yes</span>
+              <span v-else class="is-size-7">no</span>
             </a>
           </p>
-          <p class="help is-info">Is you dog castrated? Click me to switch</p>
         </div>
       </div>
     </div>
