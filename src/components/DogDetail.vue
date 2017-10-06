@@ -71,7 +71,7 @@ export default {
       return this.$store.state.activities[this.dog.activity]
     },
     expectedQuantityPerDay () {
-      return parseInt(this.$store.getters.planRequirements(this.dog))
+      return parseInt(this.$store.getters.dogFoodQuantityPerDay(this.dog))
     },
     expectedQuantityPerWeek () {
       return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
@@ -91,7 +91,6 @@ export default {
   },
   methods: {
     calculateAge () {
-      console.log(this.dog.birthday)
       let birthday = this.dog.birthday
       if (!birthday) return
       let today = new Date()

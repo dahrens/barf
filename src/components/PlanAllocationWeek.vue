@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import subCategoryTag from '@/components/SubCategoryTag'
+import subCategoryTag from '@/components/include/SubCategoryTag'
 import planAllocationWizard from '@/components/PlanAllocationWizard'
 import { ADD_OR_UPDATE_DAY_ALLOCATION, REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 

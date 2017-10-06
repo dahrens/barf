@@ -94,8 +94,6 @@ export default {
         }
       }
     }
-    console.log('dist', dist)
-    console.log('allocation', allocation)
     commit(UPDATE_PLAN_ALLOCATION, {
       dog: payload.dog.id,
       allocation

@@ -22,9 +22,7 @@
 
 <script>
 import vueSlider from 'vue-slider-component'
-import subCategoryTag from '@/components/SubCategoryTag'
-import subCategorySlider from '@/components/SubCategorySlider'
-import categorySliders from '@/components/CategorySliders'
+import categorySliders from '@/components/include/CategorySliders'
 import {
   UPDATE_PLAN_DISTRIBUTION, UPDATE_PLAN_CATEGORY_DISTRIBUTION
 } from '@/store/mutation-types'
@@ -42,8 +40,6 @@ export default {
   },
   components: {
     vueSlider,
-    subCategorySlider,
-    subCategoryTag,
     categorySliders
   },
   data () {

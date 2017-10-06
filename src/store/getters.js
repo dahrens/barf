@@ -13,6 +13,12 @@ export default {
     }
     return options
   },
+  selectedDog: (state) => {
+    if (state.dogs.length === 0 || !state.ui.selectedDog) {
+      return false
+    }
+    return state.dogs.filter(d => d.id === state.ui.selectedDog)[0]
+  },
   emptyDistribution (state, getters) {
     let distribution = {}
     for (let c of getters.subCategories) {
@@ -39,39 +45,37 @@ export default {
   stashedIngredients: state => {
     let ingredients = {}
     for (let item of state.stash) {
-      if (item.hasOwnProperty('ingredient')) {
-        let ingredient = state.ingredients.filter(i => i.id === item.ingredient)[0]
-        if (ingredients.hasOwnProperty(ingredient.id)) {
-          // already found this one
-          let ingredientMeta = ingredients[ingredient.id]
-          let existingAmounts = ingredientMeta.amounts.map(e => e[0])
-          if (existingAmounts.indexOf(item.amount) === -1) {
-            ingredientMeta.amounts.push([item.amount, 1])
-          } else {
-            let amountCounter = ingredientMeta.amounts.filter(a => item.amount)[0]
-            amountCounter[1]++
-          }
+      let ingredient = state.ingredients.filter(i => i.id === item.ingredient)[0]
+      if (ingredients.hasOwnProperty(ingredient.id)) {
+        // already found this one
+        let ingredientMeta = ingredients[ingredient.id]
+        let existingAmounts = ingredientMeta.amounts.map(e => e[0])
+        if (existingAmounts.indexOf(item.amount) === -1) {
+          ingredientMeta.amounts.push([item.amount, 1])
         } else {
-          // first occurency
-          ingredients[ingredient.id] = {
-            ingredient,
-            item,
-            amounts: [[item.amount, 1]],
-            unit: item.unit
-          }
+          let amountCounter = ingredientMeta.amounts.filter(a => item.amount)[0]
+          amountCounter[1]++
+        }
+      } else {
+        // first occurency
+        ingredients[ingredient.id] = {
+          ingredient,
+          item,
+          amounts: [[item.amount, 1]],
+          unit: item.unit
         }
       }
     }
     return ingredients
   },
   dogFoodQuantityPerDay: (state) => (dog) => {
-    let factor = state.activities[dog.activity]
-    if (dog.castrated) factor = factor * 0.8
-    return dog.plan.idealWeight * (dog.plan.percentOfWeight / 100) * factor
-  },
-  planRequirements: (state, getters) => (dog) => {
-    let foodPerDay = getters.dogFoodQuantityPerDay(dog)
-    return foodPerDay
+    if (dog.plan.calculated) {
+      let factor = state.activities[dog.activity]
+      if (dog.castrated) factor = factor * 0.8
+      return dog.plan.idealWeight * (dog.plan.percentOfWeight / 100) * factor
+    } else {
+      return dog.plan.portionPerDay
+    }
   },
   planDistribution: (state, getters) => (dog) => {
     let plan = dog.plan

@@ -69,17 +69,11 @@ export default {
     settings () {
       return this.$store.state.settings
     },
-    subCategories () {
-      return this.$store.getters.subCategories
-    },
     dogs () {
       return this.$store.state.dogs
     },
     dog () {
-      if (this.dogs.length === 0 || !this.$store.state.ui.selectedDog) {
-        return false
-      }
-      return this.$store.state.dogs.filter(d => d.id === this.$store.state.ui.selectedDog)[0]
+      return this.$store.getters.selectedDog
     }
   }
 }

@@ -60,7 +60,7 @@
 <script>
 import ingredientCreate from '@/components/IngredientCreate'
 import stashIngredient from '@/components/StashIngredient'
-import subCategoryTag from '@/components/SubCategoryTag'
+import subCategoryTag from '@/components/include/SubCategoryTag'
 
 export default {
   name: 'ingredients',

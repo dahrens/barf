@@ -59,12 +59,6 @@ export default {
     }
   },
   computed: {
-    expectedQuantityPerDay () {
-      return parseInt(this.$store.getters.planRequirements(this.dog))
-    },
-    expectedQuantityWeek () {
-      return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
-    },
     distributionChartData () {
       let chartData = {
         datasets: [{

@@ -7,18 +7,18 @@ export default {
   [types.WRITE_SETTINGS] (state, settings) {
     state.settings = settings
   },
-  [types.INSERT_DOG] (state, payload) {
-    payload.id = state.ids.dogs
+  [types.INSERT_DOG] (state, dog) {
+    dog.id = state.ids.dogs
     state.ids.dogs++
-    state.dogs.push(payload)
-    state.selectedDog = payload.id
+    state.dogs.push(dog)
+    state.selectedDog = dog.id
   },
-  [types.UPDATE_DOG] (state, payload) {
-    let idx = state.dogs.map(d => d.id).indexOf(payload.id)
+  [types.UPDATE_DOG] (state, dog) {
+    let idx = state.dogs.map(d => d.id).indexOf(dog.id)
     if (idx === -1) {
       throw new Error('Unknown Dog for update')
     }
-    state.dogs[idx] = payload
+    state.dogs[idx] = dog
   },
   [types.REMOVE_DOG] (state, dogId) {
     let idx = state.dogs.map(d => d.id).indexOf(dogId)
@@ -27,13 +27,13 @@ export default {
     }
     state.dogs.splice(idx, 1)
   },
-  [types.SELECT_DOG] (state, payload) {
-    state.ui.selectedDog = payload
+  [types.SELECT_DOG] (state, dogId) {
+    state.ui.selectedDog = dogId
   },
-  [types.INSERT_INGREDIENT] (state, payload) {
-    payload.id = state.ids.ingredients
+  [types.INSERT_INGREDIENT] (state, ingredient) {
+    ingredient.id = state.ids.ingredients
     state.ids.ingredients++
-    state.ingredients.push(payload)
+    state.ingredients.push(ingredient)
   },
   [types.REMOVE_INGREDIENT] (state, payload) {
     let ingredient = payload.ingredient
@@ -47,8 +47,8 @@ export default {
       state.recipes.splice(state.recipes.indexOf(recipe), 1)
     }
   },
-  [types.STASH_INGREDIENT] (state, payload) {
-    state.stash.push(payload)
+  [types.STASH_INGREDIENT] (state, item) {
+    state.stash.push(item)
   },
   [types.UPDATE_PLAN_DISTRIBUTION] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]

@@ -1,5 +1,9 @@
 <template>
-  <vue-slider @callback="changed" v-bind="sliderConfig" v-bind:value="currentValue()"></vue-slider>
+  <vue-slider
+    @callback="changed"
+    v-bind="sliderConfig"
+    v-bind:value="currentValue()">
+  </vue-slider>
 </template>
 
 <script>

@@ -21,20 +21,13 @@
 </template>
 
 <script>
-import subCategorySlider from '@/components/SubCategorySlider'
-import subCategoryTag from '@/components/SubCategoryTag'
+import subCategorySlider from '@/components/include/SubCategorySlider'
 
 export default {
   name: 'planPanel',
   props: ['dog', 'category', 'sliderConfig'],
   components: {
-    subCategorySlider,
-    subCategoryTag
-  },
-  data () {
-    return {
-      used: []
-    }
+    subCategorySlider
   },
   computed: {
     plan () {
