@@ -58,7 +58,7 @@
         </div>
         <div class="field is-horizontal">
           <div class="field-label">
-            <label class="label">Enable Meals?</label>
+            <label class="label">Meals</label>
           </div>
           <div class="field-body">
             <div class="field">
@@ -78,7 +78,7 @@
         </div>
         <div class="field is-horizontal">
           <div class="field-label">
-            <label class="label">Enable Stash?</label>
+            <label class="label">Stash</label>
           </div>
           <div class="field-body">
             <div class="field">
