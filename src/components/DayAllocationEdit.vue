@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-for="a in allocation" class="panel-block">
+    <div v-for="a in allocation" class="faked-panel-block">
       <div class="field has-addons">
         <p class="control is-expanded">
           <input class="input" type="number" min="0" max="99999" step="25" v-model="a.amount" v-on:change="writeAllocation(a)">
@@ -26,8 +26,8 @@
             </span>
           </a>
         </p>
-        <p class="control">
-          <span class="select">
+        <p class="control is-expanded">
+          <span class="select is-fullwidth">
             <select v-model="a.subCategory" v-on:change="writeAllocation(a)">
               <option v-for="option in subCategoryOptions" v-model="a.subCategory">
                 {{ option.subCategory }}
@@ -35,20 +35,13 @@
             </select>
           </span>
         </p>
-        <p class="control">
-          <a class="button" v-on:click="deleteAllocation(a)">
-            <span class="icon">
-              <fa pack="fas" name="trash" />
-            </span>
-          </a>
-        </p>
       </div>
-    </span>
+    </div>
   </div>
 </template>
 
 <script>
-import { ADD_OR_UPDATE_DAY_ALLOCATION, REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
+import { ADD_OR_UPDATE_DAY_ALLOCATION } from '@/store/mutation-types'
 
 export default {
   name: 'dayAllocationEdit',
@@ -94,13 +87,6 @@ export default {
     writeAllocation (allocation) {
       allocation.amount = parseInt(allocation.amount)
       this.$store.commit(ADD_OR_UPDATE_DAY_ALLOCATION, {
-        dog: this.dog.id,
-        day: this.day,
-        allocation
-      })
-    },
-    deleteAllocation (allocation) {
-      this.$store.commit(REMOVE_DAY_ALLOCATION, {
         dog: this.dog.id,
         day: this.day,
         allocation
