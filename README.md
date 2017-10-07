@@ -1,8 +1,34 @@
-# barf
+# B.A.R.F
 
-> A Vue.js project
+> raw feeding for dogs made simple
+
+This app should assist you when creating a raw feeding plan for your dog.
+
+It is made using [vue.js](https://vuejs.org/) and [bulma](http://bulma.io/). Thanks for this awesome tools!
+
+![alt text](https://raw.githubusercontent.com/dahrens/barf/master/.github/screenshot-plan.png)
+
+## Features
+
+* Calculate the daily requirement of food based on the dogs weight, the activity
+* Based on food categories.
+  * `animal`
+   * meat
+   * stomach
+   * entrails
+   * bones
+  * `vegetarian`
+   * grains
+   * fruits
+   * vegetables
+* Calculate the amounts for each of them per week
+* Define how much you want to feed ingredients of which category in percent.
+* Break down the overall amounts for the week into a plan for each day.
+* Separated to the theoretic plan you can create a plan including real ingredients.
 
 ## Build Setup
+
+**NOTE** there are no tests :(
 
 ``` bash
 # install dependencies
@@ -28,9 +54,3 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-## Helpers
-
-Find all fa icons currently used:
-
-`grep -rhi '<fa ' ./src | sed 's/.*name=\"\(.*\)\".*/\1/' | sort | uniq`
