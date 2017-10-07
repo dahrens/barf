@@ -17,10 +17,26 @@
           <span>print</span>
         </a>
       </p>
+      <p class="control is-expanded">
+        <a v-on:click="editAll()" class="button is-fullwidth is-outlined">
+          <span class="icon is-small">
+            <fa pack="fas" name="edit" />
+          </span>
+          <span>edit all</span>
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <a v-on:click="saveAll()" class="button is-fullwidth is-outlined">
+          <span class="icon is-small">
+            <fa pack="fas" name="save" />
+          </span>
+          <span>save all</span>
+        </a>
+      </p>
     </div>
 
     <template v-for="(weekday, index) in dog.plan.week">
-      <weekDay :dog="dog" :weekday="weekday" :day="index"></weekDay>
+      <weekDay :ref="weekday" :dog="dog" :weekday="weekday" :day="index"></weekDay>
     </template>
 
     <planAllocationWizard :dog="dog" :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
@@ -45,6 +61,18 @@ export default {
   data () {
     return {
       wizard: false
+    }
+  },
+  methods: {
+    editAll () {
+      for (let referenceName in this.$refs) {
+        this.$refs[referenceName][0].edit = true
+      }
+    },
+    saveAll () {
+      for (let referenceName in this.$refs) {
+        this.$refs[referenceName][0].edit = false
+      }
     }
   }
 }
