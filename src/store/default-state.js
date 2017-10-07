@@ -62,7 +62,7 @@ export default {
       allocation: [[], [], [], [], [], [], []],
       mealAllocation: 'manual',
       meals: [
-        { morning: [{ ingredient: 1, amount: 2000 }], evening: [] },
+        { morning: [], evening: [] },
         { morning: [], evening: [] },
         { morning: [], evening: [] },
         { morning: [], evening: [] },

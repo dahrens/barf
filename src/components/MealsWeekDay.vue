@@ -35,7 +35,7 @@
     <!-- categories overview -->
     <div class="faked-panel-block">
       <div class="field is-grouped is-grouped-multiline">
-        <div class="control is-size-5 is-uppercase">daily consumption</div>
+        <div class="control is-size-5 is-uppercase">planned ration</div>
         <template v-for="a in allocation">
           <div class="control">
             <div class="tags has-addons">
