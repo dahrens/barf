@@ -39,7 +39,6 @@
         </div>
         <div class="column">
           <week :dog="dog"></week>
-          <ingredients></ingredients>
         </div>
         <div class="column is-one-quarter">
           <statistics :dog="dog"></statistics>
@@ -54,7 +53,6 @@ import week from '@/components/Week'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
 import statistics from '@/components/Statistics'
-import ingredients from '@/components/Ingredients'
 
 export default {
   name: 'plan',
@@ -62,8 +60,7 @@ export default {
     dogPanel,
     dogSelector,
     statistics,
-    week,
-    ingredients
+    week
   },
   computed: {
     settings () {

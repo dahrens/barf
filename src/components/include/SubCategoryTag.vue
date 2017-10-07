@@ -35,6 +35,9 @@ export default {
       type: String
     }
   },
+  created () {
+    console.warn('subCategoryTag is deprecated - just do this inline...')
+  },
   computed: {
     category () {
       return this.$store.getters.subCategories.filter(c => c.subCategory === this.subCategory)[0].category

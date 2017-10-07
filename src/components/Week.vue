@@ -1,90 +1,124 @@
 <template>
-  <nav class="panel">
-    <p class="panel-heading">
-      Week
-      <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="caret-down" />
-        <fa v-if="collapsed" pack="fas" name="caret-right" />
-      </a>
-      <a v-on:click="wizard = !wizard" class="icon is-pulled-right has-text-dark">
-        <fa pack="fas" name="magic" />
-      </a>
-      <a v-on:click="expandMany = !expandMany" class="is-light is-pulled-right">
-        <span class="icon has-text-dark panel-heading-icon">
-          <fa v-if="expandMany" pack="fas" name="arrows-alt-v" size="sm" />
-          <fa v-if="!expandMany" pack="fas" name="crosshairs" size="sm" />
-        </span>
-      </a>
-      <a v-on:click="expandAll()" class="is-light is-pulled-right">
-        <span class="icon has-text-dark panel-heading-icon">
-          <fa pack="fas" name="expand-arrows-alt" size="sm" />
-        </span>
-      </a>
-    </p>
+  <div class="week">
+    <div class="field has-addons">
+      <p class="control is-expanded">
+        <a v-on:click="wizard = !wizard" class="button is-fullwidth is-outlined">
+          <span class="icon is-small">
+            <fa pack="fas" name="magic" />
+          </span>
+          <span>wizard</span>
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <a class="button is-fullwidth is-outlined">
+          <span class="icon is-small">
+            <fa pack="fas" name="print" />
+          </span>
+          <span>print</span>
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <a v-on:click="showCategories = !showCategories" class="button is-fullwidth is-outlined">
+          <span class="icon is-small">
+            <fa pack="fas" name="tags" />
+          </span>
+          <span v-if="!showCategories">show</span>
+          <span v-else>hide</span>
+          <span>&nbsp;categories</span>
+        </a>
+      </p>
+      <p class="control is-expanded">
+        <a v-on:click="showMeals = !showMeals" class="button is-fullwidth is-outlined">
+          <span class="icon is-small">
+            <fa pack="fas" name="utensils" />
+          </span>
+          <span v-if="!showMeals">show</span>
+          <span v-else>hide</span>
+          <span>&nbsp;meals</span>
+        </a>
+      </p>
+    </div>
 
     <!-- iterate weekdays weekday = monday, index = 0 -->
     <template v-if="!collapsed" v-for="(weekday, index) in dog.plan.week">
-      <!-- day heading -->
-      <a v-on:click="activate(weekday)" class="panel-block" :class="{'is-active': isActive(weekday)}">
-        <p class="panel-icon">
-          <fa v-if ="!isActive(weekday)" pack="fas" name="caret-right" />
-          <fa v-if ="isActive(weekday)" pack="fas" name="caret-down" />
+      <nav class="panel">
+        <!-- day heading -->
+        <p class="panel-heading">
+          <span class="is-size-5 is-uppercase">{{ weekday }}</span>
         </p>
-        <span v-if="!isActive(weekday)" class="is-size-5 is-uppercase">{{ weekday.slice(0, 2) }}&nbsp;</span>
-        <span v-else class="is-size-5 is-uppercase">{{ weekday }}</span>
-        <template v-if="!isActive(weekday)" v-for="a in allocation(index)">
-          <subCategoryTag :subCategory="a.subCategory" :textBefore="a.amount + 'g '"></subCategoryTag>&nbsp;
-        </template>
-      </a>
 
-      <!-- categories overview -->
-      <div v-if="isActive(weekday)" class="faked-panel-block">
-        <span class="has-text-weight-bold">Categories</span>
-        <template v-if="isActive(weekday)" v-for="a in allocation(index)">
-          <subCategoryTag :subCategory="a.subCategory" :textBefore="a.amount + 'g '"></subCategoryTag>&nbsp;
-        </template>
-        <a v-on:click="toggleDayAllocationEdit(weekday)" class="icon has-text-dark is-pulled-right">
-          <fa v-if="!hasAllocationEdit(weekday)" pack="fas" name="edit" />
-          <fa v-else pack="fas" name="save" />
-        </a>
-        <a v-on:click="addAllocation(index)" :disabled="allocation(index).length === subCategoryOptions.length" class="icon is-pulled-right has-text-dark">
-          <fa pack="fas" name="plus" />
-        </a>
-        <div class="is-clearfix"/>
-      </div>
-
-      <!-- categories edit -->
-      <template v-if="hasAllocationEdit(weekday)">
-        <dayAllocationEdit :dog="dog" :day="index"></dayAllocationEdit>
-      </template>
-
-      <!-- meals for that day -->
-      <div v-if="isActive(weekday)" class="faked-panel-block">
-        <nav class="level">
-          <div v-for="timeOfDay in ['morning', 'evening']" class="level-item has-text-centered">
-            <div>
-              <p class="heading is-size-6">{{ timeOfDay }}</p>
-              <p v-if="plan.meals[index][timeOfDay].length" class="subtitle">
-                <ul>
-                  <li v-for="meal in plan.meals[index][timeOfDay]">
-                    {{ getIngredient(meal.ingredient).name }}
-                  </li>
-                </ul>
-              </p>
-              <p v-else class="subtitle">nothing</p>
+        <!-- categories overview -->
+        <div v-if="showCategories" class="faked-panel-block">
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control">
+              <a v-on:click="addAllocation(index)" :disabled="allocation(index).length === subCategoryOptions.length" class="button icon is-medium is-success">
+                <fa pack="fas" name="plus" />
+              </a>
             </div>
+            <div class="control">
+              <a v-on:click="toggleDayAllocationEdit(weekday)" class="button icon is-medium is-dark">
+                <fa v-if="!hasAllocationEdit(weekday)" pack="fas" name="edit" />
+                <fa v-else pack="fas" name="save" />
+              </a>
+            </div>
+            <template v-for="a in allocation(index)">
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-dark is-medium">{{ a.amount }}g</span>
+                  <span class="tag is-light is-medium" v-bind:style="{
+                    backgroundColor: subCategoryColor(a.subCategory),
+                    color: categoryColor,
+                    }">{{ a.subCategory }}</span>
+                  <a v-on:click="deleteAllocation(a, index)" class="tag is-medium is-delete"></a>
+                </div>
+              </div>
+            </template>
           </div>
-        </nav>
-      </div>
+        </div>
+
+        <!-- categories edit -->
+        <template v-if="showCategories && hasAllocationEdit(weekday)">
+          <dayAllocationEdit :dog="dog" :day="index"></dayAllocationEdit>
+        </template>
+
+        <!-- meals for that day -->
+        <div v-if="showMeals" class="faked-panel-block">
+          <nav class="level">
+            <div v-for="timeOfDay in ['morning', 'evening']" class="level-item has-text-centered">
+              <div>
+                <p class="heading is-size-4">
+                  <a class="button icon is-medium is-success">
+                    <fa pack="fas" name="plus" />
+                  </a>
+                  <span>{{ timeOfDay }}</span>
+                  <a class="button icon is-medium is-danger">
+                    <fa pack="fas" name="bomb" />
+                  </a>
+                </p>
+                <p v-if="plan.meals[index][timeOfDay].length" class="subtitle">
+                  <ul>
+                    <li v-for="meal in plan.meals[index][timeOfDay]">
+                      {{ getIngredient(meal.ingredient).name }}
+                    </li>
+                  </ul>
+                </p>
+                <p v-else class="subtitle has-text-danger">nothing</p>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </nav>
     </template>
     <planAllocationWizard :dog="dog" :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
-  </nav>
+  </div>
 </template>
 
 <script>
 import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import planAllocationWizard from '@/components/PlanAllocationWizard'
+import ingredients from '@/components/Ingredients'
+import { REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 
 export default {
   name: 'planDay',
@@ -92,15 +126,15 @@ export default {
   components: {
     planAllocationWizard,
     dayAllocationEdit,
-    subCategoryTag
+    subCategoryTag,
+    ingredients
   },
   data () {
     return {
       wizard: false,
-      collapsed: false,
+      showCategories: true,
+      showMeals: true,
       allocationEdit: [],  // list of weekday with activated edit panel
-      active: [],
-      expandMany: false,
       newAllocation: {
         subCategory: 'meat',
         amount: 100
@@ -113,9 +147,15 @@ export default {
     },
     subCategoryOptions () {
       return this.$store.getters.subCategories
+    },
+    categoryColor () {
+      if (this.category === 'animal') return 'whitesmoke'
     }
   },
   methods: {
+    subCategoryColor (subCategory) {
+      return this.$store.state.ui.subCategoryColors[subCategory]
+    },
     allocation (day) {
       return this.plan.allocation[day]
     },
@@ -129,11 +169,8 @@ export default {
       fresh.subCategory = freshSubCategory
       this.allocation(day).push(fresh)
     },
-    expandAll () {
-      this.expandMany = true
-      for (let day of this.plan.week) {
-        this.activate(day)
-      }
+    editAll () {
+
     },
     toggleDayAllocationEdit (weekday) {
       let idx = this.allocationEdit.indexOf(weekday)
@@ -149,17 +186,12 @@ export default {
     getIngredient (id) {
       return this.$store.getters.ingredientById(id)
     },
-    activate: function (day) {
-      if (this.active.indexOf(day) === -1) {
-        if (!this.expandMany) this.active = []
-        this.active.push(day)
-      } else {
-        if (!this.expandMany) this.active = []
-        this.active.splice(this.active.indexOf(day), 1)
-      }
-    },
-    isActive: function (day) {
-      return this.active.indexOf(day) !== -1
+    deleteAllocation (allocation, day) {
+      this.$store.commit(REMOVE_DAY_ALLOCATION, {
+        dog: this.dog.id,
+        day,
+        allocation
+      })
     }
   }
 }

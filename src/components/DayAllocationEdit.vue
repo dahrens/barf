@@ -2,22 +2,6 @@
   <div>
     <span v-for="a in allocation" class="panel-block">
       <div class="field has-addons">
-        <p class="control">
-          <a class="button is-static">
-            <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(a.subCategory) }">
-              <fa size="2x" pack="fas" name="square"/>
-            </span>
-          </a>
-        </p>
-        <p class="control">
-          <span class="select">
-            <select v-model="a.subCategory" v-on:change="writeAllocation(a)">
-              <option v-for="option in subCategoryOptions" v-model="a.subCategory">
-                {{ option.subCategory }}
-              </option>
-            </select>
-          </span>
-        </p>
         <p class="control is-expanded">
           <input class="input" type="number" min="0" max="99999" step="25" v-model="a.amount" v-on:change="writeAllocation(a)">
         </p>
@@ -34,6 +18,22 @@
               <fa pack="fas" name="chevron-down" />
             </span>
           </a>
+        </p>
+        <p class="control">
+          <a class="button is-static">
+            <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(a.subCategory) }">
+              <fa size="2x" pack="fas" name="square"/>
+            </span>
+          </a>
+        </p>
+        <p class="control">
+          <span class="select">
+            <select v-model="a.subCategory" v-on:change="writeAllocation(a)">
+              <option v-for="option in subCategoryOptions" v-model="a.subCategory">
+                {{ option.subCategory }}
+              </option>
+            </select>
+          </span>
         </p>
         <p class="control">
           <a class="button" v-on:click="deleteAllocation(a)">
