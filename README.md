@@ -13,14 +13,14 @@ It is made using [vue.js](https://vuejs.org/) and [bulma](http://bulma.io/). Tha
 * Calculate the daily requirement of food based on the dogs weight, the activity
 * Based on food categories.
   * `animal`
-   * meat
-   * stomach
-   * entrails
-   * bones
+    * meat
+    * stomach
+    * entrails
+    * bones
   * `vegetarian`
-   * grains
-   * fruits
-   * vegetables
+    * grains
+    * fruits
+    * vegetables
 * Calculate the amounts for each of them per week
 * Define how much you want to feed ingredients of which category in percent.
 * Break down the overall amounts for the week into a plan for each day.
