@@ -90,7 +90,7 @@ export default {
   [types.REMOVE_SCHEDULED_MEAL] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
     let idx = dog.plan.meals[payload.day][payload.timeOfDay].indexOf(payload.meal)
-    if (idx) {
+    if (idx !== -1) {
       dog.plan.meals[payload.day][payload.timeOfDay].splice(idx, 1)
     }
   }
