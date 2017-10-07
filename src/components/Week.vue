@@ -55,12 +55,6 @@
                 <fa pack="fas" name="plus" />
               </a>
             </div>
-            <div class="control">
-              <a v-on:click="toggleDayAllocationEdit(weekday)" class="button icon is-medium is-dark">
-                <fa v-if="!hasAllocationEdit(weekday)" pack="fas" name="edit" />
-                <fa v-else pack="fas" name="save" />
-              </a>
-            </div>
             <template v-for="a in allocation(index)">
               <div class="control">
                 <div class="tags has-addons">
@@ -73,6 +67,12 @@
                 </div>
               </div>
             </template>
+            <div class="control">
+              <a v-on:click="toggleDayAllocationEdit(weekday)" class="button icon is-medium is-dark">
+                <fa v-if="!hasAllocationEdit(weekday)" pack="fas" name="edit" />
+                <fa v-else pack="fas" name="save" />
+              </a>
+            </div>
           </div>
         </div>
 

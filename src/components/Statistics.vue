@@ -8,11 +8,11 @@
       </a>
     </p>
     <template v-if="!collapsed">
-      <div class="faked-panel-block">
-        <distributionChart :chartData="distributionChartData"></distributionChart>
-      </div>
       <div class="panel-block">
         <allocationChart :chartData="allocationChartData"></allocationChart>
+      </div>
+      <div class="faked-panel-block">
+        <distributionChart :chartData="distributionChartData"></distributionChart>
       </div>
     </template>
   </nav>
