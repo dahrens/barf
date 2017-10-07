@@ -1,7 +1,14 @@
 <template>
-  <div class="week columns is-gapless">
-    <div v-for="(weekday, index) in dog.plan.week" class="column">
-      <weekDay :dog="dog" :weekday="weekday" :day="index"></weekDay>
+  <div class="week">
+    <div class="columns is-gapless">
+      <div v-for="(weekday, index) in dog.plan.week" class="column">
+        <weekDay :dog="dog" :weekday="weekday" :day="index"></weekDay>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <ingredients></ingredients>
+      </div>
     </div>
   </div>
 </template>
