@@ -220,6 +220,7 @@ export default {
 
 .modal .panel-block,
 .modal .faked-panel-block,
+.modal .panel-tabs,
 .modal .steps
   background-color: white
   color: $dark

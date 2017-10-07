@@ -9,7 +9,7 @@
       </a>
     </p>
     <!-- categories overview -->
-    <div v-if="showCategories" class="faked-panel-block">
+    <div class="faked-panel-block">
       <div class="field is-grouped is-grouped-multiline">
         <div class="control is-size-5 is-uppercase">daily consumption</div>
         <template v-for="a in allocation">
@@ -33,43 +33,16 @@
     </div>
 
     <!-- categories edit -->
-    <template v-if="showCategories && edit">
+    <template v-if="edit">
       <dayAllocationEdit :dog="dog" :day="day"></dayAllocationEdit>
     </template>
 
-    <!-- meals for that day -->
-    <div v-if="showMeals" class="faked-panel-block">
-      <nav class="level">
-        <div v-for="timeOfDay in ['morning', 'evening']" class="level-item has-text-centered">
-          <div>
-            <p class="heading is-size-4">
-              <a v-if="edit" class="button icon is-medium is-success">
-                <fa pack="fas" name="plus" />
-              </a>
-              <span>{{ timeOfDay }}</span>
-              <a v-if="edit" class="button icon is-medium is-danger">
-                <fa pack="fas" name="bomb" />
-              </a>
-            </p>
-            <p v-if="dog.plan.meals[day][timeOfDay].length" class="subtitle">
-              <ul>
-                <li v-for="meal in dog.plan.meals[day][timeOfDay]">
-                  {{ getIngredient(meal.ingredient).name }}
-                </li>
-              </ul>
-            </p>
-            <p v-else class="subtitle has-text-danger">nothing</p>
-          </div>
-        </div>
-      </nav>
-    </div>
   </nav>
 </template>
 
 <script>
 import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
-import ingredients from '@/components/Ingredients'
 import { REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 
 export default {
@@ -83,20 +56,11 @@ export default {
     },
     weekday: {
       required: true
-    },
-    showCategories: {
-      required: false,
-      default: () => (true)
-    },
-    showMeals: {
-      required: false,
-      default: () => (true)
     }
   },
   components: {
     dayAllocationEdit,
-    subCategoryTag,
-    ingredients
+    subCategoryTag
   },
   data () {
     return {

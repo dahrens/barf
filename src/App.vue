@@ -23,7 +23,17 @@
             <span class="icon is-large">
               <fa size="2x" pack="fas" name="calculator"/>
             </span>
-            <span class="is-size-5">PLAN</span>
+            <span class="is-size-5 is-uppercase">PLAN</span>
+          </router-link>
+          <router-link
+            v-if="settings.useMeals"
+            class="nav-item is-tab"
+            :class="{'is-active': $route.fullPath ==='/meals'}"
+            :to="{ name: 'Meals' }">
+            <span class="icon is-large">
+              <fa size="2x" pack="fas" name="utensils"/>
+            </span>
+            <span class="is-size-5 is-uppercase">meals</span>
           </router-link>
           <router-link
             v-if="settings.useStash"
@@ -33,7 +43,7 @@
             <span class="icon is-large">
               <fa size="2x" pack="fas" name="archive"/>
             </span>
-            <span class="is-size-5">STASH</span>
+            <span class="is-size-5 is-uppercase">stash</span>
           </router-link>
         </div>
         <div class="navbar-end">
@@ -44,7 +54,7 @@
             <span class="icon is-large">
               <fa size="2x" pack="fas" name="info"/>
             </span>
-            <span class="is-size-5">ABOUT</span>
+            <span class="is-size-5 is-uppercase">about</span>
           </router-link>
           <router-link
             class="nav-item is-tab"
@@ -53,7 +63,7 @@
             <span class="icon is-large">
               <fa size="2x" pack="fas" name="wrench" />
             </span>
-            <span class="is-size-5">SETTINGS</span>
+            <span class="is-size-5 is-uppercase">settings</span>
           </router-link>
         </div>
       </div>

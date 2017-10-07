@@ -1,6 +1,6 @@
 <template>
   <nav class="panel market-panel">
-    <p class="panel-heading">
+    <p v-if="showHeading" class="panel-heading">
       Ingredients
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
@@ -49,9 +49,35 @@
               <subCategoryTag :amount="part[0]" :subCategory="part[1]"></subCategoryTag>&nbsp;
             </template>
           </a>
-          <span v-if="isActive(ingredient)" class="panel-block">
+          <div v-if="isActive(ingredient) && dog" class="faked-panel-block">
+            <div class="field has-addons has-addons-right">
+              <p class="control is-expanded">
+                <input v-model="mealAmounts[ingredient.id]" class="input" type="number" placeholder="Amount" min="0" max="100000" step="25">
+              </p>
+              <p class="control">
+                <a class="button is-static">
+                  <span class="">
+                    {{ ingredient.unit }}
+                  </span>
+                </a>
+              </p>
+              <p class="control">
+                <a v-on:click="scheduleMeal(ingredient.id, 'morning')" class="button" title="Schedule morning">
+                  <span class="icon">
+                    <fa pack="fas" name="sun" />
+                  </span>
+                </a>
+              </p>
+              <p class="control">
+                <a v-on:click="scheduleMeal(ingredient.id, 'evening')" class="button" title="Schedule evening">
+                  <span class="icon">
+                    <fa pack="fas" name="moon" />
+                  </span>
+                </a>
+              </p>
+            </div>
             <stashIngredient v-if="settings.useStash" :ingredient="ingredient"></stashIngredient>
-          </span>
+          </div>
       </template>
     </template>
   </nav>
@@ -61,6 +87,7 @@
 import ingredientCreate from '@/components/IngredientCreate'
 import stashIngredient from '@/components/StashIngredient'
 import subCategoryTag from '@/components/include/SubCategoryTag'
+import { SCHEDULE_MEAL } from '@/store/mutation-types'
 
 export default {
   name: 'ingredients',
@@ -73,6 +100,18 @@ export default {
     showCreate: {
       required: false,
       default: () => (true)
+    },
+    showHeading: {
+      required: false,
+      default: () => true
+    },
+    dog: {
+      required: false,
+      default: () => (false)
+    },
+    day: {
+      required: false,
+      default: () => (false)
     }
   },
   data () {
@@ -82,7 +121,13 @@ export default {
       collapsed: false,
       active: [],
       subCategoryFilter: 'all',
-      search: ''
+      search: '',
+      mealAmounts: {}
+    }
+  },
+  created () {
+    for (let ingredient of this.ingredients) {
+      this.mealAmounts[ingredient.id] = 100
     }
   },
   computed: {
@@ -117,8 +162,16 @@ export default {
     isActive: function (record) {
       return this.active.indexOf(record) !== -1
     },
-    setCategoryFilter (filter) {
-
+    scheduleMeal (ingredientId, timeOfDay) {
+      this.$store.commit(SCHEDULE_MEAL, {
+        dog: this.dog.id,
+        day: this.day,
+        timeOfDay,
+        meal: {
+          ingredient: ingredientId,
+          amount: this.mealAmounts[ingredientId]
+        }
+      })
     }
   }
 }

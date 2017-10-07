@@ -82,5 +82,16 @@ export default {
   [types.UPDATE_PLAN_ALLOCATION] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
     dog.plan.allocation = payload.allocation
+  },
+  [types.SCHEDULE_MEAL] (state, payload) {
+    let dog = state.dogs.filter(d => d.id === payload.dog)[0]
+    dog.plan.meals[payload.day][payload.timeOfDay].push(payload.meal)
+  },
+  [types.REMOVE_SCHEDULED_MEAL] (state, payload) {
+    let dog = state.dogs.filter(d => d.id === payload.dog)[0]
+    let idx = dog.plan.meals[payload.day][payload.timeOfDay].indexOf(payload.meal)
+    if (idx) {
+      dog.plan.meals[payload.day][payload.timeOfDay].splice(idx, 1)
+    }
   }
 }

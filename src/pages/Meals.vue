@@ -1,11 +1,11 @@
-<template>
-  <div class="plan">
+meals<template>
+  <div class="meals">
     <section class="hero is-primary is-bold">
       <div class="hero-body">
         <div class="container">
-          <h2 class="title">Plan</h2>
+          <h2 class="title">Meals</h2>
           <p class="subtitle">
-            Create an individual plan to barf your dog.
+            You created an abstract plan now, but What exactly do you feed?
           </p>
           <dogSelector></dogSelector>
         </div>
@@ -32,34 +32,22 @@
         </div>
       </div>
     </section>
-    <div v-if="dog" class="plan-content">
-      <div class="columns">
-        <div class="column is-one-quarter">
-          <dogPanel :dog="dog"></dogPanel>
-        </div>
-        <div class="column">
-          <week :dog="dog"></week>
-        </div>
-        <div class="column is-one-quarter">
-          <statistics :dog="dog"></statistics>
-        </div>
-      </div>
+    <div v-if="dog" class="meals-content">
+      <week :dog="dog"></week>
     </div>
   </div>
 </template>
 
 <script>
-import week from '@/components/PlanWeek'
+import week from '@/components/MealsWeek'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
-import statistics from '@/components/Statistics'
 
 export default {
   name: 'plan',
   components: {
     dogPanel,
     dogSelector,
-    statistics,
     week
   },
   computed: {

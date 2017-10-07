@@ -5,6 +5,7 @@ export default {
     recipes: 2
   },
   settings: {
+    useMeals: true,
     useStash: false
   },
   ui: {
