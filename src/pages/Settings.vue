@@ -58,6 +58,26 @@
         </div>
         <div class="field is-horizontal">
           <div class="field-label">
+            <label class="label">Enable Meals?</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="useMeals" :value="true" v-model="settings.useMeals" v-on:change="writeSettings()">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="useMeals" :value="false" v-model="settings.useMeals" v-on:change="writeSettings()">
+                  No
+                </label>
+              </div>
+              <p class="help is-info">The meals feature allows you to create a real plan for a week with things you can buy.</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
             <label class="label">Enable Stash?</label>
           </div>
           <div class="field-body">
@@ -72,7 +92,7 @@
                   No
                 </label>
               </div>
-              <p class="help is-info">This feature is experimental</p>
+              <p class="help is-info">This feature is experimental! In addition to the meals plan, this should enable you to track what you have at home.</p>
             </div>
           </div>
         </div>
