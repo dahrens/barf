@@ -82,11 +82,23 @@
     <section class="hero is-warning">
       <div class="hero-body">
         <div class="container">
-          <h2 class="title">Beta Release</h2>
-          <p class="subtitle">
-            The app is not ready for production use.
-            In worst case it might happen that your <strong>inserted data will not be compatible with future versions</strong>.
-          </p>
+          <div class="columns">
+            <div class="column is-1">
+              <span class="icon is-large">
+                <fa size="4x" pack="fas" name="exclamation-triangle" />
+              </span>
+            </div>
+            <div class="column">
+              <h2 class="title">
+                Beta Release
+              </h2>
+              <p class="subtitle">
+                The app is not ready for production use.
+                In worst case it might happen that your <strong>inserted data will not be compatible with future versions</strong>.
+              </p>
+              <p>If you were here before and encounter strange behavior - <a class="has-text-primary" v-on:click="resetApp()">reset all data</a> and reload the page. This removes all local data from the app and enforces a fresh state.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -121,6 +133,11 @@ export default {
   computed: {
     settings () {
       return this.$store.state.settings
+    }
+  },
+  methods: {
+    resetApp () {
+      localStorage.removeItem('barf')
     }
   }
 }
