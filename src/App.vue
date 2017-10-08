@@ -36,6 +36,16 @@
             <span class="is-size-5 is-uppercase">meals</span>
           </router-link>
           <router-link
+            v-if="settings.useMeals"
+            class="nav-item is-tab"
+            :class="{'is-active': $route.fullPath ==='/ingredients'}"
+            :to="{ name: 'Ingredients' }">
+            <span class="icon is-large">
+              <fa size="2x" pack="fas" name="puzzle-piece"/>
+            </span>
+            <span class="is-size-5 is-uppercase">ingredients</span>
+          </router-link>
+          <router-link
             v-if="settings.useStash"
             class="nav-item is-tab"
             :class="{'is-active': $route.fullPath ==='/stash'}"
