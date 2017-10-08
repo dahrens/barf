@@ -4,6 +4,8 @@
 
 This app should assist you when creating a raw feeding plan for your dog.
 
+Have a look at the [Online Demo](https://barf.part-of.me).
+
 It is made using [vue.js](https://vuejs.org/) and [bulma](http://bulma.io/). Thanks for this awesome tools!
 
 ![alt text](https://raw.githubusercontent.com/dahrens/barf/master/.github/screenshot-plan.png)

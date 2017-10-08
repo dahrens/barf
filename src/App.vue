@@ -79,6 +79,17 @@
       </div>
     </nav>
     <router-view></router-view>
+    <section class="hero is-warning">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Beta Release</h2>
+          <p class="subtitle">
+            The app is not ready for production use.
+            In worst case it might happen that your <strong>inserted data will not be compatible with future versions</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
