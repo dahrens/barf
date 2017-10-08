@@ -5,21 +5,15 @@
         <weekDay :dog="dog" :weekday="weekday" :day="index"></weekDay>
       </div>
     </div>
-    <div class="columns">
-      <div class="column">
-        <ingredients></ingredients>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import weekDay from '@/components/MealsWeekDay'
 import planAllocationWizard from '@/components/PlanAllocationWizard'
-import ingredients from '@/components/Ingredients'
 
 export default {
-  name: 'week',
+  name: 'mealsWeek',
   props: {
     dog: {
       required: true
@@ -27,8 +21,7 @@ export default {
   },
   components: {
     planAllocationWizard,
-    weekDay,
-    ingredients
+    weekDay
   }
 }
 </script>

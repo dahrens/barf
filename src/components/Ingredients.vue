@@ -44,10 +44,7 @@
               <fa v-if ="!isActive(ingredient)" pack="fas" name="caret-right" />
               <fa v-if ="isActive(ingredient)" pack="fas" name="caret-down" />
             </p>
-            {{ ingredient.name }}&nbsp;
-            <template v-for="part in ingredient.subcategories">
-              <subCategoryTag :amount="part[0]" :subCategory="part[1]"></subCategoryTag>&nbsp;
-            </template>
+            {{ ingredient.name }}
           </a>
           <div v-if="isActive(ingredient) && dog" class="faked-panel-block">
             <div class="field has-addons has-addons-right">
@@ -86,15 +83,13 @@
 <script>
 import ingredientCreate from '@/components/IngredientCreate'
 import stashIngredient from '@/components/StashIngredient'
-import subCategoryTag from '@/components/include/SubCategoryTag'
 import { SCHEDULE_MEAL } from '@/store/mutation-types'
 
 export default {
   name: 'ingredients',
   components: {
     ingredientCreate,
-    stashIngredient,
-    subCategoryTag
+    stashIngredient
   },
   props: {
     showCreate: {

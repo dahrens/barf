@@ -11,20 +11,19 @@
     <!-- categories overview -->
     <div class="faked-panel-block">
       <div class="field is-grouped is-grouped-multiline">
-        <template v-for="a in allocation">
+        <template v-for="allocation in allocations">
           <div class="control">
             <div class="tags has-addons">
-              <span class="tag is-dark is-medium">{{ a.amount }}g</span>
+              <span class="tag is-dark is-medium">{{ allocation.amount }}g</span>
               <span class="tag is-light is-medium" v-bind:style="{
-                backgroundColor: subCategoryColor(a.subCategory),
-                color: categoryColor,
-                }">{{ a.subCategory }}</span>
+                backgroundColor: subCategoryColor(allocation.subCategory)
+              }">{{ allocation.subCategory }}</span>
               <a v-if="edit" v-on:click="deleteAllocation(a)" class="tag is-medium is-delete"></a>
             </div>
           </div>
         </template>
         <div v-if="edit" class="control">
-          <a v-on:click="addAllocation()" :disabled="allocation.length === subCategoryOptions.length" class="button icon is-medium is-success">
+          <a v-on:click="addAllocation()" :disabled="allocations.length === subCategoryOptions.length" class="button icon is-medium is-success">
             <fa pack="fas" name="plus" />
           </a>
         </div>
@@ -40,7 +39,6 @@
 </template>
 
 <script>
-import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import { REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 
@@ -58,8 +56,7 @@ export default {
     }
   },
   components: {
-    dayAllocationEdit,
-    subCategoryTag
+    dayAllocationEdit
   },
   data () {
     return {
@@ -74,10 +71,7 @@ export default {
     subCategoryOptions () {
       return this.$store.getters.subCategories
     },
-    categoryColor () {
-      if (this.category === 'animal') return 'whitesmoke'
-    },
-    allocation () {
+    allocations () {
       return this.dog.plan.allocation[this.day]
     }
   },
@@ -86,11 +80,12 @@ export default {
       return this.$store.state.ui.subCategoryColors[subCategory]
     },
     addAllocation () {
-      if (this.allocation.length === this.subCategoryOptions.length) return
+      if (this.allocations.length === this.subCategoryOptions.length) return
       let fresh = JSON.parse(JSON.stringify(this.newAllocation))
-      let freshSubCategory = this.subCategoryOptions.filter(s => this.allocation.map(a => a.subCategory).indexOf(s.subCategory) === -1)[0].subCategory
+      let notUsed = (s) => this.allocations.map(a => a.subCategory).indexOf(s.subCategory) === -1
+      let freshSubCategory = this.subCategoryOptions.filter(notUsed)[0].subCategory
       fresh.subCategory = freshSubCategory
-      this.allocation.push(fresh)
+      this.allocations.push(fresh)
     },
     getIngredient (id) {
       return this.$store.getters.ingredientById(id)

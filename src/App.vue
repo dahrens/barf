@@ -23,7 +23,7 @@
             <span class="icon is-large">
               <fa size="2x" pack="fas" name="calculator"/>
             </span>
-            <span class="is-size-5 is-uppercase">PLAN</span>
+            <span class="is-size-5 is-uppercase">plan</span>
           </router-link>
           <router-link
             v-if="settings.useMeals"

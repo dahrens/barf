@@ -48,7 +48,7 @@ import weekDay from '@/components/PlanWeekDay'
 import planAllocationWizard from '@/components/PlanAllocationWizard'
 
 export default {
-  name: 'week',
+  name: 'planWeek',
   props: {
     dog: {
       required: true

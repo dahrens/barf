@@ -17,9 +17,14 @@
         <p v-if="dog.plan.meals[day][timeOfDay].length" class="subtitle">
           <ul>
             <li v-for="meal in dog.plan.meals[day][timeOfDay]">
-              <span class="has-text-weight-bold">{{ meal.amount }}{{ getIngredient(meal.ingredient).unit }}</span>
-              <span>{{ getIngredient(meal.ingredient).name }}</span>
-              <a v-if="edit" v-on:click="removeScheduledMeal(timeOfDay, meal)" class="tag is-delete"></a>
+              <span class="has-text-weight-bold">
+                {{ meal.amount }}{{ getIngredient(meal.ingredient).unit }}
+              </span>
+              <span>
+                {{ getIngredient(meal.ingredient).name }}
+              </span>
+              <a v-if="edit" class="tag is-delete"
+                v-on:click="removeScheduledMeal(timeOfDay, meal)"></a>
             </li>
           </ul>
         </p>
@@ -36,14 +41,13 @@
     <div class="faked-panel-block">
       <div class="field is-grouped is-grouped-multiline">
         <div class="control is-size-5 is-uppercase">planned ration</div>
-        <template v-for="a in allocation">
+        <template v-for="allocation in allocations">
           <div class="control">
             <div class="tags has-addons">
-              <span class="tag is-dark is-medium">{{ a.amount }}g</span>
+              <span class="tag is-dark is-medium">{{ allocation.amount }}g</span>
               <span class="tag is-light is-medium" v-bind:style="{
-                backgroundColor: subCategoryColor(a.subCategory),
-                color: categoryColor,
-                }">{{ a.subCategory }}</span>
+                backgroundColor: subCategoryColor(allocation.subCategory)
+              }">{{ allocation.subCategory }}</span>
             </div>
           </div>
         </template>
@@ -53,7 +57,6 @@
 </template>
 
 <script>
-import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import ingredients from '@/components/Ingredients'
 import { REMOVE_SCHEDULED_MEAL } from '@/store/mutation-types'
@@ -73,7 +76,6 @@ export default {
   },
   components: {
     dayAllocationEdit,
-    subCategoryTag,
     ingredients
   },
   data () {
@@ -88,7 +90,7 @@ export default {
     categoryColor () {
       if (this.category === 'animal') return 'whitesmoke'
     },
-    allocation () {
+    allocations () {
       return this.dog.plan.allocation[this.day]
     }
   },

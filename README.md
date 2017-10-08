@@ -1,7 +1,5 @@
 # B.A.R.F
 
-> raw feeding for dogs made simple
-
 This app should assist you when creating a raw feeding plan for your dog.
 
 It is made using [vue.js](https://vuejs.org/) and [bulma](http://bulma.io/). Thanks for this awesome tools!
