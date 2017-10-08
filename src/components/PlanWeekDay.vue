@@ -18,7 +18,7 @@
               <span class="tag is-light is-medium" v-bind:style="{
                 backgroundColor: subCategoryColor(allocation.subCategory)
               }">{{ allocation.subCategory }}</span>
-              <a v-if="edit" v-on:click="deleteAllocation(a)" class="tag is-medium is-delete"></a>
+              <a v-if="edit" v-on:click="deleteAllocation(allocation)" class="tag is-medium is-delete"></a>
             </div>
           </div>
         </template>
