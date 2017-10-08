@@ -28,6 +28,9 @@ export default {
     state.dogs.splice(idx, 1)
   },
   [types.SELECT_DOG] (state, dogId) {
+    if (!state.dogs.some(d => d.id === dogId)) {
+      throw new Error('Unknown DogId ' + dogId)
+    }
     state.ui.selectedDogId = dogId
   },
   [types.INSERT_INGREDIENT] (state, ingredient) {
@@ -42,9 +45,6 @@ export default {
     state.ingredients.splice(idx, 1)
     for (let item of payload.cascade.stashContent) {
       state.stash.splice(state.stash.indexOf(item), 1)
-    }
-    for (let recipe of payload.cascade.recipes) {
-      state.recipes.splice(state.recipes.indexOf(recipe), 1)
     }
   },
   [types.STASH_INGREDIENT] (state, item) {
