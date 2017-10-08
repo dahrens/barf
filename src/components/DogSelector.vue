@@ -1,11 +1,11 @@
 <template>
-  <div class="field has-addons has-addons-right has-addons-left">
+  <div id="dog-selector" class="field has-addons has-addons-right has-addons-left">
     <p class="control">
-      <a v-on:click="deleteDog()" class="button is-medium is-danger" :disabled="selectedDogId === 0">
+      <button v-on:click="deleteDog()" name="delete-dog" class="button is-medium is-danger" :disabled="selectedDogId === 0">
         <span class="icon is-medium">
           <fa pack="fas" name="trash"/>
         </span>
-      </a>
+      </button>
     </p>
     <div class="control has-icons-left is-expanded">
       <div class="select is-fullwidth is-medium">
@@ -19,13 +19,13 @@
       </div>
     </div>
     <p class="control">
-      <a v-on:click="createDog()" class="button is-medium is-success">
+      <button v-on:click="createDog()" name="create-dog" class="button is-medium is-success">
         <span class="icon is-medium">
           <fa pack="fas" name="plus"/>
         </span>
-      </a>
+      </button>
     </p>
-    <div class="modal" :class="{'is-active': showCreate}">
+    <div id="dog-create-modal" class="modal" :class="{'is-active': showCreate}">
       <div class="modal-background"></div>
       <div class="modal-content">
         <nav class="panel">
@@ -90,21 +90,21 @@
           <div class="faked-panel-block">
             <div class="field has-addons is-centered">
               <p class="control is-expanded">
-                <a v-on:click="prevStep()" class="button is-primary" :disabled="step < 2">
+                <button v-on:click="prevStep()" name="prev" class="button is-primary" :disabled="step < 2">
                   <span class="icon">
                     <fa pack="fas" name="angle-left" />
                   </span>
                   <span>back</span>
-                </a>
+                </button>
               </p>
               <p class="control">
-                <a v-if="step < 4" v-on:click="nextStep()" class="button is-primary" >
+                <button v-if="step < 4" name="next" v-on:click="nextStep()" class="button is-primary" >
                   <span>next</span>
                   <span class="icon">
                     <fa pack="fas" name="angle-right" />
                   </span>
-                </a>
-                <button v-else v-on:click="saveNewDog()" class="button is-primary">
+                </button>
+                <button v-else name="save" v-on:click="saveNewDog()" class="button is-primary">
                   <span class="icon">
                     <fa pack="fas" name="save" />
                   </span>

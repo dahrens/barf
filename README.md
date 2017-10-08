@@ -39,6 +39,12 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 
+# run e2e test
+npm run e2e
+
+# run unit tests
+npm run unit
+
 # run all tests
 npm test
 ```

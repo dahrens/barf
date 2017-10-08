@@ -1,5 +1,5 @@
 <template>
-  <nav class="panel">
+  <nav class="panel statistics">
     <p class="panel-heading">
       Statistics
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">

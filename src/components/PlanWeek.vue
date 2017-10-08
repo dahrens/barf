@@ -1,5 +1,5 @@
 <template>
-  <div class="week">
+  <div class="plan-week">
     <div class="field has-addons">
       <p class="control is-expanded">
         <a v-on:click="wizard = !wizard" class="button is-fullwidth is-outlined">

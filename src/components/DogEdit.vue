@@ -8,6 +8,7 @@
         <div class="field">
           <p class="control has-icons-left">
             <input type="text"
+              name="name"
               v-focus
               class="input"
               :class="{'is-danger': !validateName(), 'is-success': validateName()}"
@@ -32,7 +33,7 @@
             <p class="control">
               <div class="file">
                 <label class="file-label">
-                  <input id="import-image" class="file-input" type="file" v-on:change="importImage()">
+                  <input id="import-image" name="image" class="file-input" type="file" v-on:change="importImage()">
                   <span class="file-cta">
                     <span class="file-icon">
                       <fa pack="fas" name="upload" />
@@ -73,6 +74,7 @@
         <div class="field has-addons">
           <p class="control has-icons-left">
             <input :ref="pickrId"
+              name="birthday"
               type="text"
               class="input"
               v-model="dog.birthday"

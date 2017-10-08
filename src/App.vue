@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app" class="app">
     <nav class="navbar is-light">
       <div class="navbar-brand">
         <a class="nav-item" href="/">
