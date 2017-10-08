@@ -106,7 +106,7 @@ export default {
     },
     coloredSliderConfig (subCategory) {
       let config = JSON.parse(JSON.stringify(this.sliderConfig))
-      let color = this.$store.state.ui.subCategoryColors[subCategory]
+      let color = this.$store.getters.subCategoryColor(subCategory)
       config.tooltipStyle[0].backgroundColor = color
       config.tooltipStyle[0].borderColor = color
       config.tooltipStyle[1].backgroundColor = color

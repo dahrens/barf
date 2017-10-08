@@ -86,7 +86,7 @@ describe(types.SELECT_DOG, () => {
   state.dogs.push(dog)
   it('only accepts valid dog IDs', () => {
     mutations.SELECT_DOG(state, 1)
-    expect(state.ui.selectedDogId).to.equal(1)
+    expect(state.selectedDogId).to.equal(1)
     expect(
       mutations.SELECT_DOG.bind(mutations, state, 10)
     ).to.throw('Unknown DogId ' + 10)

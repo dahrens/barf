@@ -147,7 +147,7 @@ export default {
     },
     selectedDogId: {
       get () {
-        return this.$store.state.ui.selectedDogId
+        return this.$store.state.selectedDogId
       },
       set (dogId) {
         this.$store.commit(SELECT_DOG, dogId)

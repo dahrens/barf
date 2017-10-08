@@ -74,7 +74,7 @@ export default {
           let recommendedAmount = distSubCategories[subCategory]
           chartData.datasets[0].data.push(recommendedAmount)
           chartData.datasets[0].backgroundColor.push(
-            this.$store.state.ui.subCategoryColors[subCategory]
+            this.$store.getters.subCategoryColor(subCategory)
           )
           chartData.datasets[0].borderWidth.push(3)
           chartData.labels.push(recommendedAmount + 'g ' + subCategory)
@@ -112,19 +112,19 @@ export default {
           let currentAmount = allocSubCategories[subCategory]
           chartData.datasets[0].data.push(recommendedAmount)
           chartData.datasets[0].backgroundColor.push(
-            this.$store.state.ui.subCategoryColors[subCategory]
+            this.$store.getters.subCategoryColor(subCategory)
           )
           if (recommendedAmount - currentAmount > 0) {
             chartData.datasets[1].data.push(currentAmount)
             chartData.datasets[1].backgroundColor.push(
-              this.$store.state.ui.subCategoryColors[subCategory]
+              this.$store.getters.subCategoryColor(subCategory)
             )
             chartData.datasets[2].data.push(recommendedAmount - currentAmount)
             chartData.datasets[2].backgroundColor.push('#dbdbdb')
           } else {
             chartData.datasets[1].data.push(currentAmount)
             chartData.datasets[1].backgroundColor.push(
-              this.$store.state.ui.subCategoryColors[subCategory]
+              this.$store.getters.subCategoryColor(subCategory)
             )
             chartData.datasets[2].data.push(0)
             chartData.datasets[2].backgroundColor.push('grey')

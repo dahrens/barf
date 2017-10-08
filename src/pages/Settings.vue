@@ -96,6 +96,24 @@
             </div>
           </div>
         </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">Colors</label>
+          </div>
+          <div class="field-body">
+            <div class="columns is-0 is-multiline ">
+              <div class="column is-one-quarter" v-for="(color, subCategory) in settings.subCategoryColors">
+                <div class="tags has-addons">
+                  <span class="tag is-dark is-medium">{{ color }}</span>
+                  <span class="tag is-light is-medium" v-bind:style="{
+                    backgroundColor: color
+                  }">{{ subCategory }}</span>
+                </div>
+                <color-picker v-model="colors[subCategory]" @input="onColorChange" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -103,6 +121,7 @@
 
 <script>
 import jsonSize from 'json-size'
+import { Chrome } from 'vue-color'
 import { version } from '../../package.json'
 import { SET_VERSION, WRITE_SETTINGS } from '@/store/mutation-types'
 import defaultState from '@/store/default-state'
@@ -116,15 +135,34 @@ function bytesToSize (bytes) {
 
 export default {
   name: 'settings',
+  components: {
+    'color-picker': Chrome
+  },
   computed: {
     settings () {
       return this.$store.state.settings
     },
     dataSize () {
       return bytesToSize(jsonSize(this.$store.state))
+    },
+    colors () {
+      let colorData = {}
+      for (let subCategory in this.settings.subCategoryColors) {
+        let color = this.settings.subCategoryColors[subCategory]
+        colorData[subCategory] = {
+          hex: color
+        }
+      }
+      return colorData
     }
   },
   methods: {
+    onColorChange (data) {
+      for (let subCategory in this.colors) {
+        this.settings.subCategoryColors[subCategory] = this.colors[subCategory].hex
+      }
+      this.writeSettings()
+    },
     writeSettings () {
       this.$store.commit(WRITE_SETTINGS, this.settings)
       this.$forceUpdate()

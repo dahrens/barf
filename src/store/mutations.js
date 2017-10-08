@@ -31,7 +31,7 @@ export default {
     if (!state.dogs.some(d => d.id === dogId)) {
       throw new Error('Unknown DogId ' + dogId)
     }
-    state.ui.selectedDogId = dogId
+    state.selectedDogId = dogId
   },
   [types.INSERT_INGREDIENT] (state, ingredient) {
     ingredient.id = state.ids.ingredients

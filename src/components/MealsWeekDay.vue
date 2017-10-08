@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     subCategoryColor (subCategory) {
-      return this.$store.state.ui.subCategoryColors[subCategory]
+      return this.$store.getters.subCategoryColor(subCategory)
     },
     getIngredient (id) {
       return this.$store.getters.ingredientById(id)

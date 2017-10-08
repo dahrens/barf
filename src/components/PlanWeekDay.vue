@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     subCategoryColor (subCategory) {
-      return this.$store.state.ui.subCategoryColors[subCategory]
+      return this.$store.getters.subCategoryColor(subCategory)
     },
     addAllocation () {
       if (this.allocations.length === this.subCategoryOptions.length) return

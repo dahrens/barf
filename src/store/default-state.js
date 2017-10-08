@@ -5,14 +5,7 @@ export default {
   },
   settings: {
     useMeals: true,
-    useStash: false
-  },
-  ui: {
-    selectedDogId: 0,
-    categoryColors: {
-      'animal': '#E8122B',
-      'vegetables': '#42FF3C'
-    },
+    useStash: false,
     subCategoryColors: {
       'meat': '#E8122B',
       'entrails': '#FF3826',
@@ -23,6 +16,7 @@ export default {
       'vegetables': '#42FF3C'
     }
   },
+  selectedDogId: 0,
   activities: {
     'unactive': 1,
     'moderate': 1.25,

@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     subCategoryColor (subCategory) {
-      return this.$store.state.ui.subCategoryColors[subCategory]
+      return this.$store.getters.subCategoryColor(subCategory)
     },
     splitNewSubcategory: function (subCategory) {
       subCategory[0] = subCategory[0] / 2

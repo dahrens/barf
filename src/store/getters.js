@@ -14,10 +14,10 @@ export default {
     return options
   },
   selectedDog: (state) => {
-    if (state.dogs.length === 0 || !state.ui.selectedDogId) {
+    if (state.dogs.length === 0 || !state.selectedDogId) {
       return false
     }
-    return state.dogs.filter(d => d.id === state.ui.selectedDogId)[0]
+    return state.dogs.filter(d => d.id === state.selectedDogId)[0]
   },
   emptyDistribution (state, getters) {
     let distribution = {}
@@ -26,6 +26,9 @@ export default {
       distribution[c.category][c.subCategory] = 0
     }
     return distribution
+  },
+  subCategoryColor: (state) => (subCategory) => {
+    return state.settings.subCategoryColors[subCategory]
   },
   ingredientById: (state) => (ingredientId) => {
     return state.ingredients.filter((i) => i.id === ingredientId)[0]
