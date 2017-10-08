@@ -6,7 +6,7 @@
         <fa v-if="!collapsed" pack="fas" name="caret-down" />
         <fa v-if="collapsed" pack="fas" name="caret-right" />
       </a>
-      <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
+      <a v-on:click="toggleEdit()" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" pack="fas" name="edit" />
         <fa v-if="edit" pack="fas" name="save" />
       </a>

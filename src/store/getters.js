@@ -1,3 +1,5 @@
+import { round } from '@/store/utils'
+
 export default {
   subCategories: state => {
     let options = []
@@ -78,7 +80,8 @@ export default {
     if (dog.plan.calculated) {
       let factor = state.activities[dog.activity]
       if (dog.castrated) factor = factor * 0.8
-      return dog.plan.idealWeight * (dog.plan.percentOfWeight / 100) * factor
+      let quantity = dog.plan.idealWeight * (dog.plan.percentOfWeight / 100) * factor
+      return round(parseInt(quantity), state.settings.rounding)
     } else {
       return dog.plan.portionPerDay
     }
@@ -96,6 +99,7 @@ export default {
         if (p === 0) value = 0
         else if (category === 'animal') value = (p / 100) * animal * plan.week.length
         else if (category === 'vegetables') value = (p / 100) * vegetables * plan.week.length
+        value = round(parseInt(value), state.settings.rounding)
         distribution[category][subcategory] = parseInt(value)
       }
     }

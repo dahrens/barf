@@ -98,6 +98,35 @@
         </div>
         <div class="field is-horizontal">
           <div class="field-label">
+            <label class="label">Rounding</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="enableRounding" :value="true" v-model="settings.rounding.enabled" v-on:change="writeSettings()">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="enableRounding" :value="false" v-model="settings.rounding.enabled" v-on:change="writeSettings()">
+                  No
+                </label>
+                <p class="help is-info">Do you want calculated amounts to be rounded?</p>
+              </div>
+            </div>
+            <div v-if="settings.rounding.enabled" class="field">
+              <div class="control">
+                <input type="number"
+                  class="input"
+                  :min="10" :max="100" :step="5"
+                  v-model="settings.rounding.value">
+              </div>
+              <p class="help is-info">Specify to which value everything should be rounded.</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
             <label class="label">Colors</label>
           </div>
           <div class="field-body">
