@@ -1,5 +1,7 @@
 # B.A.R.F
 
+[![Build Status](https://travis-ci.org/dahrens/barf.svg?branch=master)](https://travis-ci.org/dahrens/barf)
+
 This app should assist you when creating a raw feeding plan for your dog.
 
 It is made using [vue.js](https://vuejs.org/) and [bulma](http://bulma.io/). Thanks for this awesome tools!
