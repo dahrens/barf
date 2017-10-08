@@ -34,7 +34,7 @@
 
     <!-- categories edit -->
     <template v-if="edit">
-      <ingredients :showHeading="false" :dog="dog" :day="day"></ingredients>
+      <ingredients :showHeading="false" :dog="dog" :day="day" :availableSubCategories="allocatedSubCategories"></ingredients>
     </template>
 
     <!-- categories overview -->
@@ -92,6 +92,9 @@ export default {
     },
     allocations () {
       return this.dog.plan.allocation[this.day]
+    },
+    allocatedSubCategories () {
+      return this.allocations.map(a => a.subCategory)
     }
   },
   methods: {

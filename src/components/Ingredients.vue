@@ -107,6 +107,10 @@ export default {
     day: {
       required: false,
       default: () => (false)
+    },
+    availableSubCategories: {
+      required: false,
+      default: () => ([])
     }
   },
   data () {
@@ -131,17 +135,35 @@ export default {
     },
     ingredients () {
       let ingredients = this.$store.state.ingredients
-      if (this.subCategoryFilter !== 'all') {
-        let filter = (i) => i.subCategories.map(e => e[1]).indexOf(this.subCategoryFilter) !== -1
-        ingredients = ingredients.filter(filter)
+      let filter = (i) => (true)
+      if (this.subCategoryFilter === 'all') {
+        if (this.availableSubCategories.length !== 0) {
+          filter = (i) => {
+            for (let subCategory of i.subCategories.map(e => e[1])) {
+              if (this.availableSubCategories.indexOf(subCategory) !== -1) return true
+            }
+            return false
+          }
+        }
+      } else {
+        filter = (i) => i.subCategories.map(e => e[1]).indexOf(this.subCategoryFilter) !== -1
       }
+
+      ingredients = ingredients.filter(filter)
+
       if (this.search !== '') {
         ingredients = ingredients.filter(i => i.name.indexOf(this.search) !== -1)
       }
       return ingredients
     },
     subCategories () {
-      return this.$store.getters.subCategories.map(s => s.subCategory)
+      if (this.availableSubCategories.length === 0) {
+        return this.$store.getters.subCategories.map(s => s.subCategory)
+      } else {
+        return this.$store.getters.subCategories.map(s => s.subCategory).filter(
+          (subCategory) => this.availableSubCategories.indexOf(subCategory) !== -1
+        )
+      }
     }
   },
   methods: {
