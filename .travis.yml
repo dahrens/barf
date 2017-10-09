@@ -20,13 +20,13 @@ script:
 - jdk_switcher use oraclejdk8
 - npm run test
 - npm run build
-- tar -czvf $TRAVIS_TAG.tar.gz -C dist .
+- tar -czvf barf-$TRAVIS_BRANCH.tar.gz dist
 deploy:
   provider: releases
   api_key:
     secure: W3m3TR9QRKmwpd5Y/Y7l9CNjaYRWq7NONlUrQcPs2AGe41K6Ge14ZhW2pdvrMKTPesNtLCpZ5IQb3qsg1aS02x2Ie3yarBCRF/nRpAQwZJg95tMEGW0bTOLi9eFsjToqCO01m5fVy0ESL02nW5SS8XMuv2TJfLjhI0etl7I5vKJzKY3rYbV/NjUxITgwe1Ay7OkUAUTBSgHl2BagwVNvoabn1teHN2HEPDVNjKutZj2oQgnSHr4XqGRvQRR8fqDazoEl3jiZ57tGJXwBN9+9NcxZxtLGUro1pGd1jrjvp/lSdIhVL9VVrndhKKorr0R8i/OTQMIJ+HKYypYdROOiC/R7+XguZJ40nK3OGR3TlWu0BOl1apzshWXqeqtIEZesE/1W/Zec6SzTTu9klByMidaJXJzDIlDW/QFa4yDoHLa2FAO8oN8Xx+p+ZOg/D6E3iiXwlIi/53dRXlxQjsIzk2xx/V+Gavi1QsdArgcXjxyV7F5bx2yQ37rQIu5xNDAmZRE5u6ozzQ8H7hK0otesaUAkmEQYxIUgERuKi8psenMLMpO9bkxX01AwE6oxsvfBMAzhCFUR2wNWW8q0SWDeQqOAvxd+AiftBcK4vkSSnHq4c6kYFHq/BQTaPKbbhYJshdkKbAjBcM8AKtd5dvJoZveZSBRN+UXqd+DA7prn5i8=
   file_glob: true
-  file: $TRAVIS_TAG.tar.gz
+  file: barf-$TRAVIS_BRANCH.tar.gz
   skip_cleanup: true
   on:
     repo: dahrens/barf
