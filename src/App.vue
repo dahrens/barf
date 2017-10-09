@@ -96,7 +96,7 @@
                 The app is not ready for production use.
                 In worst case it might happen that your <strong>inserted data will not be compatible with future versions</strong>.
               </p>
-              <p>If you were here before and encounter strange behavior - <a class="has-text-primary" v-on:click="resetApp()">reset all data</a> and reload the page. This removes all local data from the app and enforces a fresh state.</p>
+              <p>If you were here before and encounter strange behavior - <a class="has-text-primary" v-on:click="resetApp()">reset all data</a> and reload the page. This removes all local data from the app and a fresh state is enforced.</p>
             </div>
           </div>
         </div>
