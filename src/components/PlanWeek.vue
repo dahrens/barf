@@ -10,11 +10,11 @@
         </a>
       </p>
       <p class="control is-expanded">
-        <a class="button is-fullwidth is-outlined">
+        <a v-on:click="clearAllocation()" class="button is-fullwidth is-outlined">
           <span class="icon is-small">
-            <fa pack="fas" name="print" />
+            <fa pack="fas" name="bomb" />
           </span>
-          <span>print</span>
+          <span>clear</span>
         </a>
       </p>
       <p class="control is-expanded">
@@ -46,6 +46,7 @@
 <script>
 import weekDay from '@/components/PlanWeekDay'
 import planAllocationWizard from '@/components/PlanAllocationWizard'
+import { UPDATE_PLAN_ALLOCATION } from '@/store/mutation-types'
 
 export default {
   name: 'planWeek',
@@ -73,6 +74,12 @@ export default {
       for (let referenceName in this.$refs) {
         this.$refs[referenceName][0].edit = false
       }
+    },
+    clearAllocation () {
+      this.$store.commit(UPDATE_PLAN_ALLOCATION, {
+        dog: this.dog.id,
+        allocation: [[], [], [], [], [], [], []]
+      })
     }
   }
 }

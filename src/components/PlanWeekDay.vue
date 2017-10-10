@@ -84,6 +84,22 @@ export default {
       let fresh = JSON.parse(JSON.stringify(this.newAllocation))
       let notUsed = (s) => this.allocations.map(a => a.subCategory).indexOf(s.subCategory) === -1
       let freshSubCategory = this.subCategoryOptions.filter(notUsed)[0].subCategory
+      let distribution = this.$store.getters.planDistribution(this.dog)
+      let allocation = this.$store.getters.planAllocation(this.dog)
+      for (let category in this.$store.state.categories) {
+        if (this.$store.state.categories[category].indexOf(freshSubCategory) !== -1) {
+          console.log('correct category', category)
+          let allocationAmount = allocation[category][freshSubCategory]
+          let distributionAmount = distribution[category][freshSubCategory]
+          if (allocationAmount < distributionAmount) {
+            fresh.amount = distributionAmount - allocationAmount
+            break
+          } else {
+            fresh.amount = 0
+            break
+          }
+        }
+      }
       fresh.subCategory = freshSubCategory
       this.allocations.push(fresh)
     },
