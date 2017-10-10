@@ -37,10 +37,10 @@
     <levelBlock
       :data="[{
         label: 'ideal weight',
-        value: parseInt(dog.plan.idealWeight / 1000) + 'kg'
+        value: (dog.plan.idealWeight / 1000).toFixed(1) + 'kg'
       }, {
         label: 'current weight',
-        value: parseInt(dog.plan.currentWeight / 1000) + 'kg'
+        value: (dog.plan.currentWeight / 1000).toFixed(1) + 'kg'
         }]">
     </levelBlock>
     <levelBlock
