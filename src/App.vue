@@ -90,7 +90,7 @@
             </div>
             <div class="column">
               <h2 class="title">
-                Beta Release
+                Alpha Release
               </h2>
               <p class="subtitle">
                 The app is not ready for production use.
