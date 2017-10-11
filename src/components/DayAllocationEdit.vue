@@ -29,7 +29,7 @@
         <p class="control is-expanded">
           <span class="select is-fullwidth">
             <select v-model="a.subCategory" v-on:change="writeAllocation(a)">
-              <option v-for="option in subCategoryOptions" v-model="a.subCategory">
+              <option v-for="option in subCategoryOptions(a.subCategory)" v-model="a.subCategory">
                 {{ option.subCategory }}
               </option>
             </select>
@@ -62,9 +62,6 @@ export default {
     }
   },
   computed: {
-    subCategoryOptions () {
-      return this.$store.getters.subCategories
-    },
     plan () {
       return this.dog.plan
     },
@@ -73,6 +70,10 @@ export default {
     }
   },
   methods: {
+    subCategoryOptions (currentlySelected) {
+      let f = (s) => s.subCategory === currentlySelected || this.allocation.map(a => a.subCategory).indexOf(s.subCategory) === -1
+      return this.$store.getters.subCategories.filter(f)
+    },
     subCategoryColor (subCategory) {
       return this.$store.getters.subCategoryColor(subCategory)
     },

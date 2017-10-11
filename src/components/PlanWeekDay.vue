@@ -88,7 +88,6 @@ export default {
       let allocation = this.$store.getters.planAllocation(this.dog)
       for (let category in this.$store.state.categories) {
         if (this.$store.state.categories[category].indexOf(freshSubCategory) !== -1) {
-          console.log('correct category', category)
           let allocationAmount = allocation[category][freshSubCategory]
           let distributionAmount = distribution[category][freshSubCategory]
           if (allocationAmount < distributionAmount) {
