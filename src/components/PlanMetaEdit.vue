@@ -46,28 +46,30 @@
         <div class="field">
           <p class="control has-icons-left">
             <input type="number"
-              :min="1000" :max="150000" :step="500"
+              :min="1" :max="150" :step="0.1"
               class="input"
-              v-model="dog.plan.currentWeight">
+              v-model="currentWeight"
+              @change="dog.plan.currentWeight = currentWeight * 1000">
             <span class="icon is-left">
               <fa pack="fas" name="tachometer-alt" />
             </span>
           </p>
-          <p v-if="!validateWeight()" class="help is-danger">Weight in gram must be a positive integer value.</p>
-          <p v-if="validateWeight()" class="help is-info">The weight in gram your dog has right now.</p>
+          <p v-if="!validateWeight()" class="help is-danger">Weight in kilogram must be a positive integer value.</p>
+          <p v-if="validateWeight()" class="help is-info">The weight in kilogram your dog has right now.</p>
         </div>
         <div class="field">
           <p class="control has-icons-left">
             <input type="number"
-              :min="1000" :max="150000" :step="500"
+              :min="1" :max="150" :step="0.1"
               class="input"
-              v-model="dog.plan.idealWeight">
+              v-model="idealWeight"
+              @change="dog.plan.idealWeight = idealWeight * 1000">
             <span class="icon is-left">
               <fa pack="fas" name="tachometer-alt" />
             </span>
           </p>
-          <p v-if="!validateWeight()" class="help is-danger">Weight in gram must be a positive integer value.</p>
-          <p v-if="validateWeight()" class="help is-info">The weight in gram your dog should have.</p>
+          <p v-if="!validateWeight()" class="help is-danger">Weight in kilogram must be a positive integer value.</p>
+          <p v-if="validateWeight()" class="help is-info">The weight in kilogram your dog should have.</p>
         </div>
       </div>
     </div>
@@ -98,6 +100,16 @@
 export default {
   name: 'planMetaEdit',
   props: ['dog'],
+  data () {
+    return {
+      idealWeight: 0,
+      currentWeight: 0
+    }
+  },
+  created () {
+    this.idealWeight = this.dog.plan.idealWeight / 1000
+    this.currentWeight = this.dog.plan.currentWeight / 1000
+  },
   computed: {
     calculatedPerDay () {
       return this.$store.getters.dogFoodQuantityPerDay(this.dog)

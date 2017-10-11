@@ -104,7 +104,7 @@ export default {
       return parseInt(this.dog.plan.week.length * this.expectedQuantityPerDay)
     },
     formulaString () {
-      let f = this.dog.plan.idealWeight + 'g * '
+      let f = this.dog.plan.idealWeight / 1000 + 'kg * '
       f += (this.dog.plan.percentOfWeight / 100)
       f += ' * ' + this.dogActivity
       if (this.dog.castrated) {
