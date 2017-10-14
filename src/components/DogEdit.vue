@@ -24,10 +24,10 @@
     </div>
 
     <div class="panel-block">
-      <div class="field-label is-normal">
+      <div class="field-label">
         <label class="label">Image</label>
       </div>
-      <div class="field-body">
+      <div class="field-body ">
         <div class="field">
           <div class="field has-addons">
             <p class="control">
@@ -55,12 +55,12 @@
             </p>
           </div>
           <p class="help is-info">The image should be of format 1:1</p>
-        </div>
-        <div class="field">
-          <p v-if="dog.image" class="control">
-            <figure class="image is-128x128">
-              <img :src="dog.image">
-            </figure>
+          <p class="control">
+            <p class="control">
+              <figure v-show="dog.image !== ''" class="image is-128x128">
+                <img :src="dog.image">
+              </figure>
+            </p>
           </p>
         </div>
       </div>
