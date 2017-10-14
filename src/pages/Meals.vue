@@ -17,7 +17,7 @@ meals<template>
           <div class="columns">
             <div class="column is-1">
               <span class="icon is-large">
-                <fa size="4x" pack="fas" name="info" />
+                <fa size="4x" icon="info"/>
               </span>
             </div>
             <div class="column">

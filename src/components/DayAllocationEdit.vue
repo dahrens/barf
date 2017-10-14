@@ -8,21 +8,21 @@
         <p class="control">
           <a class="button" v-on:click="increaseAllocation(a)">
             <span class="icon">
-              <fa pack="fas" name="chevron-up" />
+              <fa icon="chevron-up" />
             </span>
           </a>
         </p>
         <p class="control">
           <a class="button" v-on:click="decreaseAllocation(a)" :disabled="a.amount === 0">
             <span class="icon">
-              <fa pack="fas" name="chevron-down" />
+              <fa icon="chevron-down" />
             </span>
           </a>
         </p>
         <p class="control">
           <a class="button is-static">
             <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(a.subCategory) }">
-              <fa size="2x" pack="fas" name="square"/>
+              <fa size="2x" icon="square"/>
             </span>
           </a>
         </p>

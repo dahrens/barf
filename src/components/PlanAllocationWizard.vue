@@ -6,7 +6,7 @@
         <p class="panel-heading">
           Automatic allocation
           <a v-on:click="close()" class="icon is-pulled-right has-text-dark">
-            <fa pack="fas" name="times" />
+            <fa icon="times"/>
           </a>
         </p>
         <div class="panel-block">
@@ -21,8 +21,8 @@
                         <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenDays[idx]}">
                           <span>{{ weekday.substring(0, 2) }}</span>
                           <span class="icon">
-                            <fa v-if="fastenDays[idx]" pack="fas" name="check" />
-                            <fa v-else pack="fas" name="times" />
+                            <fa v-if="fastenDays[idx]" icon="check"/>
+                            <fa v-else icon="times"/>
                           </span>
                         </a>
                       </p>
@@ -47,8 +47,8 @@
                         <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianDays[idx]}">
                           <span>{{ weekday.substring(0, 2) }}</span>
                           <span class="icon">
-                            <fa v-if="vegetarianDays[idx]" pack="fas" name="check" />
-                            <fa v-else pack="fas" name="times" />
+                            <fa v-if="vegetarianDays[idx]" icon="check"/>
+                            <fa v-else icon="times"/>
                           </span>
                         </a>
                       </p>
@@ -64,7 +64,7 @@
         <div class="panel-block">
           <div class="notification is-warning is-fullwidth">
             <span class="icon is-large fa-fw">
-              <fa size="2x" pack="fas" name="exclamation-triangle" />
+              <fa size="2x" icon="exclamation-triangle" />
             </span>
             <span class="is-size-5">Automatic allocation overrides all existing allocations</span>
           </div>
@@ -72,7 +72,7 @@
         <p class="panel-block">
           <button v-on:click="allocate" class="button is-primary is-fullwidth">
             <span class="icon">
-              <fa pack="fas" name="save" />
+              <fa icon="save"/>
             </span>
           </button>
         </p>

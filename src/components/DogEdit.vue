@@ -15,7 +15,7 @@
               v-model="dog.name"
               placeholder="Dogs Name">
             <span class="icon is-left">
-              <fa pack="fas" name="address-card" />
+              <fa icon="address-card" />
             </span>
           </p>
           <p v-if="!validateName()" class="help is-danger">Dogs name must be not empty and unique</p>
@@ -36,7 +36,7 @@
                   <input id="import-image" name="image" class="file-input" type="file" v-on:change="importImage()">
                   <span class="file-cta">
                     <span class="file-icon">
-                      <fa pack="fas" name="upload" />
+                      <fa icon="upload"/>
                     </span>
                     <span class="file-label">
                       import
@@ -48,7 +48,7 @@
             <p class="control">
               <a v-on:click="dog.image = null" class="button">
                 <span class="icon">
-                  <fa pack="fas" name="times" />
+                  <fa icon="times"/>
                 </span>
                 <span>clear</span>
               </a>
@@ -80,13 +80,13 @@
               v-model="dog.birthday"
               placeholder="dd.mm.yyyy">
             <span class="icon is-left">
-              <fa pack="fas" name="birthday-cake" />
+              <fa icon="birthday-cake" />
             </span>
           </p>
           <div class="control">
             <a v-on:click="pickr.open()" class="button">
               <span class="icon is-left">
-                <fa pack="fas" name="calendar-alt" />
+                <fa icon="calendar-alt" />
               </span>
             </a>
           </div>
@@ -103,7 +103,7 @@
           <div class="control">
             <a class="button is-static">
               <span class="icon is-left">
-                <fa pack="fas" name="futbol" />
+                <fa icon="futbol"/>
               </span>
             </a>
           </div>
@@ -126,13 +126,13 @@
             <label class="radio">
               <input type="radio" name="sex" v-model="dog.sex" value="m">
               <span class="icon">
-                <fa pack="fas" name="mars" />
+                <fa icon="mars"/>
               </span>
             </label>
             <label class="radio">
               <input type="radio" name="sex" v-model="dog.sex" value="f">
               <span class="icon">
-                <fa pack="fas" name="venus" />
+                <fa icon="venus"/>
               </span>
             </label>
           </div>
@@ -149,8 +149,8 @@
           <p class="control">
             <a class="button" v-on:click="dog.castrated = !dog.castrated">
               <span class="icon" :class="{'has-text-success': dog.castrated, 'has-text-danger': !dog.castrated}">
-                <fa v-if="dog.castrated" pack="fas" name="check-circle" />
-                <fa v-else pack="fas" name="times-circle" />
+                <fa v-if="dog.castrated" icon="check-circle" />
+                <fa v-else icon="times-circle" />
               </span>
               <span v-if="dog.castrated" class="is-size-7">yes</span>
               <span v-else class="is-size-7">no</span>

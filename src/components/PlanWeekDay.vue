@@ -4,8 +4,8 @@
     <p class="panel-heading">
       <span class="is-size-5 is-uppercase">{{ weekday }}</span>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!edit" pack="fas" name="edit" />
-        <fa v-if="edit" pack="fas" name="save" />
+        <fa v-if="!edit" icon="edit"/>
+        <fa v-if="edit" icon="save"/>
       </a>
     </p>
     <!-- categories overview -->
@@ -24,7 +24,7 @@
         </template>
         <div v-if="edit" class="control">
           <a v-on:click="addAllocation()" :disabled="allocations.length === subCategoryOptions.length" class="button icon is-medium is-success">
-            <fa pack="fas" name="plus" />
+            <fa icon="plus"/>
           </a>
         </div>
       </div>

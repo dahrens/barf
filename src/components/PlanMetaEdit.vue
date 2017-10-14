@@ -10,8 +10,8 @@
             <p class="control">
               <a class="button" v-on:click="toggleCalculated()">
                 <span class="icon" :class="{'has-text-success': dog.plan.calculated, 'has-text-danger': !dog.plan.calculated}">
-                  <fa v-if="dog.plan.calculated" pack="fas" name="check-circle" />
-                  <fa v-else pack="fas" name="times-circle" />
+                  <fa v-if="dog.plan.calculated" icon="check-circle" />
+                  <fa v-else icon="times-circle" />
                 </span>
               </a>
             </p>
@@ -21,7 +21,7 @@
                 :min="100" :max="10000" :step="50"
                 v-model="dog.plan.portionPerDay">
               <span class="icon is-left">
-                <fa pack="fas" name="hand-paper" />
+                <fa icon="hand-paper" />
               </span>
             </p>
             <p v-else class="control is-expanded has-icons-left">
@@ -29,7 +29,7 @@
                 class="input" disabled
                 v-model="calculatedPerDay">
               <span class="icon is-left">
-                <fa pack="fas" name="hand-paper" />
+                <fa icon="hand-paper" />
               </span>
             </p>
           </div>
@@ -51,7 +51,7 @@
               v-model="currentWeight"
               @change="dog.plan.currentWeight = currentWeight * 1000">
             <span class="icon is-left">
-              <fa pack="fas" name="tachometer-alt" />
+              <fa icon="tachometer-alt" />
             </span>
           </p>
           <p v-if="!validateWeight()" class="help is-danger">Weight in kilogram must be a positive integer value.</p>
@@ -65,7 +65,7 @@
               v-model="idealWeight"
               @change="dog.plan.idealWeight = idealWeight * 1000">
             <span class="icon is-left">
-              <fa pack="fas" name="tachometer-alt" />
+              <fa icon="tachometer-alt" />
             </span>
           </p>
           <p v-if="!validateWeight()" class="help is-danger">Weight in kilogram must be a positive integer value.</p>
@@ -86,7 +86,7 @@
               class="input"
               v-model="dog.plan.percentOfWeight">
             <span class="icon is-left">
-              <fa pack="fas" name="percent" />
+              <fa icon="percent"/>
             </span>
           </p>
           <p class="help is-info">The base value for weight calculation. How many percent of dogs weight.</p>

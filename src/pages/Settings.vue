@@ -26,7 +26,7 @@
                       <input id="import-file" class="file-input" type="file" name="resume" v-on:change="importData()">
                       <span class="file-cta">
                         <span class="file-icon">
-                          <fa pack="fas" name="upload" />
+                          <fa icon="upload"/>
                         </span>
                         <span class="file-label">
                           Import
@@ -38,7 +38,7 @@
                 <p class="control">
                   <a v-on:click="exportData()" class="button is-dark">
                     <span class="icon">
-                      <fa pack="fas" name="download" />
+                      <fa icon="download"/>
                     </span>
                     <span>export</span>
                   </a>
@@ -46,7 +46,7 @@
                 <p class="control">
                   <a v-on:click="resetData()" class="button is-danger">
                     <span class="icon">
-                      <fa pack="fas" name="bomb" />
+                      <fa icon="bomb"/>
                     </span>
                     <span>reset</span>
                   </a>

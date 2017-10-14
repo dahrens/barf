@@ -3,19 +3,19 @@
     <p v-if="showHeading" class="panel-heading">
       Ingredients
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="caret-down" />
-        <fa v-if="collapsed" pack="fas" name="caret-right" />
+        <fa v-if="!collapsed" icon="caret-down" />
+        <fa v-if="collapsed" icon="caret-right" />
       </a>
       <a v-if="showCreate" v-on:click="expandedCreate = !expandedCreate" class="is-light is-pulled-right">
         <span class="icon has-text-dark">
-          <fa v-if="!expandedCreate" pack="fas" name="plus" />
-          <fa v-if="expandedCreate" pack="fas" name="times"/>
+          <fa v-if="!expandedCreate" icon="plus"/>
+          <fa v-if="expandedCreate" icon="times"/>
         </span>
       </a>
       <a v-on:click="expandMany = !expandMany" class="is-light is-pulled-right">
         <span class="icon has-text-dark panel-heading-icon">
-          <fa v-if="expandMany" pack="fas" name="arrows-alt-v" size="sm" />
-          <fa v-if="!expandMany" pack="fas" name="crosshairs" size="sm" />
+          <fa v-if="expandMany" icon="arrows-alt-v" size="sm" />
+          <fa v-if="!expandMany" icon="crosshairs"size="sm" />
         </span>
       </a>
     </p>
@@ -26,7 +26,7 @@
       <p class="control has-icons-left">
         <input class="input is-small" type="text" placeholder="search" v-model="search">
         <span class="icon is-small is-left">
-          <fa pack="fas" name="search" />
+          <fa icon="search"/>
         </span>
       </p>
     </div>
@@ -41,8 +41,8 @@
       <template v-for="ingredient in ingredients">
           <a v-on:click="activate(ingredient)" class="panel-block" :class="{'is-active': isActive(ingredient)}">
             <p class="panel-icon">
-              <fa v-if ="!isActive(ingredient)" pack="fas" name="caret-right" />
-              <fa v-if ="isActive(ingredient)" pack="fas" name="caret-down" />
+              <fa v-if ="!isActive(ingredient)" icon="caret-right" />
+              <fa v-if ="isActive(ingredient)" icon="caret-down" />
             </p>
             {{ ingredient.name }}
           </a>
@@ -61,14 +61,14 @@
               <p class="control">
                 <a v-on:click="scheduleMeal(ingredient.id, 'morning')" class="button" title="Schedule morning">
                   <span class="icon">
-                    <fa pack="fas" name="sun" />
+                    <fa icon="sun"/>
                   </span>
                 </a>
               </p>
               <p class="control">
                 <a v-on:click="scheduleMeal(ingredient.id, 'evening')" class="button" title="Schedule evening">
                   <span class="icon">
-                    <fa pack="fas" name="moon" />
+                    <fa icon="moon"/>
                   </span>
                 </a>
               </p>

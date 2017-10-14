@@ -6,13 +6,13 @@
           <p v-if="item.label && !item.iconLabel" class="heading">{{ item.label }}</p>
           <p v-else>
             <span class="icon">
-              <fa size="2x" pack="fas" :name="item.label" />
+              <fa size="2x" :icon="item.label" />
             </span>
           </p>
           <p v-if="item.value && !item.iconValue" class="subtitle has-text-dark">{{ item.value }}</p>
           <p v-else>
             <span class="icon">
-              <fa size="2x" pack="fas" :name="item.value" />
+              <fa size="2x" :icon="item.value" />
             </span>
           </p>
         </div>

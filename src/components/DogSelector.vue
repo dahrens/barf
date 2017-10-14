@@ -3,7 +3,7 @@
     <p class="control">
       <button v-on:click="deleteDog()" name="delete-dog" class="button is-medium is-danger" :disabled="selectedDogId === 0">
         <span class="icon is-medium">
-          <fa pack="fas" name="trash"/>
+          <fa icon="trash"/>
         </span>
       </button>
     </p>
@@ -14,14 +14,14 @@
           <option v-for="d in dogs" v-bind:value="d.id">{{ d.name }}</option>
         </select>
         <div class="icon is-left has-text-primary">
-          <fa pack="fas" name="paw" />
+          <fa icon="paw"/>
         </div>
       </div>
     </div>
     <p class="control">
       <button v-on:click="createDog()" name="create-dog" class="button is-medium is-success">
         <span class="icon is-medium">
-          <fa pack="fas" name="plus"/>
+          <fa icon="plus"/>
         </span>
       </button>
     </p>
@@ -32,7 +32,7 @@
           <p class="panel-heading">
             Please provide a few details
             <a v-on:click="cancelCreate()" class="icon is-pulled-right has-text-dark">
-              <fa pack="fas" name="times" />
+              <fa icon="times"/>
             </a>
           </p>
           <div class="faked-panel-block">
@@ -40,7 +40,7 @@
               <div class="step-item" :class="stepClasses(1)">
                 <div class="step-marker">
                   <span class="icon">
-                    <fa pack="fas" name="paw" />
+                    <fa icon="paw"/>
                   </span>
                 </div>
                 <div class="step-details">
@@ -51,7 +51,7 @@
               <div class="step-item" :class="{'is-active': step === 2, 'is-completed is-success': step > 2}">
                 <div class="step-marker">
                   <span class="icon">
-                    <fa pack="fas" name="question" />
+                    <fa icon="question"/>
                   </span>
                 </div>
                 <div class="step-details">
@@ -62,7 +62,7 @@
               <div class="step-item" :class="{'is-active': step === 3, 'is-completed is-success': step > 3}">
                 <div class="step-marker">
                   <span class="icon">
-                    <fa pack="fas" name="sliders-h" />
+                    <fa icon="sliders-h" />
                   </span>
                 </div>
                 <div class="step-details">
@@ -73,7 +73,7 @@
               <div class="step-item" :class="{'is-active': step === 4, 'is-completed is-success': step > 4}">
                 <div class="step-marker">
                   <span class="icon">
-                    <fa pack="fas" name="flag" />
+                    <fa icon="flag"/>
                   </span>
                 </div>
                 <div class="step-details">
@@ -92,7 +92,7 @@
               <p class="control is-expanded">
                 <button v-on:click="prevStep()" name="prev" class="button is-primary" :disabled="step < 2">
                   <span class="icon">
-                    <fa pack="fas" name="angle-left" />
+                    <fa icon="angle-left" />
                   </span>
                   <span>back</span>
                 </button>
@@ -101,12 +101,12 @@
                 <button v-if="step < 4" name="next" v-on:click="nextStep()" class="button is-primary" >
                   <span>next</span>
                   <span class="icon">
-                    <fa pack="fas" name="angle-right" />
+                    <fa icon="angle-right" />
                   </span>
                 </button>
                 <button v-else name="save" v-on:click="saveNewDog()" class="button is-primary">
                   <span class="icon">
-                    <fa pack="fas" name="save" />
+                    <fa icon="save"/>
                   </span>
                   <span>save</span>
                 </button>

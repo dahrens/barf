@@ -4,7 +4,7 @@
       <div class="navbar-brand">
         <a class="nav-item" href="/">
           <span class="icon is-large has-text-primary">
-            <fa size="2x" pack="fas" name="paw"/>
+            <fa size="2x" icon="paw"/>
           </span>
           <h1 class="title">B.A.R.F.</h1>
         </a>
@@ -21,7 +21,7 @@
             :class="{'is-active': $route.fullPath ==='/'}"
             :to="{ name: 'Plan' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="calculator"/>
+              <fa size="2x" icon="calculator"/>
             </span>
             <span class="is-size-5 is-uppercase">plan</span>
           </router-link>
@@ -31,7 +31,7 @@
             :class="{'is-active': $route.fullPath ==='/meals'}"
             :to="{ name: 'Meals' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="utensils"/>
+              <fa size="2x" icon="utensils"/>
             </span>
             <span class="is-size-5 is-uppercase">meals</span>
           </router-link>
@@ -41,7 +41,7 @@
             :class="{'is-active': $route.fullPath ==='/ingredients'}"
             :to="{ name: 'Ingredients' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="puzzle-piece"/>
+              <fa size="2x" icon="puzzle-piece"/>
             </span>
             <span class="is-size-5 is-uppercase">ingredients</span>
           </router-link>
@@ -51,7 +51,7 @@
             :class="{'is-active': $route.fullPath ==='/stash'}"
             :to="{ name: 'Stash' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="archive"/>
+              <fa size="2x" icon="archive"/>
             </span>
             <span class="is-size-5 is-uppercase">stash</span>
           </router-link>
@@ -62,7 +62,7 @@
             :class="{'is-active': $route.fullPath === '/about'}"
             :to="{ name: 'About' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="info"/>
+              <fa size="2x" icon="info"/>
             </span>
             <span class="is-size-5 is-uppercase">about</span>
           </router-link>
@@ -71,7 +71,7 @@
             :class="{'is-active': $route.fullPath === '/settings'}"
             :to="{ name: 'Settings' }">
             <span class="icon is-large">
-              <fa size="2x" pack="fas" name="wrench" />
+              <fa size="2x" icon="wrench"/>
             </span>
             <span class="is-size-5 is-uppercase">settings</span>
           </router-link>
@@ -85,7 +85,7 @@
           <div class="columns">
             <div class="column is-1">
               <span class="icon is-large">
-                <fa size="4x" pack="fas" name="exclamation-triangle" />
+                <fa size="4x" icon="exclamation-triangle" />
               </span>
             </div>
             <div class="column">
@@ -111,10 +111,10 @@
         </p>
         <p>
           <a class="icon" href="mailto:dennis.ahrens@mailbox.org">
-            <fa pack="fas" name="envelope" />
+            <fa icon="envelope"/>
           </a>
           <a class="icon" href="https://github.com/dahrens/barf">
-            <fa pack="fab" name="github" />
+            <fa :icon="['fab', 'github']"/>
           </a>
         </p>
       </div>

@@ -11,10 +11,10 @@
                       'is-success': isNameValid && newIngredient.name !== ''
                     }">
               <span v-if="newIngredient.name" class="icon is-small is-right">
-                <fa v-if="isNameValid" pack="fas" name="check" />
+                <fa v-if="isNameValid" icon="check"/>
               </span>
               <span v-if="!isNameValid && newIngredient.name !== ''" class="icon is-small is-right has-text-danger">
-                <fa v-if="!isNameValid" pack="fas" name="times" />
+                <fa v-if="!isNameValid" icon="times"/>
               </span>
             </div>
             <p v-if="this.newIngredient.name === ''" class="help is-danger">Pick a name</p>
@@ -40,7 +40,7 @@
         <div v-model="newIngredient.subCategories" class="field has-addons">
           <a class="button is-static">
             <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(subCategory[1]) }">
-              <fa size="2x" pack="fas" name="square"/>
+              <fa size="2x" icon="square"/>
             </span>
           </a>
           <p class="control">
@@ -59,12 +59,12 @@
           <p class="control">
             <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subCategory)">
               <span class="icon">
-                <fa pack="fas" name="plus" />
+                <fa icon="plus"/>
               </span>
             </a>
             <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subCategory)">
               <span class="icon">
-                <fa pack="fas" name="trash" />
+                <fa icon="trash"/>
               </span>
             </a>
           </p>
@@ -75,7 +75,7 @@
     <div class="panel-block">
       <button title="Add ingredient" class="button is-primary is-fullwidth" v-on:click="createNewIngredient()" :disabled="!isValid">
         <span class="icon">
-          <fa pack="fas" name="save" />
+          <fa icon="save"/>
         </span>
       </button>
     </div>

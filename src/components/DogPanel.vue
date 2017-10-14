@@ -3,12 +3,12 @@
     <p class="panel-heading">
       <span>Dog</span>
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="caret-down" />
-        <fa v-if="collapsed" pack="fas" name="caret-right" />
+        <fa v-if="!collapsed" icon="caret-down" />
+        <fa v-if="collapsed" icon="caret-right" />
       </a>
       <a v-on:click="toggleEdit()" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!edit" pack="fas" name="edit" />
-        <fa v-if="edit" pack="fas" name="save" />
+        <fa v-if="!edit" icon="edit"/>
+        <fa v-if="edit" icon="save"/>
       </a>
     </p>
     <template v-if="!collapsed">

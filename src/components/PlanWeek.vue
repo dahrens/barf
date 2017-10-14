@@ -4,7 +4,7 @@
       <p class="control is-expanded">
         <a v-on:click="wizard = !wizard" class="button is-fullwidth is-outlined">
           <span class="icon is-small">
-            <fa pack="fas" name="magic" />
+            <fa icon="magic"/>
           </span>
           <span>wizard</span>
         </a>
@@ -12,7 +12,7 @@
       <p class="control is-expanded">
         <a v-on:click="clearAllocation()" class="button is-fullwidth is-outlined">
           <span class="icon is-small">
-            <fa pack="fas" name="bomb" />
+            <fa icon="bomb"/>
           </span>
           <span>clear</span>
         </a>
@@ -20,7 +20,7 @@
       <p class="control is-expanded">
         <a v-on:click="editAll()" class="button is-fullwidth is-outlined">
           <span class="icon is-small">
-            <fa pack="fas" name="edit" />
+            <fa icon="edit"/>
           </span>
           <span>edit all</span>
         </a>
@@ -28,7 +28,7 @@
       <p class="control is-expanded">
         <a v-on:click="saveAll()" class="button is-fullwidth is-outlined">
           <span class="icon is-small">
-            <fa pack="fas" name="save" />
+            <fa icon="save"/>
           </span>
           <span>save all</span>
         </a>

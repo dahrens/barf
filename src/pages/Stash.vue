@@ -21,15 +21,15 @@
               <p class="control has-icons-left">
                 <input class="input is-small" type="text" placeholder="search">
                 <span class="icon is-small is-left">
-                  <fa pack="fas" name="search" />
+                  <fa icon="search"/>
                 </span>
               </p>
             </div>
             <template v-for="ingredientMeta in ingredientStash">
               <a v-on:click="activateStashItem(ingredientMeta.item)" class="panel-block" :class="{'is-active': isActiveStashItem(ingredientMeta.item)}">
                 <p class="panel-icon">
-                  <fa v-if ="!isActiveStashItem(ingredientMeta.item)" pack="fas" name="caret-right" />
-                  <fa v-if ="isActiveStashItem(ingredientMeta.item)" pack="fas" name="caret-down" />
+                  <fa v-if ="!isActiveStashItem(ingredientMeta.item)" icon="caret-right" />
+                  <fa v-if ="isActiveStashItem(ingredientMeta.item)" icon="caret-down" />
                 </p>
                 {{ ingredientMeta.ingredient.name }}&nbsp;
                 <template v-for="amountMeta in ingredientMeta.amounts">
@@ -46,8 +46,8 @@
             <template v-for="recipeMeta of recipeStash">
               <a v-on:click="activateStashItem(recipeMeta.recipe)" class="panel-block" :class="{'is-active': isActiveStashItem(recipeMeta.recipe)}">
                 <p class="panel-icon">
-                  <fa v-if ="!isActiveStashItem(recipeMeta.recipe)" pack="fas" name="caret-right" />
-                  <fa v-if ="isActiveStashItem(recipeMeta.recipe)" pack="fas" name="caret-down" />
+                  <fa v-if ="!isActiveStashItem(recipeMeta.recipe)" icon="caret-right" />
+                  <fa v-if ="isActiveStashItem(recipeMeta.recipe)" icon="caret-down" />
                 </p>
                 {{ recipeMeta.recipe.name }}&nbsp;
                 <span class="tag is-dark">

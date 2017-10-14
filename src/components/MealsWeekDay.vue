@@ -4,8 +4,8 @@
     <p class="panel-heading">
       <span class="is-size-5 is-uppercase">{{ weekday }}</span>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!edit" pack="fas" name="edit" />
-        <fa v-if="edit" pack="fas" name="save" />
+        <fa v-if="!edit" icon="edit"/>
+        <fa v-if="edit" icon="save"/>
       </a>
     </p>
     <!-- meals for that day -->

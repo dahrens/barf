@@ -3,8 +3,8 @@
     <p class="panel-heading">
       Statistics
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
-        <fa v-if="!collapsed" pack="fas" name="caret-down" />
-        <fa v-if="collapsed" pack="fas" name="caret-right" />
+        <fa v-if="!collapsed" icon="caret-down" />
+        <fa v-if="collapsed" icon="caret-right" />
       </a>
     </p>
     <template v-if="!collapsed">
