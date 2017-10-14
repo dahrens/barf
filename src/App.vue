@@ -17,8 +17,8 @@
       <div class="navbar-menu" :class="{'is-active': mobileMenu}">
         <div class="navbar-start">
           <router-link
+            v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
-            :class="{'is-active': $route.fullPath ==='/'}"
             :to="{ name: 'Plan' }">
             <span class="icon is-large">
               <fa size="2x" icon="calculator"/>
@@ -27,8 +27,8 @@
           </router-link>
           <router-link
             v-if="settings.useMeals"
+            v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
-            :class="{'is-active': $route.fullPath ==='/meals'}"
             :to="{ name: 'Meals' }">
             <span class="icon is-large">
               <fa size="2x" icon="utensils"/>
@@ -37,8 +37,8 @@
           </router-link>
           <router-link
             v-if="settings.useMeals"
+            v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
-            :class="{'is-active': $route.fullPath ==='/ingredients'}"
             :to="{ name: 'Ingredients' }">
             <span class="icon is-large">
               <fa size="2x" icon="puzzle-piece"/>
@@ -47,8 +47,8 @@
           </router-link>
           <router-link
             v-if="settings.useStash"
+            v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
-            :class="{'is-active': $route.fullPath ==='/stash'}"
             :to="{ name: 'Stash' }">
             <span class="icon is-large">
               <fa size="2x" icon="archive"/>
@@ -58,8 +58,8 @@
         </div>
         <div class="navbar-end">
           <router-link
+            v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
-            :class="{'is-active': $route.fullPath === '/about'}"
             :to="{ name: 'About' }">
             <span class="icon is-large">
               <fa size="2x" icon="info"/>
@@ -67,11 +67,11 @@
             <span class="is-size-5 is-uppercase">about</span>
           </router-link>
           <router-link
+            v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
-            :class="{'is-active': $route.fullPath === '/settings'}"
             :to="{ name: 'Settings' }">
             <span class="icon is-large">
-              <fa size="2x" icon="wrench"/>
+              <fa size="2x" icon="cog"/>
             </span>
             <span class="is-size-5 is-uppercase">settings</span>
           </router-link>
@@ -138,6 +138,9 @@ export default {
   methods: {
     resetApp () {
       localStorage.removeItem('barf')
+    },
+    navigate () {
+      console.log('navigate')
     }
   }
 }

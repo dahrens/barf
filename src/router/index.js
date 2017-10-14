@@ -10,9 +10,11 @@ import About from '@/pages/About'
 Vue.use(Router)
 
 export default new Router({
+  linkActiveClass: 'is-active',
   routes: [
+    { path: '/', redirect: '/plan' },
     {
-      path: '/',
+      path: '/plan',
       name: 'Plan',
       component: Plan
     },
