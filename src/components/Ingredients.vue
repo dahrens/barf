@@ -46,6 +46,18 @@
             </p>
             {{ ingredient.name }}
           </a>
+          <div v-if="isActive(ingredient)" class="faked-panel-block">
+            <div class="field is-grouped is-grouped-multiline">
+              <span class="control">composition</span>
+              <template v-for="part in ingredient.subCategories">
+                <div class="control">
+                  <subCategoryTag  :subCategory="part[1]" :amount="100 * part[0]" unit="%"></subCategoryTag>
+                </div>
+              </template>
+              <span class="control">default amount <strong>{{ ingredient.defaultAmount }}</strong></span>
+              <span class="control">unit <strong>{{ ingredient.unit }}</strong></span>
+            </div>
+          </div>
           <div v-if="isActive(ingredient) && dog" class="faked-panel-block">
             <div class="field has-addons has-addons-right">
               <p class="control is-expanded">
@@ -81,6 +93,7 @@
 </template>
 
 <script>
+import subCategoryTag from '@/components/include/SubCategoryTag'
 import ingredientCreate from '@/components/IngredientCreate'
 import stashIngredient from '@/components/StashIngredient'
 import { SCHEDULE_MEAL } from '@/store/mutation-types'
@@ -89,7 +102,8 @@ export default {
   name: 'ingredients',
   components: {
     ingredientCreate,
-    stashIngredient
+    stashIngredient,
+    subCategoryTag
   },
   props: {
     showCreate: {

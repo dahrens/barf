@@ -43,12 +43,7 @@
         <div class="control is-size-5 is-uppercase">planned ration</div>
         <template v-for="allocation in allocations">
           <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-dark is-medium">{{ allocation.amount }}g</span>
-              <span class="tag is-light is-medium" v-bind:style="{
-                backgroundColor: subCategoryColor(allocation.subCategory)
-              }">{{ allocation.subCategory }}</span>
-            </div>
+            <subCategoryTag :subCategory="allocation.subCategory" :amount="allocation.amount"></subCategoryTag>
           </div>
         </template>
       </div>
@@ -57,6 +52,7 @@
 </template>
 
 <script>
+import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import ingredients from '@/components/Ingredients'
 import { REMOVE_SCHEDULED_MEAL } from '@/store/mutation-types'
@@ -76,7 +72,8 @@ export default {
   },
   components: {
     dayAllocationEdit,
-    ingredients
+    ingredients,
+    subCategoryTag
   },
   data () {
     return {
@@ -98,9 +95,6 @@ export default {
     }
   },
   methods: {
-    subCategoryColor (subCategory) {
-      return this.$store.getters.subCategoryColor(subCategory)
-    },
     getIngredient (id) {
       return this.$store.getters.ingredientById(id)
     },

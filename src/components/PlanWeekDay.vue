@@ -13,13 +13,9 @@
       <div class="field is-grouped is-grouped-multiline">
         <template v-for="allocation in allocations">
           <div class="control">
-            <div class="tags has-addons">
-              <span class="tag is-dark is-medium">{{ allocation.amount }}g</span>
-              <span class="tag is-light is-medium" v-bind:style="{
-                backgroundColor: subCategoryColor(allocation.subCategory)
-              }">{{ allocation.subCategory }}</span>
-              <a v-if="edit" v-on:click="deleteAllocation(allocation)" class="tag is-medium is-delete"></a>
-            </div>
+            <subCategoryTag :subCategory="allocation.subCategory" :amount="allocation.amount">
+              <a slot="delete" v-if="edit" v-on:click="deleteAllocation(allocation)" class="tag is-medium is-delete"></a>
+            </subCategoryTag>
           </div>
         </template>
         <div v-if="edit" class="control">
@@ -39,6 +35,7 @@
 </template>
 
 <script>
+import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import { REMOVE_DAY_ALLOCATION } from '@/store/mutation-types'
 
@@ -56,7 +53,8 @@ export default {
     }
   },
   components: {
-    dayAllocationEdit
+    dayAllocationEdit,
+    subCategoryTag
   },
   data () {
     return {
