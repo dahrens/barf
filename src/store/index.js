@@ -12,8 +12,13 @@ Vue.use(Vuex)
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
 if (state !== null && state.version !== version) {
-  migrations.migrate(version, state)
-  localStorage.setItem('barf', JSON.stringify(state))
+  try {
+    migrations.migrate(version, state)
+    localStorage.setItem('barf', JSON.stringify(state))
+  } catch (e) {
+    console.error(e)
+    state = null
+  }
 } else if (state === null) {
   defaultState.version = version
   state = defaultState

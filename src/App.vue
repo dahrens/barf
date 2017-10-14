@@ -110,6 +110,11 @@
           is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
         </p>
         <p>
+          <a href="http://bulma.io">
+            <img src="http://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128" height="24">
+          </a>
+        </p>
+        <p>
           <a class="icon" href="mailto:dennis.ahrens@mailbox.org">
             <fa icon="envelope"/>
           </a>
