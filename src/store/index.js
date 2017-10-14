@@ -4,6 +4,7 @@ import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
 import actions from './actions'
+import migrations from './migrations'
 import { version } from '../../package.json'
 
 Vue.use(Vuex)
@@ -11,9 +12,9 @@ Vue.use(Vuex)
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
 if (state !== null && state.version !== version) {
-  console.warn('Your data was written by an another version!' + version + ' / ' + state.version)
-}
-if (state === null) {
+  migrations.migrate(version, state)
+  localStorage.setItem('barf', JSON.stringify(state))
+} else if (state === null) {
   defaultState.version = version
   state = defaultState
 }

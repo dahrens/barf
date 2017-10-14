@@ -1,4 +1,5 @@
 export default {
+  version: '1.0.0-alpha',
   ids: {
     dogs: 1,
     ingredients: 15
@@ -74,7 +75,7 @@ export default {
   categories: {
     animal: ['meat', 'stomach', 'entrails', 'bones'],
     vegetables: ['grains', 'fruits', 'vegetables'],
-    additives: ['oil']
+    additives: ['vitamin']
   },
   units: [
     'g', 'ml'

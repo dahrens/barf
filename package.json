@@ -1,6 +1,6 @@
 {
   "name": "barf",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.5",
   "description": "Create a barf plan for your dog(s).",
   "author": "Denis Ahrens <dennis.ahrens@mailbox.org>",
   "private": true,
