@@ -9,8 +9,8 @@
   "repository": "github.com/dahrens/barf",
   "private": true,
   "engines": {
-    "node": ">= 6.0.0",
-    "yarn": ">= 1.2.0"
+    "node": ">=6.9.0",
+    "yarn": ">=1.2.1"
   },
   "scripts": {
     "dev": "node build/dev-server.js",
