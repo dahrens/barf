@@ -73,6 +73,17 @@
               <div class="step-item" :class="{'is-active': step === 4, 'is-completed is-success': step > 4}">
                 <div class="step-marker">
                   <span class="icon">
+                    <fa icon="calendar-alt"/>
+                  </span>
+                </div>
+                <div class="step-details">
+                  <p class="step-title">Allocate</p>
+                  <p class="is-size-7 is-uppercase">assign to week</p>
+                </div>
+              </div>
+              <div class="step-item" :class="{'is-active': step === 5, 'is-completed is-success': step > 4}">
+                <div class="step-marker">
+                  <span class="icon">
                     <fa icon="flag"/>
                   </span>
                 </div>
@@ -85,8 +96,14 @@
           </div>
           <dogEdit v-if="step === 1" :dog="newDog"></dogEdit>
           <planMetaEdit v-if="step === 2" :dog="newDog"></planMetaEdit>
-          <planDistributionEdit v-if="step === 3" :dog="newDog" :commit="false"></planDistributionEdit>
-          <dogDetail v-if="step === 4" :dog="newDog" :imageSmall="true"></dogDetail>
+          <planDistributionEdit v-if="step === 3" :dog="newDog"
+            :commit="false"></planDistributionEdit>
+          <planAllocationWizard v-if="step === 4"
+            ref="allocationWizard"
+            :dog="newDog"
+            :newDog="true">
+          </planAllocationWizard>
+          <dogDetail v-if="step === 5" :dog="newDog" :imageSmall="true"></dogDetail>
           <div class="faked-panel-block">
             <div class="field has-addons is-centered">
               <p class="control is-expanded">
@@ -98,7 +115,7 @@
                 </button>
               </p>
               <p class="control">
-                <button v-if="step < 4" name="next" v-on:click="nextStep()" class="button is-primary" >
+                <button v-if="step < 5" name="next" v-on:click="nextStep()" class="button is-primary" >
                   <span>next</span>
                   <span class="icon">
                     <fa icon="angle-right" />
@@ -123,6 +140,7 @@
 import dogEdit from '@/components/DogEdit'
 import planMetaEdit from '@/components/PlanMetaEdit'
 import planDistributionEdit from '@/components/PlanDistributionEdit'
+import planAllocationWizard from '@/components/PlanAllocationWizard'
 import dogDetail from '@/components/DogDetail'
 import { SELECT_DOG, INSERT_DOG, REMOVE_DOG } from '@/store/mutation-types'
 
@@ -132,6 +150,7 @@ export default {
     dogEdit,
     planMetaEdit,
     planDistributionEdit,
+    planAllocationWizard,
     dogDetail
   },
   data () {
@@ -180,6 +199,9 @@ export default {
     nextStep () {
       if (this.canStepFurther && this.step < 4) {
         this.step += 1
+      } else if (this.step === 4) {
+        this.$refs['allocationWizard'].allocate()
+        this.step += 1
       }
     },
     cancelCreate () {
@@ -194,11 +216,6 @@ export default {
     saveNewDog () {
       let dog = JSON.parse(JSON.stringify(this.newDog))
       this.$store.commit(INSERT_DOG, dog)
-      this.$store.dispatch('allocate', {
-        dog,
-        fastenDays: [],
-        vegetarianDays: [2, 5]
-      })
       this.selectedDogId = dog.id
       this.cancelCreate()
     },

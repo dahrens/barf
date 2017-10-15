@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
-import actions from './actions'
 import migrations from './migrations'
 import { version } from '../../package.json'
 
@@ -34,6 +33,5 @@ export default new Vuex.Store({
   state: state,
   plugins: [persistPlugin],
   mutations,
-  getters,
-  actions
+  getters
 })

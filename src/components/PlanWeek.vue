@@ -39,7 +39,20 @@
       <weekDay :ref="weekday" :dog="dog" :weekday="weekday" :day="index"></weekDay>
     </template>
 
-    <planAllocationWizard :dog="dog" :class="{'is-active': wizard}" v-on:close="wizard = !wizard"></planAllocationWizard>
+    <div class="modal" :class="{'is-active': wizard}">
+      <div class="modal-background" v-on:click="wizard = !wizard"></div>
+      <div class="modal-content">
+        <nav class="panel">
+          <p class="panel-heading">
+            Automatic allocation
+            <a v-on:click="wizard = !wizard" class="icon is-pulled-right has-text-dark">
+              <fa icon="times"/>
+            </a>
+          </p>
+          <planAllocationWizard :dog="dog" @close="wizard = false"></planAllocationWizard>
+        </nav>
+      </div>
+    </div>
   </div>
 </template>
 

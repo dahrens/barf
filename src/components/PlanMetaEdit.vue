@@ -13,6 +13,8 @@
                   <fa v-if="dog.plan.calculated" icon="check-circle" />
                   <fa v-else icon="times-circle" />
                 </span>
+                <span v-if="dog.plan.calculated">yes</span>
+                <span v-else>no</span>
               </a>
             </p>
             <p v-if="!dog.plan.calculated" class="control is-expanded has-icons-left">

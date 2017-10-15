@@ -24,6 +24,7 @@ module.exports = {
       .click('button[name=next]')
       .click('button[name=next]')
       .click('button[name=next]')
+      .click('button[name=next]')
       .click('button[name=save]')
       .assert.elementPresent('.dog-panel')
       .assert.containsText('.dog-panel', 'Foobar')
