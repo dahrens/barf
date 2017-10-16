@@ -90,29 +90,20 @@ export default {
     }
   },
   data () {
+    let fastenDays = [false, false, false, false, false, false, false]
+    let vegetarianDays = [false, false, false, false, false, false, false]
+    let parameters = this.calculateParameters(fastenDays, vegetarianDays)
     return {
-      fastenDays: [false, false, false, false, false, false, false],
-      vegetarianDays: [false, false, false, false, false, false, false],
-      meatCount: 0,
-      meatPortion: 0,
-      stomachCount: 0,
-      stomachPortion: 0,
-      entrailsCount: 0,
-      entrailsPortion: 0,
-      bonesCount: 0,
-      bonesPortion: 0,
-      fruitsCount: 0,
-      fruitsPortion: 0,
-      vegetablesCount: 0,
-      vegetablesPortion: 0,
-      grainsCount: 0,
-      grainsPortion: 0
+      fastenDays,
+      vegetarianDays,
+      parameters
     }
   },
   methods: {
     calcPortion (occurency, total, average) {
-      if (!average) average = this.$store.getters.dogFoodQuantityPerDay(this.dog)
-      let roundSettings = this.$store.state.settings.rounding
+      if (!average) {
+        average = this.$store.getters.dogFoodQuantityPerDay(this.dog)
+      }
       return round(
         Math.min(
           parseInt(
@@ -120,64 +111,61 @@ export default {
           ),
           parseInt(average)
         ),
-        roundSettings
+        this.$store.state.settings.rounding
       )
     },
-    calculateDefaults () {
+    calculateParameters (fastenDays, vegetarianDays, parameters) {
       let totalDays = this.dog.plan.week.length
-      let average = this.$store.getters.dogFoodQuantityPerDay(this.dog)
-      let vegDayCount = this.vegetarianDays
+      let fastenDayCount = fastenDays
         .map((b, i) => [b, i])
         .filter((i) => i[0])
         .map((d) => d[1]).length
+      let vegDayCount = vegetarianDays
+        .map((b, i) => [b, i])
+        .filter((i) => i[0])
+        .map((d) => d[1]).length
+      let average = this.$store.getters.dogFoodQuantityPerDay(this.dog)
       let dist = this.$store.getters.planDistribution(this.dog)
-      this.meatCount = Math.ceil((totalDays - vegDayCount) / 2)
-      this.meatPortion = this.calcPortion(
-        this.meatCount, dist['animal']['meat']
-      )
-      this.stomachCount = totalDays - vegDayCount - this.meatCount
-      this.stomachPortion = this.calcPortion(
-        this.stomachCount, dist['animal']['stomach']
-      )
-      this.entrailsCount = randomDays(this.stomachCount + this.meatCount, this.meatCount)
-      this.entrailsPortion = this.calcPortion(
-        this.entrailsCount, dist['animal']['entrails']
-      )
-      this.bonesCount = randomDays(this.stomachCount + this.meatCount, this.meatCount)
-      this.bonesPortion = this.calcPortion(
-        this.bonesCount, dist['animal']['bones']
-      )
-      this.fruitsCount = randomDays(this.stomachCount + this.meatCount, this.stomachCount)
-      this.fruitsPortion = this.calcPortion(
-        this.fruitsCount, dist['vegetables']['fruits']
-      )
-      this.vegetablesCount = randomDays(this.stomachCount + this.meatCount, this.meatCount)
-      this.vegetablesPortion = this.calcPortion(
-        this.vegetablesCount, dist['vegetables']['vegetables']
-      )
-      this.grainsCount = randomDays(this.stomachCount + this.meatCount, this.meatCount)
-      this.grainsPortion = this.calcPortion(
-        this.grainsCount, dist['vegetables']['grains']
-      )
+      if (!parameters) {
+        parameters = JSON.parse(JSON.stringify(this.$store.getters.emptyDistribution))
+        let commonDays = totalDays - vegDayCount - fastenDayCount
+        let minCount = 3
+        let maxCount = commonDays
+        for (let category in parameters) {
+          for (let subCategory in parameters[category]) {
+            let count = randomDays(minCount, maxCount)
+            parameters[category][subCategory] = {
+              count,
+              portion: this.calcPortion(
+                count, dist[category][subCategory]
+              )
+            }
+          }
+        }
+      }
       if (vegDayCount) {
-        this.vegetablesPortion = this.calcPortion(
+        parameters['vegetables']['vegetables'].count = vegDayCount
+        parameters['vegetables']['vegetables'].portion = this.calcPortion(
           vegDayCount, dist['vegetables']['vegetables'], average / 2
         )
-        this.grainsPortion = this.calcPortion(
+        parameters['vegetables']['grains'].count = vegDayCount
+        parameters['vegetables']['grains'].portion = this.calcPortion(
           vegDayCount, dist['vegetables']['grains'], average / 2
         )
       }
+      return parameters
     },
     toggleFastenDay (day) {
       this.fastenDays[day] = !this.fastenDays[day]
+      this.parameters = this.calculateParameters(this.fastenDays, this.vegetarianDays)
       this.$forceUpdate()
     },
     toggleVegetarianDay (day) {
       this.vegetarianDays[day] = !this.vegetarianDays[day]
+      this.parameters = this.calculateParameters(this.fastenDays, this.vegetarianDays)
       this.$forceUpdate()
     },
     allocate () {
-      this.calculateDefaults()
       let fastenDays = this.fastenDays
         .map((b, i) => [b, i])
         .filter((i) => i[0])
@@ -186,13 +174,6 @@ export default {
         .map((b, i) => [b, i])
         .filter((i) => i[0])
         .map((d) => d[1])
-      let vegDayCount = vegetarianDays.length
-      let stomachCount = this.stomachCount
-      let entrailsCount = this.entrailsCount
-      let bonesCount = this.bonesCount
-      let fruitsCount = this.fruitsCount
-      let vegetablesCount = this.vegetablesCount
-      let grainsCount = this.grainsCount
 
       let todo = []
       let allocation = []
@@ -211,16 +192,18 @@ export default {
         }
       }
 
-      if (vegDayCount) {
+      if (vegetarianDays.length) {
         for (let day of vegetarianDays) {
           allocation[day].push({
             subCategory: 'vegetables',
-            amount: this.vegetablesPortion
+            amount: this.parameters['vegetables']['vegetables'].portion
           })
+          this.parameters['vegetables']['vegetables'].count--
           allocation[day].push({
             subCategory: 'grains',
-            amount: this.grainsPortion
+            amount: this.parameters['vegetables']['grains'].portion
           })
+          this.parameters['vegetables']['grains'].count--
           let idx = todo.indexOf(day)
           if (idx) {
             todo.splice(idx, 1)
@@ -231,57 +214,22 @@ export default {
       for (let idx in todo) {
         let daysLeft = todo.length - idx
         let day = todo[idx]
-        if ((stomachCount < daysLeft && randomDays(0, 1)) || stomachCount === daysLeft) {
-          allocation[day].push({
-            subCategory: 'stomach',
-            amount: this.stomachPortion
-          })
-          stomachCount--
-        } else {
-          allocation[day].push({
-            subCategory: 'meat',
-            amount: this.meatPortion
-          })
-          this.meatCount--
-        }
-        if ((entrailsCount < daysLeft && randomDays(0, 1)) || entrailsCount === daysLeft) {
-          allocation[day].push({
-            subCategory: 'entrails',
-            amount: this.entrailsPortion
-          })
-          entrailsCount--
-        }
-        if ((bonesCount < daysLeft && randomDays(0, 1)) || bonesCount === daysLeft) {
-          allocation[day].push({
-            subCategory: 'bones',
-            amount: this.bonesPortion
-          })
-          bonesCount--
-        }
-        if ((fruitsCount < daysLeft && randomDays(0, 1)) || fruitsCount === daysLeft) {
-          allocation[day].push({
-            subCategory: 'fruits',
-            amount: this.fruitsPortion
-          })
-          fruitsCount--
-        }
-        if (!vegDayCount) {
-          if ((vegetablesCount < daysLeft && randomDays(0, 1)) || vegetablesCount === daysLeft) {
-            allocation[day].push({
-              subCategory: 'vegetables',
-              amount: this.vegetablesPortion
-            })
-            vegetablesCount--
-          }
-          if ((grainsCount < daysLeft && randomDays(0, 1)) || grainsCount === daysLeft) {
-            allocation[day].push({
-              subCategory: 'grains',
-              amount: this.grainsPortion
-            })
-            grainsCount--
+        for (let category in this.parameters) {
+          for (let subCategory in this.parameters[category]) {
+            let count = this.parameters[category][subCategory].count
+            if (!count) continue
+            let portion = this.parameters[category][subCategory].portion
+            if ((count < daysLeft && randomDays(0, 1)) || count === daysLeft) {
+              allocation[day].push({
+                subCategory: subCategory,
+                amount: portion
+              })
+              this.parameters[category][subCategory].count--
+            }
           }
         }
       }
+
       if (!this.newDog) {
         this.$store.commit(UPDATE_PLAN_ALLOCATION, {
           dog: this.dog.id,
