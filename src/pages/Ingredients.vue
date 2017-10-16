@@ -13,7 +13,9 @@
     <div class="ingredients container">
       <div class="columns">
         <div class="column">
-          <ingredients></ingredients>
+          <nav class="panel ingredient-panel">
+            <ingredients></ingredients>
+          </nav>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="panel market-panel">
+  <span>
     <p v-if="showHeading" class="panel-heading">
       Ingredients
       <a v-on:click="collapsed = !collapsed" class="icon is-pulled-right has-text-dark">
@@ -89,7 +89,7 @@
           </div>
       </template>
     </template>
-  </nav>
+  </span>
 </template>
 
 <script>
