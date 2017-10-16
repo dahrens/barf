@@ -32,22 +32,29 @@
       </div>
     </div>
 
-    <!-- categories edit -->
-    <template v-if="edit">
-      <ingredients :showHeading="false" :dog="dog" :day="day" :availableSubCategories="allocatedSubCategories"></ingredients>
-    </template>
 
-    <!-- categories overview -->
     <div class="faked-panel-block">
       <div class="field is-grouped is-grouped-multiline">
-        <div class="control is-size-5 is-uppercase">planned ration</div>
-        <template v-for="allocation in allocations">
+        <template v-for="(data, subCategory) in mealSubCategories">
           <div class="control">
-            <subCategoryTag :subCategory="allocation.subCategory" :amount="allocation.amount"></subCategoryTag>
+            <subCategoryTag
+              :subCategory="subCategory"
+              :amount="data.expected">
+              <span slot="prefix" class="tag is-medium" :class="{
+                'is-success': data.expected === data.assigned,
+                'is-danger': data.expected !== data.assigned,
+                }">
+                {{ data.assigned }}g
+              </span>
+            </subCategoryTag>
           </div>
         </template>
       </div>
     </div>
+
+    <template v-if="edit">
+      <ingredients :showHeading="false" :dog="dog" :day="day" :availableSubCategories="planedSubCategories"></ingredients>
+    </template>
   </nav>
 </template>
 
@@ -90,8 +97,42 @@ export default {
     allocations () {
       return this.dog.plan.allocation[this.day]
     },
-    allocatedSubCategories () {
+    planedSubCategories () {
       return this.allocations.map(a => a.subCategory)
+    },
+    meals () {
+      let meals = []
+      meals = meals.concat(this.dog.plan.meals[this.day].morning)
+      meals = meals.concat(this.dog.plan.meals[this.day].evening)
+      return meals
+    },
+    mealSubCategories () {
+      let result = {}
+      for (let meal of this.meals) {
+        let ingredient = this.getIngredient(meal.ingredient)
+        for (let idx in ingredient.subCategories) {
+          let m = ingredient.subCategories[idx][0]
+          let subCategory = ingredient.subCategories[idx][1]
+          let amount = parseInt(meal.amount * m)
+          if (!result[subCategory]) {
+            let expected = 0
+            let f = (a) => a.subCategory === subCategory
+            let filtered = this.allocations.filter(f)
+            if (filtered.length === 1) {
+              expected = filtered[0].amount
+            }
+            result[subCategory] = { assigned: amount, expected }
+          } else {
+            result[subCategory].assigned += amount
+          }
+        }
+      }
+      for (let alloc of this.allocations) {
+        if (!result[alloc.subCategory]) {
+          result[alloc.subCategory] = { assigned: 0, expected: alloc.amount }
+        }
+      }
+      return result
     }
   },
   methods: {

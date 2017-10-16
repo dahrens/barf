@@ -48,14 +48,14 @@
           </a>
           <div v-if="isActive(ingredient)" class="faked-panel-block">
             <div class="field is-grouped is-grouped-multiline">
-              <span class="control">composition</span>
+              <span v-if="!dog" class="control">composition</span>
               <template v-for="part in ingredient.subCategories">
                 <div class="control">
                   <subCategoryTag  :subCategory="part[1]" :amount="100 * part[0]" unit="%"></subCategoryTag>
                 </div>
               </template>
-              <span class="control">default amount <strong>{{ ingredient.defaultAmount }}</strong></span>
-              <span class="control">unit <strong>{{ ingredient.unit }}</strong></span>
+              <span v-if="!dog" class="control">default amount <strong>{{ ingredient.defaultAmount }}</strong></span>
+              <span v-if="!dog" class="control">unit <strong>{{ ingredient.unit }}</strong></span>
             </div>
           </div>
           <div v-if="isActive(ingredient) && dog" class="faked-panel-block">
