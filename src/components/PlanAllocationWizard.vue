@@ -62,27 +62,27 @@
             <div class="field">
               <div class="field is-grouped is-grouped-multiline">
                 <div v-for="(data, subCategory) in subCategories" class="control">
-                  <div class="tags has-addons">
-                    <a class="tag is-medium is-danger"
-                      v-on:click="decreaseSubCategoryCount(category, subCategory)">
-                      <span class="icon">
-                        <fa icon="minus" />
+                  <subCategoryTag
+                    :subCategory="subCategory"
+                    :amount="data.portion">
+                    <template slot="prefix">
+                      <a class="tag is-medium is-danger"
+                        v-on:click="decreaseSubCategoryCount(category, subCategory)">
+                        <span class="icon">
+                          <fa icon="minus" />
+                        </span>
+                      </a>
+                      <span class="tag is-medium is-dark">
+                        {{ parameters[category][subCategory].count }} X
                       </span>
-                    </a>
-                    <span class="tag is-medium is-dark">
-                      {{ parameters[category][subCategory].count }} X
-                    </span>
-                    <a class="tag is-medium is-success"
-                      v-on:click="increaseSubCategoryCount(category, subCategory)">
-                      <span class="icon">
-                        <fa icon="plus" />
-                      </span>
-                    </a>
-                    <span class="tag is-dark is-medium">{{ data.portion }}g</span>
-                    <span class="tag is-medium" v-bind:style="{
-                      backgroundColor: subCategoryColor(subCategory)
-                    }">{{ subCategory }}</span>
-                  </div>
+                      <a class="tag is-medium is-success"
+                        v-on:click="increaseSubCategoryCount(category, subCategory)">
+                        <span class="icon">
+                          <fa icon="plus" />
+                        </span>
+                      </a>
+                    </template>
+                  </subCategoryTag>
                 </div>
               </div>
               <p class="help is-info">
@@ -152,9 +152,6 @@ export default {
     }
   },
   methods: {
-    subCategoryColor (subCategory) {
-      return this.$store.getters.subCategoryColor(subCategory)
-    },
     fastenDays () {
       return this.fastenWeek
         .map((b, i) => [b, i])

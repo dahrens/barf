@@ -14,7 +14,7 @@
         <template v-for="allocation in allocations">
           <div class="control">
             <subCategoryTag :subCategory="allocation.subCategory" :amount="allocation.amount">
-              <a slot="delete" v-if="edit" v-on:click="deleteAllocation(allocation)" class="tag is-medium is-delete"></a>
+              <a slot="suffix" v-if="edit" v-on:click="deleteAllocation(allocation)" class="tag is-medium is-delete"></a>
             </subCategoryTag>
           </div>
         </template>
