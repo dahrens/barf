@@ -9,10 +9,10 @@
               <p class="control is-expanded">
                 <div class="field has-addons">
                   <p v-for="(weekday, idx) in dog.plan.week" class="control">
-                    <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenDays[idx]}">
+                    <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenWeek[idx]}">
                       <span>{{ weekday.substring(0, 2) }}</span>
                       <span class="icon">
-                        <fa v-if="fastenDays[idx]" icon="check"/>
+                        <fa v-if="fastenWeek[idx]" icon="check"/>
                         <fa v-else icon="times"/>
                       </span>
                     </a>
@@ -20,7 +20,7 @@
                 </div>
               </p>
             </div>
-            <p v-if="fastenDays.filter(fd => fd === true).length > 2" class="help is-danger">Are you sure that your dog should not eat on more than 2 days?</p>
+            <p v-if="fastenWeek.filter(fd => fd === true).length > 2" class="help is-danger">Are you sure that your dog should not eat on more than 2 days?</p>
             <p class="help is-info">Click on a day to toggle whether it is a fasten day or not</p>
           </div>
         </div>
@@ -35,10 +35,10 @@
               <p class="control is-expanded">
                 <div class="field has-addons">
                   <p v-for="(weekday, idx) in dog.plan.week" class="control">
-                    <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianDays[idx]}">
+                    <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianWeek[idx]}">
                       <span>{{ weekday.substring(0, 2) }}</span>
                       <span class="icon">
-                        <fa v-if="vegetarianDays[idx]" icon="check"/>
+                        <fa v-if="vegetarianWeek[idx]" icon="check"/>
                         <fa v-else icon="times"/>
                       </span>
                     </a>
@@ -46,12 +46,17 @@
                 </div>
               </p>
             </div>
-            <p v-if="fastenDays.filter(fd => fd === true).length > 2" class="help is-danger">Are you sure that your dog should not eat on more than 2 days?</p>
+            <p v-if="fastenWeek.filter(fd => fd === true).length > 2" class="help is-danger">Are you sure that your dog should not eat on more than 2 days?</p>
             <p class="help is-info">Click on a day to toggle whether it is a fasten day or not</p>
           </div>
         </div>
       </div>
     </div>
+    <template v-for="(subCategories, category) in parameters">
+      <div v-for="(subCategory, data) in subCategories" class="panel-block">
+        {{ category }} {{ subCategory }} {{ data }}
+      </div>
+    </template>
     <div v-if="!newDog" class="panel-block">
       <div class="notification is-warning is-fullwidth">
         <span class="icon is-large fa-fw">
@@ -90,19 +95,58 @@ export default {
     }
   },
   data () {
-    let fastenDays = [false, false, false, false, false, false, false]
-    let vegetarianDays = [false, false, false, false, false, false, false]
-    let parameters = this.calculateParameters(fastenDays, vegetarianDays)
-    return {
-      fastenDays,
-      vegetarianDays,
-      parameters
+    return this.freshData()
+  },
+  computed: {
+    dist () {
+      return this.$store.getters.planDistribution(this.dog)
+    },
+    portionPerDay () {
+      return this.$store.getters.dogFoodQuantityPerDay(this.dog)
     }
   },
   methods: {
+    fastenDays () {
+      return this.fastenWeek
+        .map((b, i) => [b, i])
+        .filter((i) => i[0])
+        .map((d) => d[1])
+    },
+    vegetarianDays () {
+      return this.vegetarianWeek
+        .map((b, i) => [b, i])
+        .filter((i) => i[0])
+        .map((d) => d[1])
+    },
+    freshData () {
+      let fastenWeek = [false, false, false, false, false, false, false]
+      let vegetarianWeek = [false, false, false, false, false, false, false]
+      let parameters = JSON.parse(JSON.stringify(this.$store.getters.emptyDistribution))
+      let minCount = 3
+      let maxCount = 5
+      let dist = this.$store.getters.planDistribution(this.dog)
+      for (let category in parameters) {
+        for (let subCategory in parameters[category]) {
+          let count = randomDays(minCount, maxCount)
+          parameters[category][subCategory] = {
+            count,
+            portion: this.calcPortion(
+              count,
+              dist[category][subCategory],
+              this.$store.getters.dogFoodQuantityPerDay(this.dog)
+            )
+          }
+        }
+      }
+      return {
+        fastenWeek,
+        vegetarianWeek,
+        parameters
+      }
+    },
     calcPortion (occurency, total, average) {
       if (!average) {
-        average = this.$store.getters.dogFoodQuantityPerDay(this.dog)
+        average = this.portionPerDay
       }
       return round(
         Math.min(
@@ -114,67 +158,32 @@ export default {
         this.$store.state.settings.rounding
       )
     },
-    calculateParameters (fastenDays, vegetarianDays, parameters) {
-      let totalDays = this.dog.plan.week.length
-      let fastenDayCount = fastenDays
-        .map((b, i) => [b, i])
-        .filter((i) => i[0])
-        .map((d) => d[1]).length
-      let vegDayCount = vegetarianDays
-        .map((b, i) => [b, i])
-        .filter((i) => i[0])
-        .map((d) => d[1]).length
-      let average = this.$store.getters.dogFoodQuantityPerDay(this.dog)
-      let dist = this.$store.getters.planDistribution(this.dog)
-      if (!parameters) {
-        parameters = JSON.parse(JSON.stringify(this.$store.getters.emptyDistribution))
-        let commonDays = totalDays - vegDayCount - fastenDayCount
-        let minCount = 3
-        let maxCount = commonDays
-        for (let category in parameters) {
-          for (let subCategory in parameters[category]) {
-            let count = randomDays(minCount, maxCount)
-            parameters[category][subCategory] = {
-              count,
-              portion: this.calcPortion(
-                count, dist[category][subCategory]
-              )
-            }
-          }
-        }
-      }
+    recalculateParameters (parameters) {
+      let vegDayCount = this.vegetarianDays().length
       if (vegDayCount) {
         parameters['vegetables']['vegetables'].count = vegDayCount
         parameters['vegetables']['vegetables'].portion = this.calcPortion(
-          vegDayCount, dist['vegetables']['vegetables'], average / 2
+          vegDayCount, this.dist['vegetables']['vegetables'],
+          this.portionPerDay / 2
         )
         parameters['vegetables']['grains'].count = vegDayCount
         parameters['vegetables']['grains'].portion = this.calcPortion(
-          vegDayCount, dist['vegetables']['grains'], average / 2
+          vegDayCount, this.dist['vegetables']['grains'],
+          this.portionPerDay / 2
         )
       }
-      return parameters
     },
     toggleFastenDay (day) {
-      this.fastenDays[day] = !this.fastenDays[day]
-      this.parameters = this.calculateParameters(this.fastenDays, this.vegetarianDays)
+      this.fastenWeek[day] = !this.fastenWeek[day]
+      this.recalculateParameters(this.parameters)
       this.$forceUpdate()
     },
     toggleVegetarianDay (day) {
-      this.vegetarianDays[day] = !this.vegetarianDays[day]
-      this.parameters = this.calculateParameters(this.fastenDays, this.vegetarianDays)
+      this.vegetarianWeek[day] = !this.vegetarianWeek[day]
+      this.recalculateParameters(this.parameters)
       this.$forceUpdate()
     },
     allocate () {
-      let fastenDays = this.fastenDays
-        .map((b, i) => [b, i])
-        .filter((i) => i[0])
-        .map((d) => d[1])
-      let vegetarianDays = this.vegetarianDays
-        .map((b, i) => [b, i])
-        .filter((i) => i[0])
-        .map((d) => d[1])
-
       let todo = []
       let allocation = []
 
@@ -183,8 +192,8 @@ export default {
         allocation.push([])
       }
 
-      if (fastenDays.length) {
-        for (let day of fastenDays) {
+      if (this.fastenDays().length) {
+        for (let day of this.fastenDays()) {
           let idx = todo.indexOf(day)
           if (idx) {
             todo.splice(idx, 1)
@@ -192,8 +201,8 @@ export default {
         }
       }
 
-      if (vegetarianDays.length) {
-        for (let day of vegetarianDays) {
+      if (this.vegetarianDays().length) {
+        for (let day of this.vegetarianDays()) {
           allocation[day].push({
             subCategory: 'vegetables',
             amount: this.parameters['vegetables']['vegetables'].portion
@@ -239,6 +248,10 @@ export default {
       } else {
         this.dog.plan.allocation = allocation
       }
+      let freshData = this.freshData()
+      this.fastenWeek = freshData.fastenWeek
+      this.vegetarianWeek = freshData.vegetarianWeek
+      this.parameters = freshData.parameters
     }
   }
 }
