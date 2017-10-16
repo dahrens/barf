@@ -4,9 +4,9 @@
       <div class="field is-horizontal">
         <div class="field-label">Fasting Days</div>
         <div class="field-body">
-          <div class="field is-expanded">
+          <div class="field">
             <div class="field">
-              <p class="control is-expanded">
+              <p class="control buttons-expanded">
                 <div class="field has-addons">
                   <p v-for="(weekday, idx) in dog.plan.week" class="control">
                     <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenWeek[idx]}">
@@ -30,9 +30,9 @@
       <div class="field is-horizontal">
         <div class="field-label">Vegetarian Days</div>
         <div class="field-body">
-          <div class="field is-expanded">
+          <div class="field">
             <div class="field">
-              <p class="control is-expanded">
+              <p class="control buttons-expanded">
                 <div class="field has-addons">
                   <p v-for="(weekday, idx) in dog.plan.week" class="control">
                     <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianWeek[idx]}">
@@ -53,8 +53,44 @@
       </div>
     </div>
     <template v-for="(subCategories, category) in parameters">
-      <div v-for="(subCategory, data) in subCategories" class="panel-block">
-        {{ category }} {{ subCategory }} {{ data }}
+      <div class="panel-block">
+        <div class="field is-horizontal">
+          <div class="field-label is-capitalized">
+            {{ category }}
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="field is-grouped is-grouped-multiline">
+                <div v-for="(data, subCategory) in subCategories" class="control">
+                  <div class="tags has-addons">
+                    <a class="tag is-medium is-danger"
+                      v-on:click="decreaseSubCategoryCount(category, subCategory)">
+                      <span class="icon">
+                        <fa icon="minus" />
+                      </span>
+                    </a>
+                    <span class="tag is-medium is-dark">
+                      {{ parameters[category][subCategory].count }} X
+                    </span>
+                    <a class="tag is-medium is-success"
+                      v-on:click="increaseSubCategoryCount(category, subCategory)">
+                      <span class="icon">
+                        <fa icon="plus" />
+                      </span>
+                    </a>
+                    <span class="tag is-dark is-medium">{{ data.portion }}g</span>
+                    <span class="tag is-medium" v-bind:style="{
+                      backgroundColor: subCategoryColor(subCategory)
+                    }">{{ subCategory }}</span>
+                  </div>
+                </div>
+              </div>
+              <p class="help is-info">
+                Decide how many allocations for each {{ category }} category should be played.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
     <div v-if="!newDog" class="panel-block">
@@ -78,6 +114,7 @@
 <script>
 import { round } from '@/store/utils'
 import { UPDATE_PLAN_ALLOCATION } from '@/store/mutation-types'
+import subCategoryTag from '@/components/include/SubCategoryTag'
 
 function randomDays (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -94,6 +131,9 @@ export default {
       default: () => (false)
     }
   },
+  components: {
+    subCategoryTag
+  },
   data () {
     return this.freshData()
   },
@@ -103,9 +143,18 @@ export default {
     },
     portionPerDay () {
       return this.$store.getters.dogFoodQuantityPerDay(this.dog)
+    },
+    portionStep () {
+      if (this.$store.state.settings.rounding.enabled) {
+        return this.$store.state.settings.rounding.value
+      }
+      return 1
     }
   },
   methods: {
+    subCategoryColor (subCategory) {
+      return this.$store.getters.subCategoryColor(subCategory)
+    },
     fastenDays () {
       return this.fastenWeek
         .map((b, i) => [b, i])
@@ -171,6 +220,28 @@ export default {
           vegDayCount, this.dist['vegetables']['grains'],
           this.portionPerDay / 2
         )
+      }
+    },
+    increaseSubCategoryCount (category, subCategory) {
+      let count = this.parameters[category][subCategory].count
+      if (count < this.dog.plan.week.length) {
+        count++
+        let p = this.calcPortion(count, this.dist[category][subCategory])
+        this.parameters[category][subCategory].count = count
+        this.parameters[category][subCategory].portion = p
+      }
+    },
+    decreaseSubCategoryCount (category, subCategory) {
+      let count = this.parameters[category][subCategory].count
+      if (count > 0) {
+        count--
+        let p = this.calcPortion(
+          count,
+          this.dist[category][subCategory],
+          this.dist[category][subCategory]
+        )
+        this.parameters[category][subCategory].count = count
+        this.parameters[category][subCategory].portion = p
       }
     },
     toggleFastenDay (day) {
@@ -256,9 +327,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.is-expaned
-  display: flex
-  flex: 0 0 100%
-</style>
