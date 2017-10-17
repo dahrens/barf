@@ -3,6 +3,9 @@
     <!-- day heading -->
     <p class="panel-heading">
       <span class="is-size-5 is-uppercase">{{ weekday }}</span>
+      <span class="is-size-5 has-text-weight-bold">
+        {{ allocations.map(a => a.amount).reduce((sum, v) => sum + v) }}g
+      </span>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" icon="edit"/>
         <fa v-if="edit" icon="save"/>
