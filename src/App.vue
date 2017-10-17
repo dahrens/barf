@@ -1,10 +1,10 @@
 <template>
   <div id="app" class="app">
-    <nav class="navbar is-light">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="nav-item" href="/">
-          <span class="icon is-large has-text-primary">
-            <fa size="2x" icon="paw"/>
+        <a class="navbar-item" href="/">
+          <span class="icon is-medium has-text-primary brand-icon">
+            <fa size="3x" icon="paw"/>
           </span>
           <h1 class="title">B.A.R.F.</h1>
         </a>
@@ -167,7 +167,6 @@ export default {
   border-left: 1px solid $border
   border-right: 1px solid $border
 
-.panel-heading .icon
-  margin-left: 0.5em
-
+.brand-icon
+  margin-right: 1em
 </style>
