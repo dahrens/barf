@@ -6,7 +6,7 @@
           <span class="icon is-small">
             <fa icon="magic"/>
           </span>
-          <span>wizard</span>
+          <span class="is-hidden-mobile">wizard</span>
         </a>
       </p>
       <p class="control is-expanded">
@@ -14,7 +14,7 @@
           <span class="icon is-small">
             <fa icon="bomb"/>
           </span>
-          <span>clear</span>
+          <span class="is-hidden-mobile">clear</span>
         </a>
       </p>
       <p class="control is-expanded">
@@ -22,7 +22,7 @@
           <span class="icon is-small">
             <fa icon="edit"/>
           </span>
-          <span>edit all</span>
+          <span class="is-hidden-mobile">edit all</span>
         </a>
       </p>
       <p class="control is-expanded">
@@ -30,7 +30,7 @@
           <span class="icon is-small">
             <fa icon="save"/>
           </span>
-          <span>save all</span>
+          <span class="is-hidden-mobile">save all</span>
         </a>
       </p>
     </div>
