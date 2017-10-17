@@ -2,33 +2,38 @@
 
 [![Build Status](https://travis-ci.org/dahrens/barf.svg?branch=master)](https://travis-ci.org/dahrens/barf)
 
-This app should assist you when creating a raw feeding plan for your dog.
-
-Have a look at the [Online Demo](https://barf.part-of.me).
-
-It is made using [vue.js](https://vuejs.org/) and [bulma](http://bulma.io/). Thanks for this awesome tools!
+This app assists you when creating a raw feeding plan for your dog. Visit the [Online Demo](https://barf.part-of.me).
 
 ![alt text](https://raw.githubusercontent.com/dahrens/barf/master/.github/screenshot-plan.png)
 
-## Features
-
-* Calculate the daily requirement of food based on the dogs weight, the activity
-* Based on food categories.
-  * `animal`
-    * meat
-    * stomach
-    * entrails
-    * bones
-  * `vegetarian`
-    * grains
-    * fruits
-    * vegetables
-* Calculate the amounts for each of them per week
-* Define how much you want to feed ingredients of which category in percent.
-* Break down the overall amounts for the week into a plan for each day.
-* Separated to the theoretic plan you can create a plan including real ingredients.
-
 ## Build Setup
+
+**recommended**
+
+``` bash
+# install dependencies
+yarn
+
+# serve with hot reload at localhost:8080
+yarn run dev
+
+# build for production with minification
+yarn run build
+
+# build for production and view the bundle analyzer report
+yarn run build --report
+
+# run e2e test
+yarn run e2e
+
+# run unit tests
+yarn run unit
+
+# run all tests
+yarn test
+```
+
+**or**
 
 ``` bash
 # install dependencies
@@ -52,3 +57,18 @@ npm run unit
 # run all tests
 npm test
 ```
+
+## powered by
+
+It is made using primarily those awesome open source tools:
+* [vue.js](https://vuejs.org/)
+* [vuex](https://vuex.vuejs.org/)
+* [vue-router](https://router.vuejs.org/)
+* [vue-chartjs](http://vue-chartjs.org/#/)
+* [vue-fontawesome](https://github.com/FortAwesome/vue-fontawesome)
+* [vue-color](https://xiaokaike.github.io/vue-color/)
+* [vue-slider-component](https://nightcatsama.github.io/vue-slider-component/)
+* [chartjs](http://www.chartjs.org/)
+* [font awesome](fontawesome.io)
+* [flatpickr](https://chmln.github.io/flatpickr/)
+* [bulma](http://bulma.io/)
