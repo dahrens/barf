@@ -3,6 +3,11 @@
     <!-- day heading -->
     <p class="panel-heading">
       <span class="is-size-5 is-uppercase">{{ weekday }}</span>
+      <span class="is-size-5 has-text-weight-bold">
+        <template v-if="">
+          {{ mealSum }}g
+        </template>
+      </span>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" icon="edit"/>
         <fa v-if="edit" icon="save"/>
@@ -105,6 +110,10 @@ export default {
       meals = meals.concat(this.dog.plan.meals[this.day].morning)
       meals = meals.concat(this.dog.plan.meals[this.day].evening)
       return meals
+    },
+    mealSum () {
+      if (this.meals.length === 0) return 0
+      return this.meals.map(m => m.amount).reduce((sum, v) => parseInt(sum) + parseInt(v))
     },
     mealSubCategories () {
       let result = {}

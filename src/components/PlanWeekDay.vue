@@ -4,7 +4,7 @@
     <p class="panel-heading">
       <span class="is-size-5 is-uppercase">{{ weekday }}</span>
       <span class="is-size-5 has-text-weight-bold">
-        {{ allocations.map(a => a.amount).reduce((sum, v) => sum + v) }}g
+        {{ allocationSum }}g
       </span>
       <a v-on:click="edit = !edit" class="icon is-pulled-right has-text-dark">
         <fa v-if="!edit" icon="edit"/>
@@ -74,6 +74,10 @@ export default {
     },
     allocations () {
       return this.dog.plan.allocation[this.day]
+    },
+    allocationSum () {
+      if (this.allocations.length === 0) return 0
+      return this.allocations.map(a => a.amount).reduce((sum, v) => sum + v)
     }
   },
   methods: {
