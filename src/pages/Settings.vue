@@ -132,12 +132,7 @@
           <div class="field-body">
             <div class="columns is-0 is-multiline ">
               <div class="column is-one-quarter" v-for="(color, subCategory) in settings.subCategoryColors">
-                <div class="tags has-addons">
-                  <span class="tag is-dark is-medium">{{ color }}</span>
-                  <span class="tag is-light is-medium" v-bind:style="{
-                    backgroundColor: color
-                  }">{{ subCategory }}</span>
-                </div>
+                <subCategoryTag :subCategory="subCategory" :amount="color"></subCategoryTag>
                 <color-picker v-model="colors[subCategory]" @input="onColorChange" />
               </div>
             </div>
@@ -154,6 +149,7 @@ import { Chrome } from 'vue-color'
 import { version } from '../../package.json'
 import { SET_VERSION, WRITE_SETTINGS } from '@/store/mutation-types'
 import defaultState from '@/store/default-state'
+import subCategoryTag from '@/components/include/SubCategoryTag'
 
 function bytesToSize (bytes) {
   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
@@ -165,7 +161,8 @@ function bytesToSize (bytes) {
 export default {
   name: 'settings',
   components: {
-    'color-picker': Chrome
+    'color-picker': Chrome,
+    subCategoryTag
   },
   computed: {
     settings () {
