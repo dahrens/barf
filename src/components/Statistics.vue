@@ -8,8 +8,9 @@
       </a>
     </p>
     <template v-if="!collapsed">
-      <div class="panel-block">
-        <allocationChart :chartData="allocationChartData"></allocationChart>
+      <div class="faked-panel-block">
+        <allocationChart :chartData="allocationChartData">
+        </allocationChart>
       </div>
       <div class="faked-panel-block">
         <distributionChart :chartData="distributionChartData"></distributionChart>
@@ -25,7 +26,10 @@ const { reactiveProp } = mixins
 const distributionChart = Doughnut.extend({
   mixins: [reactiveProp],
   mounted () {
-    this.renderChart(this.chartData, { maintainAspectRatio: true, responsive: true })
+    this.renderChart(this.chartData, {
+      maintainAspectRatio: true,
+      responsive: true
+    })
   }
 })
 

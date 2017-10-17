@@ -32,8 +32,8 @@
         </div>
       </div>
     </section>
-    <div v-if="dog" class="plan-content">
-      <div class="columns">
+    <template v-if="dog">
+      <div class="columns is-marginless">
         <div class="column is-one-quarter">
           <dogPanel :dog="dog"></dogPanel>
         </div>
@@ -44,7 +44,7 @@
           <statistics :dog="dog"></statistics>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -79,9 +79,6 @@ export default {
 <style lang="sass">
 @import "../assets/sass/variables"
 @import "../../node_modules/bulma/bulma"
-
-.plan-content
-  margin: 1em 0
 
 .dog-selector
   background-color: $dark
