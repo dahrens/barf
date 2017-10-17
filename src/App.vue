@@ -20,8 +20,9 @@
             v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
             :to="{ name: 'Plan' }">
-            <span class="icon is-large">
+            <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="calculator"/>
+              <span v-if="false" class="is-size-1 fa-layers-counter">1</span>
             </span>
             <span class="is-size-5 is-uppercase">plan</span>
           </router-link>
@@ -30,8 +31,9 @@
             v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
             :to="{ name: 'Meals' }">
-            <span class="icon is-large">
+            <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="utensils"/>
+              <span v-if="false" class="is-size-1 fa-layers-counter">1</span>
             </span>
             <span class="is-size-5 is-uppercase">meals</span>
           </router-link>
@@ -40,8 +42,9 @@
             v-on:click.native="mobileMenu = false"
             class="nav-item is-tab"
             :to="{ name: 'Ingredients' }">
-            <span class="icon is-large">
+            <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="puzzle-piece"/>
+              <span v-if="false" class="is-size-1 fa-layers-counter">1</span>
             </span>
             <span class="is-size-5 is-uppercase">ingredients</span>
           </router-link>
