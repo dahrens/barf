@@ -11,15 +11,12 @@ export const migrations = {
     state.categories.additives[0] = 'oil'
   },
   '1.0.0-alpha.6': (state) => {
-    state.notifications = [
-      {
-        pages: ['plan'],
-        message: 'Notifications arrived in the software',
-        style: 'is-info',
-        type: 'general',
-        data: {}
-      }
-    ]
+    state.notifications = []
+    state.settings.notifications = {
+      severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],
+      severity: 0,
+      autoDelete: false
+    }
   }
 }
 
@@ -46,21 +43,19 @@ export const safeMigrate = (state, version) => {
   try {
     migrate(version, state)
     state.notifications.push({
-      pages: ['settings'],
+      pages: [],
       message: `Migrated your state from version ${oldState.version} to ${version}`,
       style: 'is-info',
-      type: 'general',
-      data: {}
+      data: null
     })
     localStorage.setItem('barf', JSON.stringify(state))
   } catch (e) {
     state = defaultState
     state.version = version
     state.notifications.push({
-      pages: ['settings'],
-      message: `Migrating your state from version ${oldState.version} to ${version} failed.`,
+      pages: [],
+      message: `Migrating your state from version ${oldState.version} to ${version} failed: ${e}`,
       style: 'is-danger',
-      type: 'general',
       data: oldState
     })
   }

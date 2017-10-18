@@ -18,17 +18,14 @@ export default {
     rounding: {
       enabled: true,
       value: 25
+    },
+    notifications: {
+      severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],
+      severity: 0,
+      autoDelete: false
     }
   },
-  notifications: [
-    {
-      pages: ['plan'],
-      message: 'welcome to barf.',
-      style: 'is-info',
-      type: 'general',
-      data: {}
-    }
-  ],
+  notifications: [],
   selectedDogId: 0,
   activities: {
     'unactive': 1,

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
+import notificationPlugin from './plugins/notifications'
 import { safeMigrate } from '@/store/migrations'
 import { version } from '../../package.json'
 
@@ -25,7 +26,7 @@ const persistPlugin = store => {
 
 export default new Vuex.Store({
   state: state,
-  plugins: [persistPlugin],
+  plugins: [persistPlugin, notificationPlugin],
   mutations,
   getters
 })

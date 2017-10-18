@@ -14,7 +14,12 @@ import { REMOVE_NOTIFICATION } from '@/store/mutation-types'
 
 export default {
   name: 'notifications',
-  props: ['page'],
+  props: {
+    page: {
+      required: false,
+      default: () => (false)
+    }
+  },
   computed: {
     notifications () {
       return this.$store.getters.notifications(this.page)

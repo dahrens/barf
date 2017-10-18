@@ -96,6 +96,7 @@
         </div>
       </div>
     </nav>
+    <notifications></notifications>
     <router-view></router-view>
     <section class="hero is-warning">
       <div class="hero-body">
@@ -146,8 +147,13 @@
 </template>
 
 <script>
+import notifications from '@/components/Notifications'
+
 export default {
   name: 'barf',
+  components: {
+    notifications
+  },
   data () {
     return {
       mobileMenu: false
