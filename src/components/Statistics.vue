@@ -23,7 +23,8 @@
 import { HorizontalBar, Doughnut, mixins } from 'vue-chartjs'
 const { reactiveProp } = mixins
 
-const distributionChart = Doughnut.extend({
+const distributionChart = {
+  extends: Doughnut,
   mixins: [reactiveProp],
   mounted () {
     this.renderChart(this.chartData, {
@@ -31,9 +32,10 @@ const distributionChart = Doughnut.extend({
       responsive: true
     })
   }
-})
+}
 
-const allocationChart = HorizontalBar.extend({
+const allocationChart = {
+  extends: HorizontalBar,
   mixins: [reactiveProp],
   mounted () {
     this.renderChart(this.chartData, {
@@ -44,7 +46,7 @@ const allocationChart = HorizontalBar.extend({
       responsive: true
     })
   }
-})
+}
 
 export default {
   name: 'planAllocationPanel',
