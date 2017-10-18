@@ -2556,9 +2556,9 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-flatpickr@^3.0.7:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-3.1.5.tgz#32b13ac2361c5f9d01484353a4f34cf5f079bc6e"
+flatpickr@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.0.5.tgz#987bffa290d01471739c4438f7208f1f602fca11"
 
 flatten@^1.0.2:
   version "1.0.2"
@@ -6338,7 +6338,7 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.3.3:
+vue@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
 
