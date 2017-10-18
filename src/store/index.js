@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import defaultState from './default-state'
 import mutations from './mutations'
 import getters from './getters'
-import { tryMigrate } from '@/store/utils'
+import { safeMigrate } from '@/store/migrations'
 import { version } from '../../package.json'
 
 Vue.use(Vuex)
@@ -11,7 +11,7 @@ Vue.use(Vuex)
 const localStorage = window.localStorage
 let state = JSON.parse(localStorage.getItem('barf'), JSON.dateParser)
 if (state !== null && state.version !== version) {
-  state = tryMigrate(state, version)
+  state = safeMigrate(state, version)
 } else if (state === null) {
   defaultState.version = version
   state = defaultState

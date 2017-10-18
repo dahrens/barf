@@ -1,40 +1,75 @@
-export default {
-  versions: [
-    '1.0.0-alpha',
-    '1.0.0-alpha.5',
-    '1.0.0-alpha.6'
-  ],
-  migrations: {
-    '1.0.0-alpha.5': (state) => {
-      state.categories.additives[0] = 'oil'
-    },
-    '1.0.0-alpha.6': (state) => {
-      state.notifications = [
-        {
-          pages: ['plan'],
-          message: 'Notifications arrived in the software',
-          style: 'is-info',
-          type: 'general',
-          data: {}
-        }
-      ]
-    }
+import defaultState from './default-state'
+
+export const versions = [
+  '1.0.0-alpha',
+  '1.0.0-alpha.5',
+  '1.0.0-alpha.6'
+]
+
+export const migrations = {
+  '1.0.0-alpha.5': (state) => {
+    state.categories.additives[0] = 'oil'
   },
-  migrate (targetVersion, state) {
-    let currentVersion = state.version
-    let currentIdx = this.versions.indexOf(currentVersion)
-    let targetIdx = this.versions.indexOf(targetVersion)
-    if (currentIdx === -1) {
-      throw new Error(`Unknown version: ${currentVersion} in state`)
-    } else if (targetIdx === -1) {
-      throw new Error(`Unknown target version: ${targetVersion}`)
-    } else if (currentIdx > targetIdx) {
-      throw new Error(`Target version ${targetVersion} lower than current version ${currentVersion}. Migrating backwards is not supported`)
-    }
-    let steps = this.versions.slice(currentIdx + 1, targetIdx + 1)
-    for (let v of steps) {
-      this.migrations[v](state)
-    }
-    state.version = targetVersion
+  '1.0.0-alpha.6': (state) => {
+    state.notifications = [
+      {
+        pages: ['plan'],
+        message: 'Notifications arrived in the software',
+        style: 'is-info',
+        type: 'general',
+        data: {}
+      }
+    ]
   }
+}
+
+export const migrate = (targetVersion, state) => {
+  let currentVersion = state.version
+  let currentIdx = versions.indexOf(currentVersion)
+  let targetIdx = versions.indexOf(targetVersion)
+  if (currentIdx === -1) {
+    throw new Error(`Unknown version: ${currentVersion} in state`)
+  } else if (targetIdx === -1) {
+    throw new Error(`Unknown target version: ${targetVersion}`)
+  } else if (currentIdx > targetIdx) {
+    throw new Error(`Target version ${targetVersion} lower than current version ${currentVersion}. Migrating backwards is not supported`)
+  }
+  let steps = versions.slice(currentIdx + 1, targetIdx + 1)
+  for (let v of steps) {
+    migrations[v](state)
+  }
+  state.version = targetVersion
+}
+
+export const safeMigrate = (state, version) => {
+  let oldState = JSON.parse(JSON.stringify(state))
+  try {
+    migrate(version, state)
+    state.notifications.push({
+      pages: ['settings'],
+      message: `Migrated your state from version ${oldState.version} to ${version}`,
+      style: 'is-info',
+      type: 'general',
+      data: {}
+    })
+    localStorage.setItem('barf', JSON.stringify(state))
+  } catch (e) {
+    state = defaultState
+    state.version = version
+    state.notifications.push({
+      pages: ['settings'],
+      message: `Migrating your state from version ${oldState.version} to ${version} failed.`,
+      style: 'is-danger',
+      type: 'general',
+      data: oldState
+    })
+  }
+  return state
+}
+
+export default {
+  versions,
+  migrations,
+  migrate,
+  safeMigrate
 }

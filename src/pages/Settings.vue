@@ -150,7 +150,7 @@ import { Chrome } from 'vue-color'
 import { version } from '../../package.json'
 import { SET_VERSION, WRITE_SETTINGS } from '@/store/mutation-types'
 import defaultState from '@/store/default-state'
-import { tryMigrate } from '@/store/utils'
+import { safeMigrate } from '@/store/migrations'
 import notifications from '@/components/Notifications'
 import subCategoryTag from '@/components/include/SubCategoryTag'
 
@@ -212,7 +212,7 @@ export default {
         reader.onloadend = (e) => {
           let loadedState = JSON.parse(e.target.result)
           if (loadedState.version !== version) {
-            loadedState = tryMigrate(loadedState, version)
+            loadedState = safeMigrate(loadedState, version)
           }
           this.$store.replaceState(loadedState)
         }
