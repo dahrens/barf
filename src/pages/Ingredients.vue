@@ -10,6 +10,7 @@
         </div>
       </div>
     </section>
+    <notifications page="ingredients"></notifications>
     <div class="ingredients container">
       <div class="columns">
         <div class="column">
@@ -24,11 +25,13 @@
 
 <script>
 import ingredients from '@/components/Ingredients'
+import notifications from '@/components/Notifications'
 
 export default {
   name: 'Stash',
   components: {
-    ingredients
+    ingredients,
+    notifications
   }
 }
 </script>

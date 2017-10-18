@@ -1,11 +1,23 @@
 export default {
   versions: [
     '1.0.0-alpha',
-    '1.0.0-alpha.5'
+    '1.0.0-alpha.5',
+    '1.0.0-alpha.6'
   ],
   migrations: {
     '1.0.0-alpha.5': (state) => {
       state.categories.additives[0] = 'oil'
+    },
+    '1.0.0-alpha.6': (state) => {
+      state.notifications = [
+        {
+          pages: ['plan'],
+          message: 'Notifications arrived in the software',
+          style: 'is-info',
+          type: 'general',
+          data: {}
+        }
+      ]
     }
   },
   migrate (targetVersion, state) {

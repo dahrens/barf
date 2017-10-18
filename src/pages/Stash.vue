@@ -10,6 +10,7 @@
         </div>
       </div>
     </section>
+    <notifications page="stash"></notifications>
     <div class="stash">
       <div class="columns">
         <div class="column is-half">
@@ -70,11 +71,13 @@
 
 <script>
 import ingredients from '@/components/Ingredients'
+import notifications from '@/components/Notifications'
 
 export default {
   name: 'Stash',
   components: {
-    ingredients
+    ingredients,
+    notifications
   },
   data () {
     return {

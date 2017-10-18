@@ -1,4 +1,4 @@
-meals<template>
+<template>
   <div class="meals">
     <section class="hero is-primary is-bold">
       <div class="hero-body">
@@ -11,6 +11,7 @@ meals<template>
         </div>
       </div>
     </section>
+    <notifications page="meals"></notifications>
     <section v-if="!dog" class="hero is-medium is-info">
       <div class="hero-body">
         <div class="container">
@@ -42,13 +43,15 @@ meals<template>
 import week from '@/components/MealsWeek'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
+import notifications from '@/components/Notifications'
 
 export default {
   name: 'plan',
   components: {
     dogPanel,
     dogSelector,
-    week
+    week,
+    notifications
   },
   computed: {
     settings () {

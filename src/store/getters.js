@@ -114,5 +114,8 @@ export default {
       }
     }
     return allocation
+  },
+  notifications: (state) => (page) => {
+    return state.notifications.filter(n => n.pages.indexOf(page) !== -1)
   }
 }

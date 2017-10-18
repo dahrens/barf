@@ -11,6 +11,7 @@
         </div>
       </div>
     </section>
+    <notifications page="settings"></notifications>
     <div class="container">
       <div class="settings-form">
         <div class="field is-horizontal">
@@ -149,6 +150,8 @@ import { Chrome } from 'vue-color'
 import { version } from '../../package.json'
 import { SET_VERSION, WRITE_SETTINGS } from '@/store/mutation-types'
 import defaultState from '@/store/default-state'
+import { tryMigrate } from '@/store/utils'
+import notifications from '@/components/Notifications'
 import subCategoryTag from '@/components/include/SubCategoryTag'
 
 function bytesToSize (bytes) {
@@ -162,7 +165,8 @@ export default {
   name: 'settings',
   components: {
     'color-picker': Chrome,
-    subCategoryTag
+    subCategoryTag,
+    notifications
   },
   computed: {
     settings () {
@@ -207,9 +211,10 @@ export default {
         let reader = new window.FileReader()
         reader.onloadend = (e) => {
           let loadedState = JSON.parse(e.target.result)
+          if (loadedState.version !== version) {
+            loadedState = tryMigrate(loadedState, version)
+          }
           this.$store.replaceState(loadedState)
-          // to trigger persist!
-          this.$store.commit(SET_VERSION, version)
         }
         reader.readAsText(file)
       } else {

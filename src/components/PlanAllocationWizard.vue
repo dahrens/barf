@@ -113,7 +113,9 @@
 
 <script>
 import { round } from '@/store/utils'
-import { UPDATE_PLAN_ALLOCATION } from '@/store/mutation-types'
+import {
+  UPDATE_PLAN_ALLOCATION, INSERT_NOTIFICATION
+} from '@/store/mutation-types'
 import subCategoryTag from '@/components/include/SubCategoryTag'
 
 function randomDays (min, max) {
@@ -316,6 +318,15 @@ export default {
       } else {
         this.dog.plan.allocation = allocation
       }
+
+      this.$store.commit(INSERT_NOTIFICATION, {
+        pages: ['plan'],
+        message: 'Allocations rewritten',
+        style: 'is-success',
+        type: 'general',
+        data: {}
+      })
+
       let freshData = this.freshData()
       this.fastenWeek = freshData.fastenWeek
       this.vegetarianWeek = freshData.vegetarianWeek

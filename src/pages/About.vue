@@ -10,6 +10,7 @@
         </div>
       </div>
     </section>
+    <notifications page="about"></notifications>
     <section class="hero is-medium is-light">
       <div class="hero-body">
         <div class="container">
@@ -46,9 +47,13 @@
 
 <script>
 import { version } from '../../package.json'
+import notifications from '@/components/Notifications'
 
 export default {
   name: 'settings',
+  components: {
+    notifications
+  },
   data () {
     return {
       version

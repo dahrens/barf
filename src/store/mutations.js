@@ -93,5 +93,14 @@ export default {
     if (idx !== -1) {
       dog.plan.meals[payload.day][payload.timeOfDay].splice(idx, 1)
     }
+  },
+  [types.INSERT_NOTIFICATION] (state, notification) {
+    state.notifications.push(notification)
+  },
+  [types.REMOVE_NOTIFICATION] (state, notification) {
+    let idx = state.notifications.indexOf(notification)
+    if (idx !== -1) {
+      state.notifications.splice(idx, 1)
+    }
   }
 }

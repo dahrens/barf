@@ -20,6 +20,15 @@ export default {
       value: 25
     }
   },
+  notifications: [
+    {
+      pages: ['plan'],
+      message: 'welcome to barf.',
+      style: 'is-info',
+      type: 'general',
+      data: {}
+    }
+  ],
   selectedDogId: 0,
   activities: {
     'unactive': 1,
