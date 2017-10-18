@@ -8,22 +8,7 @@ const baseNotification = {
 }
 
 const notifications = {
-  [types.WRITE_SETTINGS] (settings) {
-    let n = JSON.parse(JSON.stringify(baseNotification))
-    n.style = 'is-success'
-    n.pages.push('settings')
-    n.message = 'Settings successfully saved'
-    return n
-  },
   [types.INSERT_DOG] (dog) {
-    let n = JSON.parse(JSON.stringify(baseNotification))
-    n.style = 'is-success'
-    n.pages.push('plan')
-    n.pages.push('meals')
-    n.message = `You successfully created the dog ${dog.name}`
-    return n
-  },
-  [types.UPDATE_DOG] (dog) {
     let n = JSON.parse(JSON.stringify(baseNotification))
     n.style = 'is-success'
     n.pages.push('plan')
