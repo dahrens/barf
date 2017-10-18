@@ -35,7 +35,7 @@
     "vue-chartjs": "^2.8.7",
     "vue-color": "^2.4.0",
     "vue-moment": "^2.0.2",
-    "vue-router": "^2.6.0",
+    "vue-router": "^3.0.1",
     "vue-slider-component": "^2.4.1",
     "vuex": "^2.3.1"
   },
