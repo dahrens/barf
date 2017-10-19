@@ -20,6 +20,7 @@ export const migrations = {
     }
   },
   '1.0.0-alpha.7': (state) => {
+    delete state.newDog
     state.notifications = []
     state.settings.notifications = {
       severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],

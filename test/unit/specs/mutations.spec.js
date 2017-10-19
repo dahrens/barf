@@ -2,6 +2,7 @@ import { expect } from 'chai'
 import * as types from '@/store/mutation-types'
 import mutations from '@/store/mutations'
 import defaultState from '@/store/default-state'
+import newDog from '../fixtures/newDog'
 
 describe(types.SET_VERSION, () => {
   const state = JSON.parse(JSON.stringify(defaultState))
@@ -23,9 +24,9 @@ describe(types.WRITE_SETTINGS, () => {
 
 describe(types.INSERT_DOG, () => {
   const state = JSON.parse(JSON.stringify(defaultState))
-  const dog1 = JSON.parse(JSON.stringify(defaultState.newDog))
+  const dog1 = JSON.parse(JSON.stringify(newDog))
   dog1.name = 'Dog 1'
-  const dog2 = JSON.parse(JSON.stringify(defaultState.newDog))
+  const dog2 = JSON.parse(JSON.stringify(newDog))
   dog2.name = 'Dog 2'
   it('inserts a new dog properly and provides IDs', () => {
     mutations.INSERT_DOG(state, dog1)
@@ -41,7 +42,7 @@ describe(types.INSERT_DOG, () => {
 
 describe(types.UPDATE_DOG, () => {
   const state = JSON.parse(JSON.stringify(defaultState))
-  let dog = JSON.parse(JSON.stringify(state.newDog))
+  let dog = JSON.parse(JSON.stringify(newDog))
   dog.name = 'Foobar'
   state.dogs.push(dog)
   it('updates name properly', () => {
@@ -59,11 +60,11 @@ describe(types.UPDATE_DOG, () => {
 
 describe(types.REMOVE_DOG, () => {
   const state = JSON.parse(JSON.stringify(defaultState))
-  let dog = JSON.parse(JSON.stringify(state.newDog))
+  let dog = JSON.parse(JSON.stringify(newDog))
   dog.id = 1
   dog.name = 'Foobar'
   state.dogs.push(dog)
-  let dog2 = JSON.parse(JSON.stringify(state.newDog))
+  let dog2 = JSON.parse(JSON.stringify(newDog))
   dog2.id = 2
   dog2.name = 'Foobar2'
   state.dogs.push(dog2)
@@ -80,7 +81,7 @@ describe(types.REMOVE_DOG, () => {
 
 describe(types.SELECT_DOG, () => {
   const state = JSON.parse(JSON.stringify(defaultState))
-  let dog = JSON.parse(JSON.stringify(state.newDog))
+  let dog = JSON.parse(JSON.stringify(newDog))
   dog.id = 1
   dog.name = 'Foobar'
   state.dogs.push(dog)

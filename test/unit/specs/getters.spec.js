@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import getters from '@/store/getters'
 import defaultState from '@/store/default-state'
+import newDog from '../fixtures/newDog'
 
 const randomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 const splitNumberIntoParts = (number, partCount) => {
@@ -20,7 +21,7 @@ const splitNumberIntoParts = (number, partCount) => {
 }
 
 describe('getters.planDistribution(dog)', () => {
-  let dog = JSON.parse(JSON.stringify(defaultState.newDog))
+  let dog = JSON.parse(JSON.stringify(newDog))
   dog.plan.animal = 80
   dog.plan.vegetables = 20
   dog.plan.distribution = {
@@ -79,7 +80,7 @@ describe('getters.planDistribution(dog)', () => {
     for (let run = 0; run <= 100; run++) {
       let amountPerDay = randomNumber(200, 2500)
       getters.dogFoodQuantityPerDay = (d) => amountPerDay
-      let dog = JSON.parse(JSON.stringify(defaultState.newDog))
+      let dog = JSON.parse(JSON.stringify(newDog))
       dog.plan.animal = randomNumber(10, 90)
       dog.plan.vegetables = 100 - dog.plan.animal
       let a = splitNumberIntoParts(100, 4)
