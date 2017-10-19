@@ -11,7 +11,6 @@
         </div>
       </div>
     </section>
-    <notifications page="settings"></notifications>
     <div class="container">
       <div class="settings-form">
         <div class="field is-horizontal">
@@ -151,7 +150,6 @@ import { version } from '../../package.json'
 import { SET_VERSION, WRITE_SETTINGS } from '@/store/mutation-types'
 import defaultState from '@/store/default-state'
 import { safeMigrate } from '@/store/migrations'
-import notifications from '@/components/Notifications'
 import subCategoryTag from '@/components/include/SubCategoryTag'
 
 function bytesToSize (bytes) {
@@ -165,8 +163,7 @@ export default {
   name: 'settings',
   components: {
     'color-picker': Chrome,
-    subCategoryTag,
-    notifications
+    subCategoryTag
   },
   computed: {
     settings () {

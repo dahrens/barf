@@ -3,7 +3,8 @@ import defaultState from './default-state'
 export const versions = [
   '1.0.0-alpha',
   '1.0.0-alpha.5',
-  '1.0.0-alpha.6'
+  '1.0.0-alpha.6',
+  '1.0.0-alpha.7'
 ]
 
 export const migrations = {
@@ -16,6 +17,15 @@ export const migrations = {
       severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],
       severity: 0,
       autoDelete: false
+    }
+  },
+  '1.0.0-alpha.7': (state) => {
+    state.notifications = []
+    state.settings.notifications = {
+      severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],
+      severity: 0,
+      autoDelete: ['is-success', 'is-info'],
+      deletionDelay: 2000
     }
   }
 }

@@ -14,26 +14,21 @@ import { REMOVE_NOTIFICATION } from '@/store/mutation-types'
 
 export default {
   name: 'notifications',
-  props: {
-    page: {
-      required: false,
-      default: () => (false)
-    }
-  },
   computed: {
     notifications () {
-      return this.$store.getters.notifications(this.page)
+      return this.$store.getters.notifications
     }
   },
   methods: {
     deleteNotification (notification) {
       this.$store.commit(REMOVE_NOTIFICATION, notification)
+    },
+    classes (notification) {
+      let classes = []
+      classes.push(notification.style)
+      if (this.page) classes.push('page-notification')
+      return classes.join(' ')
     }
   }
 }
 </script>
-
-<style lang="sass">
-.notification
-  margin-bottom: 0 !important
-</style>

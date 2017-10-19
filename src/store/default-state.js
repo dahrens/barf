@@ -21,8 +21,7 @@ export default {
     },
     notifications: {
       severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],
-      severity: 0,
-      autoDelete: false
+      severity: 0
     }
   },
   notifications: [],

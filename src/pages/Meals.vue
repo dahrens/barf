@@ -11,7 +11,6 @@
         </div>
       </div>
     </section>
-    <notifications page="meals"></notifications>
     <section v-if="!dog" class="hero is-medium is-info">
       <div class="hero-body">
         <div class="container">
@@ -43,15 +42,13 @@
 import week from '@/components/MealsWeek'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
-import notifications from '@/components/Notifications'
 
 export default {
   name: 'plan',
   components: {
     dogPanel,
     dogSelector,
-    week,
-    notifications
+    week
   },
   computed: {
     settings () {

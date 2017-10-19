@@ -22,9 +22,6 @@
             :to="{ name: 'Plan' }">
             <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="calculator"/>
-              <span v-if="notificationCount('plan')" class="is-size-1 fa-layers-counter">
-                {{ notificationCount('plan') }}
-              </span>
             </span>
             <span class="is-size-5 is-uppercase">plan</span>
           </router-link>
@@ -35,9 +32,6 @@
             :to="{ name: 'Meals' }">
             <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="utensils"/>
-              <span v-if="notificationCount('meals')" class="is-size-1 fa-layers-counter">
-                {{ notificationCount('meals') }}
-              </span>
             </span>
             <span class="is-size-5 is-uppercase">meals</span>
           </router-link>
@@ -48,9 +42,6 @@
             :to="{ name: 'Ingredients' }">
             <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="puzzle-piece"/>
-              <span v-if="notificationCount('ingredients')" class="is-size-1 fa-layers-counter">
-                {{ notificationCount('ingredients') }}
-              </span>
             </span>
             <span class="is-size-5 is-uppercase">ingredients</span>
           </router-link>
@@ -61,9 +52,6 @@
             :to="{ name: 'Stash' }">
             <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="archive"/>
-              <span v-if="notificationCount('stash')" class="is-size-1 fa-layers-counter">
-                {{ notificationCount('stash') }}
-              </span>
             </span>
             <span class="is-size-5 is-uppercase">stash</span>
           </router-link>
@@ -75,9 +63,6 @@
             :to="{ name: 'About' }">
             <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="info"/>
-              <span v-if="notificationCount('about')" class="is-size-1 fa-layers-counter">
-                {{ notificationCount('about') }}
-              </span>
             </span>
             <span class="is-size-5 is-uppercase">about</span>
           </router-link>
@@ -87,16 +72,17 @@
             :to="{ name: 'Settings' }">
             <span class="icon is-large fa-layers fa-fw">
               <fa size="2x" icon="cog"/>
-              <span v-if="notificationCount('settings')" class="is-size-1 fa-layers-counter">
-                {{ notificationCount('settings') }}
-              </span>
             </span>
             <span class="is-size-5 is-uppercase">settings</span>
           </router-link>
         </div>
       </div>
     </nav>
-    <notifications></notifications>
+    <div class="notification-container">
+      <div class="container">
+        <notifications></notifications>
+      </div>
+    </div>
     <router-view></router-view>
     <section class="hero is-warning">
       <div class="hero-body">
@@ -190,4 +176,14 @@ export default {
 
 .brand-icon
   margin-right: 1em
+
+.notification-container
+  position: fixed
+  display: flex
+  top: 0
+  left: 0
+  right: 0
+  z-index: 1000
+  opacity: 0.9
+  margin: 1em
 </style>

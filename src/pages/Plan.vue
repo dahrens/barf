@@ -32,7 +32,6 @@
         </div>
       </div>
     </section>
-    <notifications page="plan"></notifications>
     <template v-if="dog">
       <div class="columns is-marginless">
         <div class="column is-one-quarter">
@@ -50,7 +49,6 @@
 </template>
 
 <script>
-import notifications from '@/components/Notifications'
 import week from '@/components/PlanWeek'
 import dogPanel from '@/components/DogPanel'
 import dogSelector from '@/components/DogSelector'
@@ -62,8 +60,7 @@ export default {
     dogPanel,
     dogSelector,
     statistics,
-    week,
-    notifications
+    week
   },
   computed: {
     settings () {
