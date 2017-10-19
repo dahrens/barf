@@ -120,8 +120,8 @@ export default {
       for (let meal of this.meals) {
         let ingredient = this.getIngredient(meal.ingredient)
         for (let idx in ingredient.subCategories) {
-          let m = ingredient.subCategories[idx][0]
-          let subCategory = ingredient.subCategories[idx][1]
+          let m = ingredient.subCategories[idx].portion
+          let subCategory = ingredient.subCategories[idx].subCategory
           let amount = parseInt(meal.amount * m)
           if (!result[subCategory]) {
             let expected = 0

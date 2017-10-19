@@ -47,110 +47,121 @@ export default {
     {
       id: 1,
       name: 'Beef muscle meat',
-      subCategories: [[1, 'meat']],
+      subCategories: [{ portion: 100, subCategory: 'meat' }],
       unit: 'g',
-      defaultAmount: 1000
+      defaultAmount: 1000,
+      price: 0.0
     },
     {
       id: 2,
       name: 'Beef heart',
-      subCategories: [[1, 'entrails']],
+      subCategories: [{ portion: 100, subCategory: 'entrails' }],
       unit: 'g',
-      defaultAmount: 500
+      defaultAmount: 500,
+      price: 0.0
     },
     {
       id: 3,
       name: 'Beef kidney',
-      subCategories: [[1, 'entrails']],
+      subCategories: [{ portion: 100, subCategory: 'entrails' }],
       unit: 'g',
-      defaultAmount: 500
+      defaultAmount: 500,
+      price: 0.0
     },
     {
       id: 4,
       name: 'Beef liver',
-      subCategories: [[1, 'entrails']],
+      subCategories: [{ portion: 100, subCategory: 'entrails' }],
       unit: 'g',
-      defaultAmount: 500
+      defaultAmount: 500,
+      price: 0.0
     },
     {
       id: 5,
       name: 'Gristle meat',
-      subCategories: [[0.2, 'bones'], [0.8, 'meat']],
+      subCategories: [
+        { portion: 20, subCategory: 'bones' },
+        { portion: 80, subCategory: 'meat' }
+      ],
       unit: 'g',
-      defaultAmount: 1000
+      defaultAmount: 1000,
+      price: 0.0
     },
     {
       id: 6,
       name: 'Omasum',
-      subCategories: [[1, 'stomach']],
+      subCategories: [{ portion: 100, subCategory: 'stomach' }],
       unit: 'g',
-      defaultAmount: 1000
+      defaultAmount: 1000,
+      price: 0.0
     },
     {
       id: 7,
       name: 'Rumen',
-      subCategories: [[1, 'stomach']],
+      subCategories: [{ portion: 100, subCategory: 'stomach' }],
       unit: 'g',
-      defaultAmount: 1000
+      defaultAmount: 1000,
+      price: 0.0
     },
     {
       id: 8,
       name: 'Chicken neck',
-      subCategories: [[0.5, 'meat'], [0.5, 'bones']],
+      subCategories: [
+        { portion: 50, subCategory: 'meat' },
+        { portion: 50, subCategory: 'bones' }
+      ],
       unit: 'g',
-      defaultAmount: 500
+      defaultAmount: 500,
+      price: 0.0
     },
     {
       id: 9,
       name: 'Rice',
-      subCategories: [[1, 'grains']],
+      subCategories: [{ portion: 100, subCategory: 'grains' }],
       unit: 'g',
-      defaultAmount: 500
+      defaultAmount: 500,
+      price: 0.0
     },
     {
       id: 10,
       name: 'Noodles',
-      subCategories: [[0.5, 'grains']],
+      subCategories: [{ portion: 100, subCategory: 'grains' }],
       unit: 'g',
-      defaultAmount: 1000
+      defaultAmount: 1000,
+      price: 0.0
     },
     {
       id: 11,
       name: 'Zucchine',
-      subCategories: [[1, 'vegetables']],
+      subCategories: [{ portion: 100, subCategory: 'vegetables' }],
       unit: 'g',
-      defaultAmount: 500
+      defaultAmount: 500,
+      price: 0.0
     },
     {
       id: 12,
       name: 'Pumpkin',
-      subCategories: [[1, 'vegetables']],
+      subCategories: [{ portion: 100, subCategory: 'vegetables' }],
       unit: 'g',
-      defaultAmount: 1000
+      defaultAmount: 1000,
+      price: 0.0
     },
     {
       id: 13,
       name: 'Apple',
-      subCategories: [[1, 'fruits']],
+      subCategories: [{ portion: 100, subCategory: 'fruits' }],
       unit: 'g',
-      defaultAmount: 250
+      defaultAmount: 250,
+      price: 0.0
     },
     {
       id: 14,
       name: 'Banana',
-      subCategories: [[1, 'fruits']],
+      subCategories: [{ portion: 100, subCategory: 'fruits' }],
       unit: 'g',
-      defaultAmount: 200
+      defaultAmount: 200,
+      price: 0.0
     }
   ],
-  stash: [
-    {
-      ingredient: 1,
-      amount: 2000
-    },
-    {
-      ingredient: 2,
-      amount: 500
-    }
-  ]
+  stash: []
 }

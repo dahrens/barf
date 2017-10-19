@@ -49,9 +49,9 @@
           <div v-if="isActive(ingredient)" class="faked-panel-block">
             <div class="field is-grouped is-grouped-multiline">
               <span v-if="!dog" class="control">composition</span>
-              <template v-for="part in ingredient.subCategories">
+              <template v-for="meta in ingredient.subCategories">
                 <div class="control">
-                  <subCategoryTag  :subCategory="part[1]" :amount="100 * part[0]" unit="%"></subCategoryTag>
+                  <subCategoryTag  :subCategory="meta.subCategory" :amount="meta.portion" unit="%"></subCategoryTag>
                 </div>
               </template>
               <span v-if="!dog" class="control">default amount <strong>{{ ingredient.defaultAmount }}</strong></span>
@@ -153,7 +153,7 @@ export default {
       if (this.subCategoryFilter === 'all') {
         if (this.availableSubCategories.length !== 0) {
           filter = (i) => {
-            for (let subCategory of i.subCategories.map(e => e[1])) {
+            for (let subCategory of i.subCategories.map(e => e.subCategory)) {
               if (this.availableSubCategories.indexOf(subCategory) !== -1) return true
             }
             return false

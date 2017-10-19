@@ -1,10 +1,10 @@
 <template>
   <div class="ingredient-create">
-    <div class="panel-block">
+    <div class="faked-panel-block">
       <div class="field has-addons has-addons-right">
         <div class="field-body">
           <div class="field">
-            <div class="control has-icons-right">
+            <div class="control is-expanded">
               <input class="input" type="text" placeholder="Name" v-model="newIngredient.name"
                     :class="{
                       'is-danger': !isNameValid && this.newIngredient.name !== '',
@@ -20,56 +20,72 @@
             <p v-if="this.newIngredient.name === ''" class="help is-danger">Pick a name</p>
             <p v-if="!isNameValid && this.newIngredient.name !== ''" class="help is-danger">This ingredient name already exists</p>
           </div>
-          <div class="field has-addons">
-            <p class="control">
-              <span class="select">
-                <select v-model="newIngredient.unit">
-                  <option v-for="option in unitOptions" v-model="option.value">{{ option.name }}</option>
-                </select>
-              </span>
-            </p>
-            <p class="control is-expanded">
-              <input class="input" type="number" min="1" max="999999" step="1" v-model="newIngredient.defaultAmount">
-            </p>
+          <div class="field">
+            <div class="field has-addons">
+              <p class="control is-expanded">
+                <input class="input" type="number" min="0" max="100000" step="500" v-model="newIngredient.defaultAmount">
+              </p>
+              <p class="control">
+                <span class="select">
+                  <select v-model="newIngredient.unit">
+                    <option v-for="option in unitOptions" v-model="option.value">{{ option.name }}</option>
+                  </select>
+                </span>
+              </p>
+            </div>
+            <p class="help is-info">The quantity in which you usually achieve this ingredient.</p>
+          </div>
+          <div class="field">
+            <div class="field has-addons">
+              <p class="control is-expanded">
+                <input class="input" type="number" min="0" max="100ß" step="1" v-model="newIngredient.price">
+              </p>
+              <p class="control">
+                <a class="button is-static">
+                  €
+                </a>
+              </p>
+            </div>
+            <p class="help is-info">The price of this ingredient.</p>
           </div>
         </div>
       </div>
     </div>
-    <template v-for="subCategory in newIngredient.subCategories">
-      <div class="panel-block">
-        <div v-model="newIngredient.subCategories" class="field has-addons">
+    <template v-for="meta in newIngredient.subCategories">
+      <div class="faked-panel-block">
+        <div class="field has-addons">
           <a class="button is-static">
-            <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(subCategory[1]) }">
+            <span class="icon is-medium" v-bind:style="{ color: subCategoryColor(meta.subCategory) }">
               <fa size="2x" icon="square"/>
             </span>
           </a>
-          <p class="control">
-            <span class="select">
-              <select v-model="subCategory[1]">
-                <option v-for="option in subCategoryOptions" v-model="subCategory[1]">{{ option.subCategory}}</option>
+          <p class="control is-expanded">
+            <span class="select is-fullwidth">
+              <select v-model="meta.subCategory">
+                <option v-for="option in subCategoryOptions">{{ option.subCategory}}</option>
               </select>
             </span>
           </p>
           <p class="control is-expanded">
-            <input class="input" type="number" min="0" max="1" step="0.1" v-model="subCategory[0]"
+            <input class="input" type="number" min="0" max="100" step="10" v-model="meta.portion"
                   :class="{
                     'is-danger': !isSubcategoriesValid
                   }">
           </p>
-          <p class="control">
-            <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(subCategory)">
+          <p class="control is-expanded">
+            <a v-if="canAddSubcategory" class="button" v-on:click="splitNewSubcategory(meta)">
               <span class="icon">
                 <fa icon="plus"/>
               </span>
             </a>
-            <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(subCategory)">
+            <a v-if="canDeleteSubcategory" class="button" v-on:click="mergeExistingSubcategory(meta)">
               <span class="icon">
                 <fa icon="trash"/>
               </span>
             </a>
           </p>
         </div>
-        <p v-if="!isSubcategoriesValid" class="help is-danger">The sum of all subCategories must be 1, not {{subCategoryValue}}</p>
+        <p v-if="!isSubcategoriesValid" class="help is-danger">The sum of all subCategories portions must be 100, not {{ subCategoryValue }}</p>
       </div>
     </template>
     <div class="panel-block">
@@ -90,9 +106,10 @@ export default {
   data () {
     let newIngredient = {
       name: '',
-      subCategories: [[1, 'meat']],
+      subCategories: [{ portion: 100, subCategory: 'meat' }],
       unit: 'g',
-      defaultAmount: 2000
+      defaultAmount: 2000,
+      price: 0.0
     }
     return {
       newIngredientBlueprint: JSON.stringify(newIngredient),
@@ -120,10 +137,10 @@ export default {
       return true
     },
     subCategoryValue () {
-      return this.newIngredient.subCategories.map(p => p[0]).reduce((a, c) => parseFloat(a) + parseFloat(c))
+      return this.newIngredient.subCategories.map(p => p.portion).reduce((a, c) => parseFloat(a) + parseFloat(c))
     },
     isSubcategoriesValid () {
-      return this.newIngredient.subCategories.map(p => p[0]).reduce((a, c) => parseFloat(a) + parseFloat(c)) === 1.0
+      return this.newIngredient.subCategories.map(p => p.portion).reduce((a, c) => parseFloat(a) + parseFloat(c)) === 100
     },
     isValid () {
       return this.isNameValid && this.isSubcategoriesValid
@@ -139,18 +156,24 @@ export default {
     subCategoryColor (subCategory) {
       return this.$store.getters.subCategoryColor(subCategory)
     },
-    splitNewSubcategory: function (subCategory) {
-      subCategory[0] = subCategory[0] / 2
-      let idx = this.newIngredient.subCategories.indexOf(subCategory)
-      let usedValues = this.newIngredient.subCategories.map(e => e[1])
+    splitNewSubcategory: function (meta) {
+      meta.portion = meta.portion / 2
+      let idx = this.newIngredient.subCategories.indexOf(meta)
+      let usedValues = this.newIngredient.subCategories.map(e => e.subCategory)
       let possibleValues = this.subCategoryOptions.filter(e => usedValues.indexOf(e.subCategory) === -1)
       if (possibleValues.length) {
-        this.newIngredient.subCategories.splice(idx + 1, 0, [subCategory[0], possibleValues[0].subCategory])
+        this.newIngredient.subCategories.splice(idx + 1, 0, {
+          portion: meta.portion,
+          subCategory: possibleValues[0].subCategory
+        })
       }
     },
-    mergeExistingSubcategory: function (subCategory) {
-      // split value to all others
-      // remove this subCategory
+    mergeExistingSubcategory: function (meta) {
+      let idx = this.newIngredient.subCategories.indexOf(meta)
+      if (idx !== -1) {
+        this.newIngredient.subCategories.splice(idx, 1)
+        this.newIngredient.subCategories[0].portion += meta.portion
+      }
     },
     createNewIngredient: function () {
       if (!this.isValid) {

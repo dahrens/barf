@@ -22,11 +22,26 @@ export const migrations = {
   '1.0.0-alpha.7': (state) => {
     delete state.newDog
     state.notifications = []
+    state.stash = []
     state.settings.notifications = {
       severities: ['is-success', 'is-info', 'is-warning', 'is-danger'],
       severity: 0,
       autoDelete: ['is-success', 'is-info'],
       deletionDelay: 2000
+    }
+    for (let idx in state.ingredients) {
+      let ingredient = state.ingredients[idx]
+      let subCategoriesNew = []
+      for (let i in ingredient.subCategories) {
+        let portion = ingredient.subCategories[i]
+        if (ingredient.name === 'Noodles') portion[0] = 1
+        subCategoriesNew.push({
+          portion: portion[0] * 100,
+          subCategory: portion[1]
+        })
+      }
+      state.ingredients[idx].price = 0.0
+      state.ingredients[idx].subCategories = subCategoriesNew
     }
   }
 }
