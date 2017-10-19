@@ -42,6 +42,7 @@ export default (store) => {
       let notification = notifications[mutation.type](mutation.payload)
       let severity = settings.severities.indexOf(notification.style)
       if (notification && severity >= settings.severity) {
+        console.log(settings)
         state.notifications.push(notification)
         if (settings.autoDelete.indexOf(notification.style) !== -1) {
           setTimeout(() => {

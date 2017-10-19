@@ -26,6 +26,7 @@ module.exports = {
       .click('button[name=next]')
       .click('button[name=next]')
       .click('button[name=save]')
+      .waitForElementVisible('.dog-panel', 1000)
       .assert.elementPresent('.dog-panel')
       .assert.containsText('.dog-panel', 'Foobar')
       .assert.elementPresent('.plan-week')
