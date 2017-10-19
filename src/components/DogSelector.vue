@@ -27,70 +27,66 @@
     </p>
     <div id="dog-create-modal" class="modal" :class="{'is-active': showCreate}">
       <div class="modal-background"></div>
-      <div class="modal-content">
-        <nav class="panel">
-          <p class="panel-heading">
-            Please provide a few details
-            <a v-on:click="cancelCreate()" class="icon is-pulled-right has-text-dark">
-              <fa icon="times"/>
-            </a>
-          </p>
-          <div class="faked-panel-block">
-            <div class="steps is-medium">
-              <div class="step-item" :class="stepClasses(1)">
-                <div class="step-marker">
-                  <span class="icon">
-                    <fa icon="paw"/>
-                  </span>
-                </div>
-                <div class="step-details">
-                  <p class="step-title">Dog</p>
-                  <p class="is-size-7 is-uppercase">general info</p>
-                </div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Create new dog</p>
+          <button v-on:click="cancelCreate()" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="steps is-medium is-hidden-mobile">
+            <div class="step-item" :class="stepClasses(1)">
+              <div class="step-marker">
+                <span class="icon">
+                  <fa icon="paw"/>
+                </span>
               </div>
-              <div class="step-item" :class="{'is-active': step === 2, 'is-completed is-success': step > 2}">
-                <div class="step-marker">
-                  <span class="icon">
-                    <fa icon="question"/>
-                  </span>
-                </div>
-                <div class="step-details">
-                  <p class="step-title">Plan</p>
-                  <p class="is-size-7 is-uppercase">general info</p>
-                </div>
+              <div class="step-details">
+                <p class="step-title">Dog</p>
+                <p class="is-size-7 is-uppercase">general info</p>
               </div>
-              <div class="step-item" :class="{'is-active': step === 3, 'is-completed is-success': step > 3}">
-                <div class="step-marker">
-                  <span class="icon">
-                    <fa icon="sliders-h" />
-                  </span>
-                </div>
-                <div class="step-details">
-                  <p class="step-title">Distribution</p>
-                  <p class="is-size-7 is-uppercase">what and how much</p>
-                </div>
+            </div>
+            <div class="step-item" :class="{'is-active': step === 2, 'is-completed is-success': step > 2}">
+              <div class="step-marker">
+                <span class="icon">
+                  <fa icon="question"/>
+                </span>
               </div>
-              <div class="step-item" :class="{'is-active': step === 4, 'is-completed is-success': step > 4}">
-                <div class="step-marker">
-                  <span class="icon">
-                    <fa icon="calendar-alt"/>
-                  </span>
-                </div>
-                <div class="step-details">
-                  <p class="step-title">Allocate</p>
-                  <p class="is-size-7 is-uppercase">assign to week</p>
-                </div>
+              <div class="step-details">
+                <p class="step-title">Plan</p>
+                <p class="is-size-7 is-uppercase">general info</p>
               </div>
-              <div class="step-item" :class="{'is-active': step === 5, 'is-completed is-success': step > 4}">
-                <div class="step-marker">
-                  <span class="icon">
-                    <fa icon="flag"/>
-                  </span>
-                </div>
-                <div class="step-details">
-                  <p class="step-title">Done</p>
-                  <p class="is-size-7 is-uppercase">summary</p>
-                </div>
+            </div>
+            <div class="step-item" :class="{'is-active': step === 3, 'is-completed is-success': step > 3}">
+              <div class="step-marker">
+                <span class="icon">
+                  <fa icon="sliders-h" />
+                </span>
+              </div>
+              <div class="step-details">
+                <p class="step-title">Distribution</p>
+                <p class="is-size-7 is-uppercase">what and how much</p>
+              </div>
+            </div>
+            <div class="step-item" :class="{'is-active': step === 4, 'is-completed is-success': step > 4}">
+              <div class="step-marker">
+                <span class="icon">
+                  <fa icon="calendar-alt"/>
+                </span>
+              </div>
+              <div class="step-details">
+                <p class="step-title">Allocate</p>
+                <p class="is-size-7 is-uppercase">assign to week</p>
+              </div>
+            </div>
+            <div class="step-item" :class="{'is-active': step === 5, 'is-completed is-success': step > 4}">
+              <div class="step-marker">
+                <span class="icon">
+                  <fa icon="flag"/>
+                </span>
+              </div>
+              <div class="step-details">
+                <p class="step-title">Done</p>
+                <p class="is-size-7 is-uppercase">summary</p>
               </div>
             </div>
           </div>
@@ -104,33 +100,28 @@
             :newDog="true">
           </planAllocationWizard>
           <dogDetail v-if="step === 5" :dog="newDog" :imageSmall="true"></dogDetail>
-          <div class="faked-panel-block">
-            <div class="field has-addons is-centered">
-              <p class="control is-expanded">
-                <button v-on:click="prevStep()" name="prev" class="button is-primary" :disabled="step < 2">
-                  <span class="icon">
-                    <fa icon="angle-left" />
-                  </span>
-                  <span>back</span>
-                </button>
-              </p>
-              <p class="control">
-                <button v-if="step < 5" name="next" v-on:click="nextStep()" class="button is-primary" >
-                  <span>next</span>
-                  <span class="icon">
-                    <fa icon="angle-right" />
-                  </span>
-                </button>
-                <button v-else name="save" v-on:click="saveNewDog()" class="button is-primary">
-                  <span class="icon">
-                    <fa icon="save"/>
-                  </span>
-                  <span>save</span>
-                </button>
-              </p>
-            </div>
-          </div>
-        </nav>
+
+        </section>
+        <footer class="modal-card-foot">
+          <a v-on:click="prevStep()" name="prev" class="button is-primary is-fullwidth" :disabled="step < 2">
+            <span class="icon">
+              <fa icon="angle-left" />
+            </span>
+            <span>back</span>
+          </a>
+          <a v-if="step < 5" name="next" v-on:click="nextStep()" class="button is-primary is-fullwidth" >
+            <span>next</span>
+            <span class="icon">
+              <fa icon="angle-right" />
+            </span>
+          </a>
+          <a v-else name="save" v-on:click="saveNewDog()" class="button is-primary is-fullwidth">
+            <span class="icon">
+              <fa icon="save"/>
+            </span>
+            <span>save</span>
+          </a>
+        </footer>
       </div>
     </div>
   </div>
@@ -288,4 +279,7 @@ export default {
 
 .steps
   margin-bottom: 0 !important
+
+.modal-card-foot .is-expanded
+  flex: 1
 </style>
