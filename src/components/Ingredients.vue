@@ -51,11 +51,25 @@
               <span v-if="!dog" class="control">composition</span>
               <template v-for="meta in ingredient.subCategories">
                 <div class="control">
-                  <subCategoryTag  :subCategory="meta.subCategory" :amount="meta.portion" unit="%"></subCategoryTag>
+                  <subCategoryTag
+                    :subCategory="meta.subCategory"
+                    :amount="meta.portion"
+                    unit="%">
+                  </subCategoryTag>
                 </div>
               </template>
-              <span v-if="!dog" class="control">default amount <strong>{{ ingredient.defaultAmount }}</strong></span>
-              <span v-if="!dog" class="control">unit <strong>{{ ingredient.unit }}</strong></span>
+              <span v-if="!dog" class="control">
+                default amount
+                <strong>{{ ingredient.defaultAmount }}</strong>
+              </span>
+              <span v-if="!dog" class="control">
+                unit <strong>{{ ingredient.unit }}</strong>
+              </span>
+              <a v-if="!dog" v-on:click="removeIngredient(ingredient)" class="control button is-danger">
+                <span class="icon">
+                  <fa icon="trash" />
+                </span>
+              </a>
             </div>
           </div>
           <div v-if="isActive(ingredient) && dog" class="faked-panel-block">
@@ -96,7 +110,7 @@
 import subCategoryTag from '@/components/include/SubCategoryTag'
 import ingredientCreate from '@/components/IngredientCreate'
 import stashIngredient from '@/components/StashIngredient'
-import { SCHEDULE_MEAL } from '@/store/mutation-types'
+import { SCHEDULE_MEAL, REMOVE_INGREDIENT } from '@/store/mutation-types'
 
 export default {
   name: 'ingredients',
@@ -202,6 +216,12 @@ export default {
           ingredient: ingredientId,
           amount: this.mealAmounts[ingredientId]
         }
+      })
+    },
+    removeIngredient: function (ingredient) {
+      this.$store.commit(REMOVE_INGREDIENT, {
+        ingredient: ingredient,
+        cascade: this.$store.getters.ingredientRelations(ingredient)
       })
     }
   }
