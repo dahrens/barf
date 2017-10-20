@@ -1,5 +1,5 @@
 <template>
-  <nav class="panel">
+  <nav class="panel week-day">
     <!-- day heading -->
     <p class="panel-heading">
       <span class="is-size-5 is-uppercase">{{ weekday }}</span>

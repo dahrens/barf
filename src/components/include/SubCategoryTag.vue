@@ -1,5 +1,5 @@
 <template>
-  <div class="tags has-addons">
+  <div class="tags has-addons" :title="subCategory + '-tag'">
     <slot name="prefix"></slot>
     <span class="tag is-dark is-medium">{{ amount }}{{ unit }}</span>
     <span class="tag is-light is-medium" v-bind:style="{

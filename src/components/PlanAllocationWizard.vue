@@ -9,7 +9,7 @@
               <p class="control buttons-expanded">
                 <div class="field has-addons">
                   <p v-for="(weekday, idx) in dog.plan.week" class="control">
-                    <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenWeek[idx]}">
+                    <a class="button" v-on:click="toggleFastenDay(idx)" :class="{'is-success': fastenWeek[idx]}" :name="'fastenDay-' + weekday">
                       <span>{{ weekday.substring(0, 2) }}</span>
                       <span class="icon">
                         <fa v-if="fastenWeek[idx]" icon="check"/>
@@ -35,7 +35,7 @@
               <p class="control buttons-expanded">
                 <div class="field has-addons">
                   <p v-for="(weekday, idx) in dog.plan.week" class="control">
-                    <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianWeek[idx]}">
+                    <a class="button" v-on:click="toggleVegetarianDay(idx)" :class="{'is-success': vegetarianWeek[idx]}" :name="'vegetarianDay-' + weekday">
                       <span>{{ weekday.substring(0, 2) }}</span>
                       <span class="icon">
                         <fa v-if="vegetarianWeek[idx]" icon="check"/>
@@ -67,16 +67,18 @@
                     :amount="data.portion">
                     <template slot="prefix">
                       <a class="tag is-medium is-danger"
-                        v-on:click="decreaseSubCategoryCount(category, subCategory)">
+                        v-on:click="decreaseSubCategoryCount(category, subCategory)"
+                        :name="subCategory + '-minus'">
                         <span class="icon">
                           <fa icon="minus" />
                         </span>
                       </a>
-                      <span class="tag is-medium is-dark">
+                      <span class="tag is-medium is-dark" :title="subCategory + '-count'">
                         {{ parameters[category][subCategory].count }} X
                       </span>
                       <a class="tag is-medium is-success"
-                        v-on:click="increaseSubCategoryCount(category, subCategory)">
+                        v-on:click="increaseSubCategoryCount(category, subCategory)"
+                        :name="subCategory + '-plus'">
                         <span class="icon">
                           <fa icon="plus" />
                         </span>
@@ -102,7 +104,7 @@
       </div>
     </div>
     <p v-if="!newDog" class="panel-block">
-      <button v-on:click="allocate" class="button is-primary is-fullwidth">
+      <button v-on:click="allocate" class="button is-primary is-fullwidth" name="allocate">
         <span class="icon">
           <fa icon="save"/>
         </span>
