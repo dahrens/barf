@@ -12,6 +12,9 @@
         <fa v-if="!edit" icon="edit"/>
         <fa v-if="edit" icon="save"/>
       </a>
+      <a v-on:click="autoAllocate()" class="icon is-pulled-right has-text-dark">
+        <fa icon="magic"/>
+      </a>
     </p>
     <!-- meals for that day -->
     <div v-for="timeOfDay in ['morning', 'evening']" class="panel-block">
@@ -67,7 +70,9 @@
 import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import ingredients from '@/components/Ingredients'
-import { REMOVE_SCHEDULED_MEAL } from '@/store/mutation-types'
+import {
+  REMOVE_SCHEDULED_MEAL, REPLACE_SCHEDULE
+} from '@/store/mutation-types'
 
 export default {
   name: 'week',
@@ -155,6 +160,41 @@ export default {
         timeOfDay,
         meal
       })
+    },
+    autoAllocate () {
+      let meals = { morning: [], evening: [] }
+      let morningCount = 0
+      let eveningCount = 0
+      for (let allocation of this.allocations) {
+        let amount = allocation.amount
+        let ingredients = this.$store.state.ingredients.filter(
+          (i) => i.subCategories.map(e => e.subCategory).indexOf(allocation.subCategory) !== -1
+        )
+        let ingredient = ingredients[Math.floor(Math.random() * ingredients.length)]
+
+        let slots = ['morning', 'evening']
+        let slot = null
+
+        if (morningCount > eveningCount) {
+          slot = 'evening'
+        } else if (morningCount < eveningCount) {
+          slot = 'morning'
+        } else {
+          slot = slots[Math.floor(Math.random() * slots.length)]
+        }
+        meals[slot].push({
+          ingredient: ingredient.id,
+          amount
+        })
+        if (slot === 'morning') morningCount++
+        else eveningCount++
+      }
+      this.$store.commit(REPLACE_SCHEDULE, {
+        dog: this.dog.id,
+        day: this.day,
+        meals
+      })
+      this.$forceUpdate()
     }
   }
 }
