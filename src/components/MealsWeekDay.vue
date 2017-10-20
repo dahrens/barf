@@ -127,7 +127,7 @@ export default {
         for (let idx in ingredient.subCategories) {
           let m = ingredient.subCategories[idx].portion
           let subCategory = ingredient.subCategories[idx].subCategory
-          let amount = parseInt(meal.amount * m)
+          let amount = parseInt(meal.amount * (m / 100))
           if (!result[subCategory]) {
             let expected = 0
             let f = (a) => a.subCategory === subCategory
