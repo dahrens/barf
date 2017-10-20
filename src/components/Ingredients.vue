@@ -160,7 +160,7 @@ export default {
           }
         }
       } else {
-        filter = (i) => i.subCategories.map(e => e[1]).indexOf(this.subCategoryFilter) !== -1
+        filter = (i) => i.subCategories.map(e => e.subCategory).indexOf(this.subCategoryFilter) !== -1
       }
 
       ingredients = ingredients.filter(filter)
