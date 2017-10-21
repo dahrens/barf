@@ -1,6 +1,4 @@
 var sampleState = require('../fixtures/state')
-var expect = require('chai').expect
-var JSON = require('babel-runtime/core-js/json/stringify')
 
 module.exports = {
   'check the features of the plan view': function (browser) {

@@ -13,6 +13,9 @@
     "test": {
       "presets": ["env", "stage-2"],
       "plugins": ["istanbul"]
+    },
+    "testing": {
+      "presets": ["env", "stage-2"]
     }
   }
 }
