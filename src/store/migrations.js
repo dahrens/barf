@@ -4,7 +4,8 @@ export const versions = [
   '1.0.0-alpha',
   '1.0.0-alpha.5',
   '1.0.0-alpha.6',
-  '1.0.0-alpha.7'
+  '1.0.0-alpha.7',
+  '1.0.0-RC1'
 ]
 
 export const migrations = {
@@ -43,6 +44,9 @@ export const migrations = {
       state.ingredients[idx].price = 0.0
       state.ingredients[idx].subCategories = subCategoriesNew
     }
+  },
+  '1.0.0-RC1': (state) => {
+    // nothing for now
   }
 }
 

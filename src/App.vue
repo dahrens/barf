@@ -84,24 +84,25 @@
       </div>
     </div>
     <router-view></router-view>
-    <section class="hero is-warning">
+    <section class="hero is-info">
       <div class="hero-body">
         <div class="container">
           <div class="columns">
             <div class="column is-1">
               <span class="icon is-large">
-                <fa size="4x" icon="exclamation-triangle" />
+                <fa size="4x" icon="info" />
               </span>
             </div>
             <div class="column">
               <h2 class="title">
-                Alpha Release
+                Release candidate 1
               </h2>
               <p class="subtitle">
-                The app is not ready for production use.
-                In worst case it might happen that your <strong>inserted data will not be compatible with future versions</strong>.
+                The app is nearly ready for production use. No new features will be added before the release of version 1.0.0 will take place.
               </p>
-              <p>If you were here before and encounter strange behavior - <a class="has-text-primary" v-on:click="resetApp()">reset all data</a> and reload the page. This removes all local data from the app and a fresh state is enforced.</p>
+              <p>
+                If you find any bugs, please <a href="https://github.com/dahrens/barf/issues">report on github</a>
+              </p>
             </div>
           </div>
         </div>
@@ -148,14 +149,6 @@ export default {
   computed: {
     settings () {
       return this.$store.state.settings
-    }
-  },
-  methods: {
-    resetApp () {
-      localStorage.removeItem('barf')
-    },
-    notificationCount (page) {
-      return this.$store.getters.notifications(page).length
     }
   }
 }
