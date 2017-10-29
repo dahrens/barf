@@ -96,7 +96,8 @@ export default {
   },
   [types.REPLACE_SCHEDULE] (state, payload) {
     let dog = state.dogs.filter(d => d.id === payload.dog)[0]
-    dog.plan.meals[payload.day] = payload.meals
+    dog.plan.meals[payload.day].morning = payload.meals.morning
+    dog.plan.meals[payload.day].evening = payload.meals.evening
   },
   [types.INSERT_NOTIFICATION] (state, notification) {
     state.notifications.push(notification)

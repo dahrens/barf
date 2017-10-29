@@ -101,9 +101,6 @@ export default {
     subCategoryOptions () {
       return this.$store.getters.subCategories
     },
-    categoryColor () {
-      if (this.category === 'animal') return 'whitesmoke'
-    },
     allocations () {
       return this.dog.plan.allocation[this.day]
     },
@@ -161,16 +158,20 @@ export default {
         meal
       })
     },
+    randomSuiteableIngredient (allocation) {
+      let ingredients = this.$store.state.ingredients.filter(
+        (i) => i.subCategories.map(e => e.subCategory).indexOf(allocation.subCategory) !== -1
+      )
+      let ingredient = ingredients[Math.floor(Math.random() * ingredients.length)]
+      return ingredient
+    },
     autoAllocate () {
       let meals = { morning: [], evening: [] }
       let morningCount = 0
       let eveningCount = 0
       for (let allocation of this.allocations) {
         let amount = allocation.amount
-        let ingredients = this.$store.state.ingredients.filter(
-          (i) => i.subCategories.map(e => e.subCategory).indexOf(allocation.subCategory) !== -1
-        )
-        let ingredient = ingredients[Math.floor(Math.random() * ingredients.length)]
+        let ingredient = this.randomSuiteableIngredient(allocation)
 
         let slots = ['morning', 'evening']
         let slot = null
@@ -182,19 +183,21 @@ export default {
         } else {
           slot = slots[Math.floor(Math.random() * slots.length)]
         }
+
         meals[slot].push({
           ingredient: ingredient.id,
           amount
         })
+
         if (slot === 'morning') morningCount++
         else eveningCount++
       }
+
       this.$store.commit(REPLACE_SCHEDULE, {
         dog: this.dog.id,
         day: this.day,
         meals
       })
-      this.$forceUpdate()
     }
   }
 }
