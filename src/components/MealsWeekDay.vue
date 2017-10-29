@@ -71,8 +71,28 @@ import subCategoryTag from '@/components/include/SubCategoryTag'
 import dayAllocationEdit from '@/components/DayAllocationEdit'
 import ingredients from '@/components/Ingredients'
 import {
-  REMOVE_SCHEDULED_MEAL, REPLACE_SCHEDULE
+  REMOVE_SCHEDULED_MEAL, REPLACE_SCHEDULE, INSERT_NOTIFICATION
 } from '@/store/mutation-types'
+
+function shuffle (array) {
+  let currentIndex = array.length
+  let temporaryValue
+  let randomIndex
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex -= 1
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex]
+    array[currentIndex] = array[randomIndex]
+    array[randomIndex] = temporaryValue
+  }
+
+  return array
+}
 
 export default {
   name: 'week',
@@ -158,20 +178,65 @@ export default {
         meal
       })
     },
-    randomSuiteableIngredient (allocation) {
+    randomSuiteableMeal (allocation, remainingAllocations) {
       let ingredients = this.$store.state.ingredients.filter(
         (i) => i.subCategories.map(e => e.subCategory).indexOf(allocation.subCategory) !== -1
       )
-      let ingredient = ingredients[Math.floor(Math.random() * ingredients.length)]
-      return ingredient
+      for (let ingredient of shuffle(ingredients)) {
+        if (ingredient.subCategories.length === 1) {
+          let idx = remainingAllocations.indexOf(allocation)
+          remainingAllocations.splice(idx, 1)
+          return {
+            ingredient: ingredient.id,
+            amount: allocation.amount
+          }
+        }
+        if (ingredient.subCategories.every(
+          s => remainingAllocations
+            .map(r => r.subCategory)
+            .indexOf(s.subCategory) !== -1
+        )) {
+          // x = a * (p / 100)
+          // a = 100 * (x / p)
+          let targetSubCategory = ingredient.subCategories.filter(
+            s => s.subCategory === allocation.subCategory
+          )[0]
+          let amount = 100 * (allocation.amount / targetSubCategory.portion)
+          let idx = remainingAllocations.indexOf(allocation)
+          remainingAllocations.splice(idx, 1)
+          for (let iSub of ingredient.subCategories.filter(
+            s => s.subCategory !== allocation.subCategory
+          )) {
+            let x = amount * (iSub.portion)
+            for (let idx in remainingAllocations) {
+              if (remainingAllocations[idx].subCategory === iSub.subCategory) {
+                if (remainingAllocations[idx].amount > x) {
+                  remainingAllocations[idx].amount -= x
+                } else {
+                  remainingAllocations.splice(idx, 1)
+                }
+              }
+            }
+          }
+          return {
+            ingredient: ingredient.id,
+            amount
+          }
+        }
+      }
+      // should not be reached
+      throw Error('unable to find suiteable meal that fulfill category: ' + allocation.subCategory)
     },
     autoAllocate () {
       let meals = { morning: [], evening: [] }
       let morningCount = 0
       let eveningCount = 0
-      for (let allocation of this.allocations) {
-        let amount = allocation.amount
-        let ingredient = this.randomSuiteableIngredient(allocation)
+      let remainingAllocations = JSON.parse(JSON.stringify(this.allocations))
+      let safetyBreak = 0
+      while (safetyBreak < 10) {
+        safetyBreak++
+        if (remainingAllocations.length === 0) break
+        let allocation = remainingAllocations[0]
 
         let slots = ['morning', 'evening']
         let slot = null
@@ -184,15 +249,24 @@ export default {
           slot = slots[Math.floor(Math.random() * slots.length)]
         }
 
-        meals[slot].push({
-          ingredient: ingredient.id,
-          amount
-        })
-
-        if (slot === 'morning') morningCount++
-        else eveningCount++
+        try {
+          let meal = this.randomSuiteableMeal(allocation, remainingAllocations)
+          meals[slot].push(meal)
+          if (slot === 'morning') morningCount++
+          else eveningCount++
+        } catch (e) {
+          if (remainingAllocations.length > 1) {
+            // TODO: this breaks when more than one allocation can not be fulfilled!
+            remainingAllocations.push(remainingAllocations.shift())
+          } else {
+            remainingAllocations.pop()
+            this.$store.commit(INSERT_NOTIFICATION, {
+              message: e.message,
+              style: 'is-danger'
+            })
+          }
+        }
       }
-
       this.$store.commit(REPLACE_SCHEDULE, {
         dog: this.dog.id,
         day: this.day,
